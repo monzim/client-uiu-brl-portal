@@ -32,12 +32,12 @@ export function NewsCarousel() {
   };
 
   return (
-    <section className="py-32 px-6 overflow-hidden">
-      <div className="max-w-[1200px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20 gap-8">
+    <section className="py-32 px-10 overflow-hidden">
+      <div className="w-full">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20 gap-8 max-w-[1400px] mx-auto">
           <div className="max-w-2xl">
             <h2 className="text-sm font-bold tracking-widest text-brand-text/40 uppercase mb-4">Laboratory Insights</h2>
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tight text-brand-text leading-tight">
+            <h3 className="text-3xl md:text-5xl font-medium tracking-tight text-brand-text leading-tight uppercase">
                Recent News & Activities.
             </h3>
           </div>
@@ -69,32 +69,40 @@ export function NewsCarousel() {
           ref={scrollRef}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
-          className="flex gap-6 overflow-x-auto pb-12 snap-x no-scrollbar"
+          className="flex gap-4 overflow-x-auto pb-12 snap-x no-scrollbar"
         >
           {newsData.map((news) => (
             <Link 
               key={news.id}
               to="/news/$newsId"
               params={{ newsId: news.id }}
-              className="min-w-[280px] md:min-w-[340px] bg-brand-bg border border-brand-border p-8 md:p-10 rounded-[40px] snap-center hover:border-brand-text transition-all duration-300 group flex flex-col justify-between h-[320px] shadow-sm hover:shadow-xl"
+              className="min-w-[280px] md:min-w-[320px] bg-white rounded-[24px] snap-center overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group shadow-sm hover:shadow-2xl"
             >
-              <div>
-                <div className="flex items-center justify-between mb-8">
-                  <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-brand-text/30">
-                    <Calendar className="w-3.5 h-3.5" />
-                    {news.date}
-                  </div>
-                  <div className="w-8 h-8 rounded-full border border-brand-text/5 flex items-center justify-center group-hover:bg-brand-text group-hover:text-brand-bg transition-all duration-500">
-                    <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:rotate-[45deg]" />
+              {/* Card Image */}
+              <div className="relative h-48 md:h-52 overflow-hidden">
+                <img 
+                  src={news.image || "https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg"} 
+                  alt={news.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute bottom-4 left-6 flex items-center gap-2 text-white text-[10px] font-bold uppercase tracking-widest translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                   <Calendar className="w-3.5 h-3.5" />
+                   {news.date}
+                </div>
+              </div>
+
+              {/* Card Content */}
+              <div className="p-6 md:p-8 space-y-4">
+                <div className="flex justify-between items-start gap-4">
+                  <h4 className="text-base md:text-lg font-bold text-brand-text leading-tight group-hover:text-brand-accent transition-colors duration-300 uppercase tracking-tight">
+                    {news.title}
+                  </h4>
+                  <div className="shrink-0 w-8 h-8 rounded-full border border-brand-border flex items-center justify-center group-hover:bg-brand-accent group-hover:border-brand-accent group-hover:text-white transition-all duration-500">
+                    <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:rotate-45" />
                   </div>
                 </div>
-                <h4 className="text-xl md:text-2xl font-medium text-brand-text leading-tight group-hover:opacity-60 transition-opacity">
-                  {news.title}
-                </h4>
               </div>
-              <p className="text-brand-text/50 font-medium text-sm leading-relaxed line-clamp-2">
-                {news.description}
-              </p>
             </Link>
           ))}
         </div>
@@ -109,5 +117,6 @@ export function NewsCarousel() {
         </div>
       </div>
     </section>
+
   );
 }

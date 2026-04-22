@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { projectsData } from '../data/data'
+import { currentProjects } from '../data/currentproject'
 import { ArrowLeft, Clock, Layout, Microscope } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 
@@ -9,7 +9,8 @@ export const Route = createFileRoute('/projects/$projectId')({
 
 function ProjectDetail() {
   const { projectId } = Route.useParams()
-  const project = projectsData.find((p) => p.id === projectId)
+  const project = currentProjects.find((p) => p.id === projectId)
+  const otherProjects = currentProjects.filter((p) => p.id !== projectId)
 
   if (!project) {
     return (
@@ -21,81 +22,100 @@ function ProjectDetail() {
   }
 
   return (
-    <main className="min-h-screen pt-[160px] pb-32 px-6 bg-brand-bg">
-      <div className="max-w-[1000px] mx-auto">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-brand-text/40 hover:text-brand-text mb-12 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Research
-        </Link>
+    <main className="min-h-screen bg-brand-bg">
+      {/* Full Width Banner Image */}
+      <div className="relative w-full h-[50vh] md:h-[60vh] overflow-hidden">
+         <img 
+           src={project.image || "https://images.pexels.com/photos/8533016/pexels-photo-8533016.jpeg"} 
+           alt={project.title} 
+           className="w-full h-full object-cover grayscale brightness-[0.7]"
+         />
+         <div className="absolute inset-0 bg-gradient-to-b from-transparent  to-brand-text" />
+         
+         <div className="absolute inset-0 flex items-end">
+            <div className="max-w-[1200px] w-full mx-auto px-6 pb-12 flex flex-col md:flex-row justify-between items-end gap-12">
+              <div className="flex-1">
+                <Link 
+                  to="/" 
+                  hash="research"
+                  className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white/60 hover:text-white mb-8 transition-colors group"
+                >
+                  <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Research
+                </Link>
+                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-brand-accent mb-4">
+                   <Clock className="w-4 h-4" /> Ongoing Project
+                </div>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter text-white max-w-3xl uppercase">
+                  {project.title}
+                </h1>
+              </div>
 
-        <div className="space-y-16 rise-in">
-          <div className="space-y-8">
-            <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-brand-text/30">
-               <Clock className="w-4 h-4" /> Ongoing Project
+              {/* Quick Navigation Links */}
+              <div className="w-full md:w-72 space-y-6 border-l border-white/10 pl-8 mb-4 hidden lg:block">
+                 <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">Explore Other Projects</h4>
+                 <div className="space-y-4">
+                    {otherProjects.map((op) => (
+                      <Link 
+                        key={op.id}
+                        to="/projects/$projectId"
+                        params={{ projectId: op.id }}
+                        className="block group"
+                      >
+                        <h5 className="text-xs font-bold text-white/70 group-hover:text-brand-accent transition-colors uppercase tracking-widest line-clamp-1 mb-1">
+                          {op.title}
+                        </h5>
+                        <p className="text-[10px] text-white/30 group-hover:text-white/50 transition-colors line-clamp-1 italic">
+                          {op.category}
+                        </p>
+                      </Link>
+                    ))}
+                 </div>
+              </div>
             </div>
-            <h1 className="text-[48px] md:text-[72px] font-medium leading-[1.1] tracking-tight text-brand-text">
-              {project.title}
-            </h1>
-          </div>
+         </div>
+      </div>
 
-          <div className="aspect-video rounded-[48px] overflow-hidden bg-brand-border shadow-2xl ring-1 ring-brand-border/50">
-             <img 
-               src="https://images.pexels.com/photos/8533016/pexels-photo-8533016.jpeg" 
-               alt={project.title} 
-               className="w-full h-full object-cover grayscale brightness-[1.05]"
-             />
-          </div>
+      <div className="max-w-[1200px] mx-auto px-6 py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+          <div className="lg:col-span-12 space-y-16">
+             <div className="prose prose-xl max-w-none text-brand-text/70 font-medium leading-[1.9] space-y-10 rise-in">
+                <p className="text-2xl md:text-3xl text-brand-text leading-tight font-medium tracking-tight border-l-4 border-brand-accent pl-8">
+                   {project.summary}
+                </p>
+                <div className="whitespace-pre-wrap text-lg">
+                  {project.details}
+                </div>
+             </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-            <div className="lg:col-span-8 space-y-12">
-               <div className="prose prose-lg max-w-none text-brand-text/70 font-medium leading-[1.8] space-y-6">
-                  <p className="text-2xl text-brand-text leading-relaxed font-medium">
-                     {project.description}
-                  </p>
-                  <p>
-                     The Biomedical Research Laboratory at UIU is currently spearheading this intensive study. Our methodology integrates high-resolution molecular analysis with standardized clinical protocols to ensure the highest degree of scientific accuracy and translational value.
-                  </p>
-                  <p>
-                     By combining microbiological culture techniques, antibiotic susceptibility testing, and advanced genetic analysis, our team aims to identify critical patterns that contribute to modern healthcare challenges. The findings from this project will directly influence local infection control strategies and global pharmaceutical development.
-                  </p>
-               </div>
-
-               <div className="pt-12 border-t border-brand-border grid grid-cols-1 md:grid-cols-2 gap-12">
-                  <div className="space-y-4">
-                     <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-text/40">
-                        <Microscope className="w-4 h-4" /> Laboratory Focus
-                     </h3>
-                     <p className="text-brand-text/60 font-medium leading-relaxed">
-                        Conducted in the Molecular Biology and Clinical Pharmacology division (Lab 907).
-                     </p>
-                  </div>
-                  <div className="space-y-4">
-                     <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-text/40">
-                        <Layout className="w-4 h-4" /> Methodology
-                     </h3>
-                     <p className="text-brand-text/60 font-medium leading-relaxed">
-                        Integrating in vitro evaluation with computational molecular docking.
-                     </p>
-                  </div>
-               </div>
-            </div>
-
-            <div className="lg:col-span-4 self-start space-y-8 sticky top-40">
-               <div className="p-8 rounded-[32px] bg-brand-text text-brand-bg shadow-xl space-y-6">
-                  <h4 className="text-xs font-bold uppercase tracking-widest opacity-40">Get Involved</h4>
-                  <p className="font-medium leading-relaxed">
-                     Are you interested in collaborating on this research or joining the team?
-                  </p>
-                  <a 
-                    href="mailto:tahmina@pharmacy.uiu.ac.bd"
-                    className="block w-full py-4 bg-brand-bg text-brand-text text-center rounded-2xl font-bold uppercase tracking-widest text-xs hover:scale-[1.02] transition-transform"
-                  >
-                    Contact Lab Head
-                  </a>
-               </div>
-            </div>
+             <div className="pt-16 border-t border-brand-border grid grid-cols-1 md:grid-cols-3 gap-16">
+                <div className="space-y-4">
+                   <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-text/40">
+                      <Microscope className="w-4 h-4" /> Laboratory Focus
+                   </h3>
+                   <p className="text-brand-text/60 font-medium leading-relaxed">
+                      Conducted in the Molecular Biology and Clinical Pharmacology division (Lab 907).
+                   </p>
+                </div>
+                <div className="space-y-4">
+                   <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-text/40">
+                      <Layout className="w-4 h-4" /> Methodology
+                   </h3>
+                   <p className="text-brand-text/60 font-medium leading-relaxed">
+                      Integrating in vitro evaluation with computational molecular docking.
+                   </p>
+                </div>
+                <div className="space-y-4">
+                   <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-text/40">
+                      <Clock className="w-4 h-4" /> Status
+                   </h3>
+                   <p className="text-brand-text/60 font-medium leading-relaxed">
+                      Active research phase. Findings expected to be published in Q4 2026.
+                   </p>
+                </div>
+             </div>
           </div>
         </div>
       </div>
     </main>
-  )
+  );
 }

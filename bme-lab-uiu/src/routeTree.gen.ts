@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +19,11 @@ import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projec
 import { Route as NewsNewsIdRouteImport } from './routes/news.$newsId'
 import { Route as FacultyFacultyIdRouteImport } from './routes/faculty.$facultyId'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/gallery': typeof GalleryRoute
   '/news': typeof NewsRouteWithChildren
+  '/team': typeof TeamRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/gallery': typeof GalleryRoute
+  '/team': typeof TeamRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/gallery': typeof GalleryRoute
   '/news': typeof NewsRouteWithChildren
+  '/team': typeof TeamRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/gallery'
     | '/news'
+    | '/team'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/gallery'
+    | '/team'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/gallery'
     | '/news'
+    | '/team'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -126,12 +138,20 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   GalleryRoute: typeof GalleryRoute
   NewsRoute: typeof NewsRouteWithChildren
+  TeamRoute: typeof TeamRoute
   FacultyFacultyIdRoute: typeof FacultyFacultyIdRoute
   ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/news': {
       id: '/news'
       path: '/news'
@@ -208,6 +228,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   GalleryRoute: GalleryRoute,
   NewsRoute: NewsRouteWithChildren,
+  TeamRoute: TeamRoute,
   FacultyFacultyIdRoute: FacultyFacultyIdRoute,
   ProjectsProjectIdRoute: ProjectsProjectIdRoute,
 }
