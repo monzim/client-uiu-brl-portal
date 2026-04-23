@@ -8,15 +8,29 @@ import { ResearchSection } from '../components/ResearchSection'
 import { EquipmentSection } from '../components/EquipmentSection'
 import { FacultySection } from '../components/FacultySection'
 import { CTASection } from '../components/CTASection'
+import { getNewsList } from '../server/news'
+import { getFacultyList } from '../server/faculty'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  loader: async () => {
+    const [news, faculty] = await Promise.all([getNewsList(), getFacultyList()])
+    return { news, faculty }
+  },
+  component: App,
+})
 
 function App() {
+  const { news, faculty } = Route.useLoaderData()
+
   return (
     <main className="min-h-screen bg-brand-bg">
-      <div id="home"><Hero /></div>
+      <div id="home">
+        <Hero />
+      </div>
       <QuoteSection />
-      <div id="news"><NewsCarousel /></div>
+      <div id="news">
+        <NewsCarousel news={news} />
+      </div>
       <div id="research">
         <div className="hidden lg:block">
           <ObjectivesSection />
@@ -26,9 +40,13 @@ function App() {
         </div>
       </div>
       <CollaborationSection />
-      <div id="equipment"><EquipmentSection /></div>
+      <div id="equipment">
+        <EquipmentSection />
+      </div>
 
-      <div id="faculty"><FacultySection isHomePage={true} /></div>
+      <div id="faculty">
+        <FacultySection faculty={faculty as any} isHomePage={true} />
+      </div>
       <CTASection />
     </main>
   )

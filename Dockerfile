@@ -12,6 +12,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+RUN npx prisma generate
 RUN npm run build
 
 # Stage 3: Production runner
@@ -24,6 +25,8 @@ RUN addgroup --system --gid 1001 nodejs \
  && adduser --system --uid 1001 --ingroup nodejs nodeapp
 
 COPY --from=builder --chown=nodeapp:nodejs /app/.output ./.output
+COPY --from=builder --chown=nodeapp:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=nodeapp:nodejs /app/node_modules/@prisma ./node_modules/@prisma
 
 USER nodeapp
 

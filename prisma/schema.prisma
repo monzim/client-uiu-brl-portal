@@ -1,0 +1,50 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+}
+
+model News {
+  id          String   @id @default(cuid())
+  title       String
+  date        DateTime @default(now())
+  description String
+  content     String   @db.Text
+  image       String?
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Faculty {
+  id                 String   @id @default(cuid())
+  name               String
+  designation        String
+  department         String
+  email              String   @unique
+  room               String?
+  image              String?
+  profileDescription String   @db.Text
+  fullBio            String?  @db.Text
+  researchGeneral    String?  @db.Text
+  education          String[]
+  positionHeld       String[]
+  honors             String[]
+  researchInterests  String[]
+  researchProjects   String[]
+  publications       String[]
+  importantLinks     Json
+  published          Boolean  @default(true)
+  sortOrder          Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
