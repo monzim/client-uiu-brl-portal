@@ -1,5 +1,6 @@
 export interface DbNews {
   id: string
+  slug: string
   title: string
   date: string | Date
   description: string
@@ -12,17 +13,19 @@ export interface DbNews {
 
 export type DbNewsListItem = Pick<
   DbNews,
-  'id' | 'title' | 'date' | 'description' | 'image'
+  'id' | 'slug' | 'title' | 'date' | 'description' | 'image'
 >
 
 export interface DbFaculty {
   id: string
+  slug: string
   name: string
   designation: string
   department: string
   email: string
   room: string | null
   image: string | null
+  coverImage: string | null
   profileDescription: string
   fullBio: string | null
   researchGeneral: string | null

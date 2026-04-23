@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { RichTextEditor } from './RichTextEditor'
 import { ImageUpload } from './ImageUpload'
 import { Plus, X } from 'lucide-react'
 import type { DbFaculty } from '../../types/cms'
+import { slugify } from '../../lib/slug'
 
 interface FacultyFormProps {
   initial?: Partial<DbFaculty>
@@ -120,6 +121,8 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
   const router = useRouter()
 
   const [name, setName] = useState(initial?.name ?? '')
+  const [slug, setSlug] = useState(initial?.slug ?? '')
+  const [slugEdited, setSlugEdited] = useState(!!initial?.slug)
   const [designation, setDesignation] = useState(initial?.designation ?? '')
   const [department, setDepartment] = useState(
     initial?.department ?? 'Department of Pharmacy',
@@ -127,6 +130,7 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
   const [email, setEmail] = useState(initial?.email ?? '')
   const [room, setRoom] = useState(initial?.room ?? '')
   const [image, setImage] = useState<string | null>(initial?.image ?? null)
+  const [coverImage, setCoverImage] = useState<string | null>(initial?.coverImage ?? null)
   const [profileDescription, setProfileDescription] = useState(
     initial?.profileDescription ?? '',
   )
@@ -159,6 +163,10 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  useEffect(() => {
+    if (!slugEdited) setSlug(slugify(name))
+  }, [name, slugEdited])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
@@ -166,6 +174,8 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
     try {
       const body = {
         name,
+        slug: slug.replace(/^-+|-+$/g, ''),
+        coverImage,
         designation,
         department,
         email,
@@ -220,6 +230,33 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
           {error}
         </div>
       )}
+
+      <div className="space-y-1">
+        <label className={labelClass}>URL Slug</label>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-400 font-medium shrink-0">/faculty/</span>
+          <input
+            type="text"
+            value={slug}
+            onChange={(e) => {
+              setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-'))
+              setSlugEdited(true)
+            }}
+            required
+            className="flex-1 px-4 py-3 border border-gray-200 rounded-lg text-sm font-medium focus:outline-none focus:border-gray-400 transition-colors font-mono"
+            placeholder="auto-generated-from-name"
+          />
+          {slugEdited && !initial?.slug && (
+            <button
+              type="button"
+              onClick={() => { setSlug(slugify(name)); setSlugEdited(false) }}
+              className="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors shrink-0"
+            >
+              Reset
+            </button>
+          )}
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-1">
@@ -287,6 +324,8 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
       </div>
 
       <ImageUpload value={image} onChange={setImage} label="Profile Photo" />
+
+      <ImageUpload value={coverImage} onChange={setCoverImage} label="Cover / Banner Image" />
 
       <div className="space-y-1">
         <label className={labelClass}>Short Profile Description</label>

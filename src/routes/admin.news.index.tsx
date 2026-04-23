@@ -16,21 +16,21 @@ function AdminNewsPage() {
   const [data, setData] = useState(initialData)
   const navigate = useNavigate()
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (slug: string) => {
     if (!confirm('Delete this news item?')) return
-    const res = await fetch(`/api/news/${id}`, { method: 'DELETE' })
-    if (res.ok) setData((prev) => prev.filter((n) => n.id !== id))
+    const res = await fetch(`/api/news/${slug}`, { method: 'DELETE' })
+    if (res.ok) setData((prev) => prev.filter((n) => n.slug !== slug))
   }
 
   const handleTogglePublish = async (item: DbNews) => {
-    const res = await fetch(`/api/news/${item.id}`, {
+    const res = await fetch(`/api/news/${item.slug}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ published: !item.published }),
     })
     if (res.ok) {
       const updated = await res.json()
-      setData((prev) => prev.map((n) => (n.id === item.id ? updated : n)))
+      setData((prev) => prev.map((n) => (n.slug === item.slug ? updated : n)))
     }
   }
 
@@ -110,7 +110,7 @@ function AdminNewsPage() {
                   onClick={() =>
                     navigate({
                       to: '/admin/news/$newsId/edit',
-                      params: { newsId: row.id },
+                      params: { newsId: row.slug },
                     })
                   }
                   className="p-1.5 text-gray-400 hover:text-gray-700 transition-colors"
@@ -118,7 +118,7 @@ function AdminNewsPage() {
                   <Pencil className="w-4 h-4" />
                 </button>
                 <button
-                  onClick={() => handleDelete(row.id)}
+                  onClick={() => handleDelete(row.slug)}
                   className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />

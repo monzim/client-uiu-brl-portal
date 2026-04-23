@@ -49,7 +49,7 @@ function FacultyProfile() {
       {/* Full Width Banner */}
       <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
         <img
-          src="https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg"
+          src={faculty.coverImage || 'https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg'}
           alt="Banner"
           className="w-full h-full object-cover grayscale brightness-[0.4]"
         />

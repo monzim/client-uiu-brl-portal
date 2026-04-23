@@ -8,6 +8,7 @@ const db = new PrismaClient({ adapter })
 const newsItems = [
   {
     id: 'cell-culture-workshop',
+    slug: 'cell-culture-workshop',
     title: 'Cell Culture Training Workshop Held',
     date: new Date('2026-03-09'),
     description:
@@ -19,6 +20,7 @@ const newsItems = [
   },
   {
     id: 'presentation-session',
+    slug: 'presentation-session',
     title: 'Biomedical Research Lab Presentation Session',
     date: new Date('2025-02-16'),
     description:
@@ -30,6 +32,7 @@ const newsItems = [
   },
   {
     id: 'community-pharmacy-webinar',
+    slug: 'community-pharmacy-webinar',
     title: 'Career Webinar on Community Pharmacy',
     date: new Date('2025-12-13'),
     description:
@@ -41,6 +44,7 @@ const newsItems = [
   },
   {
     id: 'wound-healing-remedy',
+    slug: 'wound-healing-remedy',
     title: 'Seminar on Local Wound Healing Remedy',
     date: new Date('2024-12-08'),
     description:
@@ -52,6 +56,7 @@ const newsItems = [
   },
   {
     id: 'pharmacist-day-2024',
+    slug: 'pharmacist-day-2024',
     title: 'World Pharmacist Day 2024 Celebrated',
     date: new Date('2024-09-28'),
     description:
@@ -66,6 +71,7 @@ const newsItems = [
 const facultyItems = [
   {
     id: 'tahmina-foyez',
+    slug: 'tahmina-foyez',
     name: 'Dr. Tahmina Foyez',
     designation: 'Head & Professor',
     department: 'Department of Pharmacy',
@@ -101,6 +107,7 @@ const facultyItems = [
   },
   {
     id: 'sabiha-tasnim',
+    slug: 'sabiha-tasnim',
     name: 'Sabiha Tasnim',
     designation: 'Assistant Professor',
     department: 'Department of Pharmacy',
@@ -119,6 +126,7 @@ const facultyItems = [
   },
   {
     id: 'sharmin-ahmed-rakhi',
+    slug: 'sharmin-ahmed-rakhi',
     name: 'Sharmin Ahmed Rakhi',
     designation: 'Assistant Professor',
     department: 'Department of Pharmacy',
@@ -137,6 +145,7 @@ const facultyItems = [
   },
   {
     id: 'ferdous-ul-haque-joy',
+    slug: 'ferdous-ul-haque-joy',
     name: 'Ferdous-Ul-Haque Joy',
     designation: 'Lecturer',
     department: 'Department of Pharmacy',
@@ -155,6 +164,7 @@ const facultyItems = [
   },
   {
     id: 'rajib-das',
+    slug: 'rajib-das',
     name: 'Rajib Das',
     designation: 'Lecturer',
     department: 'Department of Pharmacy',
@@ -173,6 +183,7 @@ const facultyItems = [
   },
   {
     id: 'nowsad-zahan-sathi',
+    slug: 'nowsad-zahan-sathi',
     name: 'Mst. Nowsad Zahan Sathi',
     designation: 'Lecturer',
     department: 'Department of Pharmacy',

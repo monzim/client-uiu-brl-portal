@@ -82,7 +82,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
             <Link
               key={item.id}
               to="/news/$newsId"
-              params={{ newsId: item.id }}
+              params={{ newsId: item.slug }}
               className="min-w-[280px] md:min-w-[320px] bg-white rounded-[24px] snap-center overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group shadow-sm hover:shadow-2xl"
             >
               <div className="relative h-48 md:h-52 overflow-hidden">

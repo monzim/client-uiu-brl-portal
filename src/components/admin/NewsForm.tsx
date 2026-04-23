@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useRouter } from '@tanstack/react-router'
 import { RichTextEditor } from './RichTextEditor'
 import { ImageUpload } from './ImageUpload'
 import type { DbNews } from '../../types/cms'
+import { slugify } from '../../lib/slug'
 
 interface NewsFormProps {
   initial?: Partial<DbNews>
@@ -13,6 +14,8 @@ export function NewsForm({ initial, newsId }: NewsFormProps) {
   const navigate = useNavigate()
   const router = useRouter()
   const [title, setTitle] = useState(initial?.title ?? '')
+  const [slug, setSlug] = useState(initial?.slug ?? '')
+  const [slugEdited, setSlugEdited] = useState(!!initial?.slug)
   const [date, setDate] = useState(
     initial?.date
       ? new Date(initial.date).toISOString().split('T')[0]
@@ -25,12 +28,16 @@ export function NewsForm({ initial, newsId }: NewsFormProps) {
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  useEffect(() => {
+    if (!slugEdited) setSlug(slugify(title))
+  }, [title, slugEdited])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
     setSaving(true)
     try {
-      const body = { title, date: new Date(date).toISOString(), description, content, image, published }
+      const body = { title, slug: slug.replace(/^-+|-+$/g, ''), date: new Date(date).toISOString(), description, content, image, published }
       const res = newsId
         ? await fetch(`/api/news/${newsId}`, {
             method: 'PUT',
@@ -75,6 +82,35 @@ export function NewsForm({ initial, newsId }: NewsFormProps) {
           className="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm font-medium focus:outline-none focus:border-gray-400 transition-colors"
           placeholder="News title"
         />
+      </div>
+
+      <div className="space-y-1">
+        <label className="text-xs font-black uppercase tracking-widest text-gray-500">
+          URL Slug
+        </label>
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-gray-400 font-medium shrink-0">/news/</span>
+          <input
+            type="text"
+            value={slug}
+            onChange={(e) => {
+              setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-'))
+              setSlugEdited(true)
+            }}
+            required
+            className="flex-1 px-4 py-3 border border-gray-200 rounded-lg text-sm font-medium focus:outline-none focus:border-gray-400 transition-colors font-mono"
+            placeholder="auto-generated-from-title"
+          />
+          {slugEdited && !initial?.slug && (
+            <button
+              type="button"
+              onClick={() => { setSlug(slugify(title)); setSlugEdited(false) }}
+              className="text-[10px] font-black uppercase tracking-widest text-gray-400 hover:text-gray-700 transition-colors shrink-0"
+            >
+              Reset
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="space-y-1">

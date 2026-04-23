@@ -15,6 +15,7 @@ model Admin {
 
 model News {
   id          String   @id @default(cuid())
+  slug        String   @unique
   title       String
   date        DateTime @default(now())
   description String
@@ -27,12 +28,14 @@ model News {
 
 model Faculty {
   id                 String   @id @default(cuid())
+  slug               String   @unique
   name               String
   designation        String
   department         String
   email              String   @unique
   room               String?
   image              String?
+  coverImage         String?
   profileDescription String   @db.Text
   fullBio            String?  @db.Text
   researchGeneral    String?  @db.Text

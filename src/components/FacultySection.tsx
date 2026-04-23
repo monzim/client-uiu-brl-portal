@@ -17,7 +17,7 @@ const FacultyCard = ({
 }) => (
   <Link
     to="/faculty/$facultyId"
-    params={{ facultyId: faculty.id }}
+    params={{ facultyId: faculty.slug }}
     className={`group cursor-pointer block bg-brand-bg/50 md:bg-transparent rounded-[40px] md:rounded-0 border border-brand-border/30 md:border-transparent transition-all duration-500 flex flex-col h-full ${isHomePage ? 'p-4 md:p-0' : 'p-6 md:p-0'}`}
   >
     <div

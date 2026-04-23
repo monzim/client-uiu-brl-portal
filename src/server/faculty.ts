@@ -12,7 +12,7 @@ export const getAdminFacultyList = createServerFn({ method: 'GET' }).handler(
 export const getAdminFacultyItem = createServerFn({ method: 'GET' }).handler(
   // @ts-expect-error - createServerFn doesn't type parameterized input in this version
   (ctx: { data: string }): Promise<DbFaculty | null> =>
-    db.faculty.findUnique({ where: { id: ctx.data } }),
+    db.faculty.findUnique({ where: { slug: ctx.data } as any }),
 )
 
 export const getFacultyList = createServerFn({ method: 'GET' }).handler(
@@ -28,15 +28,12 @@ export const getFacultyList = createServerFn({ method: 'GET' }).handler(
 export const getFacultyItem = createServerFn({ method: 'GET' }).handler(
   // @ts-expect-error - createServerFn doesn't type parameterized input in this version
   (ctx: { data: string }): Promise<DbFaculty | null> => {
-    const id = ctx.data
+    const slug = ctx.data
     return cached(
-      CACHE_KEYS.facultyItem(id),
+      CACHE_KEYS.facultyItem(slug),
       CACHE_TTL.facultyItem,
       async () => {
-        const faculty = await db.faculty.findFirst({
-          where: { OR: [{ id }, { email: id }], published: true },
-        })
-        return faculty
+        return db.faculty.findUnique({ where: { slug, published: true } as any })
       },
     ) as Promise<DbFaculty | null>
   },

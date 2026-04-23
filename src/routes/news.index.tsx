@@ -27,7 +27,7 @@ function NewsPage() {
           {newsData.length > 0 && (
             <Link
               to="/news/$newsId"
-              params={{ newsId: newsData[0].id }}
+              params={{ newsId: newsData[0].slug }}
               className="bg-white rounded-[24px] overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group shadow-sm hover:shadow-2xl h-full flex flex-col"
             >
               <div className="relative h-48 md:h-52 overflow-hidden shrink-0">
@@ -73,7 +73,7 @@ function NewsPage() {
             <Link
               key={news.id}
               to="/news/$newsId"
-              params={{ newsId: news.id }}
+              params={{ newsId: news.slug }}
               className="bg-white rounded-[24px] overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group shadow-sm hover:shadow-2xl h-full flex flex-col"
             >
               <div className="relative h-48 md:h-52 overflow-hidden shrink-0">

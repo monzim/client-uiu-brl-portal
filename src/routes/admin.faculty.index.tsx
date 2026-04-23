@@ -15,21 +15,21 @@ function AdminFacultyPage() {
   const [data, setData] = useState(initialData)
   const navigate = useNavigate()
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (slug: string) => {
     if (!confirm('Delete this faculty member?')) return
-    const res = await fetch(`/api/faculty/${id}`, { method: 'DELETE' })
-    if (res.ok) setData((prev) => prev.filter((f) => f.id !== id))
+    const res = await fetch(`/api/faculty/${slug}`, { method: 'DELETE' })
+    if (res.ok) setData((prev) => prev.filter((f) => f.slug !== slug))
   }
 
   const handleTogglePublish = async (item: DbFaculty) => {
-    const res = await fetch(`/api/faculty/${item.id}`, {
+    const res = await fetch(`/api/faculty/${item.slug}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ published: !item.published }),
     })
     if (res.ok) {
       const updated = await res.json()
-      setData((prev) => prev.map((f) => (f.id === item.id ? updated : f)))
+      setData((prev) => prev.map((f) => (f.slug === item.slug ? updated : f)))
     }
   }
 
@@ -112,7 +112,7 @@ function AdminFacultyPage() {
                   onClick={() =>
                     navigate({
                       to: '/admin/faculty/$facultyId/edit',
-                      params: { facultyId: row.id },
+                      params: { facultyId: row.slug },
                     })
                   }
                   className="p-1.5 text-gray-400 hover:text-gray-700 transition-colors"
@@ -120,7 +120,7 @@ function AdminFacultyPage() {
                   <Pencil className="w-4 h-4" />
                 </button>
                 <button
-                  onClick={() => handleDelete(row.id)}
+                  onClick={() => handleDelete(row.slug)}
                   className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
