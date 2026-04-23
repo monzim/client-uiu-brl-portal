@@ -36,6 +36,7 @@ export interface DbFaculty {
   designation: string
   department: string
   email: string
+  phone: string | null
   room: string | null
   image: string | null
   coverImage: string | null

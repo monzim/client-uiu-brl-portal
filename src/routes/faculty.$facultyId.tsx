@@ -7,6 +7,7 @@ import {
   ArrowLeft,
   ExternalLink,
   BookOpen,
+  Phone,
 } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { getFacultyItem } from '../server/faculty'
@@ -213,10 +214,16 @@ function FacultyProfile() {
                     )}
                     <a
                       href={`mailto:${faculty.email}`}
-                      className="text-sm font-bold text-brand-text hover:text-brand-accent transition-colors block break-all"
+                      className="text-sm font-bold text-brand-text hover:text-brand-accent transition-colors flex items-center gap-2 block break-all"
                     >
                       {faculty.email}
                     </a>
+                    {faculty.phone && (
+                      <p className="text-sm font-bold text-brand-text/70 flex items-center gap-2">
+                        <Phone className="w-3.5 h-3.5 text-brand-text/30" />
+                        {faculty.phone}
+                      </p>
+                    )}
                   </div>
                 </div>
                 {importantLinks.length > 0 && (

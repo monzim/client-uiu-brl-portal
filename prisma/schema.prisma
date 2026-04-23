@@ -33,6 +33,7 @@ model Faculty {
   designation        String
   department         String
   email              String   @unique
+  phone              String?
   room               String?
   image              String?
   coverImage         String?

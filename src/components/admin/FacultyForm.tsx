@@ -329,6 +329,7 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
     initial?.department ?? 'Department of Pharmacy',
   )
   const [email, setEmail] = useState(initial?.email ?? '')
+  const [phone, setPhone] = useState(initial?.phone ?? '')
   const [room, setRoom] = useState(initial?.room ?? '')
   const [image, setImage] = useState<string | null>(initial?.image ?? null)
   const [coverImage, setCoverImage] = useState<string | null>(
@@ -381,6 +382,7 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
         designation,
         department,
         email,
+        phone: phone || null,
         room: room || null,
         image,
         profileDescription,
@@ -543,6 +545,16 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
                       onChange={(e) => setEmail(e.target.value)}
                       required
                       className={cn(inputBase, 'bg-gray-50/50 border-gray-100')}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className={labelClass}>Contact Phone</label>
+                    <input
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className={cn(inputBase, 'bg-gray-50/50 border-gray-100')}
+                      placeholder="e.g. +880 1234 567890"
                     />
                   </div>
                   <div className="space-y-2">
