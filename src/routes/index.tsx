@@ -9,7 +9,22 @@ import { EquipmentSection } from '../components/EquipmentSection'
 import { FacultySection } from '../components/FacultySection'
 import { CTASection } from '../components/CTASection'
 
-export const Route = createFileRoute('/')({ component: App })
+export const Route = createFileRoute('/')({
+  head: () => ({
+    meta: [
+      { title: 'UIU Biomedical Research Lab | Pushing Boundaries in BME' },
+      {
+        name: 'description',
+        content: 'The Biomedical Research Laboratory at United International University focuses on smart hydrogels, pharmacogenomics, and antimicrobial resistance.',
+      },
+      { property: 'og:title', content: 'UIU Biomedical Research Lab' },
+      { property: 'og:description', content: 'Leading biomedical research in Bangladesh at United International University.' },
+      { property: 'og:type', content: 'website' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+  }),
+  component: App 
+})
 
 function App() {
   return (

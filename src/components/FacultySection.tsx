@@ -14,14 +14,14 @@ const FacultyCard = ({ faculty, isHomePage }: { faculty: Faculty, isHomePage: bo
     params={{ facultyId: faculty.id }} 
     className={`group cursor-pointer block bg-brand-bg/50 md:bg-transparent rounded-[40px] md:rounded-0 border border-brand-border/30 md:border-transparent transition-all duration-500 flex flex-col h-full ${isHomePage ? 'p-4 md:p-0' : 'p-6 md:p-0'}`}
   >
-    <div className={`bg-brand-border rounded-[24px] mb-5 overflow-hidden relative shadow-sm transition-shadow group-hover:shadow-2xl ${isHomePage ? 'aspect-square' : 'aspect-[4/5] mb-8'}`}>
+    <div className={`bg-brand-border rounded-[24px] mb-5 overflow-hidden relative transition-shadow ${isHomePage ? 'aspect-square' : 'aspect-[4/5] mb-8'}`}>
        <img src={faculty.image} alt={faculty.name} className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
        <div className="absolute inset-0 bg-brand-text/5 opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
     <div className={`flex flex-col flex-grow ${isHomePage ? 'px-2' : 'space-y-4'}`}>
        <div className={`flex justify-between ${isHomePage ? 'items-center' : 'items-start'} gap-2`}>
          <div className="overflow-hidden flex-grow">
-            <h4 className={`${isHomePage ? 'text-lg md:text-xl' : 'text-2xl'} font-bold text-brand-text mb-1 tracking-tight line-clamp-1`}>{faculty.name}</h4>
+            <h4 className={`${isHomePage ? 'text-base md:text-xl' : 'text-xl md:text-2xl'} font-bold text-brand-text mb-1 tracking-tight line-clamp-1`}>{faculty.name}</h4>
             <p className="text-brand-text/30 font-extrabold text-[10px] uppercase tracking-[0.25em] line-clamp-1">{faculty.designation}</p>
          </div>
          {isHomePage && (
@@ -57,7 +57,7 @@ export function FacultySection({ isHomePage = false }: FacultySectionProps) {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20 gap-8">
           <div className="max-w-2xl">
             <h2 className="text-sm font-bold tracking-widest text-brand-text/40 uppercase mb-4">Our Team</h2>
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tight text-brand-text leading-tight">
+            <h3 className="text-2xl md:text-5xl font-medium tracking-tight text-brand-text leading-tight">
               Meet the researchers behind the innovation.
             </h3>
           </div>
@@ -74,7 +74,7 @@ export function FacultySection({ isHomePage = false }: FacultySectionProps) {
           {/* Header (Middle) */}
           <div className="md:col-span-2 flex flex-col justify-start items-center text-center order-first md:order-none py-12 md:pb-36">
             <h2 className="text-sm font-bold tracking-widest text-brand-text/40 uppercase mb-4">Leadership</h2>
-            <h3 className="text-4xl md:text-5xl lg:text-[56px] font-medium tracking-tight text-brand-text leading-[1.1] uppercase">
+            <h3 className="text-3xl md:text-5xl lg:text-[56px] font-medium tracking-tight text-brand-text leading-[1.1] uppercase">
               Faculty <br /> Members.
             </h3>
           </div>

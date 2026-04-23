@@ -20,7 +20,7 @@ export function ResearchAreasSection() {
                 key={area.title} 
                 className={`p-10 rounded-[40px] border transition-all duration-700 cursor-pointer group flex flex-col h-full ${
                   isSpecial 
-                    ? 'bg-brand-text text-brand-bg border-transparent scale-[1.05] shadow-2xl hover:bg-brand-bg hover:text-brand-text hover:border-brand-border hover:scale-100' 
+                    ? 'bg-brand-text text-brand-bg border-transparent scale-[1.05] hover:bg-brand-bg hover:text-brand-text hover:border-brand-border hover:scale-100' 
                     : 'bg-brand-bg text-brand-text border-brand-border hover:bg-[#e6ebe6] hover:-translate-y-2'
                 }`}
               >

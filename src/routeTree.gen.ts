@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PartnershipRouteImport } from './routes/partnership'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as GalleryRouteImport } from './routes/gallery'
@@ -24,6 +25,11 @@ import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projec
 import { Route as NewsNewsIdRouteImport } from './routes/news.$newsId'
 import { Route as FacultyFacultyIdRouteImport } from './routes/faculty.$facultyId'
 
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnershipRoute = PartnershipRouteImport.update({
   id: '/partnership',
   path: '/partnership',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/gallery': typeof GalleryRoute
   '/news': typeof NewsRouteWithChildren
   '/partnership': typeof PartnershipRoute
+  '/privacy': typeof PrivacyRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/equipment': typeof EquipmentRoute
   '/gallery': typeof GalleryRoute
   '/partnership': typeof PartnershipRoute
+  '/privacy': typeof PrivacyRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/gallery': typeof GalleryRoute
   '/news': typeof NewsRouteWithChildren
   '/partnership': typeof PartnershipRoute
+  '/privacy': typeof PrivacyRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/news'
     | '/partnership'
+    | '/privacy'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/equipment'
     | '/gallery'
     | '/partnership'
+    | '/privacy'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/news'
     | '/partnership'
+    | '/privacy'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   GalleryRoute: typeof GalleryRoute
   NewsRoute: typeof NewsRouteWithChildren
   PartnershipRoute: typeof PartnershipRoute
+  PrivacyRoute: typeof PrivacyRoute
   FacultyFacultyIdRoute: typeof FacultyFacultyIdRoute
   ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
   FacultyIndexRoute: typeof FacultyIndexRoute
@@ -210,6 +223,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partnership': {
       id: '/partnership'
       path: '/partnership'
@@ -333,6 +353,7 @@ const rootRouteChildren: RootRouteChildren = {
   GalleryRoute: GalleryRoute,
   NewsRoute: NewsRouteWithChildren,
   PartnershipRoute: PartnershipRoute,
+  PrivacyRoute: PrivacyRoute,
   FacultyFacultyIdRoute: FacultyFacultyIdRoute,
   ProjectsProjectIdRoute: ProjectsProjectIdRoute,
   FacultyIndexRoute: FacultyIndexRoute,

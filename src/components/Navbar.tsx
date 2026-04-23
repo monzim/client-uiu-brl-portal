@@ -12,8 +12,7 @@ export function Navbar() {
   const [lastScrollY, setLastScrollY] = useState(0);
   
   const location = useLocation();
-  const isHome = location.pathname === '/';
-  const showBg = !isHome || isScrolled;
+  const showBg = isScrolled;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +77,9 @@ export function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 transform flex flex-col ${
           (isVisible || isOpen) ? 'translate-y-0' : '-translate-y-full'
         } ${
-          showBg ? 'bg-brand-bg shadow-sm backdrop-blur-md' : 'bg-transparent'
+          showBg 
+            ? (isOpen ? 'bg-transparent lg:bg-brand-bg lg:backdrop-blur-md' : 'bg-brand-bg backdrop-blur-md') 
+            : 'bg-transparent'
         }`}
       >
         {/* Top Social Bar */}
@@ -102,17 +103,17 @@ export function Navbar() {
         {/* Main Navbar */}
         <div className={`max-w-[1400px] w-full mx-auto px-6 flex items-center justify-between transition-all duration-500 ${showBg ? 'py-4' : 'py-8'}`}>
           {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-3 sm:gap-4 group relative z-[60]">
+          <Link to="/" className="flex items-center gap-2 sm:gap-4 group relative z-[60]">
             <img 
               src={(isOpen || !showBg) ? "/images/transparent original logo.png" : "/images/transparent black logo.png"} 
               alt="BRL Logo" 
-              className="h-10 sm:h-12 w-auto object-contain transition-all duration-500"
+              className="h-7 sm:h-10 md:h-12 w-auto object-contain transition-all duration-500"
             />
-            <div className={`h-8 sm:h-10 w-[1px] bg-current opacity-20 mx-1 sm:mx-2 ${isOpen ? 'text-white' : (showBg ? 'text-brand-accent' : 'text-white')}`} />
+            <div className={`h-6 sm:h-8 md:h-10 w-[1px] bg-current opacity-20 mx-1 sm:mx-2 ${isOpen ? 'text-white' : (showBg ? 'text-brand-accent' : 'text-white')}`} />
             <img 
               src={(isOpen || !showBg) ? "/images/uiu-logo.png" : "/images/UIU-Logo-2.png"} 
               alt="UIU Logo" 
-              className="h-8 sm:h-10 w-auto object-contain transition-all duration-500"
+              className="h-6 sm:h-8 md:h-10 w-auto object-contain transition-all duration-500"
             />
           </Link>
 
@@ -130,14 +131,18 @@ export function Navbar() {
                     <Link 
                       to={item.to}
                       className={`text-xs font-bold uppercase tracking-widest transition-colors ${
-                        showBg ? 'text-brand-accent hover:text-brand-accent/70' : 'text-white hover:text-white/70'
+                        (location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to)))
+                          ? (showBg ? 'text-brand-accent underline underline-offset-[6px] decoration-2' : 'text-white underline underline-offset-[6px] decoration-2')
+                          : (showBg ? 'text-brand-accent hover:text-brand-accent/70' : 'text-white hover:text-white/70')
                       }`}
                     >
                       {item.label}
                     </Link>
                   ) : (
                     <span className={`text-xs font-bold uppercase tracking-widest transition-colors ${
-                      showBg ? 'text-brand-accent' : 'text-white'
+                      item.subItems?.some(sub => location.pathname === sub.to || (sub.to !== '/' && location.pathname.startsWith(sub.to)))
+                        ? (showBg ? 'text-brand-accent underline underline-offset-[6px] decoration-2' : 'text-white underline underline-offset-[6px] decoration-2')
+                        : (showBg ? 'text-brand-accent' : 'text-white')
                     }`}>
                       {item.label}
                     </span>
@@ -150,7 +155,7 @@ export function Navbar() {
                 {/* Dropdown Menu */}
                 {item.subItems && (
                   <div 
-                    className={`absolute top-full left-0 w-64 bg-brand-text rounded-xl overflow-hidden transition-all duration-400 origin-top shadow-2xl ${
+                    className={`absolute top-full left-0 w-64 bg-brand-text rounded-xl overflow-hidden transition-all duration-400 origin-top ${
                       activeDropdown === item.label ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-4 invisible'
                     }`}
                   >
@@ -219,31 +224,39 @@ export function Navbar() {
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-100%] pointer-events-none'
         }`}
       >
-        <div className="flex flex-col items-center justify-start h-full px-6 text-white overflow-y-auto pt-32 pb-10">
-          <nav className="flex flex-col items-center gap-6 w-full max-w-sm">
+        <div className="flex flex-col items-center justify-center h-full px-6 text-white pt-16">
+          <nav className="flex flex-col items-center gap-4 w-full max-w-sm">
             {navItems.map((item) => (
               <div key={item.label} className="text-center w-full">
                 {item.to ? (
                   <Link 
                     to={item.to} 
-                    className="text-xl font-bold uppercase tracking-widest hover:text-white/60 transition-colors block py-2"
+                    className={`text-sm font-bold uppercase tracking-[0.2em] transition-colors block py-1 ${
+                      (location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to)))
+                        ? 'text-white underline underline-offset-[6px] decoration-2'
+                        : 'text-white hover:text-white/60'
+                    }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {item.label}
                   </Link>
                 ) : (
-                  <span className="text-xl font-bold uppercase tracking-widest opacity-40 block py-2">
+                  <span className={`text-sm font-bold uppercase tracking-[0.2em] block py-1 ${
+                    item.subItems?.some(sub => location.pathname === sub.to || (sub.to !== '/' && location.pathname.startsWith(sub.to)))
+                      ? 'text-white underline underline-offset-[6px] decoration-2'
+                      : 'text-white opacity-40'
+                  }`}>
                     {item.label}
                   </span>
                 )}
                 {item.subItems && (
-                  <div className="mt-2 flex flex-col gap-2 bg-white/5 py-3 rounded-2xl">
+                  <div className="mt-1 flex flex-col gap-1 bg-white/5 py-2 rounded-xl border border-white/5">
                     {item.subItems.map((sub) => (
                       <div key={sub.label}>
                         {sub.to.startsWith('/#') ? (
                           <a
                             href={sub.to.substring(1)}
-                            className="text-sm font-medium text-white/60 hover:text-white transition-colors block py-1"
+                            className="text-xs font-medium text-white/60 hover:text-white transition-colors block py-1 uppercase tracking-widest"
                             onClick={() => setIsOpen(false)}
                           >
                             {sub.label}
@@ -251,7 +264,11 @@ export function Navbar() {
                         ) : (
                           <Link
                             to={sub.to as any}
-                            className="text-sm font-medium text-white/60 hover:text-white transition-colors block py-1"
+                            className={`text-xs font-medium transition-colors block py-1 uppercase tracking-widest ${
+                              location.pathname === sub.to || (sub.to !== '/' && location.pathname.startsWith(sub.to))
+                                ? 'text-white underline underline-offset-4 decoration-2'
+                                : 'text-white/60 hover:text-white'
+                            }`}
                             onClick={() => setIsOpen(false)}
                           >
                             {sub.label}

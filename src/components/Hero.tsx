@@ -87,7 +87,7 @@ export function Hero() {
                     : 'opacity-0 translate-x-20 pointer-events-none'
               }`}
             >
-              <h1 className="text-white text-[28px] sm:text-[40px] md:text-[44px] font-light leading-[1.1] drop-shadow-2xl">
+              <h1 className="text-white text-[28px] sm:text-[40px] md:text-[44px] font-light leading-[1.1]">
                 {slide.text}
               </h1>
             </div>

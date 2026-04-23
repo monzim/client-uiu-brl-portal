@@ -1,12 +1,23 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Microscope, FlaskConical, Beaker, Dna } from 'lucide-react'
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { Microscope, FlaskConical, Beaker, Dna, ArrowLeft } from 'lucide-react'
 
 export const Route = createFileRoute('/gallery')({
+  head: () => ({
+    meta: [
+      { title: 'Laboratory Gallery | UIU Biomedical Research Lab' },
+      {
+        name: 'description',
+        content: 'Take a virtual tour of the UIU Biomedical Research Lab and see our state-of-the-art equipment and research facilities.',
+      },
+      { property: 'og:title', content: 'Lab Gallery | UIU BME Lab' },
+      { property: 'og:type', content: 'website' },
+    ],
+  }),
   component: Gallery,
 })
 
 const images = [
-  { url: 'https://images.pexels.com/photos/8442448/pexels-photo-8442448.jpeg', caption: 'Cell Culture Analysis' },
+  { url: 'https://images.pexels.com/photos/8442458/pexels-photo-8442458.jpeg', caption: 'Cell Culture Analysis' },
   { url: 'https://images.pexels.com/photos/8442036/pexels-photo-8442036.jpeg', caption: 'HPLC Setup' },
   { url: 'https://images.pexels.com/photos/7108344/pexels-photo-7108344.jpeg', caption: 'Molecular Visualization' },
   { url: 'https://images.pexels.com/photos/3912981/pexels-photo-3912981.jpeg', caption: 'Compound Evaluation' },
@@ -18,14 +29,29 @@ const images = [
 
 function Gallery() {
   return (
-    <main className="min-h-screen pt-[160px] pb-40 bg-brand-bg px-6">
-      <div className="max-w-[1400px] mx-auto">
-        <div className="mb-24 space-y-6">
-           <h2 className="text-sm font-bold uppercase tracking-widest text-brand-text/30">Visual Archive</h2>
-           <h1 className="text-[56px] md:text-[80px] font-medium leading-[1.05] tracking-tight text-brand-text">
-              Inside the laboratory.
-           </h1>
+    <main className="min-h-screen bg-brand-bg pb-40">
+      {/* Hero Banner Section */}
+      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+        <img 
+          src="https://images.pexels.com/photos/442579/pexels-photo-442579.jpeg" 
+          alt="Gallery Banner" 
+          className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+        
+        <div className="absolute bottom-0 left-0 w-full px-6 pb-12 md:pb-20">
+          <div className="max-w-[1400px] mx-auto">
+            <Link to="/" className="inline-flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest text-white/50 hover:text-white mb-6 transition-colors group">
+               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Home
+            </Link>
+            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+              Inside the <br className="hidden md:block"/>Laboratory.
+            </h1>
+          </div>
         </div>
+      </section>
+
+      <div className="max-w-[1400px] mx-auto px-6 mt-16 md:mt-24">
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
            {images.map((img, i) => (

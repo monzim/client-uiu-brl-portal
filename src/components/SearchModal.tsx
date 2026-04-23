@@ -66,7 +66,7 @@ export function SearchModal({ open, onOpenChange }: { open: boolean, onOpenChang
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[100] bg-brand-text/40 backdrop-blur-sm animate-in fade-in duration-300" />
-        <Dialog.Content className="fixed top-[15%] left-1/2 -translate-x-1/2 w-full max-w-[600px] z-[101] bg-brand-bg rounded-[32px] shadow-2xl overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300 outline-none">
+        <Dialog.Content className="fixed top-[15%] left-1/2 -translate-x-1/2 w-full max-w-[600px] z-[101] bg-brand-bg rounded-[32px] overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300 outline-none">
           <div className="p-6 border-b border-brand-border flex items-center gap-4">
             <Search className="w-5 h-5 text-brand-text/30" />
             <input 

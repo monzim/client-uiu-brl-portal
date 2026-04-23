@@ -26,7 +26,7 @@ export function ResearchSection() {
                   isFirst 
                     ? 'bg-brand-text text-brand-bg hover:bg-brand-bg hover:text-brand-text' 
                     : 'bg-brand-bg text-brand-text hover:bg-brand-text hover:text-brand-bg'
-                } hover:shadow-2xl hover:scale-[1.02]`}
+                } hover:scale-[1.02]`}
               >
                 {/* Background Decorative Number */}
                 <span className={`absolute top-6 right-6 text-5xl font-black transition-colors duration-500 ${

@@ -8,11 +8,11 @@ export function QuoteSection() {
       <div className="max-w-[1200px] mx-auto px-6 relative">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-20 w-full relative z-10 text-center lg:text-left justify-center lg:justify-start">
           {/* Decorative Background Element */}
-          <div className="absolute top-1/2 left-0 w-64 h-64 bg-brand-accent/5 rounded-full -translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
+          <div className="absolute  top-1/2 left-0 w-64 h-64 bg-brand-accent/5 rounded-full -translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
           
           {/* Image Section */}
           <div className="flex flex-col items-center shrink-0 lg:sticky lg:top-32">
-            <div className="relative w-48 h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden border-2 border-brand-border shadow-xl ring-1 ring-brand-text/5 ring-offset-4 ring-offset-brand-bg transition-transform duration-500 hover:scale-105">
+            <div className="relative w-48 h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden border-2 border-brand-border ring-1 ring-brand-text/5 ring-offset-4 ring-offset-brand-bg transition-transform duration-500 hover:scale-105">
               <img 
                 src="https://images.pexels.com/photos/5214995/pexels-photo-5214995.jpeg" 
                 alt="Prof. Dr Tahmina Foyez" 
@@ -32,8 +32,8 @@ export function QuoteSection() {
           <div className="flex-1 space-y-10 py-4">
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                 <div className="h-[1px] w-8 bg-brand-accent" />
-                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-accent">Mission & Vision</span>
+                 <div className="h-[1px] w-8 hidden md:block bg-brand-accent" />
+                 <span className="text-[10px] hidden md:block font-bold uppercase tracking-[0.3em] text-brand-accent">Mission & Vision</span>
               </div>
               <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-brand-text leading-[1.1] capitalize">
                  Embark on a journey of <br className="hidden lg:block" /> scientific discovery
@@ -53,7 +53,7 @@ export function QuoteSection() {
               <Link 
                 to="/faculty/$facultyId"
                 params={{ facultyId: 'tahmina-foyez' }}
-                className="group inline-flex items-center gap-4 px-8 py-4 bg-brand-text text-brand-bg rounded-2xl font-bold uppercase tracking-widest text-[10px] transition-all hover:bg-brand-accent hover:scale-[1.02] shadow-xl"
+                className="group inline-flex items-center gap-4 px-8 py-4 bg-brand-text text-brand-bg rounded-2xl font-bold uppercase tracking-widest text-[10px] transition-all hover:bg-brand-accent hover:scale-[1.02]"
               >
                 Discover More
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />

@@ -1,11 +1,27 @@
 import React, { useState } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute,Link } from '@tanstack/react-router'
 import { facultyData } from '../data/faculty'
 import { Mail, GraduationCap, Briefcase, Award, Globe, ArrowLeft, BookOpen, History, ArrowUpRight } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
+
 
 
 export const Route = createFileRoute('/faculty/$facultyId')({
+  head: ({ params }) => {
+    const faculty = facultyData.find((f) => f.id === params.facultyId)
+    const title = faculty ? `${faculty.name} | UIU BME Lab Faculty` : 'Faculty Profile'
+    const description = faculty?.biography?.[0] || 'Faculty member profile at UIU BME Lab.'
+    
+    return {
+      meta: [
+        { title },
+        { name: 'description', content: description },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: faculty?.image },
+        { property: 'og:type', content: 'profile' },
+      ],
+    }
+  },
   component: FacultyProfile,
 })
 
@@ -33,7 +49,7 @@ function FacultyProfile() {
   return (
     <main className="min-h-screen bg-white font-sans">
       {/* Full Width Banner */}
-      <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+      <div className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
          <img 
            src="https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg" 
            alt="Banner" 
@@ -41,19 +57,22 @@ function FacultyProfile() {
          />
          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-text/90" />
          <div className="absolute inset-0 flex items-end">
-            <div className="max-w-[1400px] w-full mx-auto px-6 pb-12">
-               <Link to="/faculty" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white/50 hover:text-white mb-8 transition-colors group">
+            <div className="max-w-[1400px] w-full mx-auto px-6 pb-8 md:pb-12 pt-24 md:pt-0">
+               <Link to="/faculty" className="inline-flex items-center gap-2 text-xs md:text-sm  uppercase tracking-widest text-white/50 hover:text-white mb-6 md:mb-8 transition-colors group">
                   <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Team
                </Link>
-               <div className="flex items-center gap-4 mb-4">
-                  <div className="h-px w-12 bg-white/30" />
-                  <p className="text-sm md:text-base text-white/60 font-bold uppercase tracking-[0.3em]">
-                     {faculty.designation}
-                  </p>
+               
+               <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-12 w-full">
+                  <h1 className="text-4xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+                     {faculty.name}
+                  </h1>
+                  
+                  <div className="flex items-center gap-3 text-white/80 shrink-0 ml-auto md:ml-0 bg-white/10 px-5 py-2.5 rounded-full backdrop-blur-md border border-white/10">
+                     <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
+                        {faculty.designation}
+                     </p>
+                  </div>
                </div>
-               <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase leading-none">
-                  {faculty.name}
-               </h1>
             </div>
          </div>
       </div>
@@ -65,7 +84,7 @@ function FacultyProfile() {
           <div className="lg:col-span-3 space-y-10">
             {/* Portrait and Info */}
             <div>
-              <div className="aspect-[4/4] bg-brand-border overflow-hidden rounded-[24px] border border-brand-border/50 shadow-xl mb-6">
+              <div className="aspect-[4/4] bg-brand-border overflow-hidden rounded-[24px] border border-brand-border/50 mb-6">
                  <img src={faculty.image} alt={faculty.name} className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1]" />
               </div>
               <h2 className="text-2xl md:text-3xl font-black text-brand-text tracking-tighter leading-tight mb-2">{faculty.name}</h2>
@@ -100,14 +119,14 @@ function FacultyProfile() {
           {/* Main Content Area */}
           <div className="lg:col-span-9">
             {/* Tabs */}
-            <div className="flex bg-[#f4f4f4] mb-12 overflow-x-auto no-scrollbar rounded-xl p-1.5 gap-1">
+            <div className="grid grid-cols-2 lg:flex bg-[#f4f4f4] mb-12 rounded-xl p-1.5 gap-1.5">
                {tabs.map((tab) => (
                  <button
                    key={tab.id}
                    onClick={() => setActiveTab(tab.id)}
-                   className={`flex-1 min-w-max md:min-w-0 px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] transition-all whitespace-nowrap rounded-lg ${
+                   className={`lg:flex-1 px-3 md:px-6 py-3 md:py-4 text-[10px] md:text-[11px] font-black uppercase tracking-wider md:tracking-[0.15em] transition-all whitespace-normal lg:whitespace-nowrap rounded-lg leading-snug ${
                      activeTab === tab.id 
-                       ? 'bg-brand-text text-white shadow-lg' 
+                       ? 'bg-brand-text text-white' 
                        : 'text-brand-text/40 hover:text-brand-text hover:bg-black/5'
                    }`}
                  >
@@ -120,10 +139,12 @@ function FacultyProfile() {
             <div className="min-h-[500px]">
                {activeTab === 'biography' && (
                   <div className="animate-in fade-in duration-700 space-y-12">
-                    <div className="space-y-6 text-lg md:text-xl text-brand-text/70 leading-[1.8] font-medium">
-                       {faculty.fullBio.split('\n').map((paragraph, index) => (
+                    <div className="space-y-6 text-base md:text-xl text-brand-text/70 leading-[1.8] font-medium">
+                       {faculty.fullBio ? faculty.fullBio.split('\n').map((paragraph, index) => (
                          paragraph.trim() ? <p key={index}>{paragraph.trim()}</p> : null
-                       ))}
+                       )) : (
+                         <p>{faculty.profileDescription}</p>
+                       )}
                     </div>
 
                     {/* Merged Career & Awards */}
@@ -160,7 +181,7 @@ function FacultyProfile() {
                {activeTab === 'qualification' && (
                   <div className="space-y-12 animate-in fade-in duration-500">
                     <div className="space-y-8">
-                       <h4 className="text-[11px] font-black uppercase tracking-[0.3em] text-brand-text/20 border-b border-brand-border/50 pb-3">Academic Background</h4>
+                       <h4 className="text-2xl font-black text-brand-text/90 mb-8 uppercase tracking-tighter">Academic Background</h4>
                        <ul className="space-y-8">
                           {faculty.qualifications.education.map((q, i) => (
                             <li key={i} className="flex gap-6 items-start group">

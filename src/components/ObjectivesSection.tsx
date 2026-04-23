@@ -33,7 +33,7 @@ export function ObjectivesSection() {
                   onMouseEnter={() => setActive(project.id)}
                   className={`w-full text-left p-6 md:p-8 rounded-[32px] transition-all duration-700 ease-[cubic-bezier(0.23, 1, 0.32, 1)] flex items-center justify-between group ${
                     active === project.id 
-                      ? 'bg-brand-bg text-brand-text shadow-[0_20px_50px_rgba(0,0,0,0.1)] scale-[1.02]' 
+                      ? 'bg-brand-bg text-brand-text scale-[1.02]' 
                       : 'opacity-20 hover:opacity-100 hover:bg-brand-bg/5'
                   }`}
                 >
@@ -54,7 +54,7 @@ export function ObjectivesSection() {
           </div>
           
           {/* Right Side: Project Image (Visualizer) */}
-          <div className="w-full lg:w-[60%] relative aspect-[16/10] lg:h-[70vh] rounded-[60px] overflow-hidden border-[16px] border-brand-bg/5 shadow-3xl transition-all duration-1000 ease-in-out">
+          <div className="w-full lg:w-[60%] relative aspect-[16/10] lg:h-[70vh] rounded-[60px] overflow-hidden border-[16px] border-brand-bg/5 transition-all duration-1000 ease-in-out">
             {projectsData.map((project) => (
               <img 
                 key={project.id}
@@ -76,7 +76,7 @@ export function ObjectivesSection() {
               <Link 
                 to="/projects/$projectId"
                 params={{ projectId: active }}
-                className="px-8 py-4 bg-white text-brand-text rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-brand-accent hover:text-white transition-all shadow-xl"
+                className="px-8 py-4 bg-white text-brand-text rounded-2xl font-bold uppercase tracking-widest text-[10px] hover:bg-brand-accent hover:text-white transition-all"
               >
                 View Details
               </Link>

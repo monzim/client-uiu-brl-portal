@@ -32,7 +32,7 @@ export function NewsCarousel() {
   };
 
   return (
-    <section className="py-32 px-10 overflow-hidden">
+    <section className="py-24 px-10 overflow-hidden">
       <div className="w-full">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20 gap-8 max-w-[1400px] mx-auto">
           <div className="max-w-2xl">
@@ -44,7 +44,7 @@ export function NewsCarousel() {
           <div className="flex items-center gap-6">
              <Link 
                to="/news"
-               className="text-[11px] font-bold uppercase tracking-widest text-brand-text hover:opacity-50 transition-opacity border-b border-brand-text pb-1 mr-4 hidden sm:block"
+               className="text-[11px] font-bold uppercase tracking-widest text-brand-text hover:bg-brand-text hover:text-white transition-all px-8 py-3 rounded-full border border-brand-text mr-4 hidden sm:block"
              >
                View All News
              </Link>
@@ -76,7 +76,7 @@ export function NewsCarousel() {
               key={news.id}
               to="/news/$newsId"
               params={{ newsId: news.id }}
-              className="min-w-[280px] md:min-w-[320px] bg-white rounded-[24px] snap-center overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group shadow-sm hover:shadow-2xl"
+              className="min-w-[280px] md:min-w-[320px] bg-white rounded-[24px] snap-center overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group"
             >
               {/* Card Image */}
               <div className="relative h-48 md:h-52 overflow-hidden">
@@ -110,7 +110,7 @@ export function NewsCarousel() {
         <div className="mt-8 flex justify-center sm:hidden">
            <Link 
              to="/news"
-             className="text-[11px] font-bold uppercase tracking-widest text-brand-text border-b border-brand-text pb-1"
+             className="text-[11px] font-bold uppercase tracking-widest text-brand-text hover:bg-brand-text hover:text-white transition-all px-8 py-3 rounded-full border border-brand-text"
            >
              View All News
            </Link>

@@ -4,6 +4,22 @@ import { ArrowLeft, Clock, Layout, Microscope } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/projects/$projectId')({
+  head: ({ params }) => {
+    const project = currentProjects.find((p) => p.id === params.projectId)
+    const title = project ? `${project.title} | UIU BME Lab Research` : 'Research Project'
+    const description = project?.summary || 'Detailed view of research projects at UIU BME Lab.'
+    
+    return {
+      meta: [
+        { title },
+        { name: 'description', content: description },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: project?.image },
+        { property: 'og:type', content: 'website' },
+      ],
+    }
+  },
   component: ProjectDetail,
 })
 
@@ -24,7 +40,7 @@ function ProjectDetail() {
   return (
     <main className="min-h-screen bg-brand-bg">
       {/* Full Width Banner Image */}
-      <div className="relative w-full h-[50vh] md:h-[60vh] overflow-hidden">
+      <div className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
          <img 
            src={project.image || "https://images.pexels.com/photos/8533016/pexels-photo-8533016.jpeg"} 
            alt={project.title} 
@@ -45,7 +61,7 @@ function ProjectDetail() {
                 <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-brand-accent mb-4">
                    <Clock className="w-4 h-4" /> Ongoing Project
                 </div>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tighter text-white max-w-3xl uppercase">
+                <h1 className="text-4xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
                   {project.title}
                 </h1>
               </div>
