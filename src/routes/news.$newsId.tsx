@@ -4,6 +4,7 @@ import { Link } from '@tanstack/react-router'
 import { getNewsItem } from '../server/news'
 import { formatNewsDate } from '../types/cms'
 import type { DbNews } from '../types/cms'
+import { RichContent } from '../components/RichContent'
 
 export const Route = createFileRoute('/news/$newsId')({
   // @ts-expect-error - parameterized createServerFn call
@@ -64,9 +65,9 @@ function NewsDetail() {
               {news.description}
             </p>
 
-            <div
-              className="prose prose-lg max-w-none text-brand-text/70 font-medium leading-[1.8]"
-              dangerouslySetInnerHTML={{ __html: news.content }}
+            <RichContent
+              html={news.content}
+              className="text-brand-text/80"
             />
 
             <div className="pt-12 border-t border-brand-border flex justify-between items-center">

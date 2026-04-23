@@ -20,7 +20,17 @@ export const Route = createFileRoute('/api/faculty/')({
         if (!payload) return errorResponse('Unauthorized', 401)
         const body = await request.json().catch(() => null)
         if (!body) return errorResponse('Invalid body', 400)
-        const faculty = await db.faculty.create({ data: body as any })
+        
+        // Remove non-creatable fields if they exist
+        const { id, createdAt, updatedAt, ...createData } = body
+
+        const faculty = await db.faculty.create({ 
+          data: {
+            ...createData,
+            publications: createData.publications ?? undefined,
+            importantLinks: createData.importantLinks ?? undefined,
+          }
+        })
         await redis.del(CACHE_KEYS.facultyList())
         return jsonResponse(faculty, { status: 201 })
       },

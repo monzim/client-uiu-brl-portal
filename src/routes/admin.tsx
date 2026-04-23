@@ -21,9 +21,9 @@ function AdminLayout() {
   if (isLogin) return <Outlet />
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-[#f8faf9] selection:bg-emerald-100 selection:text-emerald-900">
       <AdminSidebar />
-      <main className="flex-1 p-8 overflow-auto">
+      <main className="flex-1 h-screen overflow-y-auto overflow-x-hidden pt-8 px-8 pb-12 transition-all duration-300">
         <Outlet />
       </main>
     </div>

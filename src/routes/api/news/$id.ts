@@ -36,8 +36,10 @@ export const Route = createFileRoute('/api/news/$id')({
         })
         if (!existing) return errorResponse('Not found', 404)
         const news = await db.news.update({ where: { id: existing.id }, data: body as any })
-        await redis.del(CACHE_KEYS.newsItem(existing.slug))
-        await redis.del(CACHE_KEYS.newsList())
+        await Promise.allSettled([
+          redis.del(CACHE_KEYS.newsItem(existing.slug)),
+          redis.del(CACHE_KEYS.newsList()),
+        ])
         return jsonResponse(news)
       },
       DELETE: async ({ request, params }) => {
@@ -50,8 +52,10 @@ export const Route = createFileRoute('/api/news/$id')({
         })
         if (!existing) return errorResponse('Not found', 404)
         await db.news.delete({ where: { id: existing.id } })
-        await redis.del(CACHE_KEYS.newsItem(existing.slug))
-        await redis.del(CACHE_KEYS.newsList())
+        await Promise.allSettled([
+          redis.del(CACHE_KEYS.newsItem(existing.slug)),
+          redis.del(CACHE_KEYS.newsList()),
+        ])
         return jsonResponse({ ok: true })
       },
     },

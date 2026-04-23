@@ -1,21 +1,118 @@
 import React, { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  Mail,
   GraduationCap,
   Award,
   Globe,
   ArrowLeft,
+  ExternalLink,
+  BookOpen,
 } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { getFacultyItem } from '../server/faculty'
-import type { DbFaculty } from '../types/cms'
+import type { Publication } from '../types/cms'
+import { RichContent } from '../components/RichContent'
 
 export const Route = createFileRoute('/faculty/$facultyId')({
   // @ts-expect-error - parameterized createServerFn call
   loader: ({ params }) => getFacultyItem({ data: params.facultyId }),
   component: FacultyProfile,
 })
+
+const PUB_TYPE_LABELS: Record<string, string> = {
+  journal: 'Journal',
+  conference: 'Conference',
+  book: 'Book',
+  thesis: 'Thesis',
+  other: 'Publication',
+}
+
+function PublicationsList({ publications }: { publications: Publication[] }) {
+  const byYear = publications.reduce<Record<string, Publication[]>>((acc, pub) => {
+    const y = pub.year || 'Undated'
+    if (!acc[y]) acc[y] = []
+    acc[y].push(pub)
+    return acc
+  }, {})
+
+  const years = Object.keys(byYear).sort((a, b) => Number(b) - Number(a))
+
+  return (
+    <div className="space-y-12 animate-in fade-in duration-500">
+      <h3 className="text-2xl font-black text-brand-text/90 uppercase tracking-tighter">
+        Scholarly Publications
+      </h3>
+      {publications.length === 0 ? (
+        <div className="p-20 bg-[#f9f9f9] text-center border border-brand-border">
+          <p className="text-brand-text/30 font-black uppercase tracking-[0.3em] text-[10px]">
+            Registry expansion in progress
+          </p>
+        </div>
+      ) : (
+        <div className="space-y-14">
+          {years.map((year) => (
+            <div key={year}>
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-brand-text/20">{year}</span>
+                <div className="flex-1 h-px bg-brand-border/40" />
+              </div>
+              <div className="space-y-5">
+                {byYear[year].map((pub, i) => (
+                  <div
+                    key={i}
+                    className="group p-6 bg-white border border-brand-border hover:border-brand-text/30 transition-all duration-300 rounded-xl"
+                  >
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0 space-y-2">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="text-[9px] font-black uppercase tracking-[0.2em] px-2 py-0.5 bg-brand-text/5 text-brand-text/40 rounded">
+                            {PUB_TYPE_LABELS[pub.type] ?? pub.type}
+                          </span>
+                        </div>
+                        <h4 className="text-base md:text-lg font-bold text-brand-text/90 leading-snug">
+                          {pub.title}
+                        </h4>
+                        <p className="text-sm text-brand-text/50 font-medium leading-relaxed">
+                          {pub.authors}
+                        </p>
+                        <p className="text-sm font-bold text-brand-accent/70 italic">
+                          {pub.venue}
+                          {pub.note && <span className="text-brand-text/40 not-italic font-medium"> — {pub.note}</span>}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-2 shrink-0">
+                        {pub.doi && (
+                          <a
+                            href={`https://doi.org/${pub.doi}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-brand-text/30 hover:text-brand-accent transition-colors"
+                          >
+                            <BookOpen className="w-3.5 h-3.5" /> DOI
+                          </a>
+                        )}
+                        {pub.url && (
+                          <a
+                            href={pub.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-brand-text/30 hover:text-brand-accent transition-colors"
+                          >
+                            <ExternalLink className="w-3.5 h-3.5" /> Link
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
 
 function FacultyProfile() {
   const faculty = Route.useLoaderData()
@@ -171,13 +268,10 @@ function FacultyProfile() {
               {activeTab === 'biography' && (
                 <div className="animate-in fade-in duration-700 space-y-12">
                   {faculty.fullBio ? (
-                    <div className="space-y-6 text-lg md:text-xl text-brand-text/70 leading-[1.8] font-medium">
-                      {faculty.fullBio.split('\n').map((paragraph, index) =>
-                        paragraph.trim() ? (
-                          <p key={index}>{paragraph.trim()}</p>
-                        ) : null,
-                      )}
-                    </div>
+                    <RichContent
+                      html={faculty.fullBio}
+                      className="text-brand-text/80 text-lg leading-[1.8]"
+                    />
                   ) : (
                     <p className="text-lg text-brand-text/60 leading-relaxed font-medium">
                       {faculty.profileDescription}
@@ -253,9 +347,10 @@ function FacultyProfile() {
                     <h3 className="text-2xl font-black text-brand-text/90 mb-8 uppercase tracking-tighter">
                       Research Overview
                     </h3>
-                    <p className="text-lg text-brand-text/60 leading-relaxed font-medium">
-                      {faculty.researchGeneral || faculty.profileDescription}
-                    </p>
+                    <RichContent
+                      html={faculty.researchGeneral || faculty.profileDescription}
+                      className="text-brand-text/80 text-lg leading-[1.8]"
+                    />
                   </div>
 
                   {faculty.researchProjects.length > 0 && (
@@ -298,29 +393,7 @@ function FacultyProfile() {
               )}
 
               {activeTab === 'publications' && (
-                <div className="space-y-8 animate-in fade-in duration-500">
-                  <h3 className="text-2xl font-black text-brand-text/90 mb-8 uppercase tracking-tighter">
-                    Scholarly Publications
-                  </h3>
-                  {faculty.publications.length > 0 ? (
-                    <ul className="space-y-8">
-                      {faculty.publications.map((pub, i) => (
-                        <li
-                          key={i}
-                          className="text-base md:text-lg font-bold text-brand-text/60 leading-relaxed border-l-4 border-brand-text/10 pl-8 hover:border-brand-text transition-colors"
-                        >
-                          {pub}
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className="p-20 bg-[#f9f9f9] text-center border border-brand-border">
-                      <p className="text-brand-text/30 font-black uppercase tracking-[0.3em] text-[10px]">
-                        Registry expansion in progress
-                      </p>
-                    </div>
-                  )}
-                </div>
+                <PublicationsList publications={faculty.publications as Publication[]} />
               )}
             </div>
           </div>

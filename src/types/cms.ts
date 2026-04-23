@@ -16,6 +16,19 @@ export type DbNewsListItem = Pick<
   'id' | 'slug' | 'title' | 'date' | 'description' | 'image'
 >
 
+export type PublicationType = 'journal' | 'conference' | 'book' | 'thesis' | 'other'
+
+export interface Publication {
+  title: string
+  authors: string
+  venue: string
+  year: string
+  type: PublicationType
+  doi?: string
+  url?: string
+  note?: string
+}
+
 export interface DbFaculty {
   id: string
   slug: string
@@ -34,7 +47,7 @@ export interface DbFaculty {
   honors: string[]
   researchInterests: string[]
   researchProjects: string[]
-  publications: string[]
+  publications: Publication[]
   importantLinks: { label: string; url: string }[]
   published: boolean
   sortOrder: number

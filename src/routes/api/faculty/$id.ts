@@ -30,14 +30,28 @@ export const Route = createFileRoute('/api/faculty/$id')({
         const identifier = params.id
         const body = await request.json().catch(() => null)
         if (!body) return errorResponse('Invalid body', 400)
+        
         const existing = await db.faculty.findFirst({
           where: { OR: [{ slug: identifier }, { id: identifier }] },
           select: { id: true, slug: true },
         })
         if (!existing) return errorResponse('Not found', 404)
-        const faculty = await db.faculty.update({ where: { id: existing.id }, data: body as any })
-        await redis.del(CACHE_KEYS.facultyItem(existing.slug))
-        await redis.del(CACHE_KEYS.facultyList())
+
+        // Remove non-updatable fields
+        const { id, createdAt, updatedAt, ...updateData } = body
+
+        const faculty = await db.faculty.update({ 
+          where: { id: existing.id }, 
+          data: {
+            ...updateData,
+            publications: updateData.publications ? { set: updateData.publications } : undefined,
+            importantLinks: updateData.importantLinks ? { set: updateData.importantLinks } : undefined,
+          } as any
+        })
+        await Promise.allSettled([
+          redis.del(CACHE_KEYS.facultyItem(existing.slug)),
+          redis.del(CACHE_KEYS.facultyList()),
+        ])
         return jsonResponse(faculty)
       },
       DELETE: async ({ request, params }) => {
@@ -50,8 +64,10 @@ export const Route = createFileRoute('/api/faculty/$id')({
         })
         if (!existing) return errorResponse('Not found', 404)
         await db.faculty.delete({ where: { id: existing.id } })
-        await redis.del(CACHE_KEYS.facultyItem(existing.slug))
-        await redis.del(CACHE_KEYS.facultyList())
+        await Promise.allSettled([
+          redis.del(CACHE_KEYS.facultyItem(existing.slug)),
+          redis.del(CACHE_KEYS.facultyList()),
+        ])
         return jsonResponse({ ok: true })
       },
     },

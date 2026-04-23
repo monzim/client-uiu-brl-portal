@@ -44,7 +44,7 @@ model Faculty {
   honors             String[]
   researchInterests  String[]
   researchProjects   String[]
-  publications       String[]
+  publications       Json     @default("[]")
   importantLinks     Json
   published          Boolean  @default(true)
   sortOrder          Int      @default(0)
