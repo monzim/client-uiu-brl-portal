@@ -26,7 +26,7 @@ export const Route = createFileRoute('/api/faculty/')({
         if (!result.success) return errorResponse(result.error.issues[0]?.message ?? 'Validation failed', 400)
         const faculty = await db.faculty.create({ data: result.data })
         await redis.del(CACHE_KEYS.facultyList())
-        auditLog('faculty.create', payload.email, { facultyId: faculty.id, slug: faculty.slug })
+        auditLog('faculty.create', payload.adminId, payload.email, { facultyId: faculty.id, slug: faculty.slug })
         return jsonResponse(faculty, { status: 201 })
       },
     },

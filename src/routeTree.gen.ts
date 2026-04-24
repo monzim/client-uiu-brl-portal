@@ -27,6 +27,7 @@ import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projec
 import { Route as NewsNewsIdRouteImport } from './routes/news.$newsId'
 import { Route as FacultyFacultyIdRouteImport } from './routes/faculty.$facultyId'
 import { Route as ApiUploadRouteImport } from './routes/api/upload'
+import { Route as AdminSystemRouteImport } from './routes/admin.system'
 import { Route as AdminNewsRouteImport } from './routes/admin.news'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminFacultyRouteImport } from './routes/admin.faculty'
@@ -34,6 +35,7 @@ import { Route as ApiNewsIndexRouteImport } from './routes/api/news/index'
 import { Route as ApiFacultyIndexRouteImport } from './routes/api/faculty/index'
 import { Route as AdminNewsIndexRouteImport } from './routes/admin.news.index'
 import { Route as AdminFacultyIndexRouteImport } from './routes/admin.faculty.index'
+import { Route as ApiSuperuserAuditLogsRouteImport } from './routes/api/superuser/audit-logs'
 import { Route as ApiNewsAdminRouteImport } from './routes/api/news/admin'
 import { Route as ApiNewsIdRouteImport } from './routes/api/news/$id'
 import { Route as ApiFacultyAdminRouteImport } from './routes/api/faculty/admin'
@@ -41,8 +43,12 @@ import { Route as ApiFacultyIdRouteImport } from './routes/api/faculty/$id'
 import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
 import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
 import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
+import { Route as AdminSystemUsersRouteImport } from './routes/admin.system.users'
+import { Route as AdminSystemAuditLogsRouteImport } from './routes/admin.system.audit-logs'
 import { Route as AdminNewsNewRouteImport } from './routes/admin.news.new'
 import { Route as AdminFacultyNewRouteImport } from './routes/admin.faculty.new'
+import { Route as ApiSuperuserUsersIndexRouteImport } from './routes/api/superuser/users/index'
+import { Route as ApiSuperuserUsersIdRouteImport } from './routes/api/superuser/users/$id'
 import { Route as AdminNewsNewsIdEditRouteImport } from './routes/admin.news.$newsId.edit'
 import { Route as AdminFacultyFacultyIdEditRouteImport } from './routes/admin.faculty.$facultyId.edit'
 
@@ -136,6 +142,11 @@ const ApiUploadRoute = ApiUploadRouteImport.update({
   path: '/api/upload',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSystemRoute = AdminSystemRouteImport.update({
+  id: '/system',
+  path: '/system',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminNewsRoute = AdminNewsRouteImport.update({
   id: '/news',
   path: '/news',
@@ -170,6 +181,11 @@ const AdminFacultyIndexRoute = AdminFacultyIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminFacultyRoute,
+} as any)
+const ApiSuperuserAuditLogsRoute = ApiSuperuserAuditLogsRouteImport.update({
+  id: '/api/superuser/audit-logs',
+  path: '/api/superuser/audit-logs',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiNewsAdminRoute = ApiNewsAdminRouteImport.update({
   id: '/api/news/admin',
@@ -206,6 +222,16 @@ const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
   path: '/api/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminSystemUsersRoute = AdminSystemUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminSystemRoute,
+} as any)
+const AdminSystemAuditLogsRoute = AdminSystemAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
+  getParentRoute: () => AdminSystemRoute,
+} as any)
 const AdminNewsNewRoute = AdminNewsNewRouteImport.update({
   id: '/new',
   path: '/new',
@@ -215,6 +241,16 @@ const AdminFacultyNewRoute = AdminFacultyNewRouteImport.update({
   id: '/new',
   path: '/new',
   getParentRoute: () => AdminFacultyRoute,
+} as any)
+const ApiSuperuserUsersIndexRoute = ApiSuperuserUsersIndexRouteImport.update({
+  id: '/api/superuser/users/',
+  path: '/api/superuser/users/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSuperuserUsersIdRoute = ApiSuperuserUsersIdRouteImport.update({
+  id: '/api/superuser/users/$id',
+  path: '/api/superuser/users/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminNewsNewsIdEditRoute = AdminNewsNewsIdEditRouteImport.update({
   id: '/$newsId/edit',
@@ -243,6 +279,7 @@ export interface FileRoutesByFullPath {
   '/admin/faculty': typeof AdminFacultyRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/news': typeof AdminNewsRouteWithChildren
+  '/admin/system': typeof AdminSystemRouteWithChildren
   '/api/upload': typeof ApiUploadRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
@@ -252,6 +289,8 @@ export interface FileRoutesByFullPath {
   '/news/': typeof NewsIndexRoute
   '/admin/faculty/new': typeof AdminFacultyNewRoute
   '/admin/news/new': typeof AdminNewsNewRoute
+  '/admin/system/audit-logs': typeof AdminSystemAuditLogsRoute
+  '/admin/system/users': typeof AdminSystemUsersRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
@@ -259,12 +298,15 @@ export interface FileRoutesByFullPath {
   '/api/faculty/admin': typeof ApiFacultyAdminRoute
   '/api/news/$id': typeof ApiNewsIdRoute
   '/api/news/admin': typeof ApiNewsAdminRoute
+  '/api/superuser/audit-logs': typeof ApiSuperuserAuditLogsRoute
   '/admin/faculty/': typeof AdminFacultyIndexRoute
   '/admin/news/': typeof AdminNewsIndexRoute
   '/api/faculty/': typeof ApiFacultyIndexRoute
   '/api/news/': typeof ApiNewsIndexRoute
   '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
   '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
+  '/api/superuser/users/$id': typeof ApiSuperuserUsersIdRoute
+  '/api/superuser/users/': typeof ApiSuperuserUsersIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -277,6 +319,7 @@ export interface FileRoutesByTo {
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
   '/admin/login': typeof AdminLoginRoute
+  '/admin/system': typeof AdminSystemRouteWithChildren
   '/api/upload': typeof ApiUploadRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
@@ -286,6 +329,8 @@ export interface FileRoutesByTo {
   '/news': typeof NewsIndexRoute
   '/admin/faculty/new': typeof AdminFacultyNewRoute
   '/admin/news/new': typeof AdminNewsNewRoute
+  '/admin/system/audit-logs': typeof AdminSystemAuditLogsRoute
+  '/admin/system/users': typeof AdminSystemUsersRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
@@ -293,12 +338,15 @@ export interface FileRoutesByTo {
   '/api/faculty/admin': typeof ApiFacultyAdminRoute
   '/api/news/$id': typeof ApiNewsIdRoute
   '/api/news/admin': typeof ApiNewsAdminRoute
+  '/api/superuser/audit-logs': typeof ApiSuperuserAuditLogsRoute
   '/admin/faculty': typeof AdminFacultyIndexRoute
   '/admin/news': typeof AdminNewsIndexRoute
   '/api/faculty': typeof ApiFacultyIndexRoute
   '/api/news': typeof ApiNewsIndexRoute
   '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
   '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
+  '/api/superuser/users/$id': typeof ApiSuperuserUsersIdRoute
+  '/api/superuser/users': typeof ApiSuperuserUsersIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -316,6 +364,7 @@ export interface FileRoutesById {
   '/admin/faculty': typeof AdminFacultyRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/news': typeof AdminNewsRouteWithChildren
+  '/admin/system': typeof AdminSystemRouteWithChildren
   '/api/upload': typeof ApiUploadRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
@@ -325,6 +374,8 @@ export interface FileRoutesById {
   '/news/': typeof NewsIndexRoute
   '/admin/faculty/new': typeof AdminFacultyNewRoute
   '/admin/news/new': typeof AdminNewsNewRoute
+  '/admin/system/audit-logs': typeof AdminSystemAuditLogsRoute
+  '/admin/system/users': typeof AdminSystemUsersRoute
   '/api/auth/login': typeof ApiAuthLoginRoute
   '/api/auth/logout': typeof ApiAuthLogoutRoute
   '/api/auth/me': typeof ApiAuthMeRoute
@@ -332,12 +383,15 @@ export interface FileRoutesById {
   '/api/faculty/admin': typeof ApiFacultyAdminRoute
   '/api/news/$id': typeof ApiNewsIdRoute
   '/api/news/admin': typeof ApiNewsAdminRoute
+  '/api/superuser/audit-logs': typeof ApiSuperuserAuditLogsRoute
   '/admin/faculty/': typeof AdminFacultyIndexRoute
   '/admin/news/': typeof AdminNewsIndexRoute
   '/api/faculty/': typeof ApiFacultyIndexRoute
   '/api/news/': typeof ApiNewsIndexRoute
   '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
   '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
+  '/api/superuser/users/$id': typeof ApiSuperuserUsersIdRoute
+  '/api/superuser/users/': typeof ApiSuperuserUsersIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -356,6 +410,7 @@ export interface FileRouteTypes {
     | '/admin/faculty'
     | '/admin/login'
     | '/admin/news'
+    | '/admin/system'
     | '/api/upload'
     | '/faculty/$facultyId'
     | '/news/$newsId'
@@ -365,6 +420,8 @@ export interface FileRouteTypes {
     | '/news/'
     | '/admin/faculty/new'
     | '/admin/news/new'
+    | '/admin/system/audit-logs'
+    | '/admin/system/users'
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/me'
@@ -372,12 +429,15 @@ export interface FileRouteTypes {
     | '/api/faculty/admin'
     | '/api/news/$id'
     | '/api/news/admin'
+    | '/api/superuser/audit-logs'
     | '/admin/faculty/'
     | '/admin/news/'
     | '/api/faculty/'
     | '/api/news/'
     | '/admin/faculty/$facultyId/edit'
     | '/admin/news/$newsId/edit'
+    | '/api/superuser/users/$id'
+    | '/api/superuser/users/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -390,6 +450,7 @@ export interface FileRouteTypes {
     | '/partnership'
     | '/privacy'
     | '/admin/login'
+    | '/admin/system'
     | '/api/upload'
     | '/faculty/$facultyId'
     | '/news/$newsId'
@@ -399,6 +460,8 @@ export interface FileRouteTypes {
     | '/news'
     | '/admin/faculty/new'
     | '/admin/news/new'
+    | '/admin/system/audit-logs'
+    | '/admin/system/users'
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/me'
@@ -406,12 +469,15 @@ export interface FileRouteTypes {
     | '/api/faculty/admin'
     | '/api/news/$id'
     | '/api/news/admin'
+    | '/api/superuser/audit-logs'
     | '/admin/faculty'
     | '/admin/news'
     | '/api/faculty'
     | '/api/news'
     | '/admin/faculty/$facultyId/edit'
     | '/admin/news/$newsId/edit'
+    | '/api/superuser/users/$id'
+    | '/api/superuser/users'
   id:
     | '__root__'
     | '/'
@@ -428,6 +494,7 @@ export interface FileRouteTypes {
     | '/admin/faculty'
     | '/admin/login'
     | '/admin/news'
+    | '/admin/system'
     | '/api/upload'
     | '/faculty/$facultyId'
     | '/news/$newsId'
@@ -437,6 +504,8 @@ export interface FileRouteTypes {
     | '/news/'
     | '/admin/faculty/new'
     | '/admin/news/new'
+    | '/admin/system/audit-logs'
+    | '/admin/system/users'
     | '/api/auth/login'
     | '/api/auth/logout'
     | '/api/auth/me'
@@ -444,12 +513,15 @@ export interface FileRouteTypes {
     | '/api/faculty/admin'
     | '/api/news/$id'
     | '/api/news/admin'
+    | '/api/superuser/audit-logs'
     | '/admin/faculty/'
     | '/admin/news/'
     | '/api/faculty/'
     | '/api/news/'
     | '/admin/faculty/$facultyId/edit'
     | '/admin/news/$newsId/edit'
+    | '/api/superuser/users/$id'
+    | '/api/superuser/users/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -475,8 +547,11 @@ export interface RootRouteChildren {
   ApiFacultyAdminRoute: typeof ApiFacultyAdminRoute
   ApiNewsIdRoute: typeof ApiNewsIdRoute
   ApiNewsAdminRoute: typeof ApiNewsAdminRoute
+  ApiSuperuserAuditLogsRoute: typeof ApiSuperuserAuditLogsRoute
   ApiFacultyIndexRoute: typeof ApiFacultyIndexRoute
   ApiNewsIndexRoute: typeof ApiNewsIndexRoute
+  ApiSuperuserUsersIdRoute: typeof ApiSuperuserUsersIdRoute
+  ApiSuperuserUsersIndexRoute: typeof ApiSuperuserUsersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -607,6 +682,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiUploadRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/system': {
+      id: '/admin/system'
+      path: '/system'
+      fullPath: '/admin/system'
+      preLoaderRoute: typeof AdminSystemRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/news': {
       id: '/admin/news'
       path: '/news'
@@ -655,6 +737,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/faculty/'
       preLoaderRoute: typeof AdminFacultyIndexRouteImport
       parentRoute: typeof AdminFacultyRoute
+    }
+    '/api/superuser/audit-logs': {
+      id: '/api/superuser/audit-logs'
+      path: '/api/superuser/audit-logs'
+      fullPath: '/api/superuser/audit-logs'
+      preLoaderRoute: typeof ApiSuperuserAuditLogsRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/news/admin': {
       id: '/api/news/admin'
@@ -705,6 +794,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/system/users': {
+      id: '/admin/system/users'
+      path: '/users'
+      fullPath: '/admin/system/users'
+      preLoaderRoute: typeof AdminSystemUsersRouteImport
+      parentRoute: typeof AdminSystemRoute
+    }
+    '/admin/system/audit-logs': {
+      id: '/admin/system/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/admin/system/audit-logs'
+      preLoaderRoute: typeof AdminSystemAuditLogsRouteImport
+      parentRoute: typeof AdminSystemRoute
+    }
     '/admin/news/new': {
       id: '/admin/news/new'
       path: '/new'
@@ -718,6 +821,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/admin/faculty/new'
       preLoaderRoute: typeof AdminFacultyNewRouteImport
       parentRoute: typeof AdminFacultyRoute
+    }
+    '/api/superuser/users/': {
+      id: '/api/superuser/users/'
+      path: '/api/superuser/users'
+      fullPath: '/api/superuser/users/'
+      preLoaderRoute: typeof ApiSuperuserUsersIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/superuser/users/$id': {
+      id: '/api/superuser/users/$id'
+      path: '/api/superuser/users/$id'
+      fullPath: '/api/superuser/users/$id'
+      preLoaderRoute: typeof ApiSuperuserUsersIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/news/$newsId/edit': {
       id: '/admin/news/$newsId/edit'
@@ -768,10 +885,25 @@ const AdminNewsRouteWithChildren = AdminNewsRoute._addFileChildren(
   AdminNewsRouteChildren,
 )
 
+interface AdminSystemRouteChildren {
+  AdminSystemAuditLogsRoute: typeof AdminSystemAuditLogsRoute
+  AdminSystemUsersRoute: typeof AdminSystemUsersRoute
+}
+
+const AdminSystemRouteChildren: AdminSystemRouteChildren = {
+  AdminSystemAuditLogsRoute: AdminSystemAuditLogsRoute,
+  AdminSystemUsersRoute: AdminSystemUsersRoute,
+}
+
+const AdminSystemRouteWithChildren = AdminSystemRoute._addFileChildren(
+  AdminSystemRouteChildren,
+)
+
 interface AdminRouteChildren {
   AdminFacultyRoute: typeof AdminFacultyRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AdminNewsRoute: typeof AdminNewsRouteWithChildren
+  AdminSystemRoute: typeof AdminSystemRouteWithChildren
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -779,6 +911,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminFacultyRoute: AdminFacultyRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AdminNewsRoute: AdminNewsRouteWithChildren,
+  AdminSystemRoute: AdminSystemRouteWithChildren,
   AdminIndexRoute: AdminIndexRoute,
 }
 
@@ -819,8 +952,11 @@ const rootRouteChildren: RootRouteChildren = {
   ApiFacultyAdminRoute: ApiFacultyAdminRoute,
   ApiNewsIdRoute: ApiNewsIdRoute,
   ApiNewsAdminRoute: ApiNewsAdminRoute,
+  ApiSuperuserAuditLogsRoute: ApiSuperuserAuditLogsRoute,
   ApiFacultyIndexRoute: ApiFacultyIndexRoute,
   ApiNewsIndexRoute: ApiNewsIndexRoute,
+  ApiSuperuserUsersIdRoute: ApiSuperuserUsersIdRoute,
+  ApiSuperuserUsersIndexRoute: ApiSuperuserUsersIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

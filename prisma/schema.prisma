@@ -6,11 +6,32 @@ datasource db {
   provider = "postgresql"
 }
 
+enum AdminRole {
+  ADMIN
+  SUPERUSER
+}
+
 model Admin {
-  id           String   @id @default(cuid())
-  email        String   @unique
+  id           String     @id @default(cuid())
+  email        String     @unique
   passwordHash String
-  createdAt    DateTime @default(now())
+  role         AdminRole  @default(ADMIN)
+  isBlocked    Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  auditLogs    AuditLog[]
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  adminId   String
+  admin     Admin    @relation(fields: [adminId], references: [id])
+  meta      Json     @default("{}")
+  createdAt DateTime @default(now())
+
+  @@index([adminId, createdAt(sort: Desc)])
+  @@index([action, createdAt(sort: Desc)])
+  @@index([createdAt(sort: Desc)])
 }
 
 model News {

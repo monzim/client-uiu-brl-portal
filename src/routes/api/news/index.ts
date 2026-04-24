@@ -27,7 +27,7 @@ export const Route = createFileRoute('/api/news/')({
         if (!result.success) return errorResponse(result.error.issues[0]?.message ?? 'Validation failed', 400)
         const news = await db.news.create({ data: result.data })
         await redis.del(CACHE_KEYS.newsList())
-        auditLog('news.create', payload.email, { newsId: news.id, slug: news.slug })
+        auditLog('news.create', payload.adminId, payload.email, { newsId: news.id, slug: news.slug })
         return jsonResponse(news, { status: 201 })
       },
     },

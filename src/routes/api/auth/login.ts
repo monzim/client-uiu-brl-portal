@@ -23,15 +23,16 @@ export const Route = createFileRoute('/api/auth/login')({
         }
 
         const body = await request.json().catch(() => null) as { email?: string; password?: string } | null
-        if (!body?.email || !body?.password) {
+        if (!body || !body.email || !body.password) {
           return errorResponse('Email and password required', 400)
         }
         const admin = await db.admin.findUnique({ where: { email: body.email } })
         if (!admin) return errorResponse('Invalid credentials', 401)
         const valid = await bcrypt.compare(body.password, admin.passwordHash)
         if (!valid) return errorResponse('Invalid credentials', 401)
-        const token = await signToken({ adminId: admin.id, email: admin.email })
-        auditLog('auth.login', admin.email, { ip: getClientIp(request) })
+        if (admin.isBlocked) return errorResponse('Account disabled', 403)
+        const token = await signToken({ adminId: admin.id, email: admin.email, role: admin.role })
+        auditLog('auth.login', admin.id, admin.email, { ip: getClientIp(request) })
         const secure = process.env.NODE_ENV === 'production'
         return jsonResponse({ ok: true }, {
           headers: {

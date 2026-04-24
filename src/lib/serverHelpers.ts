@@ -27,6 +27,23 @@ export async function getAuthPayload(
   return verifyToken(token)
 }
 
+export async function requireAuth(
+  request: Request,
+): Promise<AdminJWTPayload | Response> {
+  const payload = await getAuthPayload(request)
+  if (!payload) return errorResponse('Unauthorized', 401)
+  return payload
+}
+
+export async function requireSuperUser(
+  request: Request,
+): Promise<AdminJWTPayload | Response> {
+  const payload = await getAuthPayload(request)
+  if (!payload) return errorResponse('Unauthorized', 401)
+  if (payload.role !== 'SUPERUSER') return errorResponse('Forbidden', 403)
+  return payload
+}
+
 export function setCookieHeader(
   name: string,
   value: string,

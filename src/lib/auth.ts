@@ -1,11 +1,13 @@
 import '#/lib/env'
 import { SignJWT, jwtVerify } from 'jose'
+import type { AdminRole } from '@prisma/client'
 
-const getSecret = () => new TextEncoder().encode(process.env.JWT_SECRET!)
+const getSecret = () => new TextEncoder().encode(process.env.JWT_SECRET)
 
 export interface AdminJWTPayload {
   adminId: string
   email: string
+  role: AdminRole
 }
 
 export async function signToken(payload: AdminJWTPayload): Promise<string> {

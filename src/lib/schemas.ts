@@ -55,3 +55,20 @@ export const CreateFacultySchema = z.object({
 })
 
 export const UpdateFacultySchema = CreateFacultySchema.partial()
+
+export const CreateAdminSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+  role: z.enum(['ADMIN', 'SUPERUSER']).default('ADMIN'),
+})
+
+export const PatchAdminSchema = z.object({
+  isBlocked: z.boolean(),
+})
+
+export const AuditLogQuerySchema = z.object({
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(50),
+  action: z.string().optional(),
+  adminId: z.string().optional(),
+})

@@ -203,13 +203,20 @@ const facultyItems = [
 ]
 
 async function main() {
-  const hash = await bcrypt.hash('Admin@BRL2026!', 12)
+  const superuserEmail = process.env.SUPERUSER_EMAIL ?? 'admin@brl.uiu.ac.bd'
+  const superuserPassword = process.env.SUPERUSER_PASSWORD ?? 'Admin@BRL2026!'
+  const hash = await bcrypt.hash(superuserPassword, 12)
   await db.admin.upsert({
-    where: { email: 'admin@brl.uiu.ac.bd' },
-    update: {},
-    create: { email: 'admin@brl.uiu.ac.bd', passwordHash: hash },
+    where: { email: superuserEmail },
+    update: { role: 'SUPERUSER', isBlocked: false },
+    create: {
+      email: superuserEmail,
+      passwordHash: hash,
+      role: 'SUPERUSER',
+      isBlocked: false,
+    },
   })
-  console.log('Admin seeded: admin@brl.uiu.ac.bd')
+  console.log(`Superuser seeded: ${superuserEmail}`)
 
   for (const item of newsItems) {
     await db.news.upsert({

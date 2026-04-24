@@ -44,7 +44,7 @@ export const Route = createFileRoute('/api/news/$id')({
           redis.del(CACHE_KEYS.newsItem(existing.slug)),
           redis.del(CACHE_KEYS.newsList()),
         ])
-        auditLog('news.update', payload.email, { newsId: existing.id })
+        auditLog('news.update', payload.adminId, payload.email, { newsId: existing.id })
         return jsonResponse(news)
       },
       DELETE: async ({ request, params }) => {
@@ -61,7 +61,7 @@ export const Route = createFileRoute('/api/news/$id')({
           redis.del(CACHE_KEYS.newsItem(existing.slug)),
           redis.del(CACHE_KEYS.newsList()),
         ])
-        auditLog('news.delete', payload.email, { newsId: existing.id, slug: existing.slug })
+        auditLog('news.delete', payload.adminId, payload.email, { newsId: existing.id, slug: existing.slug })
         return jsonResponse({ ok: true })
       },
     },
