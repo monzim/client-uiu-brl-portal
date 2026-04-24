@@ -1,6 +1,6 @@
 import path from 'node:path'
 import 'dotenv/config'
-import { defineConfig, env } from 'prisma/config'
+import { defineConfig } from 'prisma/config'
 
 export default defineConfig({
   earlyAccess: true,
@@ -9,6 +9,6 @@ export default defineConfig({
     seed: 'ts-node prisma/seed.ts',
   },
   datasource: {
-    url: env('DATABASE_URL'),
+    url: process.env.DATABASE_URL ?? 'postgresql://postgres:postgres@localhost:5432/brl',
   },
 } as Parameters<typeof defineConfig>[0])
