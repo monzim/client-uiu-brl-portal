@@ -12,7 +12,7 @@ export const getAdminNewsList = createServerFn({ method: 'GET' }).handler(
 export const getAdminNewsItem = createServerFn({ method: 'GET' }).handler(
   // @ts-expect-error - createServerFn doesn't type parameterized input in this version
   (ctx: { data: string }): Promise<DbNews | null> =>
-    db.news.findUnique({ where: { slug: ctx.data } as any }),
+    db.news.findUnique({ where: { slug: ctx.data } }),
 )
 
 export const getNewsList = createServerFn({ method: 'GET' }).handler(
@@ -33,13 +33,12 @@ export const getNewsList = createServerFn({ method: 'GET' }).handler(
     ) as Promise<DbNewsListItem[]>,
 )
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const getNewsItem = createServerFn({ method: 'GET' }).handler(
   // @ts-expect-error - createServerFn doesn't type parameterized input in this version
   (ctx: { data: string }): Promise<DbNews | null> => {
     const slug = ctx.data
     return cached(CACHE_KEYS.newsItem(slug), CACHE_TTL.newsItem, async () => {
-      return db.news.findUnique({ where: { slug, published: true } as any })
+      return db.news.findFirst({ where: { slug, published: true } })
     }) as Promise<DbNews | null>
   },
 )

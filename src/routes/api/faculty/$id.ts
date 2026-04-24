@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { db } from '#/lib/db'
 import { cached, redis, CACHE_KEYS, CACHE_TTL } from '#/lib/redis'
 import { getAuthPayload, jsonResponse, errorResponse } from '#/lib/serverHelpers'
+import { UpdateFacultySchema } from '#/lib/schemas'
+import { auditLog } from '#/lib/audit'
 
 export const Route = createFileRoute('/api/faculty/$id')({
   server: {
@@ -28,30 +30,26 @@ export const Route = createFileRoute('/api/faculty/$id')({
         const payload = await getAuthPayload(request)
         if (!payload) return errorResponse('Unauthorized', 401)
         const identifier = params.id
-        const body = await request.json().catch(() => null)
-        if (!body) return errorResponse('Invalid body', 400)
-        
+        const raw = await request.json().catch(() => null)
+        if (!raw) return errorResponse('Invalid body', 400)
+        const result = UpdateFacultySchema.safeParse(raw)
+        if (!result.success) return errorResponse(result.error.issues[0]?.message ?? 'Validation failed', 400)
+
         const existing = await db.faculty.findFirst({
           where: { OR: [{ slug: identifier }, { id: identifier }] },
           select: { id: true, slug: true },
         })
         if (!existing) return errorResponse('Not found', 404)
 
-        // Remove non-updatable fields
-        const { id, createdAt, updatedAt, ...updateData } = body
-
-        const faculty = await db.faculty.update({ 
-          where: { id: existing.id }, 
-          data: {
-            ...updateData,
-            publications: updateData.publications || undefined,
-            importantLinks: updateData.importantLinks || undefined,
-          } as any
+        const faculty = await db.faculty.update({
+          where: { id: existing.id },
+          data: result.data,
         })
         await Promise.allSettled([
           redis.del(CACHE_KEYS.facultyItem(existing.slug)),
           redis.del(CACHE_KEYS.facultyList()),
         ])
+        auditLog('faculty.update', payload.email, { facultyId: existing.id })
         return jsonResponse(faculty)
       },
       DELETE: async ({ request, params }) => {
@@ -68,6 +66,7 @@ export const Route = createFileRoute('/api/faculty/$id')({
           redis.del(CACHE_KEYS.facultyItem(existing.slug)),
           redis.del(CACHE_KEYS.facultyList()),
         ])
+        auditLog('faculty.delete', payload.email, { facultyId: existing.id, slug: existing.slug })
         return jsonResponse({ ok: true })
       },
     },

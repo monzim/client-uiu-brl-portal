@@ -10,12 +10,14 @@ import {
 } from 'lucide-react'
 import { useState } from 'react'
 import { RichContent } from '../components/RichContent'
+import { ErrorFallback } from '../components/ErrorFallback'
 import { getFacultyItem } from '../server/faculty'
 import type { Publication } from '../types/cms'
 
 export const Route = createFileRoute('/faculty/$facultyId')({
   // @ts-expect-error - parameterized createServerFn call
   loader: ({ params }) => getFacultyItem({ data: params.facultyId }),
+  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
   component: FacultyProfile,
 })
 
@@ -133,19 +135,7 @@ function FacultyProfile() {
   const [activeTab, setActiveTab] = useState('biography')
 
   if (!faculty) {
-    return (
-      <div className="min-h-screen pt-40 px-6 max-w-[1200px] mx-auto text-center">
-        <h1 className="text-4xl font-bold text-brand-text">
-          Faculty not found
-        </h1>
-        <Link
-          to="/faculty"
-          className="mt-8 inline-block text-brand-text/60 hover:text-brand-text underline"
-        >
-          Return to Team
-        </Link>
-      </div>
-    )
+    return <NotFound />
   }
 
   const importantLinks = (

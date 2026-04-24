@@ -8,6 +8,7 @@ import { ResearchSection } from '../components/ResearchSection'
 import { EquipmentSection } from '../components/EquipmentSection'
 import { FacultySection } from '../components/FacultySection'
 import { CTASection } from '../components/CTASection'
+import { ErrorFallback } from '../components/ErrorFallback'
 import { getNewsList } from '../server/news'
 import { getFacultyList } from '../server/faculty'
 
@@ -16,6 +17,7 @@ export const Route = createFileRoute('/')({
     const [news, faculty] = await Promise.all([getNewsList(), getFacultyList()])
     return { news, faculty }
   },
+  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
   component: App,
 })
 

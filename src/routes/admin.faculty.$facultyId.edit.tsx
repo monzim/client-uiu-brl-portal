@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { FacultyForm } from '../components/admin/FacultyForm'
+import { ErrorFallback } from '../components/ErrorFallback'
 import { getAdminFacultyItem } from '../server/faculty'
 
 export const Route = createFileRoute('/admin/faculty/$facultyId/edit')({
@@ -9,6 +10,7 @@ export const Route = createFileRoute('/admin/faculty/$facultyId/edit')({
     if (!faculty) throw new Error('Faculty not found')
     return faculty
   },
+  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
   component: EditFacultyPage,
 })
 

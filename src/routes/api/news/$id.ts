@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { db } from '#/lib/db'
 import { cached, redis, CACHE_KEYS, CACHE_TTL } from '#/lib/redis'
 import { getAuthPayload, jsonResponse, errorResponse } from '#/lib/serverHelpers'
+import { UpdateNewsSchema } from '#/lib/schemas'
+import { auditLog } from '#/lib/audit'
 
 export const Route = createFileRoute('/api/news/$id')({
   server: {
@@ -28,18 +30,21 @@ export const Route = createFileRoute('/api/news/$id')({
         const payload = await getAuthPayload(request)
         if (!payload) return errorResponse('Unauthorized', 401)
         const identifier = params.id
-        const body = await request.json().catch(() => null)
-        if (!body) return errorResponse('Invalid body', 400)
+        const raw = await request.json().catch(() => null)
+        if (!raw) return errorResponse('Invalid body', 400)
+        const result = UpdateNewsSchema.safeParse(raw)
+        if (!result.success) return errorResponse(result.error.issues[0]?.message ?? 'Validation failed', 400)
         const existing = await db.news.findFirst({
           where: { OR: [{ slug: identifier }, { id: identifier }] },
           select: { id: true, slug: true },
         })
         if (!existing) return errorResponse('Not found', 404)
-        const news = await db.news.update({ where: { id: existing.id }, data: body as any })
+        const news = await db.news.update({ where: { id: existing.id }, data: result.data })
         await Promise.allSettled([
           redis.del(CACHE_KEYS.newsItem(existing.slug)),
           redis.del(CACHE_KEYS.newsList()),
         ])
+        auditLog('news.update', payload.email, { newsId: existing.id })
         return jsonResponse(news)
       },
       DELETE: async ({ request, params }) => {
@@ -56,6 +61,7 @@ export const Route = createFileRoute('/api/news/$id')({
           redis.del(CACHE_KEYS.newsItem(existing.slug)),
           redis.del(CACHE_KEYS.newsList()),
         ])
+        auditLog('news.delete', payload.email, { newsId: existing.id, slug: existing.slug })
         return jsonResponse({ ok: true })
       },
     },

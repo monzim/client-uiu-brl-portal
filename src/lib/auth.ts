@@ -1,9 +1,7 @@
+import '#/lib/env'
 import { SignJWT, jwtVerify } from 'jose'
 
-const getSecret = () =>
-  new TextEncoder().encode(
-    process.env.JWT_SECRET ?? 'fallback-dev-secret-change-this!!',
-  )
+const getSecret = () => new TextEncoder().encode(process.env.JWT_SECRET!)
 
 export interface AdminJWTPayload {
   adminId: string

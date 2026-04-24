@@ -8,6 +8,7 @@ import {
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
+import { NotFound } from '../components/NotFound'
 
 import appCss from '../styles.css?url'
 
@@ -39,6 +40,7 @@ export const Route = createRootRoute({
     ],
   }),
   shellComponent: RootDocument,
+  notFoundComponent: NotFound,
 })
 
 function RootDocument({ children }: { children: React.ReactNode }) {

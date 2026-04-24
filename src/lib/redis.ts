@@ -10,7 +10,7 @@ export const redis =
     enableOfflineQueue: false,
   })
 
-if (process.env.NODE_ENV !== 'production') globalForRedis.redis = redis
+globalForRedis.redis = redis
 
 export async function cached<T>(
   key: string,
@@ -19,7 +19,13 @@ export async function cached<T>(
 ): Promise<T> {
   try {
     const hit = await redis.get(key)
-    if (hit) return JSON.parse(hit) as T
+    if (hit) {
+      try {
+        return JSON.parse(hit) as T
+      } catch {
+        await redis.del(key).catch(() => {})
+      }
+    }
   } catch {
     // Redis unavailable — fall through
   }

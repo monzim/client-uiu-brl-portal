@@ -14,7 +14,7 @@ export const getAdminFacultyList = createServerFn({ method: 'GET' }).handler(
 export const getAdminFacultyItem = createServerFn({ method: 'GET' }).handler(
   // @ts-expect-error - createServerFn doesn't type parameterized input in this version
   async (ctx: { data: string }): Promise<DbFaculty | null> => {
-    const row = await db.faculty.findUnique({ where: { slug: ctx.data } as any })
+    const row = await db.faculty.findUnique({ where: { slug: ctx.data } })
     return row as unknown as DbFaculty | null
   },
 )
@@ -38,7 +38,7 @@ export const getFacultyItem = createServerFn({ method: 'GET' }).handler(
     const row = await cached(
       CACHE_KEYS.facultyItem(slug),
       CACHE_TTL.facultyItem,
-      async () => db.faculty.findUnique({ where: { slug, published: true } as any }),
+      async () => db.faculty.findFirst({ where: { slug, published: true } }),
     )
     return row as unknown as DbFaculty | null
   },

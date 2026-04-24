@@ -2,6 +2,8 @@ import { createFileRoute } from '@tanstack/react-router'
 import { db } from '#/lib/db'
 import { cached, redis, CACHE_KEYS, CACHE_TTL } from '#/lib/redis'
 import { getAuthPayload, jsonResponse, errorResponse } from '#/lib/serverHelpers'
+import { CreateFacultySchema } from '#/lib/schemas'
+import { auditLog } from '#/lib/audit'
 
 export const Route = createFileRoute('/api/faculty/')({
   server: {
@@ -18,20 +20,13 @@ export const Route = createFileRoute('/api/faculty/')({
       POST: async ({ request }) => {
         const payload = await getAuthPayload(request)
         if (!payload) return errorResponse('Unauthorized', 401)
-        const body = await request.json().catch(() => null)
-        if (!body) return errorResponse('Invalid body', 400)
-        
-        // Remove non-creatable fields if they exist
-        const { id, createdAt, updatedAt, ...createData } = body
-
-        const faculty = await db.faculty.create({ 
-          data: {
-            ...createData,
-            publications: createData.publications ?? undefined,
-            importantLinks: createData.importantLinks ?? undefined,
-          }
-        })
+        const raw = await request.json().catch(() => null)
+        if (!raw) return errorResponse('Invalid body', 400)
+        const result = CreateFacultySchema.safeParse(raw)
+        if (!result.success) return errorResponse(result.error.issues[0]?.message ?? 'Validation failed', 400)
+        const faculty = await db.faculty.create({ data: result.data })
         await redis.del(CACHE_KEYS.facultyList())
+        auditLog('faculty.create', payload.email, { facultyId: faculty.id, slug: faculty.slug })
         return jsonResponse(faculty, { status: 201 })
       },
     },

@@ -1,18 +1,20 @@
+import '#/lib/env'
 import { Client as MinioClient } from 'minio'
+import { randomBytes } from 'crypto'
 
 const globalForMinio = globalThis as unknown as { minio?: MinioClient }
 
 export const minio =
   globalForMinio.minio ??
   new MinioClient({
-    endPoint: process.env.MINIO_ENDPOINT ?? 'localhost',
+    endPoint: process.env.MINIO_ENDPOINT!,
     port: parseInt(process.env.MINIO_PORT ?? '9000'),
     useSSL: process.env.MINIO_USE_SSL === 'true',
-    accessKey: process.env.MINIO_ACCESS_KEY ?? 'minioadmin',
-    secretKey: process.env.MINIO_SECRET_KEY ?? 'minioadmin',
+    accessKey: process.env.MINIO_ACCESS_KEY!,
+    secretKey: process.env.MINIO_SECRET_KEY!,
   })
 
-if (process.env.NODE_ENV !== 'production') globalForMinio.minio = minio
+globalForMinio.minio = minio
 
 const BUCKET = () => process.env.MINIO_BUCKET ?? 'brl-media'
 
@@ -42,7 +44,8 @@ export async function uploadFile(
   contentType: string,
 ): Promise<string> {
   const bucket = BUCKET()
-  const key = `${Date.now()}-${fileName.replace(/[^a-zA-Z0-9._-]/g, '_')}`
+  const sanitized = fileName.replace(/[^a-zA-Z0-9._-]/g, '_').slice(0, 100)
+  const key = `${randomBytes(16).toString('hex')}-${sanitized}`
   await minio.putObject(bucket, key, buffer, buffer.length, {
     'Content-Type': contentType,
   })

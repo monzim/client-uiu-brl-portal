@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowUpRight, Calendar } from 'lucide-react'
+import { ErrorFallback } from '../components/ErrorFallback'
 import { getNewsList } from '../server/news'
 import { formatNewsDate } from '../types/cms'
 
 export const Route = createFileRoute('/news/')({
   loader: () => getNewsList(),
+  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
   component: NewsPage,
 })
 

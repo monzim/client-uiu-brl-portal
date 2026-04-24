@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
 import { FacultySection } from '../components/FacultySection'
+import { ErrorFallback } from '../components/ErrorFallback'
 import { getFacultyList } from '../server/faculty'
 
 export const Route = createFileRoute('/faculty/')({
   loader: () => getFacultyList(),
+  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
   component: FacultyPage,
 })
 

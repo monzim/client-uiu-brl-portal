@@ -7,6 +7,13 @@ import { nitro } from 'nitro/vite'
 import viteReact from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
+const SECURITY_HEADERS = {
+  'X-Frame-Options': 'DENY',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+}
+
 const config = defineConfig({
   plugins: [
     devtools(),
@@ -14,7 +21,11 @@ const config = defineConfig({
     tailwindcss(),
     tanstackStart(),
     viteReact(),
-    nitro()
+    nitro({
+      routeRules: {
+        '/**': { headers: SECURITY_HEADERS },
+      },
+    }),
   ],
 })
 

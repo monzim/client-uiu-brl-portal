@@ -1,12 +1,14 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, Calendar, Share2 } from 'lucide-react'
 import { RichContent } from '../components/RichContent'
+import { ErrorFallback } from '../components/ErrorFallback'
 import { getNewsItem } from '../server/news'
 import { formatNewsDate } from '../types/cms'
 
 export const Route = createFileRoute('/news/$newsId')({
   // @ts-expect-error - parameterized createServerFn call
   loader: ({ params }) => getNewsItem({ data: params.newsId }),
+  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
   component: NewsDetail,
 })
 
@@ -14,14 +16,7 @@ function NewsDetail() {
   const news = Route.useLoaderData()
 
   if (!news) {
-    return (
-      <div className="min-h-screen pt-40 px-6 text-center">
-        <h1 className="text-4xl font-bold text-brand-text">News not found</h1>
-        <Link to="/" className="mt-8 inline-block text-brand-text/60 underline">
-          Return Home
-        </Link>
-      </div>
-    )
+    return <NotFound />
   }
 
   return (

@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { NewsForm } from '../components/admin/NewsForm'
+import { ErrorFallback } from '../components/ErrorFallback'
 import { getAdminNewsItem } from '../server/news'
 
 export const Route = createFileRoute('/admin/news/$newsId/edit')({
@@ -9,6 +10,7 @@ export const Route = createFileRoute('/admin/news/$newsId/edit')({
     if (!news) throw new Error('News not found')
     return news
   },
+  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
   component: EditNewsPage,
 })
 
