@@ -1,13 +1,76 @@
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: runner
+  # app:
+  # build:
+  #   context: .
+  #   dockerfile: Dockerfile
+  #   target: runner
+  # ports:
+  #   - "3000:3000"
+  # environment:
+  #   NODE_ENV: production
+  #   PORT: "3000"
+  #   HOST: "0.0.0.0"
+  #   DATABASE_URL: postgresql://brl_user:brl_pass@postgres:5432/brl_db
+  #   REDIS_URL: redis://redis:6379
+  #   MINIO_ENDPOINT: minio
+  #   MINIO_PORT: "9000"
+  #   MINIO_USE_SSL: "false"
+  #   MINIO_ACCESS_KEY: minioadmin
+  #   MINIO_SECRET_KEY: minioadmin
+  #   MINIO_BUCKET: brl-media
+  #   MINIO_PUBLIC_URL: http://localhost:9000/brl-media
+  #   JWT_SECRET: "change-this-in-production-min-32-chars!!"
+  # depends_on:
+  #   postgres:
+  #     condition: service_healthy
+  #   redis:
+  #     condition: service_healthy
+  #   minio:
+  #     condition: service_started
+  # restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
     ports:
-      - "3000:3000"
+      - "5432:5432"
     environment:
-      NODE_ENV: production
-      PORT: "3000"
-      HOST: "0.0.0.0"
+      POSTGRES_USER: brl_user
+      POSTGRES_PASSWORD: brl_pass
+      POSTGRES_DB: brl_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U brl_user -d brl_db" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --save "" --appendonly no
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  minio_data:

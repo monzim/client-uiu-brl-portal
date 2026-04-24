@@ -17,13 +17,34 @@ import { Route as EquipmentRouteImport } from './routes/equipment'
 import { Route as AwardsRouteImport } from './routes/awards'
 import { Route as AssistantsRouteImport } from './routes/assistants'
 import { Route as AreaRouteImport } from './routes/area'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as NewsIndexRouteImport } from './routes/news.index'
 import { Route as FacultyIndexRouteImport } from './routes/faculty.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projectId'
 import { Route as NewsNewsIdRouteImport } from './routes/news.$newsId'
 import { Route as FacultyFacultyIdRouteImport } from './routes/faculty.$facultyId'
+import { Route as ApiUploadRouteImport } from './routes/api/upload'
+import { Route as AdminNewsRouteImport } from './routes/admin.news'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminFacultyRouteImport } from './routes/admin.faculty'
+import { Route as ApiNewsIndexRouteImport } from './routes/api/news/index'
+import { Route as ApiFacultyIndexRouteImport } from './routes/api/faculty/index'
+import { Route as AdminNewsIndexRouteImport } from './routes/admin.news.index'
+import { Route as AdminFacultyIndexRouteImport } from './routes/admin.faculty.index'
+import { Route as ApiNewsAdminRouteImport } from './routes/api/news/admin'
+import { Route as ApiNewsIdRouteImport } from './routes/api/news/$id'
+import { Route as ApiFacultyAdminRouteImport } from './routes/api/faculty/admin'
+import { Route as ApiFacultyIdRouteImport } from './routes/api/faculty/$id'
+import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
+import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
+import { Route as AdminNewsNewRouteImport } from './routes/admin.news.new'
+import { Route as AdminFacultyNewRouteImport } from './routes/admin.faculty.new'
+import { Route as AdminNewsNewsIdEditRouteImport } from './routes/admin.news.$newsId.edit'
+import { Route as AdminFacultyFacultyIdEditRouteImport } from './routes/admin.faculty.$facultyId.edit'
 
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
@@ -65,6 +86,11 @@ const AreaRoute = AreaRouteImport.update({
   path: '/area',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -85,6 +111,11 @@ const FacultyIndexRoute = FacultyIndexRouteImport.update({
   path: '/faculty/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const ProjectsProjectIdRoute = ProjectsProjectIdRouteImport.update({
   id: '/projects/$projectId',
   path: '/projects/$projectId',
@@ -100,10 +131,107 @@ const FacultyFacultyIdRoute = FacultyFacultyIdRouteImport.update({
   path: '/faculty/$facultyId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiUploadRoute = ApiUploadRouteImport.update({
+  id: '/api/upload',
+  path: '/api/upload',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNewsRoute = AdminNewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminFacultyRoute = AdminFacultyRouteImport.update({
+  id: '/faculty',
+  path: '/faculty',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiNewsIndexRoute = ApiNewsIndexRouteImport.update({
+  id: '/api/news/',
+  path: '/api/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFacultyIndexRoute = ApiFacultyIndexRouteImport.update({
+  id: '/api/faculty/',
+  path: '/api/faculty/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNewsIndexRoute = AdminNewsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminNewsRoute,
+} as any)
+const AdminFacultyIndexRoute = AdminFacultyIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminFacultyRoute,
+} as any)
+const ApiNewsAdminRoute = ApiNewsAdminRouteImport.update({
+  id: '/api/news/admin',
+  path: '/api/news/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNewsIdRoute = ApiNewsIdRouteImport.update({
+  id: '/api/news/$id',
+  path: '/api/news/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFacultyAdminRoute = ApiFacultyAdminRouteImport.update({
+  id: '/api/faculty/admin',
+  path: '/api/faculty/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiFacultyIdRoute = ApiFacultyIdRouteImport.update({
+  id: '/api/faculty/$id',
+  path: '/api/faculty/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthMeRoute = ApiAuthMeRouteImport.update({
+  id: '/api/auth/me',
+  path: '/api/auth/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
+  id: '/api/auth/logout',
+  path: '/api/auth/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminNewsNewRoute = AdminNewsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminNewsRoute,
+} as any)
+const AdminFacultyNewRoute = AdminFacultyNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminFacultyRoute,
+} as any)
+const AdminNewsNewsIdEditRoute = AdminNewsNewsIdEditRouteImport.update({
+  id: '/$newsId/edit',
+  path: '/$newsId/edit',
+  getParentRoute: () => AdminNewsRoute,
+} as any)
+const AdminFacultyFacultyIdEditRoute =
+  AdminFacultyFacultyIdEditRouteImport.update({
+    id: '/$facultyId/edit',
+    path: '/$facultyId/edit',
+    getParentRoute: () => AdminFacultyRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/area': typeof AreaRoute
   '/assistants': typeof AssistantsRoute
   '/awards': typeof AwardsRoute
@@ -112,11 +240,31 @@ export interface FileRoutesByFullPath {
   '/news': typeof NewsRouteWithChildren
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/faculty': typeof AdminFacultyRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/news': typeof AdminNewsRouteWithChildren
+  '/api/upload': typeof ApiUploadRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/faculty/': typeof FacultyIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/admin/faculty/new': typeof AdminFacultyNewRoute
+  '/admin/news/new': typeof AdminNewsNewRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/me': typeof ApiAuthMeRoute
+  '/api/faculty/$id': typeof ApiFacultyIdRoute
+  '/api/faculty/admin': typeof ApiFacultyAdminRoute
+  '/api/news/$id': typeof ApiNewsIdRoute
+  '/api/news/admin': typeof ApiNewsAdminRoute
+  '/admin/faculty/': typeof AdminFacultyIndexRoute
+  '/admin/news/': typeof AdminNewsIndexRoute
+  '/api/faculty/': typeof ApiFacultyIndexRoute
+  '/api/news/': typeof ApiNewsIndexRoute
+  '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
+  '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -128,16 +276,35 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/api/upload': typeof ApiUploadRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
+  '/admin': typeof AdminIndexRoute
   '/faculty': typeof FacultyIndexRoute
   '/news': typeof NewsIndexRoute
+  '/admin/faculty/new': typeof AdminFacultyNewRoute
+  '/admin/news/new': typeof AdminNewsNewRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/me': typeof ApiAuthMeRoute
+  '/api/faculty/$id': typeof ApiFacultyIdRoute
+  '/api/faculty/admin': typeof ApiFacultyAdminRoute
+  '/api/news/$id': typeof ApiNewsIdRoute
+  '/api/news/admin': typeof ApiNewsAdminRoute
+  '/admin/faculty': typeof AdminFacultyIndexRoute
+  '/admin/news': typeof AdminNewsIndexRoute
+  '/api/faculty': typeof ApiFacultyIndexRoute
+  '/api/news': typeof ApiNewsIndexRoute
+  '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
+  '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/area': typeof AreaRoute
   '/assistants': typeof AssistantsRoute
   '/awards': typeof AwardsRoute
@@ -146,17 +313,38 @@ export interface FileRoutesById {
   '/news': typeof NewsRouteWithChildren
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
+  '/admin/faculty': typeof AdminFacultyRouteWithChildren
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/news': typeof AdminNewsRouteWithChildren
+  '/api/upload': typeof ApiUploadRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/faculty/': typeof FacultyIndexRoute
   '/news/': typeof NewsIndexRoute
+  '/admin/faculty/new': typeof AdminFacultyNewRoute
+  '/admin/news/new': typeof AdminNewsNewRoute
+  '/api/auth/login': typeof ApiAuthLoginRoute
+  '/api/auth/logout': typeof ApiAuthLogoutRoute
+  '/api/auth/me': typeof ApiAuthMeRoute
+  '/api/faculty/$id': typeof ApiFacultyIdRoute
+  '/api/faculty/admin': typeof ApiFacultyAdminRoute
+  '/api/news/$id': typeof ApiNewsIdRoute
+  '/api/news/admin': typeof ApiNewsAdminRoute
+  '/admin/faculty/': typeof AdminFacultyIndexRoute
+  '/admin/news/': typeof AdminNewsIndexRoute
+  '/api/faculty/': typeof ApiFacultyIndexRoute
+  '/api/news/': typeof ApiNewsIndexRoute
+  '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
+  '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/area'
     | '/assistants'
     | '/awards'
@@ -165,11 +353,31 @@ export interface FileRouteTypes {
     | '/news'
     | '/partnership'
     | '/privacy'
+    | '/admin/faculty'
+    | '/admin/login'
+    | '/admin/news'
+    | '/api/upload'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
+    | '/admin/'
     | '/faculty/'
     | '/news/'
+    | '/admin/faculty/new'
+    | '/admin/news/new'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/me'
+    | '/api/faculty/$id'
+    | '/api/faculty/admin'
+    | '/api/news/$id'
+    | '/api/news/admin'
+    | '/admin/faculty/'
+    | '/admin/news/'
+    | '/api/faculty/'
+    | '/api/news/'
+    | '/admin/faculty/$facultyId/edit'
+    | '/admin/news/$newsId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -181,15 +389,34 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/partnership'
     | '/privacy'
+    | '/admin/login'
+    | '/api/upload'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
+    | '/admin'
     | '/faculty'
     | '/news'
+    | '/admin/faculty/new'
+    | '/admin/news/new'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/me'
+    | '/api/faculty/$id'
+    | '/api/faculty/admin'
+    | '/api/news/$id'
+    | '/api/news/admin'
+    | '/admin/faculty'
+    | '/admin/news'
+    | '/api/faculty'
+    | '/api/news'
+    | '/admin/faculty/$facultyId/edit'
+    | '/admin/news/$newsId/edit'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/area'
     | '/assistants'
     | '/awards'
@@ -198,16 +425,37 @@ export interface FileRouteTypes {
     | '/news'
     | '/partnership'
     | '/privacy'
+    | '/admin/faculty'
+    | '/admin/login'
+    | '/admin/news'
+    | '/api/upload'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
+    | '/admin/'
     | '/faculty/'
     | '/news/'
+    | '/admin/faculty/new'
+    | '/admin/news/new'
+    | '/api/auth/login'
+    | '/api/auth/logout'
+    | '/api/auth/me'
+    | '/api/faculty/$id'
+    | '/api/faculty/admin'
+    | '/api/news/$id'
+    | '/api/news/admin'
+    | '/admin/faculty/'
+    | '/admin/news/'
+    | '/api/faculty/'
+    | '/api/news/'
+    | '/admin/faculty/$facultyId/edit'
+    | '/admin/news/$newsId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AreaRoute: typeof AreaRoute
   AssistantsRoute: typeof AssistantsRoute
   AwardsRoute: typeof AwardsRoute
@@ -216,9 +464,19 @@ export interface RootRouteChildren {
   NewsRoute: typeof NewsRouteWithChildren
   PartnershipRoute: typeof PartnershipRoute
   PrivacyRoute: typeof PrivacyRoute
+  ApiUploadRoute: typeof ApiUploadRoute
   FacultyFacultyIdRoute: typeof FacultyFacultyIdRoute
   ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
   FacultyIndexRoute: typeof FacultyIndexRoute
+  ApiAuthLoginRoute: typeof ApiAuthLoginRoute
+  ApiAuthLogoutRoute: typeof ApiAuthLogoutRoute
+  ApiAuthMeRoute: typeof ApiAuthMeRoute
+  ApiFacultyIdRoute: typeof ApiFacultyIdRoute
+  ApiFacultyAdminRoute: typeof ApiFacultyAdminRoute
+  ApiNewsIdRoute: typeof ApiNewsIdRoute
+  ApiNewsAdminRoute: typeof ApiNewsAdminRoute
+  ApiFacultyIndexRoute: typeof ApiFacultyIndexRoute
+  ApiNewsIndexRoute: typeof ApiNewsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -279,6 +537,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AreaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -307,6 +572,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FacultyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/projects/$projectId': {
       id: '/projects/$projectId'
       path: '/projects/$projectId'
@@ -328,8 +600,189 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FacultyFacultyIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/upload': {
+      id: '/api/upload'
+      path: '/api/upload'
+      fullPath: '/api/upload'
+      preLoaderRoute: typeof ApiUploadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/news': {
+      id: '/admin/news'
+      path: '/news'
+      fullPath: '/admin/news'
+      preLoaderRoute: typeof AdminNewsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/faculty': {
+      id: '/admin/faculty'
+      path: '/faculty'
+      fullPath: '/admin/faculty'
+      preLoaderRoute: typeof AdminFacultyRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/news/': {
+      id: '/api/news/'
+      path: '/api/news'
+      fullPath: '/api/news/'
+      preLoaderRoute: typeof ApiNewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/faculty/': {
+      id: '/api/faculty/'
+      path: '/api/faculty'
+      fullPath: '/api/faculty/'
+      preLoaderRoute: typeof ApiFacultyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/news/': {
+      id: '/admin/news/'
+      path: '/'
+      fullPath: '/admin/news/'
+      preLoaderRoute: typeof AdminNewsIndexRouteImport
+      parentRoute: typeof AdminNewsRoute
+    }
+    '/admin/faculty/': {
+      id: '/admin/faculty/'
+      path: '/'
+      fullPath: '/admin/faculty/'
+      preLoaderRoute: typeof AdminFacultyIndexRouteImport
+      parentRoute: typeof AdminFacultyRoute
+    }
+    '/api/news/admin': {
+      id: '/api/news/admin'
+      path: '/api/news/admin'
+      fullPath: '/api/news/admin'
+      preLoaderRoute: typeof ApiNewsAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/news/$id': {
+      id: '/api/news/$id'
+      path: '/api/news/$id'
+      fullPath: '/api/news/$id'
+      preLoaderRoute: typeof ApiNewsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/faculty/admin': {
+      id: '/api/faculty/admin'
+      path: '/api/faculty/admin'
+      fullPath: '/api/faculty/admin'
+      preLoaderRoute: typeof ApiFacultyAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/faculty/$id': {
+      id: '/api/faculty/$id'
+      path: '/api/faculty/$id'
+      fullPath: '/api/faculty/$id'
+      preLoaderRoute: typeof ApiFacultyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/me': {
+      id: '/api/auth/me'
+      path: '/api/auth/me'
+      fullPath: '/api/auth/me'
+      preLoaderRoute: typeof ApiAuthMeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/logout': {
+      id: '/api/auth/logout'
+      path: '/api/auth/logout'
+      fullPath: '/api/auth/logout'
+      preLoaderRoute: typeof ApiAuthLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/news/new': {
+      id: '/admin/news/new'
+      path: '/new'
+      fullPath: '/admin/news/new'
+      preLoaderRoute: typeof AdminNewsNewRouteImport
+      parentRoute: typeof AdminNewsRoute
+    }
+    '/admin/faculty/new': {
+      id: '/admin/faculty/new'
+      path: '/new'
+      fullPath: '/admin/faculty/new'
+      preLoaderRoute: typeof AdminFacultyNewRouteImport
+      parentRoute: typeof AdminFacultyRoute
+    }
+    '/admin/news/$newsId/edit': {
+      id: '/admin/news/$newsId/edit'
+      path: '/$newsId/edit'
+      fullPath: '/admin/news/$newsId/edit'
+      preLoaderRoute: typeof AdminNewsNewsIdEditRouteImport
+      parentRoute: typeof AdminNewsRoute
+    }
+    '/admin/faculty/$facultyId/edit': {
+      id: '/admin/faculty/$facultyId/edit'
+      path: '/$facultyId/edit'
+      fullPath: '/admin/faculty/$facultyId/edit'
+      preLoaderRoute: typeof AdminFacultyFacultyIdEditRouteImport
+      parentRoute: typeof AdminFacultyRoute
+    }
   }
 }
+
+interface AdminFacultyRouteChildren {
+  AdminFacultyNewRoute: typeof AdminFacultyNewRoute
+  AdminFacultyIndexRoute: typeof AdminFacultyIndexRoute
+  AdminFacultyFacultyIdEditRoute: typeof AdminFacultyFacultyIdEditRoute
+}
+
+const AdminFacultyRouteChildren: AdminFacultyRouteChildren = {
+  AdminFacultyNewRoute: AdminFacultyNewRoute,
+  AdminFacultyIndexRoute: AdminFacultyIndexRoute,
+  AdminFacultyFacultyIdEditRoute: AdminFacultyFacultyIdEditRoute,
+}
+
+const AdminFacultyRouteWithChildren = AdminFacultyRoute._addFileChildren(
+  AdminFacultyRouteChildren,
+)
+
+interface AdminNewsRouteChildren {
+  AdminNewsNewRoute: typeof AdminNewsNewRoute
+  AdminNewsIndexRoute: typeof AdminNewsIndexRoute
+  AdminNewsNewsIdEditRoute: typeof AdminNewsNewsIdEditRoute
+}
+
+const AdminNewsRouteChildren: AdminNewsRouteChildren = {
+  AdminNewsNewRoute: AdminNewsNewRoute,
+  AdminNewsIndexRoute: AdminNewsIndexRoute,
+  AdminNewsNewsIdEditRoute: AdminNewsNewsIdEditRoute,
+}
+
+const AdminNewsRouteWithChildren = AdminNewsRoute._addFileChildren(
+  AdminNewsRouteChildren,
+)
+
+interface AdminRouteChildren {
+  AdminFacultyRoute: typeof AdminFacultyRouteWithChildren
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminNewsRoute: typeof AdminNewsRouteWithChildren
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminFacultyRoute: AdminFacultyRouteWithChildren,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminNewsRoute: AdminNewsRouteWithChildren,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface NewsRouteChildren {
   NewsNewsIdRoute: typeof NewsNewsIdRoute
@@ -346,6 +799,7 @@ const NewsRouteWithChildren = NewsRoute._addFileChildren(NewsRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
   AreaRoute: AreaRoute,
   AssistantsRoute: AssistantsRoute,
   AwardsRoute: AwardsRoute,
@@ -354,9 +808,19 @@ const rootRouteChildren: RootRouteChildren = {
   NewsRoute: NewsRouteWithChildren,
   PartnershipRoute: PartnershipRoute,
   PrivacyRoute: PrivacyRoute,
+  ApiUploadRoute: ApiUploadRoute,
   FacultyFacultyIdRoute: FacultyFacultyIdRoute,
   ProjectsProjectIdRoute: ProjectsProjectIdRoute,
   FacultyIndexRoute: FacultyIndexRoute,
+  ApiAuthLoginRoute: ApiAuthLoginRoute,
+  ApiAuthLogoutRoute: ApiAuthLogoutRoute,
+  ApiAuthMeRoute: ApiAuthMeRoute,
+  ApiFacultyIdRoute: ApiFacultyIdRoute,
+  ApiFacultyAdminRoute: ApiFacultyAdminRoute,
+  ApiNewsIdRoute: ApiNewsIdRoute,
+  ApiNewsAdminRoute: ApiNewsAdminRoute,
+  ApiFacultyIndexRoute: ApiFacultyIndexRoute,
+  ApiNewsIndexRoute: ApiNewsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

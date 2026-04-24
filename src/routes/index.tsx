@@ -8,30 +8,29 @@ import { ResearchSection } from '../components/ResearchSection'
 import { EquipmentSection } from '../components/EquipmentSection'
 import { FacultySection } from '../components/FacultySection'
 import { CTASection } from '../components/CTASection'
+import { getNewsList } from '../server/news'
+import { getFacultyList } from '../server/faculty'
 
 export const Route = createFileRoute('/')({
-  head: () => ({
-    meta: [
-      { title: 'UIU Biomedical Research Lab | Pushing Boundaries in BME' },
-      {
-        name: 'description',
-        content: 'The Biomedical Research Laboratory at United International University focuses on smart hydrogels, pharmacogenomics, and antimicrobial resistance.',
-      },
-      { property: 'og:title', content: 'UIU Biomedical Research Lab' },
-      { property: 'og:description', content: 'Leading biomedical research in Bangladesh at United International University.' },
-      { property: 'og:type', content: 'website' },
-      { name: 'twitter:card', content: 'summary_large_image' },
-    ],
-  }),
-  component: App 
+  loader: async () => {
+    const [news, faculty] = await Promise.all([getNewsList(), getFacultyList()])
+    return { news, faculty }
+  },
+  component: App,
 })
 
 function App() {
+  const { news, faculty } = Route.useLoaderData()
+
   return (
     <main className="min-h-screen bg-brand-bg">
-      <div id="home"><Hero /></div>
+      <div id="home">
+        <Hero />
+      </div>
       <QuoteSection />
-      <div id="news"><NewsCarousel /></div>
+      <div id="news">
+        <NewsCarousel news={news} />
+      </div>
       <div id="research">
         <div className="hidden lg:block">
           <ObjectivesSection />
@@ -41,9 +40,13 @@ function App() {
         </div>
       </div>
       <CollaborationSection />
-      <div id="equipment"><EquipmentSection /></div>
+      <div id="equipment">
+        <EquipmentSection />
+      </div>
 
-      <div id="faculty"><FacultySection isHomePage={true} /></div>
+      <div id="faculty">
+        <FacultySection faculty={faculty as any} isHomePage={true} />
+      </div>
       <CTASection />
     </main>
   )
