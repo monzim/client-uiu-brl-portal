@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ChevronLeft, ChevronRight, Calendar, ArrowUpRight } from 'lucide-react'
+import { SmoothImage } from './ui/SmoothImage'
 import type { DbNewsListItem } from '../types/cms'
 import { formatNewsDate } from '../types/cms'
 
@@ -86,13 +87,14 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
               className="min-w-[280px] md:min-w-[320px] bg-white rounded-[24px] snap-center overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group shadow-sm hover:shadow-2xl"
             >
               <div className="relative h-48 md:h-52 overflow-hidden">
-                <img
+                <SmoothImage
                   src={
                     item.image ||
                     'https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg'
                   }
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  containerClassName="w-full h-full"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute bottom-4 left-6 flex items-center gap-2 text-white text-[10px] font-bold uppercase tracking-widest translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">

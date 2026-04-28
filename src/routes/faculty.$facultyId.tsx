@@ -177,12 +177,9 @@ function FacultyProfile() {
               Back to Team
             </Link>
             <div className="flex items-center gap-4 mb-4">
-              <div className="h-px w-12 bg-white/30" />
-              <p className="text-sm md:text-base text-white/60 font-bold uppercase tracking-[0.3em]">
-                {faculty.designation}
-              </p>
+              
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase leading-none">
+            <h1 className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-none">
               {faculty.name}
             </h1>
           </div>
@@ -269,14 +266,14 @@ function FacultyProfile() {
           {/* Main Content Area */}
           <div className="lg:col-span-9">
             {/* Tabs */}
-            <div className="flex bg-[#f4f4f4] mb-12 overflow-x-auto no-scrollbar rounded-xl p-1.5 gap-1">
+            <div className="grid grid-cols-2 md:flex bg-[#f4f4f4] mb-12 rounded-xl p-1.5 gap-1.5">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 min-w-max md:min-w-0 px-6 py-4 text-[11px] font-black uppercase tracking-[0.15em] transition-all whitespace-nowrap rounded-lg ${
+                  className={`flex-1 px-4 md:px-6 py-3.5 md:py-4 text-[9px] md:text-[11px] font-black uppercase tracking-[0.15em] transition-all rounded-lg text-center ${
                     activeTab === tab.id
-                      ? 'bg-brand-text text-white shadow-lg'
+                      ? 'bg-brand-text text-white shadow-md md:shadow-lg'
                       : 'text-brand-text/40 hover:text-brand-text hover:bg-black/5'
                   }`}
                 >
@@ -292,10 +289,10 @@ function FacultyProfile() {
                   {faculty.fullBio ? (
                     <RichContent
                       html={faculty.fullBio}
-                      className="text-brand-text/80 text-lg leading-[1.8]"
+                      className="text-brand-text/80 text-base md:text-lg leading-[1.8]"
                     />
                   ) : (
-                    <p className="text-lg text-brand-text/60 leading-relaxed font-medium">
+                    <p className="text-base md:text-lg text-brand-text/60 leading-relaxed font-medium">
                       {faculty.profileDescription}
                     </p>
                   )}
@@ -309,7 +306,7 @@ function FacultyProfile() {
                         {faculty.positionHeld.map((c, i) => (
                           <div key={i} className="relative">
                             <div className="absolute -left-[37px] top-0 w-4 h-4 rounded-full bg-white border-4 border-brand-text" />
-                            <p className="text-base font-bold text-brand-text/60 leading-tight">
+                            <p className="text-sm md:text-base font-bold text-brand-text/60 leading-tight">
                               {c}
                             </p>
                           </div>
@@ -353,7 +350,7 @@ function FacultyProfile() {
                           <div className="w-12 h-12 bg-[#f8f8f8] border border-brand-border flex items-center justify-center shrink-0 group-hover:bg-brand-text group-hover:border-brand-text transition-all duration-500">
                             <GraduationCap className="w-5 h-5 text-brand-text group-hover:text-white" />
                           </div>
-                          <span className="text-lg md:text-xl font-bold text-brand-text/80 leading-snug pt-1">
+                          <span className="text-base md:text-xl font-bold text-brand-text/80 leading-snug pt-1">
                             {q}
                           </span>
                         </li>
@@ -366,14 +363,14 @@ function FacultyProfile() {
               {activeTab === 'research' && (
                 <div className="space-y-16 animate-in fade-in duration-500">
                   <div className="prose prose-xl max-w-none">
-                    <h3 className="text-2xl font-black text-brand-text/90 mb-8 uppercase tracking-tighter">
+                    <h3 className="text-xl md:text-2xl font-black text-brand-text/90 mb-8 uppercase tracking-tighter">
                       Research Overview
                     </h3>
                     <RichContent
                       html={
                         faculty.researchGeneral || faculty.profileDescription
                       }
-                      className="text-brand-text/80 text-lg leading-[1.8]"
+                      className="text-brand-text/80 text-base md:text-lg leading-[1.8]"
                     />
                   </div>
 
@@ -389,7 +386,7 @@ function FacultyProfile() {
                             className="p-8 bg-[#fbfbfb] border border-brand-border flex items-center gap-6 group hover:border-brand-text transition-all duration-500"
                           >
                             <div className="w-3 h-3 bg-brand-text/10 rounded-full group-hover:bg-brand-text transition-colors" />
-                            <span className="text-lg font-black text-brand-text/80 uppercase tracking-tight">
+                            <span className="text-base md:text-lg font-black text-brand-text/80 uppercase tracking-tight">
                               {p}
                             </span>
                           </div>

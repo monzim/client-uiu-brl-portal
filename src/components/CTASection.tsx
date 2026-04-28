@@ -1,15 +1,17 @@
 import React from 'react';
 import { Mail, Linkedin, ArrowUpRight } from 'lucide-react';
+import { SmoothImage } from './ui/SmoothImage';
 
 export function CTASection() {
   return (
     <section className="py-24 px-6 relative overflow-hidden flex flex-col items-center justify-center">
        {/* Background Image with Mask */}
        <div className="absolute inset-0 z-0">
-         <img 
+         <SmoothImage 
            src="https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg" 
            alt="Laboratory Background" 
            className="w-full h-full object-cover grayscale brightness-50"
+           containerClassName="w-full h-full"
          />
          <div className="absolute inset-0 bg-brand-accent/90 mix-blend-multiply" />
        </div>

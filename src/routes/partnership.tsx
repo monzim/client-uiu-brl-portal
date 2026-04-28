@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, Handshake } from 'lucide-react'
+import { SmoothImage } from '../components/ui/SmoothImage'
 import { partnershipsData, partnershipsIntro } from '../data/data'
 
 export const Route = createFileRoute('/partnership')({
@@ -22,10 +23,11 @@ function PartnershipPage() {
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <img 
+        <SmoothImage 
           src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg" 
           alt="Partnership Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+          containerClassName="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         
@@ -42,7 +44,7 @@ function PartnershipPage() {
       </section>
 
       <div className="max-w-[1400px] mx-auto px-6 mt-20">
-        <p className="text-lg md:text-2xl font-medium text-brand-text/60 leading-relaxed max-w-4xl mb-16">
+        <p className="text-base md:text-2xl font-medium text-brand-text/60 leading-relaxed max-w-4xl mb-16">
           {partnershipsIntro}
         </p>
 
@@ -63,13 +65,13 @@ function PartnershipPage() {
                        <Handshake className="w-10 h-10" />
                      </div>
                    )}
-                   <h3 className={`font-medium tracking-tight text-brand-text leading-[1.2] ${isFullWidth ? 'text-2xl md:text-4xl mt-2 md:mt-0' : 'text-xl mt-4'}`}>
+                   <h3 className={`font-medium tracking-tight text-brand-text leading-[1.2] ${isFullWidth ? 'text-xl md:text-4xl mt-2 md:mt-0' : 'text-lg mt-4'}`}>
                      {partner.name}
                    </h3>
                  </div>
 
                  <div className={`flex-1 ${isFullWidth ? 'border-t md:border-t-0 md:border-l border-brand-border/50 pt-8 md:pt-0 md:pl-12' : ''}`}>
-                   <p className="text-base font-medium text-brand-text/70 leading-relaxed">
+                   <p className="text-sm md:text-base font-medium text-brand-text/70 leading-relaxed">
                      {partner.description}
                    </p>
                  </div>

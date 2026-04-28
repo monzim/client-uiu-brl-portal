@@ -66,7 +66,7 @@ export function SearchModal({ open, onOpenChange }: { open: boolean, onOpenChang
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-[100] bg-brand-text/40 backdrop-blur-sm animate-in fade-in duration-300" />
-        <Dialog.Content className="fixed top-[15%] left-1/2 -translate-x-1/2 w-full max-w-[600px] z-[101] bg-brand-bg rounded-[32px] overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300 outline-none">
+        <Dialog.Content className="fixed top-[15%] left-1/2 -translate-x-1/2 w-full max-w-[600px] z-[101] bg-brand-bg rounded-xl overflow-hidden animate-in zoom-in-95 slide-in-from-top-4 duration-300 outline-none">
           <div className="p-6 border-b border-brand-border flex items-center gap-4">
             <Search className="w-5 h-5 text-brand-text/30" />
             <input 
@@ -88,7 +88,7 @@ export function SearchModal({ open, onOpenChange }: { open: boolean, onOpenChang
             {query.trim() === '' ? (
               <div className="py-20 text-center space-y-4">
                  <div className="w-16 h-16 bg-brand-text/5 rounded-full flex items-center justify-center mx-auto">
-                    <Command className="w-8 h-8 text-brand-text/10" />
+                    <Search className="w-8 h-8 text-brand-text/10" />
                  </div>
                  <p className="text-brand-text/30 font-bold uppercase tracking-widest text-[10px]">What are you looking for today?</p>
               </div>
@@ -135,7 +135,8 @@ export function SearchModal({ open, onOpenChange }: { open: boolean, onOpenChang
           </div>
 
           <div className="p-4 bg-brand-text/5 border-t border-brand-border flex justify-between items-center text-[9px] font-bold uppercase tracking-widest text-brand-text/30">
-             <span>UIU BME Lab Search</span>
+             <span>UIU BRL Search</span>
+             <img src="/images/transparent black logo.png" alt="logo" className="w-8 h-8" />
              <div className="flex gap-4">
                 <span className="flex items-center gap-1"><span className="px-1.5 py-0.5 bg-brand-bg rounded border border-brand-border">ESC</span> to close</span>
              </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowUpRight } from 'lucide-react'
+import { SmoothImage } from './ui/SmoothImage'
 import type { DbFaculty } from '../types/cms'
 
 interface FacultySectionProps {
@@ -23,13 +24,14 @@ const FacultyCard = ({
     <div
       className={`bg-brand-border rounded-[24px] mb-5 overflow-hidden relative shadow-sm transition-shadow group-hover:shadow-2xl ${isHomePage ? 'aspect-square' : 'aspect-[4/5] mb-8'}`}
     >
-      <img
+      <SmoothImage
         src={
           faculty.image ||
           'https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg'
         }
         alt={faculty.name}
         className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+        containerClassName="w-full h-full"
       />
       <div className="absolute inset-0 bg-brand-text/5 opacity-0 group-hover:opacity-100 transition-opacity" />
     </div>
@@ -41,7 +43,7 @@ const FacultyCard = ({
       >
         <div className="overflow-hidden flex-grow">
           <h4
-            className={`${isHomePage ? 'text-lg md:text-xl' : 'text-2xl'} font-bold text-brand-text mb-1 tracking-tight line-clamp-1`}
+            className={`${isHomePage ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'} font-bold text-brand-text mb-1 tracking-tight line-clamp-1`}
           >
             {faculty.name}
           </h4>

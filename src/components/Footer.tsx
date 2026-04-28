@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from '@tanstack/react-router'
+import DevBanner from './DevBanner'
 
 export function Footer() {
   return (
@@ -131,9 +132,8 @@ export function Footer() {
             </div>
           </div>
         </div>
-
-        
       </footer>
+      <DevBanner />
     </>
   )
 }

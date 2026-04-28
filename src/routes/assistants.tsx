@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
+import { SmoothImage } from '../components/ui/SmoothImage'
 import { assistantData } from '../data/faculty'
 
 export const Route = createFileRoute('/assistants')({
@@ -23,10 +24,11 @@ function AssistantsPage() {
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <img 
+        <SmoothImage 
           src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg" 
           alt="Assistants Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+          containerClassName="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         
@@ -47,7 +49,7 @@ function AssistantsPage() {
           {assistantData.map((member) => (
             <div key={member.id} className="group bg-brand-bg border border-brand-border p-8 rounded-[40px] transition-all duration-500 hover:border-brand-text/20 hover:-translate-y-1">
                <div className="aspect-square bg-brand-border rounded-[32px] mb-8 overflow-hidden">
-                  <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale brightness-[1.05] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+                  <SmoothImage src={member.image} alt={member.name} className="w-full h-full object-cover grayscale brightness-[1.05] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" containerClassName="w-full h-full" />
                </div>
                <div className="space-y-4">
                   <div>

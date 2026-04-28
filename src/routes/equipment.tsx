@@ -1,6 +1,8 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { ArrowLeft } from 'lucide-react'
+import { SmoothImage } from '../components/ui/SmoothImage'
 import { equipmentData } from '../data/data'
+import { Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/equipment')({
   head: () => ({
@@ -22,10 +24,11 @@ function EquipmentPage() {
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <img 
+        <SmoothImage 
           src="https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg" 
           alt="Equipment Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+          containerClassName="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         
@@ -53,7 +56,7 @@ function EquipmentPage() {
           {equipmentData.map((item) => (
             <div key={item.id} className="group bg-brand-bg rounded-[32px] p-8 border border-brand-border hover:border-brand-text/20 transition-all duration-500 flex flex-col items-start hover:-translate-y-2">
               <div className="mb-8 w-full aspect-[4/3] rounded-2xl overflow-hidden bg-brand-border transition-shadow duration-500">
-                 <img src={item.image} alt={item.name} className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                 <SmoothImage src={item.image} alt={item.name} className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" containerClassName="w-full h-full" />
               </div>
               <p className="text-[10px] text-brand-text/40 font-bold uppercase tracking-widest mb-2 border-b border-brand-border pb-1 w-full">{item.origin}</p>
               <h4 className="text-xl font-bold text-brand-text mb-4 leading-tight">{item.name}</h4>

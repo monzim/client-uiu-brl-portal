@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { ArrowLeft, Beaker } from 'lucide-react'
+import { SmoothImage } from '../components/ui/SmoothImage'
 import { researchAreasData } from '../data/data'
 
 export const Route = createFileRoute('/area')({
@@ -22,10 +23,11 @@ function AreaPage() {
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <img 
+        <SmoothImage 
           src="https://images.pexels.com/photos/3825368/pexels-photo-3825368.jpeg" 
           alt="Research Areas Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+          containerClassName="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         
@@ -56,10 +58,10 @@ function AreaPage() {
                  </div> */}
 
                  <div className="space-y-6 flex-grow">
-                   <h3 className="text-2xl md:text-4xl font-medium tracking-tight leading-[1.2]">
+                   <h3 className="text-xl md:text-4xl font-medium tracking-tight leading-[1.2]">
                      {area.title}
                    </h3>
-                   <p className={`text-base md:text-xl font-medium leading-relaxed ${
+                   <p className={`text-sm md:text-xl font-medium leading-relaxed ${
                      isSpecial ? 'text-brand-bg/80' : 'text-brand-text/70'
                    }`}>
                      {area.description}

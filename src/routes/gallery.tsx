@@ -1,5 +1,8 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Microscope, FlaskConical, Beaker, Dna, ArrowLeft } from 'lucide-react'
+import { createFileRoute } from '@tanstack/react-router'
+import { Microscope, FlaskConical, Beaker, Dna, ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { SmoothImage } from '../components/ui/SmoothImage'
+import { useState } from 'react';
+import { Link } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/gallery')({
   head: () => ({
@@ -28,14 +31,29 @@ const images = [
 ]
 
 function Gallery() {
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+
+  const nextImage = () => {
+    if (selectedImage !== null) {
+      setSelectedImage((selectedImage + 1) % images.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (selectedImage !== null) {
+      setSelectedImage((selectedImage - 1 + images.length) % images.length);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-brand-bg pb-40">
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <img 
+        <SmoothImage 
           src="https://images.pexels.com/photos/442579/pexels-photo-442579.jpeg" 
           alt="Gallery Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+          containerClassName="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         
@@ -55,11 +73,16 @@ function Gallery() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
            {images.map((img, i) => (
-              <div key={i} className="group relative aspect-[4/5] rounded-[48px] overflow-hidden bg-brand-border cursor-none">
-                 <img 
+              <div 
+                key={i} 
+                onClick={() => setSelectedImage(i)}
+                className="group relative aspect-[4/5] rounded-[48px] overflow-hidden bg-brand-border cursor-pointer"
+              >
+                 <SmoothImage 
                     src={img.url} 
                     alt={img.caption} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000"
+                    containerClassName="w-full h-full"
                  />
                  <div className="absolute inset-x-0 bottom-0 p-10 bg-gradient-to-t from-brand-text/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                     <p className="text-white text-lg font-bold tracking-tight">{img.caption}</p>
@@ -68,32 +91,51 @@ function Gallery() {
            ))}
         </div>
 
-        <div className="mt-40 grid grid-cols-2 lg:grid-cols-4 gap-12 border-t border-brand-border pt-20">
-           <div className="flex flex-col gap-6 items-center text-center">
-              <div className="bg-brand-text/5 p-8 rounded-full text-brand-text">
-                 <Microscope className="w-8 h-8" />
+        {/* Lightbox */}
+        {selectedImage !== null && (
+          <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-10 backdrop-blur-sm animate-in fade-in duration-300">
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white transition-colors z-[110]"
+            >
+              <X className="w-8 h-8" />
+            </button>
+
+            <button 
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
+              className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all z-[110]"
+            >
+              <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
+            </button>
+
+            <button 
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
+              className="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/50 hover:text-white hover:bg-white/10 transition-all z-[110]"
+            >
+              <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
+            </button>
+
+            <div className="relative max-w-5xl w-full h-full flex flex-col items-center justify-center gap-6" onClick={() => setSelectedImage(null)}>
+              <div className="relative w-full h-[70vh] md:h-[80vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+                <img 
+                  src={images[selectedImage].url} 
+                  alt={images[selectedImage].caption} 
+                  className="max-w-full max-h-full object-contain rounded-2xl shadow-2xl"
+                />
               </div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-text/40">Microscopy Suite</p>
-           </div>
-           <div className="flex flex-col gap-6 items-center text-center">
-              <div className="bg-brand-text/5 p-8 rounded-full text-brand-text">
-                 <FlaskConical className="w-8 h-8" />
+              <div className="text-center animate-in slide-in-from-bottom-4 duration-500 delay-150 fill-mode-both" onClick={(e) => e.stopPropagation()}>
+                <p className="text-white text-xl md:text-2xl font-medium tracking-tight uppercase">
+                  {images[selectedImage].caption}
+                </p>
+                <p className="text-white/40 text-sm mt-2 font-bold uppercase tracking-widest">
+                  {selectedImage + 1} / {images.length}
+                </p>
               </div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-text/40">Organic Synthesis</p>
-           </div>
-           <div className="flex flex-col gap-6 items-center text-center">
-              <div className="bg-brand-text/5 p-8 rounded-full text-brand-text">
-                 <Beaker className="w-8 h-8" />
-              </div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-text/40">Pharmacology Lab</p>
-           </div>
-           <div className="flex flex-col gap-6 items-center text-center">
-              <div className="bg-brand-text/5 p-8 rounded-full text-brand-text">
-                 <Dna className="w-8 h-8" />
-              </div>
-              <p className="text-xs font-bold uppercase tracking-widest text-brand-text/40">Molecular Biology</p>
-           </div>
-        </div>
+            </div>
+          </div>
+        )}
+
+        
       </div>
     </main>
   )

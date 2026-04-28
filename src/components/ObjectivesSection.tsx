@@ -2,6 +2,7 @@ import React from 'react';
 import { projectsData } from '../data/data';
 import { Link } from '@tanstack/react-router';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import { SmoothImage } from './ui/SmoothImage';
 
 export function ObjectivesSection() {
   const [active, setActive] = React.useState(projectsData[0].id);
@@ -56,13 +57,14 @@ export function ObjectivesSection() {
           {/* Right Side: Project Image (Visualizer) */}
           <div className="w-full lg:w-[60%] relative aspect-[16/10] lg:h-[70vh] rounded-[60px] overflow-hidden border-[16px] border-brand-bg/5 transition-all duration-1000 ease-in-out">
             {projectsData.map((project) => (
-              <img 
+              <SmoothImage 
                 key={project.id}
                 src={project.image || 'https://images.pexels.com/photos/8533016/pexels-photo-8533016.jpeg'} 
                 alt={project.title}
                 className={`absolute inset-0 w-full h-full object-cover grayscale-[0.2] brightness-[0.9] transition-all duration-1000 ${
                   active === project.id ? 'opacity-100 scale-100' : 'opacity-0 scale-110 pointer-events-none'
                 }`}
+                containerClassName="absolute inset-0 w-full h-full"
               />
             ))}
             <div className="absolute inset-0 bg-gradient-to-t from-brand-text/40 to-transparent" />

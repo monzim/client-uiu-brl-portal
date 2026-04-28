@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
+import { SmoothImage } from './ui/SmoothImage';
 
 const slides = [
   {
@@ -57,10 +58,11 @@ export function Hero() {
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            <img 
+            <SmoothImage 
               src={slide.image} 
               alt="Hero" 
               className="w-full h-full object-cover scale-105"
+              containerClassName="w-full h-full"
             />
             <div className="absolute inset-0 bg-black/40" />
           </div>

@@ -1,5 +1,6 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute,Link } from '@tanstack/react-router'
 import { ArrowLeft, Trophy, Award as AwardIcon } from 'lucide-react'
+import { SmoothImage } from '../components/ui/SmoothImage'
 import { awardsData } from '../data/data'
 
 export const Route = createFileRoute('/awards')({
@@ -29,10 +30,11 @@ function AwardsPage() {
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <img 
+        <SmoothImage 
           src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg" 
           alt="Awards Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+          containerClassName="w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
         
@@ -94,8 +96,8 @@ function AwardsPage() {
           {[joy, sathi].map((award, index) => award && (
             <div key={`large-${index}`} className="md:col-span-3 group bg-brand-bg border border-brand-border p-10 rounded-[32px] transition-all duration-500 hover:border-brand-text/20 hover:-translate-y-1 flex flex-col h-full">
                <div className="flex justify-between items-start mb-10">
-                 <div className="w-16 h-16 rounded-3xl bg-brand-text/5 flex items-center justify-center text-brand-text group-hover:scale-110 group-hover:bg-brand-text group-hover:text-brand-bg transition-all duration-500">
-                   <AwardIcon className="w-8 h-8" />
+                 <div className="w-12 h-12 rounded-xl bg-brand-text/5 flex items-center justify-center text-brand-text group-hover:scale-110 group-hover:bg-brand-text group-hover:text-brand-bg transition-all duration-500">
+                   <AwardIcon className="w-6 h-6" />
                  </div>
                  {award.amount && (
                    <span className="inline-flex items-center px-4 py-2 rounded-full bg-brand-text/5 text-brand-text/60 text-sm font-bold tracking-widest uppercase border border-brand-border/50">
@@ -132,11 +134,11 @@ function AwardsPage() {
             <div className="md:col-span-6 group bg-brand-bg border border-brand-border p-10 md:p-16 rounded-[40px] transition-all duration-500 hover:border-brand-text/20 hover:-translate-y-2 flex flex-col md:flex-row gap-12 items-center">
                <div className="flex-1 space-y-8">
                  <div className="flex items-start gap-6 mb-2">
-                   <div className="w-20 h-20 shrink-0 rounded-[32px] bg-brand-text flex items-center justify-center text-brand-bg group-hover:scale-110 transition-all duration-500">
-                     <Trophy className="w-10 h-10" />
+                   <div className="w-12 h-12 shrink-0 rounded-xl bg-brand-text flex items-center justify-center text-brand-bg group-hover:scale-110 transition-all duration-500">
+                     <Trophy className="w-6 h-6" />
                    </div>
                    <div>
-                     <h3 className="text-2xl md:text-5xl font-medium tracking-tight text-brand-text leading-[1.1] mb-4">
+                     <h3 className="text-2xl md:text-4xl font-medium tracking-tight text-brand-text leading-[1.1] mb-4">
                        {owsd.name}
                      </h3>
                      <div className="flex items-center gap-4 text-brand-text/80">
