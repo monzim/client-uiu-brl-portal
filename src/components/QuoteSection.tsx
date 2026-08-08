@@ -12,11 +12,11 @@ export function QuoteSection() {
           
           {/* Image Section */}
           <div className="flex flex-col items-center shrink-0 lg:sticky lg:top-32">
-            <div className="relative w-48 h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden border-2 border-brand-border ring-1 ring-brand-text/5 ring-offset-4 ring-offset-brand-bg transition-transform duration-500 hover:scale-105">
+            <div className="relative w-48 h-48 lg:w-60 lg:h-60 rounded-full overflow-hidden border-2 border-brand-border ring-1 ring-brand-text/5 ring-offset-4 ring-offset-brand-bg transition-transform duration-500 hover:scale-105">
               <img 
-                src="https://images.pexels.com/photos/5214995/pexels-photo-5214995.jpeg" 
+                src="/images/DrTahmina.jpg" 
                 alt="Prof. Dr Tahmina Foyez" 
-                className="w-full h-full object-cover grayscale brightness-[1.05]"
+                className="w-full h-full object-cover brightness-[1.05]"
               />
             </div>
             <div className="mt-8 text-center">

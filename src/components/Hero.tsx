@@ -5,11 +5,11 @@ import { SmoothImage } from './ui/SmoothImage';
 
 const slides = [
   {
-    image: '/images/hero1.png',
-    text: 'Welcome to the Biomedical Research Laboratory '
+    image: '/images/lab.webp',
+    text: 'Welcome to the Biomedical Research Laboratory of UIU '
   },
   {
-    image: '/images/hero2.png',
+    image: '/images/hero2.webp',
     text: 'Advancing scientific knowledge in the field of pharmaceutical and biomedical sciences .'
   }
 ];
@@ -59,9 +59,11 @@ export function Hero() {
             }`}
           >
             <SmoothImage 
-              src={slide.image} 
+              src={slide.image}
+              //priority image set
+              loading="eager"
               alt="Hero" 
-              className="w-full h-full object-cover scale-105"
+              className="w-full h-full object-cover scale-105 "
               containerClassName="w-full h-full"
             />
             <div className="absolute inset-0 bg-black/40" />

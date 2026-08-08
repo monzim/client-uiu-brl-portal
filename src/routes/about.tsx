@@ -130,7 +130,7 @@ function About() {
             
             <div className="absolute inset-0 flex items-center justify-center p-6 text-center">
               <div className="space-y-8 max-w-4xl w-full">
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white tracking-tight">
+                <h2 className="text-2xl md:text-3xl lg:text-6xl font-medium text-white tracking-tight">
                   United City built. <br className="hidden md:block"/>Global impact.
                 </h2>
                 

@@ -30,7 +30,7 @@ const FacultyCard = ({
           'https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg'
         }
         alt={faculty.name}
-        className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+        className="w-full h-full object-cover  brightness-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
         containerClassName="w-full h-full"
       />
       <div className="absolute inset-0 bg-brand-text/5 opacity-0 group-hover:opacity-100 transition-opacity" />
