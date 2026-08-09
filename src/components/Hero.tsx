@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
-import { SmoothImage } from './ui/SmoothImage';
 
 const slides = [
   {
@@ -49,7 +48,8 @@ export function Hero() {
 
   return (
     <section className="relative w-full h-screen overflow-hidden flex flex-col">
-      {/* Carousel */}
+      {/* Carousel — uses CSS background-image so preloaded images show instantly,
+          no JS onLoad gate, no opacity-0 delay */}
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) => (
           <div
@@ -57,19 +57,18 @@ export function Hero() {
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
               index === currentSlide ? 'opacity-100' : 'opacity-0'
             }`}
-          >
-            <SmoothImage 
-              src={slide.image}
-              //priority image set
-              loading="eager"
-              alt="Hero" 
-              className="w-full h-full object-cover scale-105 "
-              containerClassName="w-full h-full"
-            />
-            <div className="absolute inset-0 bg-black/40" />
-          </div>
+            style={{
+              backgroundImage: `url(${slide.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              transform: 'scale(1.05)',
+            }}
+            aria-hidden="true"
+          />
         ))}
+        <div className="absolute inset-0 bg-black/40" />
       </div>
+
 
       {/* Fading Masks */}
       {/* <div className="absolute top-0 left-0 right-0 h-22 bg-gradient-to-b from-black to-transparent z-[5]" /> */}

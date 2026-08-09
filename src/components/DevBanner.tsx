@@ -1,4 +1,3 @@
-import React from 'react'
 import { HoverPeek } from './ui/link-preview'
 
 const DevBanner = () => {

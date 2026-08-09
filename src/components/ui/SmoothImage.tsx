@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 
 interface SmoothImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
@@ -11,39 +11,43 @@ export function SmoothImage({
   alt,
   className,
   containerClassName,
+  loading = 'eager',
   ...props
 }: SmoothImageProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState(false)
+  const imgRef = useRef<HTMLImageElement>(null)
 
+  // Handle already-cached images that fire onLoad before React attaches handlers
   useEffect(() => {
-    if (!src) return
-    
-    const img = new Image()
-    img.src = src
-    img.onload = () => setIsLoaded(true)
-    img.onerror = () => setError(true)
+    if (imgRef.current?.complete && imgRef.current.naturalWidth > 0) {
+      setIsLoaded(true)
+    }
   }, [src])
 
   return (
-    <div className={cn("relative overflow-hidden bg-brand-text/5", containerClassName)}>
-      {/* Loading Placeholder */}
+    <div className={cn('relative overflow-hidden bg-brand-text/5', containerClassName)}>
+      {/* Shimmer placeholder */}
       {!isLoaded && !error && (
         <div className="absolute inset-0 animate-pulse bg-brand-text/10" />
       )}
-      
-      {/* The Image */}
+
       <img
+        ref={imgRef}
         src={src}
         alt={alt}
+        loading={loading}
+        decoding="async"
         className={cn(
-          "transition-all duration-1000 ease-in-out",
-          isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-105",
-          className
+          'transition-opacity duration-700 ease-in-out',
+          isLoaded ? 'opacity-100' : 'opacity-0',
+          className,
         )}
+        onLoad={() => setIsLoaded(true)}
+        onError={() => setError(true)}
         {...props}
       />
-      
+
       {/* Error State */}
       {error && (
         <div className="absolute inset-0 flex items-center justify-center bg-brand-text/10 text-brand-text/20 text-xs font-bold uppercase tracking-widest">

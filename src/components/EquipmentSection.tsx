@@ -37,6 +37,10 @@ export function EquipmentSection() {
                     <img
                       src={item.image}
                       alt={item.name}
+                      loading="lazy"
+                      decoding="async"
+                      width={800}
+                      height={600}
                       className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                     />
                     <span className="absolute top-3 right-3 w-9 h-9 rounded-full bg-brand-bg/90 backdrop-blur-sm flex items-center justify-center text-brand-text opacity-0 group-hover:opacity-100 transition-opacity duration-300">
