@@ -78,7 +78,7 @@ export function Navbar() {
           (isVisible || isOpen) ? 'translate-y-0' : '-translate-y-full'
         } ${
           showBg 
-            ? (isOpen ? 'bg-transparent lg:bg-brand-bg lg:backdrop-blur-md' : 'bg-brand-bg backdrop-blur-md') 
+            ? (isOpen ? 'bg-transparent xl:bg-brand-bg xl:backdrop-blur-md' : 'bg-brand-bg backdrop-blur-md') 
             : 'bg-transparent'
         }`}
       >
@@ -101,7 +101,7 @@ export function Navbar() {
         </div> */}
 
         {/* Main Navbar */}
-        <div className={`max-w-[1400px] w-full mx-auto px-6 flex items-center justify-between transition-all duration-500 ${showBg ? 'py-4' : 'py-8'}`}>
+        <div className={`max-w-[1400px] w-full mx-auto px-4 lg:px-6 flex items-center justify-between transition-all duration-500 ${showBg ? 'py-3 lg:py-4' : 'py-6 lg:py-8'}`}>
           {/* Logo Section */}
           <Link to="/" className="flex items-center gap-2 sm:gap-4 group relative z-[60]">
             <img 
@@ -118,7 +118,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-10">
+          <div className="hidden xl:flex items-center gap-4 2xl:gap-8">
             {navItems.map((item) => (
               <div 
                 key={item.label}
@@ -130,7 +130,7 @@ export function Navbar() {
                   {item.to ? (
                     <Link 
                       to={item.to}
-                      className={`text-xs font-bold uppercase tracking-widest transition-colors ${
+                      className={`text-[10px] xl:text-xs font-bold uppercase tracking-tight xl:tracking-widest whitespace-nowrap transition-colors ${
                         (location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to)))
                           ? (showBg ? 'text-brand-accent underline underline-offset-[6px] decoration-2' : 'text-white underline underline-offset-[6px] decoration-2')
                           : (showBg ? 'text-brand-accent hover:text-brand-accent/70' : 'text-white hover:text-white/70')
@@ -139,7 +139,7 @@ export function Navbar() {
                       {item.label}
                     </Link>
                   ) : (
-                    <span className={`text-xs font-bold uppercase tracking-widest transition-colors ${
+                    <span className={`text-[10px] xl:text-xs font-bold uppercase tracking-tight xl:tracking-widest whitespace-nowrap cursor-default transition-colors ${
                       item.subItems?.some(sub => location.pathname === sub.to || (sub.to !== '/' && location.pathname.startsWith(sub.to)))
                         ? (showBg ? 'text-brand-accent underline underline-offset-[6px] decoration-2' : 'text-white underline underline-offset-[6px] decoration-2')
                         : (showBg ? 'text-brand-accent' : 'text-white')
@@ -197,8 +197,8 @@ export function Navbar() {
             </button>
           </div>
 
-          {/* Mobile Toggle */}
-          <div className="lg:hidden flex items-center gap-4 relative z-[60]">
+          {/* Mobile/Tablet Toggle — shown below xl breakpoint */}
+          <div className="xl:hidden flex items-center gap-4 relative z-[60]">
             <button 
               onClick={() => setSearchOpen(true)}
               className={`p-2 ${isOpen ? 'text-white' : (showBg ? 'text-brand-accent' : 'text-white')}`}

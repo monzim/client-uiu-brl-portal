@@ -38,14 +38,14 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
   }
 
   return (
-    <section className="py-24 px-10 overflow-hidden">
+    <section className="py-16 md:py-24 px-4 sm:px-8 md:px-10 overflow-hidden">
       <div className="w-full">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20 gap-8 max-w-[1400px] mx-auto">
+        <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end mb-12 md:mb-16 lg:mb-20 gap-6 lg:gap-8 max-w-[1400px] mx-auto">
           <div className="max-w-2xl">
-            <h2 className="text-sm font-bold tracking-widest text-brand-text/40 uppercase mb-4">
+            <h2 className="text-sm font-bold tracking-widest text-brand-text/40 uppercase mb-3 md:mb-4">
               Laboratory Insights
             </h2>
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tight text-brand-text leading-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-5xl font-medium tracking-tight text-brand-text leading-tight">
               Recent News & Activities.
             </h3>
           </div>

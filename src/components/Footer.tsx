@@ -1,6 +1,7 @@
-import React from 'react'
+import { Suspense, lazy } from 'react'
 import { Link } from '@tanstack/react-router'
-import DevBanner from './DevBanner'
+
+const DevBanner = lazy(() => import('./DevBanner'))
 
 export function Footer() {
   return (
@@ -133,7 +134,9 @@ export function Footer() {
           </div>
         </div>
       </footer>
-      <DevBanner />
+      <Suspense fallback={null}>
+        <DevBanner />
+      </Suspense>
     </>
   )
 }
