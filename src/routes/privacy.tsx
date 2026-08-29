@@ -34,7 +34,7 @@ function PrivacyPage() {
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <img 
-          src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg" 
+          src="/images/lab.webp" 
           alt="Privacy Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
         />

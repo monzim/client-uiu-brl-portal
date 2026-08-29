@@ -20,14 +20,14 @@ export const Route = createFileRoute('/gallery')({
 })
 
 const images = [
-  { url: 'https://images.pexels.com/photos/8442458/pexels-photo-8442458.jpeg', caption: 'Cell Culture Analysis' },
-  { url: 'https://images.pexels.com/photos/8442036/pexels-photo-8442036.jpeg', caption: 'HPLC Setup' },
-  { url: 'https://images.pexels.com/photos/7108344/pexels-photo-7108344.jpeg', caption: 'Molecular Visualization' },
-  { url: 'https://images.pexels.com/photos/3912981/pexels-photo-3912981.jpeg', caption: 'Compound Evaluation' },
-  { url: 'https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg', caption: 'Student Training' },
-  { url: 'https://images.pexels.com/photos/5439141/pexels-photo-5439141.jpeg', caption: 'Lab Safety Procedures' },
-  { url: 'https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg', caption: 'Equipment Testing' },
-  { url: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg', caption: 'Team Collaboration' },
+  { url: '/work_picture/Cell Culture.webp', caption: 'Cell Culture Analysis' },
+  { url: '/banner_images/1.Inorganic-lab-pic.webp', caption: 'HPLC Setup' },
+  { url: '/work_picture/Pharmacogenomics.webp', caption: 'Molecular Visualization' },
+  { url: '/current_project_images/Drug discovery.webp', caption: 'Compound Evaluation' },
+  { url: '/work_picture/Team.webp', caption: 'Student Training' },
+  { url: '/banner_images/9U-9.webp', caption: 'Lab Safety Procedures' },
+  { url: '/banner_images/2.Microscope.webp', caption: 'Equipment Testing' },
+  { url: '/images/hero2.webp', caption: 'Team Collaboration' },
 ]
 
 function Gallery() {
@@ -50,7 +50,7 @@ function Gallery() {
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage 
-          src="https://images.pexels.com/photos/442579/pexels-photo-442579.jpeg" 
+          src="/images/hero1.webp" 
           alt="Gallery Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"

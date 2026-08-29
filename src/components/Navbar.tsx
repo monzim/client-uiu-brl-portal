@@ -67,7 +67,7 @@ export function Navbar() {
     },
 
     { label: 'Equipment Facility', to: '/equipment' },
-    { label: 'News and Events', to: '/news' },
+    { label: 'News & Events', to: '/news' },
     { label: 'Gallery', to: '/gallery' },
   ];
 

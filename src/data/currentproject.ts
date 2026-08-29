@@ -22,7 +22,7 @@ To enhance its clinical relevance, the hydrogel is engineered with inherent or i
 The project also explores the physicochemical and biological properties of the hydrogel, including swelling behavior, mechanical strength, biodegradability, cytocompatibility, and antimicrobial efficacy. In vitro and, where applicable, in vivo evaluations are conducted to assess its performance in promoting wound closure and tissue repair.
 
 Overall, this research aims to provide a multifunctional wound dressing platform that combines self-healing capability, antimicrobial protection, and enhanced biocompatibility. The outcomes of this study are expected to contribute to the development of next-generation smart biomaterials for effective wound management and broader biomedical applications.`,
-    image: "https://images.pexels.com/photos/3825368/pexels-photo-3825368.jpeg"
+    image: "/current_project_images/Hydrogel.webp"
   },
   {
     id: "gene-polymorphism",
@@ -38,7 +38,7 @@ This case–control study is designed to evaluate the association between specif
 Molecular techniques, including polymerase chain reaction (PCR)-based genotyping and enzyme-linked immunosorbent assay (ELISA), are employed for accurate detection and quantification. Statistical analyses are conducted to determine the strength of associations, evaluate risk factors, and identify potential predictive markers.
 
 This research aims to establish VEGF polymorphisms and serum VEGF levels as minimally invasive, reliable biomarkers for early detection, risk assessment, and prognosis of breast cancer in the Bangladeshi population. The findings are expected to contribute to the advancement of precision medicine approaches and support the development of targeted therapeutic strategies tailored to population-specific genetic profiles.`,
-    image: "https://images.unsplash.com/photo-1641903202531-bfa6bf0c6419?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    image: "/current_project_images/Gene Polymorphism.webp"
   },
   {
     id: "antimicrobial-gene-analysis",
@@ -54,7 +54,7 @@ This study employs a combination of phenotypic and molecular approaches to compr
 Additionally, the study aims to determine the prevalence of these resistance determinants within the hospital environment, providing valuable insights into local antimicrobial resistance patterns. Understanding the distribution of plasmid-mediated colistin resistance genes is essential for implementing effective infection control measures and guiding antibiotic stewardship programs.
 
 Overall, this research seeks to highlight the growing threat of colistin resistance in uropathogenic E. coli and to establish molecular surveillance strategies for early detection and containment. The findings are expected to contribute to improved clinical decision-making, reinforce public health policies, and support global efforts to combat antimicrobial resistance.`,
-    image: "https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg"
+    image: "/current_project_images/Antimicrobial Resistance.webp"
   },
   {
     id: "drug-discovery",
@@ -70,6 +70,6 @@ To further validate these findings, in vivo studies are conducted using appropri
 In parallel, in silico analysis is performed to identify and characterize the active phytochemical constituents present in the leaf extract. Computational techniques, including molecular docking and pharmacokinetic prediction, are used to investigate the interaction between selected compounds and relevant biological targets. This approach provides mechanistic insights into the observed biological activities and supports the identification of potential lead compounds for drug development.
 
 The integration of experimental and computational methods in this study offers a comprehensive understanding of the therapeutic potential of Diospyros malabarica. The findings are expected to contribute to the discovery of novel plant-based bioactive agents and support the development of safe, effective, and affordable therapeutic alternatives.`,
-    image: "https://images.pexels.com/photos/8539653/pexels-photo-8539653.jpeg"
+    image: "/current_project_images/Drug discovery.webp"
   }
 ];

@@ -26,7 +26,7 @@ export function ObjectivesSection() {
                 }`}
               >
                 <SmoothImage 
-                  src={project.image || 'https://images.pexels.com/photos/8533016/pexels-photo-8533016.jpeg'} 
+                  src={project.image || '/images/lab.webp'} 
                   alt={project.title}
                   className="w-full h-full object-cover grayscale-[0.2] brightness-[0.9]"
                   containerClassName="absolute inset-0 w-full h-full"

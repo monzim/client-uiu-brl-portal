@@ -8,31 +8,31 @@ const slides = [
     text: 'Welcome to the Biomedical Research Laboratory of UIU '
   },
   {
-    image: '/images/hero2.webp',
+    image: '/banner_images/banner_image3.jpg',
     text: 'Advancing scientific knowledge in the field of pharmaceutical and biomedical sciences .'
   }
 ];
 
 const focusCards = [
   { 
-    title: 'Smart Hydrogels in Wound Healing', 
+    title: 'Smart Hydrogels in Wound Healing',
     sub: 'Advanced tissue regeneration and drug delivery.',
-    to: '/projects/hydrogel' 
+    to: '/projects/smart-hydrogel' 
   },
   { 
-    title: 'Pharmacogenomics', 
-    sub: 'Personalized drug therapy based on genetic profile.',
-    to: '/projects/pharmacogenomics' 
+    title: 'Gene Polymorphism', 
+    sub: 'Role of VEGF Polymorphisms and Serum VEGF in Breast Cancer.',
+    to: '/projects/gene-polymorphism' 
   },
   { 
     title: 'Antimicrobial Resistance', 
-    sub: 'Combating global pathogens and superbugs.',
-    to: '/projects/amr' 
+    sub: 'Colistin resistance and mcr-1/mcr-3 gene analysis in E. coli.',
+    to: '/projects/antimicrobial-gene-analysis' 
   },
   { 
-    title: 'Cell Culture', 
-    sub: 'Precision cellular modeling for drug discovery.',
-    to: '/projects/cell-culture' 
+    title: 'Drug Discovery',
+    sub: 'In vitro, in vivo, and in silico analysis of medicinal plant extracts.',
+    to: '/projects/drug-discovery'
   }
 ];
 
@@ -100,16 +100,16 @@ export function Hero() {
         {/* Focus Area Cards */}
         <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 lg:absolute lg:bottom-12 lg:left-6 lg:right-6 max-w-[1400px] lg:mx-auto  lg:pb-0">
           {focusCards.map((card, i) => {
-            const isAMR = card.title === 'Cell Culture';
+            // const isFeaturedCard = i === 3;
             return (
               <Link
                 key={card.title}
                 to="/projects/$projectId"
                 params={{ projectId: card.to.split('/').pop() || '' }}
                 className={`group relative p-4 lg:p-6 rounded-2xl backdrop-blur-xl border border-white/20 transition-all duration-500 flex flex-col justify-between h-[140px] sm:h-[160px] lg:h-[220px] ${
-                  isAMR 
-                    ? 'bg-brand-text border-transparent lg:hover:bg-white/10 lg:hover:border-white/20' 
-                    : 'bg-white/10 lg:hover:bg-brand-text lg:hover:border-transparent'
+                  // isFeaturedCard 
+                  //   ? 'bg-brand-text border-transparent lg:hover:bg-white/10 lg:hover:border-white/20' 
+                     'bg-white/10 lg:hover:bg-brand-text lg:hover:border-transparent'
                 }`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >

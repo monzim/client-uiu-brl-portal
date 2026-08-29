@@ -71,7 +71,7 @@ export function Footer() {
             </div>
 
             <div className="flex flex-col gap-6">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-white/30">
                 Connect
               </h3>
               <ul className="flex flex-col gap-4 font-medium">
@@ -105,7 +105,7 @@ export function Footer() {
             </div>
 
             <div className="flex flex-col gap-6">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30">
+              <h3 className="text-xs font-semibold uppercase tracking-widest text-white/30">
                 Contact
               </h3>
               <div className="flex flex-col gap-4 font-medium text-white/70">
@@ -124,7 +124,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between gap-6 text-xs font-bold uppercase tracking-widest text-white/30">
+          <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between gap-6 text-xs font-semibold uppercase tracking-widest text-white/30">
             <p>&copy; {new Date().getFullYear()} UIU BME Lab</p>
             <div className="flex gap-8">
               <Link to="/privacy" className="hover:text-white transition-colors">
