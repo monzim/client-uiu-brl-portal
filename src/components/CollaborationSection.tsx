@@ -24,15 +24,7 @@ export function CollaborationSection() {
           ))}
         </div>
 
-        <div className="flex justify-center">
-          <Link 
-            to="/partnership" 
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-brand-text bg-brand-text/5 hover:bg-brand-text hover:text-brand-bg px-6 py-3 rounded-full transition-all duration-300 group"
-          >
-            Learn More
-            <ArrowUpRight className="w-3 h-3 group-hover:rotate-[45deg] transition-transform duration-300" />
-          </Link>
-        </div>
+        
       </div>
     </section>
   );

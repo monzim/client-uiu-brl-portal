@@ -52,7 +52,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
           <div className="flex items-center gap-6">
             <Link
               to="/news"
-              className="text-[11px] font-bold uppercase tracking-widest text-brand-text hover:opacity-50 transition-opacity border-b border-brand-text pb-1 mr-4 hidden sm:block"
+              className="text-[11px] font-bold uppercase tracking-widest text-brand-text hover:opacity-50 transition-opacity border border-brand-text pb-1 mr-4 hidden sm:block"
             >
               View All News
             </Link>
@@ -90,7 +90,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
                 <SmoothImage
                   src={
                     item.image ||
-                    'https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg'
+                    '/banner_images/banner_image1.webp'
                   }
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -119,7 +119,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
         <div className="mt-8 flex justify-center sm:hidden">
           <Link
             to="/news"
-            className="text-[11px] font-bold uppercase tracking-widest text-brand-text border-b border-brand-text pb-1"
+            className="text-[11px] font-bold uppercase tracking-widest text-brand-text border p-4 rounded-4xl border-brand-text hover:bg-brand-text hover:text-white transition-all duration-500"
           >
             View All News
           </Link>

@@ -29,14 +29,14 @@ export function ResearchSection() {
                 } hover:scale-[1.02]`}
               >
                 {/* Background Decorative Number */}
-                <span className={`absolute top-6 right-6 text-5xl font-black transition-colors duration-500 ${
+                <span className={`hidden md:block absolute top-6 right-6 text-5xl font-black transition-colors duration-500 ${
                   isFirst ? 'text-brand-bg/[0.05] group-hover:text-brand-text/[0.05]' : 'text-brand-text/[0.03] group-hover:text-brand-bg/[0.05]'
                 }`}>
                   0{index + 1}
                 </span>
 
                 <div className="flex flex-col h-full relative z-10">
-                  <div className="space-y-4 flex-1 pr-8">
+                  <div className="space-y-4 flex-1 md:pr-8">
                     <h4 className="text-lg md:text-xl font-bold leading-tight uppercase tracking-tighter">
                       {project.title}
                     </h4>
@@ -50,7 +50,7 @@ export function ResearchSection() {
                   <div className={`mt-8 pt-6 border-t flex items-center justify-between transition-colors ${
                     isFirst ? 'border-brand-bg/10 group-hover:border-brand-text/10' : 'border-brand-text/10 group-hover:border-brand-bg/10'
                   }`}>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.2em]">
+                    <span className="hidden md:block text-[10px] font-bold uppercase tracking-[0.2em]">
                       Explore Project
                     </span>
                     <div className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-500 bg-brand-text/5 group-hover:bg-[#1a3a32] group-hover:text-white border border-transparent group-hover:border-[#1a3a32]">

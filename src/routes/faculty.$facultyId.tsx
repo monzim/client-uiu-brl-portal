@@ -161,7 +161,7 @@ function FacultyProfile() {
         <img
           src={
             faculty.coverImage ||
-            'https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg'
+            '/banner_images/banner_image1.webp'
           }
           alt="Banner"
           className="w-full h-full object-cover grayscale brightness-[0.4]"
@@ -195,7 +195,7 @@ function FacultyProfile() {
                 <img
                   src={
                     faculty.image ||
-                    'https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg'
+                    '/work_picture/BRL team member.webp'
                   }
                   alt={faculty.name}
                   className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1]"

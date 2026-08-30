@@ -19,7 +19,7 @@ function NewsPage() {
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage 
-          src="https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg" 
+          src="/banner_images/IMG20260225102648.webp" 
           alt="News Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"
@@ -51,7 +51,7 @@ function NewsPage() {
                 <SmoothImage
                   src={
                     newsData[0].image ||
-                    'https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg'
+                    '/work_picture/Cell Culture.webp'
                   }
                   alt={newsData[0].title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
@@ -98,7 +98,7 @@ function NewsPage() {
                 <SmoothImage
                   src={
                     news.image ||
-                    'https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg'
+                    '/work_picture/Cell Culture.webp'
                   }
                   alt={news.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"

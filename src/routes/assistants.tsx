@@ -25,7 +25,7 @@ function AssistantsPage() {
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage 
-          src="https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg" 
+          src="/banner_images/banner_image2.webp" 
           alt="Assistants Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"

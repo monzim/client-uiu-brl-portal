@@ -57,9 +57,9 @@ function App() {
       </LazySection>
 
       {/* Collaboration */}
-      <LazySection rootMargin="200px" placeholderHeight="400px">
+      {/* <LazySection rootMargin="200px" placeholderHeight="400px">
         <CollaborationSection />
-      </LazySection>
+      </LazySection> */}
 
       {/* Equipment — images heavy */}
       <LazySection rootMargin="200px" placeholderHeight="600px">

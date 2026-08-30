@@ -8,7 +8,7 @@ export function CTASection() {
        {/* Background Image with Mask */}
        <div className="absolute inset-0 z-0">
          <SmoothImage 
-           src="https://images.pexels.com/photos/2280571/pexels-photo-2280571.jpeg" 
+           src="/images/lab.webp" 
            alt="Laboratory Background" 
            className="w-full h-full object-cover grayscale brightness-50"
            containerClassName="w-full h-full"

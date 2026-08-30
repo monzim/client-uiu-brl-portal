@@ -30,7 +30,7 @@ function EquipmentPage() {
       {/* Hero Banner Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
-          src="https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg"
+          src="/banner_images/2.Microscope.webp"
           alt="Equipment Banner"
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"

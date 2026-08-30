@@ -27,7 +27,7 @@ const FacultyCard = ({
       <SmoothImage
         src={
           faculty.image ||
-          'https://images.pexels.com/photos/267511/pexels-photo-267511.jpeg'
+          '/work_picture/BRL team member.webp'
         }
         alt={faculty.name}
         className="w-full h-full object-cover  brightness-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
