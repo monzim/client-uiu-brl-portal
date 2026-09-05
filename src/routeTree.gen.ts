@@ -9,92 +9,67 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PartnershipRouteImport } from './routes/partnership'
-import { Route as NewsRouteImport } from './routes/news'
-import { Route as GalleryRouteImport } from './routes/gallery'
-import { Route as EquipmentRouteImport } from './routes/equipment'
-import { Route as AwardsRouteImport } from './routes/awards'
-import { Route as AssistantsRouteImport } from './routes/assistants'
-import { Route as AreaRouteImport } from './routes/area'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as NewsIndexRouteImport } from './routes/news.index'
-import { Route as FacultyIndexRouteImport } from './routes/faculty.index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AreaRouteImport } from './routes/area'
+import { Route as AssistantsRouteImport } from './routes/assistants'
+import { Route as AwardsRouteImport } from './routes/awards'
+import { Route as EquipmentRouteImport } from './routes/equipment'
+import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as PartnershipRouteImport } from './routes/partnership'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projectId'
-import { Route as NewsNewsIdRouteImport } from './routes/news.$newsId'
-import { Route as FacultyFacultyIdRouteImport } from './routes/faculty.$facultyId'
-import { Route as ApiUploadRouteImport } from './routes/api/upload'
-import { Route as AdminSystemRouteImport } from './routes/admin.system'
-import { Route as AdminNewsRouteImport } from './routes/admin.news'
-import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminFacultyRouteImport } from './routes/admin.faculty'
-import { Route as ApiNewsIndexRouteImport } from './routes/api/news/index'
-import { Route as ApiFacultyIndexRouteImport } from './routes/api/faculty/index'
-import { Route as AdminNewsIndexRouteImport } from './routes/admin.news.index'
+import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminNewsRouteImport } from './routes/admin.news'
+import { Route as AdminSystemRouteImport } from './routes/admin.system'
+import { Route as ApiUploadRouteImport } from './routes/api/upload'
+import { Route as FacultyIndexRouteImport } from './routes/faculty.index'
+import { Route as FacultyFacultyIdRouteImport } from './routes/faculty.$facultyId'
+import { Route as NewsIndexRouteImport } from './routes/news.index'
+import { Route as NewsNewsIdRouteImport } from './routes/news.$newsId'
+import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projectId'
 import { Route as AdminFacultyIndexRouteImport } from './routes/admin.faculty.index'
-import { Route as ApiSuperuserAuditLogsRouteImport } from './routes/api/superuser/audit-logs'
-import { Route as ApiNewsAdminRouteImport } from './routes/api/news/admin'
-import { Route as ApiNewsIdRouteImport } from './routes/api/news/$id'
-import { Route as ApiFacultyAdminRouteImport } from './routes/api/faculty/admin'
-import { Route as ApiFacultyIdRouteImport } from './routes/api/faculty/$id'
-import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
-import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
-import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
-import { Route as AdminSystemUsersRouteImport } from './routes/admin.system.users'
-import { Route as AdminSystemAuditLogsRouteImport } from './routes/admin.system.audit-logs'
-import { Route as AdminNewsNewRouteImport } from './routes/admin.news.new'
 import { Route as AdminFacultyNewRouteImport } from './routes/admin.faculty.new'
+import { Route as AdminGalleryIndexRouteImport } from './routes/admin.gallery.index'
+import { Route as AdminGalleryNewRouteImport } from './routes/admin.gallery.new'
+import { Route as AdminGallerySettingsRouteImport } from './routes/admin.gallery.settings'
+import { Route as AdminNewsIndexRouteImport } from './routes/admin.news.index'
+import { Route as AdminNewsNewRouteImport } from './routes/admin.news.new'
+import { Route as AdminSystemAuditLogsRouteImport } from './routes/admin.system.audit-logs'
+import { Route as AdminSystemUsersRouteImport } from './routes/admin.system.users'
+import { Route as ApiAuthLoginRouteImport } from './routes/api/auth/login'
+import { Route as ApiAuthLogoutRouteImport } from './routes/api/auth/logout'
+import { Route as ApiAuthMeRouteImport } from './routes/api/auth/me'
+import { Route as ApiFacultyIndexRouteImport } from './routes/api/faculty/index'
+import { Route as ApiFacultyIdRouteImport } from './routes/api/faculty/$id'
+import { Route as ApiFacultyAdminRouteImport } from './routes/api/faculty/admin'
+import { Route as ApiGalleryIndexRouteImport } from './routes/api/gallery/index'
+import { Route as ApiGalleryIdRouteImport } from './routes/api/gallery/$id'
+import { Route as ApiGalleryAdminRouteImport } from './routes/api/gallery/admin'
+import { Route as ApiGalleryReorderRouteImport } from './routes/api/gallery/reorder'
+import { Route as ApiGallerySettingsRouteImport } from './routes/api/gallery/settings'
+import { Route as ApiNewsIndexRouteImport } from './routes/api/news/index'
+import { Route as ApiNewsIdRouteImport } from './routes/api/news/$id'
+import { Route as ApiNewsAdminRouteImport } from './routes/api/news/admin'
+import { Route as ApiSuperuserAuditLogsRouteImport } from './routes/api/superuser/audit-logs'
+import { Route as AdminFacultyFacultyIdEditRouteImport } from './routes/admin.faculty.$facultyId.edit'
+import { Route as AdminGalleryImageIdEditRouteImport } from './routes/admin.gallery.$imageId.edit'
+import { Route as AdminGalleryCategoriesIndexRouteImport } from './routes/admin.gallery.categories.index'
+import { Route as AdminGalleryCategoriesNewRouteImport } from './routes/admin.gallery.categories.new'
+import { Route as AdminNewsNewsIdEditRouteImport } from './routes/admin.news.$newsId.edit'
+import { Route as ApiGalleryCategoriesIndexRouteImport } from './routes/api/gallery/categories/index'
+import { Route as ApiGalleryCategoriesIdRouteImport } from './routes/api/gallery/categories/$id'
 import { Route as ApiSuperuserUsersIndexRouteImport } from './routes/api/superuser/users/index'
 import { Route as ApiSuperuserUsersIdRouteImport } from './routes/api/superuser/users/$id'
-import { Route as AdminNewsNewsIdEditRouteImport } from './routes/admin.news.$newsId.edit'
-import { Route as AdminFacultyFacultyIdEditRouteImport } from './routes/admin.faculty.$facultyId.edit'
+import { Route as AdminGalleryCategoriesCategoryIdEditRouteImport } from './routes/admin.gallery.categories.$categoryId.edit'
 
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PartnershipRoute = PartnershipRouteImport.update({
-  id: '/partnership',
-  path: '/partnership',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NewsRoute = NewsRouteImport.update({
-  id: '/news',
-  path: '/news',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GalleryRoute = GalleryRouteImport.update({
-  id: '/gallery',
-  path: '/gallery',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EquipmentRoute = EquipmentRouteImport.update({
-  id: '/equipment',
-  path: '/equipment',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AwardsRoute = AwardsRouteImport.update({
-  id: '/awards',
-  path: '/awards',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AssistantsRoute = AssistantsRouteImport.update({
-  id: '/assistants',
-  path: '/assistants',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AreaRoute = AreaRouteImport.update({
-  id: '/area',
-  path: '/area',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -102,19 +77,49 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NewsIndexRoute = NewsIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => NewsRoute,
+const AreaRoute = AreaRouteImport.update({
+  id: '/area',
+  path: '/area',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const FacultyIndexRoute = FacultyIndexRouteImport.update({
-  id: '/faculty/',
-  path: '/faculty/',
+const AssistantsRoute = AssistantsRouteImport.update({
+  id: '/assistants',
+  path: '/assistants',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AwardsRoute = AwardsRouteImport.update({
+  id: '/awards',
+  path: '/awards',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EquipmentRoute = EquipmentRouteImport.update({
+  id: '/equipment',
+  path: '/equipment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnershipRoute = PartnershipRouteImport.update({
+  id: '/partnership',
+  path: '/partnership',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -122,34 +127,14 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const ProjectsProjectIdRoute = ProjectsProjectIdRouteImport.update({
-  id: '/projects/$projectId',
-  path: '/projects/$projectId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const NewsNewsIdRoute = NewsNewsIdRouteImport.update({
-  id: '/$newsId',
-  path: '/$newsId',
-  getParentRoute: () => NewsRoute,
-} as any)
-const FacultyFacultyIdRoute = FacultyFacultyIdRouteImport.update({
-  id: '/faculty/$facultyId',
-  path: '/faculty/$facultyId',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiUploadRoute = ApiUploadRouteImport.update({
-  id: '/api/upload',
-  path: '/api/upload',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminSystemRoute = AdminSystemRouteImport.update({
-  id: '/system',
-  path: '/system',
+const AdminFacultyRoute = AdminFacultyRouteImport.update({
+  id: '/faculty',
+  path: '/faculty',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminNewsRoute = AdminNewsRouteImport.update({
-  id: '/news',
-  path: '/news',
+const AdminGalleryRoute = AdminGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminLoginRoute = AdminLoginRouteImport.update({
@@ -157,59 +142,94 @@ const AdminLoginRoute = AdminLoginRouteImport.update({
   path: '/login',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminFacultyRoute = AdminFacultyRouteImport.update({
-  id: '/faculty',
-  path: '/faculty',
+const AdminNewsRoute = AdminNewsRouteImport.update({
+  id: '/news',
+  path: '/news',
   getParentRoute: () => AdminRoute,
 } as any)
-const ApiNewsIndexRoute = ApiNewsIndexRouteImport.update({
-  id: '/api/news/',
-  path: '/api/news/',
+const AdminSystemRoute = AdminSystemRouteImport.update({
+  id: '/system',
+  path: '/system',
+  getParentRoute: () => AdminRoute,
+} as any)
+const ApiUploadRoute = ApiUploadRouteImport.update({
+  id: '/api/upload',
+  path: '/api/upload',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiFacultyIndexRoute = ApiFacultyIndexRouteImport.update({
-  id: '/api/faculty/',
-  path: '/api/faculty/',
+const FacultyIndexRoute = FacultyIndexRouteImport.update({
+  id: '/faculty/',
+  path: '/faculty/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminNewsIndexRoute = AdminNewsIndexRouteImport.update({
+const FacultyFacultyIdRoute = FacultyFacultyIdRouteImport.update({
+  id: '/faculty/$facultyId',
+  path: '/faculty/$facultyId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsIndexRoute = NewsIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => AdminNewsRoute,
+  getParentRoute: () => NewsRoute,
+} as any)
+const NewsNewsIdRoute = NewsNewsIdRouteImport.update({
+  id: '/$newsId',
+  path: '/$newsId',
+  getParentRoute: () => NewsRoute,
+} as any)
+const ProjectsProjectIdRoute = ProjectsProjectIdRouteImport.update({
+  id: '/projects/$projectId',
+  path: '/projects/$projectId',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AdminFacultyIndexRoute = AdminFacultyIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminFacultyRoute,
 } as any)
-const ApiSuperuserAuditLogsRoute = ApiSuperuserAuditLogsRouteImport.update({
-  id: '/api/superuser/audit-logs',
-  path: '/api/superuser/audit-logs',
-  getParentRoute: () => rootRouteImport,
+const AdminFacultyNewRoute = AdminFacultyNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminFacultyRoute,
 } as any)
-const ApiNewsAdminRoute = ApiNewsAdminRouteImport.update({
-  id: '/api/news/admin',
-  path: '/api/news/admin',
-  getParentRoute: () => rootRouteImport,
+const AdminGalleryIndexRoute = AdminGalleryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminGalleryRoute,
 } as any)
-const ApiNewsIdRoute = ApiNewsIdRouteImport.update({
-  id: '/api/news/$id',
-  path: '/api/news/$id',
-  getParentRoute: () => rootRouteImport,
+const AdminGalleryNewRoute = AdminGalleryNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminGalleryRoute,
 } as any)
-const ApiFacultyAdminRoute = ApiFacultyAdminRouteImport.update({
-  id: '/api/faculty/admin',
-  path: '/api/faculty/admin',
-  getParentRoute: () => rootRouteImport,
+const AdminGallerySettingsRoute = AdminGallerySettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminGalleryRoute,
 } as any)
-const ApiFacultyIdRoute = ApiFacultyIdRouteImport.update({
-  id: '/api/faculty/$id',
-  path: '/api/faculty/$id',
-  getParentRoute: () => rootRouteImport,
+const AdminNewsIndexRoute = AdminNewsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminNewsRoute,
 } as any)
-const ApiAuthMeRoute = ApiAuthMeRouteImport.update({
-  id: '/api/auth/me',
-  path: '/api/auth/me',
+const AdminNewsNewRoute = AdminNewsNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminNewsRoute,
+} as any)
+const AdminSystemAuditLogsRoute = AdminSystemAuditLogsRouteImport.update({
+  id: '/audit-logs',
+  path: '/audit-logs',
+  getParentRoute: () => AdminSystemRoute,
+} as any)
+const AdminSystemUsersRoute = AdminSystemUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminSystemRoute,
+} as any)
+const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
+  id: '/api/auth/login',
+  path: '/api/auth/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
@@ -217,30 +237,109 @@ const ApiAuthLogoutRoute = ApiAuthLogoutRouteImport.update({
   path: '/api/auth/logout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAuthLoginRoute = ApiAuthLoginRouteImport.update({
-  id: '/api/auth/login',
-  path: '/api/auth/login',
+const ApiAuthMeRoute = ApiAuthMeRouteImport.update({
+  id: '/api/auth/me',
+  path: '/api/auth/me',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminSystemUsersRoute = AdminSystemUsersRouteImport.update({
-  id: '/users',
-  path: '/users',
-  getParentRoute: () => AdminSystemRoute,
+const ApiFacultyIndexRoute = ApiFacultyIndexRouteImport.update({
+  id: '/api/faculty/',
+  path: '/api/faculty/',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AdminSystemAuditLogsRoute = AdminSystemAuditLogsRouteImport.update({
-  id: '/audit-logs',
-  path: '/audit-logs',
-  getParentRoute: () => AdminSystemRoute,
+const ApiFacultyIdRoute = ApiFacultyIdRouteImport.update({
+  id: '/api/faculty/$id',
+  path: '/api/faculty/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AdminNewsNewRoute = AdminNewsNewRouteImport.update({
-  id: '/new',
-  path: '/new',
+const ApiFacultyAdminRoute = ApiFacultyAdminRouteImport.update({
+  id: '/api/faculty/admin',
+  path: '/api/faculty/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGalleryIndexRoute = ApiGalleryIndexRouteImport.update({
+  id: '/api/gallery/',
+  path: '/api/gallery/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGalleryIdRoute = ApiGalleryIdRouteImport.update({
+  id: '/api/gallery/$id',
+  path: '/api/gallery/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGalleryAdminRoute = ApiGalleryAdminRouteImport.update({
+  id: '/api/gallery/admin',
+  path: '/api/gallery/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGalleryReorderRoute = ApiGalleryReorderRouteImport.update({
+  id: '/api/gallery/reorder',
+  path: '/api/gallery/reorder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGallerySettingsRoute = ApiGallerySettingsRouteImport.update({
+  id: '/api/gallery/settings',
+  path: '/api/gallery/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNewsIndexRoute = ApiNewsIndexRouteImport.update({
+  id: '/api/news/',
+  path: '/api/news/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNewsIdRoute = ApiNewsIdRouteImport.update({
+  id: '/api/news/$id',
+  path: '/api/news/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiNewsAdminRoute = ApiNewsAdminRouteImport.update({
+  id: '/api/news/admin',
+  path: '/api/news/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSuperuserAuditLogsRoute = ApiSuperuserAuditLogsRouteImport.update({
+  id: '/api/superuser/audit-logs',
+  path: '/api/superuser/audit-logs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminFacultyFacultyIdEditRoute =
+  AdminFacultyFacultyIdEditRouteImport.update({
+    id: '/$facultyId/edit',
+    path: '/$facultyId/edit',
+    getParentRoute: () => AdminFacultyRoute,
+  } as any)
+const AdminGalleryImageIdEditRoute = AdminGalleryImageIdEditRouteImport.update({
+  id: '/$imageId/edit',
+  path: '/$imageId/edit',
+  getParentRoute: () => AdminGalleryRoute,
+} as any)
+const AdminGalleryCategoriesIndexRoute =
+  AdminGalleryCategoriesIndexRouteImport.update({
+    id: '/categories/',
+    path: '/categories/',
+    getParentRoute: () => AdminGalleryRoute,
+  } as any)
+const AdminGalleryCategoriesNewRoute =
+  AdminGalleryCategoriesNewRouteImport.update({
+    id: '/categories/new',
+    path: '/categories/new',
+    getParentRoute: () => AdminGalleryRoute,
+  } as any)
+const AdminNewsNewsIdEditRoute = AdminNewsNewsIdEditRouteImport.update({
+  id: '/$newsId/edit',
+  path: '/$newsId/edit',
   getParentRoute: () => AdminNewsRoute,
 } as any)
-const AdminFacultyNewRoute = AdminFacultyNewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => AdminFacultyRoute,
+const ApiGalleryCategoriesIndexRoute =
+  ApiGalleryCategoriesIndexRouteImport.update({
+    id: '/api/gallery/categories/',
+    path: '/api/gallery/categories/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ApiGalleryCategoriesIdRoute = ApiGalleryCategoriesIdRouteImport.update({
+  id: '/api/gallery/categories/$id',
+  path: '/api/gallery/categories/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ApiSuperuserUsersIndexRoute = ApiSuperuserUsersIndexRouteImport.update({
   id: '/api/superuser/users/',
@@ -252,16 +351,11 @@ const ApiSuperuserUsersIdRoute = ApiSuperuserUsersIdRouteImport.update({
   path: '/api/superuser/users/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminNewsNewsIdEditRoute = AdminNewsNewsIdEditRouteImport.update({
-  id: '/$newsId/edit',
-  path: '/$newsId/edit',
-  getParentRoute: () => AdminNewsRoute,
-} as any)
-const AdminFacultyFacultyIdEditRoute =
-  AdminFacultyFacultyIdEditRouteImport.update({
-    id: '/$facultyId/edit',
-    path: '/$facultyId/edit',
-    getParentRoute: () => AdminFacultyRoute,
+const AdminGalleryCategoriesCategoryIdEditRoute =
+  AdminGalleryCategoriesCategoryIdEditRouteImport.update({
+    id: '/categories/$categoryId/edit',
+    path: '/categories/$categoryId/edit',
+    getParentRoute: () => AdminGalleryRoute,
   } as any)
 
 export interface FileRoutesByFullPath {
@@ -277,6 +371,7 @@ export interface FileRoutesByFullPath {
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
   '/admin/faculty': typeof AdminFacultyRouteWithChildren
+  '/admin/gallery': typeof AdminGalleryRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/news': typeof AdminNewsRouteWithChildren
   '/admin/system': typeof AdminSystemRouteWithChildren
@@ -288,6 +383,8 @@ export interface FileRoutesByFullPath {
   '/faculty/': typeof FacultyIndexRoute
   '/news/': typeof NewsIndexRoute
   '/admin/faculty/new': typeof AdminFacultyNewRoute
+  '/admin/gallery/new': typeof AdminGalleryNewRoute
+  '/admin/gallery/settings': typeof AdminGallerySettingsRoute
   '/admin/news/new': typeof AdminNewsNewRoute
   '/admin/system/audit-logs': typeof AdminSystemAuditLogsRoute
   '/admin/system/users': typeof AdminSystemUsersRoute
@@ -296,17 +393,29 @@ export interface FileRoutesByFullPath {
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/faculty/$id': typeof ApiFacultyIdRoute
   '/api/faculty/admin': typeof ApiFacultyAdminRoute
+  '/api/gallery/$id': typeof ApiGalleryIdRoute
+  '/api/gallery/admin': typeof ApiGalleryAdminRoute
+  '/api/gallery/reorder': typeof ApiGalleryReorderRoute
+  '/api/gallery/settings': typeof ApiGallerySettingsRoute
   '/api/news/$id': typeof ApiNewsIdRoute
   '/api/news/admin': typeof ApiNewsAdminRoute
   '/api/superuser/audit-logs': typeof ApiSuperuserAuditLogsRoute
   '/admin/faculty/': typeof AdminFacultyIndexRoute
+  '/admin/gallery/': typeof AdminGalleryIndexRoute
   '/admin/news/': typeof AdminNewsIndexRoute
   '/api/faculty/': typeof ApiFacultyIndexRoute
+  '/api/gallery/': typeof ApiGalleryIndexRoute
   '/api/news/': typeof ApiNewsIndexRoute
   '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
+  '/admin/gallery/$imageId/edit': typeof AdminGalleryImageIdEditRoute
+  '/admin/gallery/categories/new': typeof AdminGalleryCategoriesNewRoute
   '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
+  '/api/gallery/categories/$id': typeof ApiGalleryCategoriesIdRoute
   '/api/superuser/users/$id': typeof ApiSuperuserUsersIdRoute
+  '/admin/gallery/categories/': typeof AdminGalleryCategoriesIndexRoute
+  '/api/gallery/categories/': typeof ApiGalleryCategoriesIndexRoute
   '/api/superuser/users/': typeof ApiSuperuserUsersIndexRoute
+  '/admin/gallery/categories/$categoryId/edit': typeof AdminGalleryCategoriesCategoryIdEditRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -328,6 +437,8 @@ export interface FileRoutesByTo {
   '/faculty': typeof FacultyIndexRoute
   '/news': typeof NewsIndexRoute
   '/admin/faculty/new': typeof AdminFacultyNewRoute
+  '/admin/gallery/new': typeof AdminGalleryNewRoute
+  '/admin/gallery/settings': typeof AdminGallerySettingsRoute
   '/admin/news/new': typeof AdminNewsNewRoute
   '/admin/system/audit-logs': typeof AdminSystemAuditLogsRoute
   '/admin/system/users': typeof AdminSystemUsersRoute
@@ -336,17 +447,29 @@ export interface FileRoutesByTo {
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/faculty/$id': typeof ApiFacultyIdRoute
   '/api/faculty/admin': typeof ApiFacultyAdminRoute
+  '/api/gallery/$id': typeof ApiGalleryIdRoute
+  '/api/gallery/admin': typeof ApiGalleryAdminRoute
+  '/api/gallery/reorder': typeof ApiGalleryReorderRoute
+  '/api/gallery/settings': typeof ApiGallerySettingsRoute
   '/api/news/$id': typeof ApiNewsIdRoute
   '/api/news/admin': typeof ApiNewsAdminRoute
   '/api/superuser/audit-logs': typeof ApiSuperuserAuditLogsRoute
   '/admin/faculty': typeof AdminFacultyIndexRoute
+  '/admin/gallery': typeof AdminGalleryIndexRoute
   '/admin/news': typeof AdminNewsIndexRoute
   '/api/faculty': typeof ApiFacultyIndexRoute
+  '/api/gallery': typeof ApiGalleryIndexRoute
   '/api/news': typeof ApiNewsIndexRoute
   '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
+  '/admin/gallery/$imageId/edit': typeof AdminGalleryImageIdEditRoute
+  '/admin/gallery/categories/new': typeof AdminGalleryCategoriesNewRoute
   '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
+  '/api/gallery/categories/$id': typeof ApiGalleryCategoriesIdRoute
   '/api/superuser/users/$id': typeof ApiSuperuserUsersIdRoute
+  '/admin/gallery/categories': typeof AdminGalleryCategoriesIndexRoute
+  '/api/gallery/categories': typeof ApiGalleryCategoriesIndexRoute
   '/api/superuser/users': typeof ApiSuperuserUsersIndexRoute
+  '/admin/gallery/categories/$categoryId/edit': typeof AdminGalleryCategoriesCategoryIdEditRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -362,6 +485,7 @@ export interface FileRoutesById {
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
   '/admin/faculty': typeof AdminFacultyRouteWithChildren
+  '/admin/gallery': typeof AdminGalleryRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/news': typeof AdminNewsRouteWithChildren
   '/admin/system': typeof AdminSystemRouteWithChildren
@@ -373,6 +497,8 @@ export interface FileRoutesById {
   '/faculty/': typeof FacultyIndexRoute
   '/news/': typeof NewsIndexRoute
   '/admin/faculty/new': typeof AdminFacultyNewRoute
+  '/admin/gallery/new': typeof AdminGalleryNewRoute
+  '/admin/gallery/settings': typeof AdminGallerySettingsRoute
   '/admin/news/new': typeof AdminNewsNewRoute
   '/admin/system/audit-logs': typeof AdminSystemAuditLogsRoute
   '/admin/system/users': typeof AdminSystemUsersRoute
@@ -381,17 +507,29 @@ export interface FileRoutesById {
   '/api/auth/me': typeof ApiAuthMeRoute
   '/api/faculty/$id': typeof ApiFacultyIdRoute
   '/api/faculty/admin': typeof ApiFacultyAdminRoute
+  '/api/gallery/$id': typeof ApiGalleryIdRoute
+  '/api/gallery/admin': typeof ApiGalleryAdminRoute
+  '/api/gallery/reorder': typeof ApiGalleryReorderRoute
+  '/api/gallery/settings': typeof ApiGallerySettingsRoute
   '/api/news/$id': typeof ApiNewsIdRoute
   '/api/news/admin': typeof ApiNewsAdminRoute
   '/api/superuser/audit-logs': typeof ApiSuperuserAuditLogsRoute
   '/admin/faculty/': typeof AdminFacultyIndexRoute
+  '/admin/gallery/': typeof AdminGalleryIndexRoute
   '/admin/news/': typeof AdminNewsIndexRoute
   '/api/faculty/': typeof ApiFacultyIndexRoute
+  '/api/gallery/': typeof ApiGalleryIndexRoute
   '/api/news/': typeof ApiNewsIndexRoute
   '/admin/faculty/$facultyId/edit': typeof AdminFacultyFacultyIdEditRoute
+  '/admin/gallery/$imageId/edit': typeof AdminGalleryImageIdEditRoute
+  '/admin/gallery/categories/new': typeof AdminGalleryCategoriesNewRoute
   '/admin/news/$newsId/edit': typeof AdminNewsNewsIdEditRoute
+  '/api/gallery/categories/$id': typeof ApiGalleryCategoriesIdRoute
   '/api/superuser/users/$id': typeof ApiSuperuserUsersIdRoute
+  '/admin/gallery/categories/': typeof AdminGalleryCategoriesIndexRoute
+  '/api/gallery/categories/': typeof ApiGalleryCategoriesIndexRoute
   '/api/superuser/users/': typeof ApiSuperuserUsersIndexRoute
+  '/admin/gallery/categories/$categoryId/edit': typeof AdminGalleryCategoriesCategoryIdEditRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -408,6 +546,7 @@ export interface FileRouteTypes {
     | '/partnership'
     | '/privacy'
     | '/admin/faculty'
+    | '/admin/gallery'
     | '/admin/login'
     | '/admin/news'
     | '/admin/system'
@@ -419,6 +558,8 @@ export interface FileRouteTypes {
     | '/faculty/'
     | '/news/'
     | '/admin/faculty/new'
+    | '/admin/gallery/new'
+    | '/admin/gallery/settings'
     | '/admin/news/new'
     | '/admin/system/audit-logs'
     | '/admin/system/users'
@@ -427,17 +568,29 @@ export interface FileRouteTypes {
     | '/api/auth/me'
     | '/api/faculty/$id'
     | '/api/faculty/admin'
+    | '/api/gallery/$id'
+    | '/api/gallery/admin'
+    | '/api/gallery/reorder'
+    | '/api/gallery/settings'
     | '/api/news/$id'
     | '/api/news/admin'
     | '/api/superuser/audit-logs'
     | '/admin/faculty/'
+    | '/admin/gallery/'
     | '/admin/news/'
     | '/api/faculty/'
+    | '/api/gallery/'
     | '/api/news/'
     | '/admin/faculty/$facultyId/edit'
+    | '/admin/gallery/$imageId/edit'
+    | '/admin/gallery/categories/new'
     | '/admin/news/$newsId/edit'
+    | '/api/gallery/categories/$id'
     | '/api/superuser/users/$id'
+    | '/admin/gallery/categories/'
+    | '/api/gallery/categories/'
     | '/api/superuser/users/'
+    | '/admin/gallery/categories/$categoryId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -459,6 +612,8 @@ export interface FileRouteTypes {
     | '/faculty'
     | '/news'
     | '/admin/faculty/new'
+    | '/admin/gallery/new'
+    | '/admin/gallery/settings'
     | '/admin/news/new'
     | '/admin/system/audit-logs'
     | '/admin/system/users'
@@ -467,17 +622,29 @@ export interface FileRouteTypes {
     | '/api/auth/me'
     | '/api/faculty/$id'
     | '/api/faculty/admin'
+    | '/api/gallery/$id'
+    | '/api/gallery/admin'
+    | '/api/gallery/reorder'
+    | '/api/gallery/settings'
     | '/api/news/$id'
     | '/api/news/admin'
     | '/api/superuser/audit-logs'
     | '/admin/faculty'
+    | '/admin/gallery'
     | '/admin/news'
     | '/api/faculty'
+    | '/api/gallery'
     | '/api/news'
     | '/admin/faculty/$facultyId/edit'
+    | '/admin/gallery/$imageId/edit'
+    | '/admin/gallery/categories/new'
     | '/admin/news/$newsId/edit'
+    | '/api/gallery/categories/$id'
     | '/api/superuser/users/$id'
+    | '/admin/gallery/categories'
+    | '/api/gallery/categories'
     | '/api/superuser/users'
+    | '/admin/gallery/categories/$categoryId/edit'
   id:
     | '__root__'
     | '/'
@@ -492,6 +659,7 @@ export interface FileRouteTypes {
     | '/partnership'
     | '/privacy'
     | '/admin/faculty'
+    | '/admin/gallery'
     | '/admin/login'
     | '/admin/news'
     | '/admin/system'
@@ -503,6 +671,8 @@ export interface FileRouteTypes {
     | '/faculty/'
     | '/news/'
     | '/admin/faculty/new'
+    | '/admin/gallery/new'
+    | '/admin/gallery/settings'
     | '/admin/news/new'
     | '/admin/system/audit-logs'
     | '/admin/system/users'
@@ -511,17 +681,29 @@ export interface FileRouteTypes {
     | '/api/auth/me'
     | '/api/faculty/$id'
     | '/api/faculty/admin'
+    | '/api/gallery/$id'
+    | '/api/gallery/admin'
+    | '/api/gallery/reorder'
+    | '/api/gallery/settings'
     | '/api/news/$id'
     | '/api/news/admin'
     | '/api/superuser/audit-logs'
     | '/admin/faculty/'
+    | '/admin/gallery/'
     | '/admin/news/'
     | '/api/faculty/'
+    | '/api/gallery/'
     | '/api/news/'
     | '/admin/faculty/$facultyId/edit'
+    | '/admin/gallery/$imageId/edit'
+    | '/admin/gallery/categories/new'
     | '/admin/news/$newsId/edit'
+    | '/api/gallery/categories/$id'
     | '/api/superuser/users/$id'
+    | '/admin/gallery/categories/'
+    | '/api/gallery/categories/'
     | '/api/superuser/users/'
+    | '/admin/gallery/categories/$categoryId/edit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -545,78 +727,29 @@ export interface RootRouteChildren {
   ApiAuthMeRoute: typeof ApiAuthMeRoute
   ApiFacultyIdRoute: typeof ApiFacultyIdRoute
   ApiFacultyAdminRoute: typeof ApiFacultyAdminRoute
+  ApiGalleryIdRoute: typeof ApiGalleryIdRoute
+  ApiGalleryAdminRoute: typeof ApiGalleryAdminRoute
+  ApiGalleryReorderRoute: typeof ApiGalleryReorderRoute
+  ApiGallerySettingsRoute: typeof ApiGallerySettingsRoute
   ApiNewsIdRoute: typeof ApiNewsIdRoute
   ApiNewsAdminRoute: typeof ApiNewsAdminRoute
   ApiSuperuserAuditLogsRoute: typeof ApiSuperuserAuditLogsRoute
   ApiFacultyIndexRoute: typeof ApiFacultyIndexRoute
+  ApiGalleryIndexRoute: typeof ApiGalleryIndexRoute
   ApiNewsIndexRoute: typeof ApiNewsIndexRoute
+  ApiGalleryCategoriesIdRoute: typeof ApiGalleryCategoriesIdRoute
   ApiSuperuserUsersIdRoute: typeof ApiSuperuserUsersIdRoute
+  ApiGalleryCategoriesIndexRoute: typeof ApiGalleryCategoriesIndexRoute
   ApiSuperuserUsersIndexRoute: typeof ApiSuperuserUsersIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/partnership': {
-      id: '/partnership'
-      path: '/partnership'
-      fullPath: '/partnership'
-      preLoaderRoute: typeof PartnershipRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news': {
-      id: '/news'
-      path: '/news'
-      fullPath: '/news'
-      preLoaderRoute: typeof NewsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gallery': {
-      id: '/gallery'
-      path: '/gallery'
-      fullPath: '/gallery'
-      preLoaderRoute: typeof GalleryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/equipment': {
-      id: '/equipment'
-      path: '/equipment'
-      fullPath: '/equipment'
-      preLoaderRoute: typeof EquipmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/awards': {
-      id: '/awards'
-      path: '/awards'
-      fullPath: '/awards'
-      preLoaderRoute: typeof AwardsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/assistants': {
-      id: '/assistants'
-      path: '/assistants'
-      fullPath: '/assistants'
-      preLoaderRoute: typeof AssistantsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/area': {
-      id: '/area'
-      path: '/area'
-      fullPath: '/area'
-      preLoaderRoute: typeof AreaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -626,25 +759,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/news/': {
-      id: '/news/'
-      path: '/'
-      fullPath: '/news/'
-      preLoaderRoute: typeof NewsIndexRouteImport
-      parentRoute: typeof NewsRoute
+    '/area': {
+      id: '/area'
+      path: '/area'
+      fullPath: '/area'
+      preLoaderRoute: typeof AreaRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/faculty/': {
-      id: '/faculty/'
-      path: '/faculty'
-      fullPath: '/faculty/'
-      preLoaderRoute: typeof FacultyIndexRouteImport
+    '/assistants': {
+      id: '/assistants'
+      path: '/assistants'
+      fullPath: '/assistants'
+      preLoaderRoute: typeof AssistantsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/awards': {
+      id: '/awards'
+      path: '/awards'
+      fullPath: '/awards'
+      preLoaderRoute: typeof AwardsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/equipment': {
+      id: '/equipment'
+      path: '/equipment'
+      fullPath: '/equipment'
+      preLoaderRoute: typeof EquipmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partnership': {
+      id: '/partnership'
+      path: '/partnership'
+      fullPath: '/partnership'
+      preLoaderRoute: typeof PartnershipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -654,46 +829,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/projects/$projectId': {
-      id: '/projects/$projectId'
-      path: '/projects/$projectId'
-      fullPath: '/projects/$projectId'
-      preLoaderRoute: typeof ProjectsProjectIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/news/$newsId': {
-      id: '/news/$newsId'
-      path: '/$newsId'
-      fullPath: '/news/$newsId'
-      preLoaderRoute: typeof NewsNewsIdRouteImport
-      parentRoute: typeof NewsRoute
-    }
-    '/faculty/$facultyId': {
-      id: '/faculty/$facultyId'
-      path: '/faculty/$facultyId'
-      fullPath: '/faculty/$facultyId'
-      preLoaderRoute: typeof FacultyFacultyIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/upload': {
-      id: '/api/upload'
-      path: '/api/upload'
-      fullPath: '/api/upload'
-      preLoaderRoute: typeof ApiUploadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/system': {
-      id: '/admin/system'
-      path: '/system'
-      fullPath: '/admin/system'
-      preLoaderRoute: typeof AdminSystemRouteImport
+    '/admin/faculty': {
+      id: '/admin/faculty'
+      path: '/faculty'
+      fullPath: '/admin/faculty'
+      preLoaderRoute: typeof AdminFacultyRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/news': {
-      id: '/admin/news'
-      path: '/news'
-      fullPath: '/admin/news'
-      preLoaderRoute: typeof AdminNewsRouteImport
+    '/admin/gallery': {
+      id: '/admin/gallery'
+      path: '/gallery'
+      fullPath: '/admin/gallery'
+      preLoaderRoute: typeof AdminGalleryRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/login': {
@@ -703,33 +850,61 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLoginRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/admin/faculty': {
-      id: '/admin/faculty'
-      path: '/faculty'
-      fullPath: '/admin/faculty'
-      preLoaderRoute: typeof AdminFacultyRouteImport
+    '/admin/news': {
+      id: '/admin/news'
+      path: '/news'
+      fullPath: '/admin/news'
+      preLoaderRoute: typeof AdminNewsRouteImport
       parentRoute: typeof AdminRoute
     }
-    '/api/news/': {
-      id: '/api/news/'
-      path: '/api/news'
-      fullPath: '/api/news/'
-      preLoaderRoute: typeof ApiNewsIndexRouteImport
+    '/admin/system': {
+      id: '/admin/system'
+      path: '/system'
+      fullPath: '/admin/system'
+      preLoaderRoute: typeof AdminSystemRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/api/upload': {
+      id: '/api/upload'
+      path: '/api/upload'
+      fullPath: '/api/upload'
+      preLoaderRoute: typeof ApiUploadRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/faculty/': {
-      id: '/api/faculty/'
-      path: '/api/faculty'
-      fullPath: '/api/faculty/'
-      preLoaderRoute: typeof ApiFacultyIndexRouteImport
+    '/faculty/': {
+      id: '/faculty/'
+      path: '/faculty'
+      fullPath: '/faculty/'
+      preLoaderRoute: typeof FacultyIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/news/': {
-      id: '/admin/news/'
+    '/faculty/$facultyId': {
+      id: '/faculty/$facultyId'
+      path: '/faculty/$facultyId'
+      fullPath: '/faculty/$facultyId'
+      preLoaderRoute: typeof FacultyFacultyIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news/': {
+      id: '/news/'
       path: '/'
-      fullPath: '/admin/news/'
-      preLoaderRoute: typeof AdminNewsIndexRouteImport
-      parentRoute: typeof AdminNewsRoute
+      fullPath: '/news/'
+      preLoaderRoute: typeof NewsIndexRouteImport
+      parentRoute: typeof NewsRoute
+    }
+    '/news/$newsId': {
+      id: '/news/$newsId'
+      path: '/$newsId'
+      fullPath: '/news/$newsId'
+      preLoaderRoute: typeof NewsNewsIdRouteImport
+      parentRoute: typeof NewsRoute
+    }
+    '/projects/$projectId': {
+      id: '/projects/$projectId'
+      path: '/projects/$projectId'
+      fullPath: '/projects/$projectId'
+      preLoaderRoute: typeof ProjectsProjectIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/admin/faculty/': {
       id: '/admin/faculty/'
@@ -738,46 +913,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminFacultyIndexRouteImport
       parentRoute: typeof AdminFacultyRoute
     }
-    '/api/superuser/audit-logs': {
-      id: '/api/superuser/audit-logs'
-      path: '/api/superuser/audit-logs'
-      fullPath: '/api/superuser/audit-logs'
-      preLoaderRoute: typeof ApiSuperuserAuditLogsRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/faculty/new': {
+      id: '/admin/faculty/new'
+      path: '/new'
+      fullPath: '/admin/faculty/new'
+      preLoaderRoute: typeof AdminFacultyNewRouteImport
+      parentRoute: typeof AdminFacultyRoute
     }
-    '/api/news/admin': {
-      id: '/api/news/admin'
-      path: '/api/news/admin'
-      fullPath: '/api/news/admin'
-      preLoaderRoute: typeof ApiNewsAdminRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/gallery/': {
+      id: '/admin/gallery/'
+      path: '/'
+      fullPath: '/admin/gallery/'
+      preLoaderRoute: typeof AdminGalleryIndexRouteImport
+      parentRoute: typeof AdminGalleryRoute
     }
-    '/api/news/$id': {
-      id: '/api/news/$id'
-      path: '/api/news/$id'
-      fullPath: '/api/news/$id'
-      preLoaderRoute: typeof ApiNewsIdRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/gallery/new': {
+      id: '/admin/gallery/new'
+      path: '/new'
+      fullPath: '/admin/gallery/new'
+      preLoaderRoute: typeof AdminGalleryNewRouteImport
+      parentRoute: typeof AdminGalleryRoute
     }
-    '/api/faculty/admin': {
-      id: '/api/faculty/admin'
-      path: '/api/faculty/admin'
-      fullPath: '/api/faculty/admin'
-      preLoaderRoute: typeof ApiFacultyAdminRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/gallery/settings': {
+      id: '/admin/gallery/settings'
+      path: '/settings'
+      fullPath: '/admin/gallery/settings'
+      preLoaderRoute: typeof AdminGallerySettingsRouteImport
+      parentRoute: typeof AdminGalleryRoute
     }
-    '/api/faculty/$id': {
-      id: '/api/faculty/$id'
-      path: '/api/faculty/$id'
-      fullPath: '/api/faculty/$id'
-      preLoaderRoute: typeof ApiFacultyIdRouteImport
-      parentRoute: typeof rootRouteImport
+    '/admin/news/': {
+      id: '/admin/news/'
+      path: '/'
+      fullPath: '/admin/news/'
+      preLoaderRoute: typeof AdminNewsIndexRouteImport
+      parentRoute: typeof AdminNewsRoute
     }
-    '/api/auth/me': {
-      id: '/api/auth/me'
-      path: '/api/auth/me'
-      fullPath: '/api/auth/me'
-      preLoaderRoute: typeof ApiAuthMeRouteImport
+    '/admin/news/new': {
+      id: '/admin/news/new'
+      path: '/new'
+      fullPath: '/admin/news/new'
+      preLoaderRoute: typeof AdminNewsNewRouteImport
+      parentRoute: typeof AdminNewsRoute
+    }
+    '/admin/system/audit-logs': {
+      id: '/admin/system/audit-logs'
+      path: '/audit-logs'
+      fullPath: '/admin/system/audit-logs'
+      preLoaderRoute: typeof AdminSystemAuditLogsRouteImport
+      parentRoute: typeof AdminSystemRoute
+    }
+    '/admin/system/users': {
+      id: '/admin/system/users'
+      path: '/users'
+      fullPath: '/admin/system/users'
+      preLoaderRoute: typeof AdminSystemUsersRouteImport
+      parentRoute: typeof AdminSystemRoute
+    }
+    '/api/auth/login': {
+      id: '/api/auth/login'
+      path: '/api/auth/login'
+      fullPath: '/api/auth/login'
+      preLoaderRoute: typeof ApiAuthLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/auth/logout': {
@@ -787,40 +983,145 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthLogoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/auth/login': {
-      id: '/api/auth/login'
-      path: '/api/auth/login'
-      fullPath: '/api/auth/login'
-      preLoaderRoute: typeof ApiAuthLoginRouteImport
+    '/api/auth/me': {
+      id: '/api/auth/me'
+      path: '/api/auth/me'
+      fullPath: '/api/auth/me'
+      preLoaderRoute: typeof ApiAuthMeRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/system/users': {
-      id: '/admin/system/users'
-      path: '/users'
-      fullPath: '/admin/system/users'
-      preLoaderRoute: typeof AdminSystemUsersRouteImport
-      parentRoute: typeof AdminSystemRoute
+    '/api/faculty/': {
+      id: '/api/faculty/'
+      path: '/api/faculty'
+      fullPath: '/api/faculty/'
+      preLoaderRoute: typeof ApiFacultyIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/system/audit-logs': {
-      id: '/admin/system/audit-logs'
-      path: '/audit-logs'
-      fullPath: '/admin/system/audit-logs'
-      preLoaderRoute: typeof AdminSystemAuditLogsRouteImport
-      parentRoute: typeof AdminSystemRoute
+    '/api/faculty/$id': {
+      id: '/api/faculty/$id'
+      path: '/api/faculty/$id'
+      fullPath: '/api/faculty/$id'
+      preLoaderRoute: typeof ApiFacultyIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/news/new': {
-      id: '/admin/news/new'
-      path: '/new'
-      fullPath: '/admin/news/new'
-      preLoaderRoute: typeof AdminNewsNewRouteImport
+    '/api/faculty/admin': {
+      id: '/api/faculty/admin'
+      path: '/api/faculty/admin'
+      fullPath: '/api/faculty/admin'
+      preLoaderRoute: typeof ApiFacultyAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gallery/': {
+      id: '/api/gallery/'
+      path: '/api/gallery'
+      fullPath: '/api/gallery/'
+      preLoaderRoute: typeof ApiGalleryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gallery/$id': {
+      id: '/api/gallery/$id'
+      path: '/api/gallery/$id'
+      fullPath: '/api/gallery/$id'
+      preLoaderRoute: typeof ApiGalleryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gallery/admin': {
+      id: '/api/gallery/admin'
+      path: '/api/gallery/admin'
+      fullPath: '/api/gallery/admin'
+      preLoaderRoute: typeof ApiGalleryAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gallery/reorder': {
+      id: '/api/gallery/reorder'
+      path: '/api/gallery/reorder'
+      fullPath: '/api/gallery/reorder'
+      preLoaderRoute: typeof ApiGalleryReorderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gallery/settings': {
+      id: '/api/gallery/settings'
+      path: '/api/gallery/settings'
+      fullPath: '/api/gallery/settings'
+      preLoaderRoute: typeof ApiGallerySettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/news/': {
+      id: '/api/news/'
+      path: '/api/news'
+      fullPath: '/api/news/'
+      preLoaderRoute: typeof ApiNewsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/news/$id': {
+      id: '/api/news/$id'
+      path: '/api/news/$id'
+      fullPath: '/api/news/$id'
+      preLoaderRoute: typeof ApiNewsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/news/admin': {
+      id: '/api/news/admin'
+      path: '/api/news/admin'
+      fullPath: '/api/news/admin'
+      preLoaderRoute: typeof ApiNewsAdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/superuser/audit-logs': {
+      id: '/api/superuser/audit-logs'
+      path: '/api/superuser/audit-logs'
+      fullPath: '/api/superuser/audit-logs'
+      preLoaderRoute: typeof ApiSuperuserAuditLogsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/faculty/$facultyId/edit': {
+      id: '/admin/faculty/$facultyId/edit'
+      path: '/$facultyId/edit'
+      fullPath: '/admin/faculty/$facultyId/edit'
+      preLoaderRoute: typeof AdminFacultyFacultyIdEditRouteImport
+      parentRoute: typeof AdminFacultyRoute
+    }
+    '/admin/gallery/$imageId/edit': {
+      id: '/admin/gallery/$imageId/edit'
+      path: '/$imageId/edit'
+      fullPath: '/admin/gallery/$imageId/edit'
+      preLoaderRoute: typeof AdminGalleryImageIdEditRouteImport
+      parentRoute: typeof AdminGalleryRoute
+    }
+    '/admin/gallery/categories/': {
+      id: '/admin/gallery/categories/'
+      path: '/categories'
+      fullPath: '/admin/gallery/categories/'
+      preLoaderRoute: typeof AdminGalleryCategoriesIndexRouteImport
+      parentRoute: typeof AdminGalleryRoute
+    }
+    '/admin/gallery/categories/new': {
+      id: '/admin/gallery/categories/new'
+      path: '/categories/new'
+      fullPath: '/admin/gallery/categories/new'
+      preLoaderRoute: typeof AdminGalleryCategoriesNewRouteImport
+      parentRoute: typeof AdminGalleryRoute
+    }
+    '/admin/news/$newsId/edit': {
+      id: '/admin/news/$newsId/edit'
+      path: '/$newsId/edit'
+      fullPath: '/admin/news/$newsId/edit'
+      preLoaderRoute: typeof AdminNewsNewsIdEditRouteImport
       parentRoute: typeof AdminNewsRoute
     }
-    '/admin/faculty/new': {
-      id: '/admin/faculty/new'
-      path: '/new'
-      fullPath: '/admin/faculty/new'
-      preLoaderRoute: typeof AdminFacultyNewRouteImport
-      parentRoute: typeof AdminFacultyRoute
+    '/api/gallery/categories/': {
+      id: '/api/gallery/categories/'
+      path: '/api/gallery/categories'
+      fullPath: '/api/gallery/categories/'
+      preLoaderRoute: typeof ApiGalleryCategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/gallery/categories/$id': {
+      id: '/api/gallery/categories/$id'
+      path: '/api/gallery/categories/$id'
+      fullPath: '/api/gallery/categories/$id'
+      preLoaderRoute: typeof ApiGalleryCategoriesIdRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/api/superuser/users/': {
       id: '/api/superuser/users/'
@@ -836,19 +1137,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiSuperuserUsersIdRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/news/$newsId/edit': {
-      id: '/admin/news/$newsId/edit'
-      path: '/$newsId/edit'
-      fullPath: '/admin/news/$newsId/edit'
-      preLoaderRoute: typeof AdminNewsNewsIdEditRouteImport
-      parentRoute: typeof AdminNewsRoute
-    }
-    '/admin/faculty/$facultyId/edit': {
-      id: '/admin/faculty/$facultyId/edit'
-      path: '/$facultyId/edit'
-      fullPath: '/admin/faculty/$facultyId/edit'
-      preLoaderRoute: typeof AdminFacultyFacultyIdEditRouteImport
-      parentRoute: typeof AdminFacultyRoute
+    '/admin/gallery/categories/$categoryId/edit': {
+      id: '/admin/gallery/categories/$categoryId/edit'
+      path: '/categories/$categoryId/edit'
+      fullPath: '/admin/gallery/categories/$categoryId/edit'
+      preLoaderRoute: typeof AdminGalleryCategoriesCategoryIdEditRouteImport
+      parentRoute: typeof AdminGalleryRoute
     }
   }
 }
@@ -867,6 +1161,31 @@ const AdminFacultyRouteChildren: AdminFacultyRouteChildren = {
 
 const AdminFacultyRouteWithChildren = AdminFacultyRoute._addFileChildren(
   AdminFacultyRouteChildren,
+)
+
+interface AdminGalleryRouteChildren {
+  AdminGalleryNewRoute: typeof AdminGalleryNewRoute
+  AdminGallerySettingsRoute: typeof AdminGallerySettingsRoute
+  AdminGalleryIndexRoute: typeof AdminGalleryIndexRoute
+  AdminGalleryImageIdEditRoute: typeof AdminGalleryImageIdEditRoute
+  AdminGalleryCategoriesNewRoute: typeof AdminGalleryCategoriesNewRoute
+  AdminGalleryCategoriesIndexRoute: typeof AdminGalleryCategoriesIndexRoute
+  AdminGalleryCategoriesCategoryIdEditRoute: typeof AdminGalleryCategoriesCategoryIdEditRoute
+}
+
+const AdminGalleryRouteChildren: AdminGalleryRouteChildren = {
+  AdminGalleryNewRoute: AdminGalleryNewRoute,
+  AdminGallerySettingsRoute: AdminGallerySettingsRoute,
+  AdminGalleryIndexRoute: AdminGalleryIndexRoute,
+  AdminGalleryImageIdEditRoute: AdminGalleryImageIdEditRoute,
+  AdminGalleryCategoriesNewRoute: AdminGalleryCategoriesNewRoute,
+  AdminGalleryCategoriesIndexRoute: AdminGalleryCategoriesIndexRoute,
+  AdminGalleryCategoriesCategoryIdEditRoute:
+    AdminGalleryCategoriesCategoryIdEditRoute,
+}
+
+const AdminGalleryRouteWithChildren = AdminGalleryRoute._addFileChildren(
+  AdminGalleryRouteChildren,
 )
 
 interface AdminNewsRouteChildren {
@@ -901,6 +1220,7 @@ const AdminSystemRouteWithChildren = AdminSystemRoute._addFileChildren(
 
 interface AdminRouteChildren {
   AdminFacultyRoute: typeof AdminFacultyRouteWithChildren
+  AdminGalleryRoute: typeof AdminGalleryRouteWithChildren
   AdminLoginRoute: typeof AdminLoginRoute
   AdminNewsRoute: typeof AdminNewsRouteWithChildren
   AdminSystemRoute: typeof AdminSystemRouteWithChildren
@@ -909,6 +1229,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminFacultyRoute: AdminFacultyRouteWithChildren,
+  AdminGalleryRoute: AdminGalleryRouteWithChildren,
   AdminLoginRoute: AdminLoginRoute,
   AdminNewsRoute: AdminNewsRouteWithChildren,
   AdminSystemRoute: AdminSystemRouteWithChildren,
@@ -950,12 +1271,19 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAuthMeRoute: ApiAuthMeRoute,
   ApiFacultyIdRoute: ApiFacultyIdRoute,
   ApiFacultyAdminRoute: ApiFacultyAdminRoute,
+  ApiGalleryIdRoute: ApiGalleryIdRoute,
+  ApiGalleryAdminRoute: ApiGalleryAdminRoute,
+  ApiGalleryReorderRoute: ApiGalleryReorderRoute,
+  ApiGallerySettingsRoute: ApiGallerySettingsRoute,
   ApiNewsIdRoute: ApiNewsIdRoute,
   ApiNewsAdminRoute: ApiNewsAdminRoute,
   ApiSuperuserAuditLogsRoute: ApiSuperuserAuditLogsRoute,
   ApiFacultyIndexRoute: ApiFacultyIndexRoute,
+  ApiGalleryIndexRoute: ApiGalleryIndexRoute,
   ApiNewsIndexRoute: ApiNewsIndexRoute,
+  ApiGalleryCategoriesIdRoute: ApiGalleryCategoriesIdRoute,
   ApiSuperuserUsersIdRoute: ApiSuperuserUsersIdRoute,
+  ApiGalleryCategoriesIndexRoute: ApiGalleryCategoriesIndexRoute,
   ApiSuperuserUsersIndexRoute: ApiSuperuserUsersIndexRoute,
 }
 export const routeTree = rootRouteImport

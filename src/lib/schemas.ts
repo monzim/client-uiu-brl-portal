@@ -78,3 +78,65 @@ export const AuditLogQuerySchema = z.object({
   action: z.string().optional(),
   adminId: z.string().optional(),
 })
+
+/**
+ * Gallery assets can be an uploaded object URL or a root-relative path to a
+ * file shipped in `public/` (which is how the seeded images are stored).
+ */
+const galleryAssetPath = z
+  .string()
+  .min(1)
+  .max(2000)
+  .refine(
+    (value) => value.startsWith('/') || /^https?:\/\//.test(value),
+    'Must be an absolute URL or a root-relative path',
+  )
+
+export const CreateGalleryCategorySchema = z.object({
+  slug: z
+    .string()
+    .regex(slugRegex, 'Slug must be lowercase alphanumeric with hyphens'),
+  name: z.string().min(1).max(200),
+  description: z.string().max(2000).nullable().optional(),
+  published: z.boolean().default(true),
+  sortOrder: z.number().int().default(0),
+})
+
+export const UpdateGalleryCategorySchema = CreateGalleryCategorySchema.partial()
+
+export const CreateGalleryImageSchema = z.object({
+  url: galleryAssetPath,
+  caption: z.string().min(1).max(300),
+  description: z.string().max(2000).nullable().optional(),
+  altText: z.string().max(300).nullable().optional(),
+  categoryId: z.string().nullable().optional(),
+  featured: z.boolean().default(false),
+  published: z.boolean().default(true),
+  sortOrder: z.number().int().default(0),
+  takenAt: z.string().datetime().nullable().optional(),
+})
+
+export const UpdateGalleryImageSchema = CreateGalleryImageSchema.partial()
+
+/** `POST /api/gallery` accepts one image or a batch, so bulk upload is one call. */
+export const CreateGalleryImagesSchema = z.union([
+  CreateGalleryImageSchema,
+  z.array(CreateGalleryImageSchema).min(1).max(50),
+])
+
+export const ReorderGallerySchema = z.object({
+  items: z
+    .array(z.object({ id: z.string().min(1), sortOrder: z.number().int() }))
+    .min(1)
+    .max(500),
+})
+
+export const UpdateGallerySettingsSchema = z.object({
+  heroTitle: z.string().min(1).max(200),
+  heroSubtitle: z.string().max(500).nullable().optional(),
+  heroImage: galleryAssetPath.nullable().optional(),
+  introText: z.string().max(2000).nullable().optional(),
+  metaTitle: z.string().min(1).max(200),
+  metaDescription: z.string().min(1).max(500),
+  showCategoryFilter: z.boolean().default(true),
+})
