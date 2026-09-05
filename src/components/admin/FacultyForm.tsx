@@ -15,7 +15,13 @@ import {
 import React, { useEffect, useState } from 'react'
 import { slugify } from '../../lib/slug'
 import { cn } from '../../lib/utils'
-import type { DbFaculty, Publication, PublicationType } from '../../types/cms'
+import { MEMBER_TYPES, MEMBER_TYPE_LABELS } from '../../types/cms'
+import type {
+  DbFaculty,
+  MemberType,
+  Publication,
+  PublicationType,
+} from '../../types/cms'
 import { ConfirmationDialog } from './ConfirmationDialog'
 import { ImageUpload } from './ImageUpload'
 import { RichTextEditor } from './RichTextEditor'
@@ -355,7 +361,7 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
   )
   const [publications, setPublications] = useState<Publication[]>(
     Array.isArray(initial?.publications)
-      ? (initial?.publications as Publication[])
+      ? initial.publications
       : (initial?.publications as any)?.set || [],
   )
   const [importantLinks, setImportantLinks] = useState<
@@ -364,6 +370,9 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
     Array.isArray(initial?.importantLinks)
       ? (initial.importantLinks as { label: string; url: string }[])
       : (initial?.importantLinks as any)?.set || [],
+  )
+  const [memberType, setMemberType] = useState<MemberType>(
+    initial?.memberType ?? 'FACULTY',
   )
   const [published, setPublished] = useState(initial?.published ?? true)
   const [sortOrder, setSortOrder] = useState(initial?.sortOrder ?? 0)
@@ -399,6 +408,7 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
         researchProjects,
         publications,
         importantLinks,
+        memberType,
         published,
         sortOrder,
       }
@@ -442,7 +452,8 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
               </button>
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600 mb-0.5">
-                  Faculty Directory / {facultyId ? 'EDITOR' : 'NEW PROFILE'}
+                  {MEMBER_TYPE_LABELS[memberType].toUpperCase()} /{' '}
+                  {facultyId ? 'EDITOR' : 'NEW PROFILE'}
                 </p>
                 <h1 className="text-3xl font-black text-black tracking-tighter uppercase">
                   {name || 'Untitled Faculty'}
@@ -530,6 +541,27 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
                       required
                       className={cn(inputBase, 'bg-gray-50/50 border-gray-100')}
                     />
+                  </div>
+                  <div className="space-y-2">
+                    <label className={labelClass}>Member Type</label>
+                    <select
+                      value={memberType}
+                      onChange={(e) =>
+                        setMemberType(e.target.value as MemberType)
+                      }
+                      className={cn(inputBase, 'bg-gray-50/50 border-gray-100')}
+                    >
+                      {MEMBER_TYPES.map((type) => (
+                        <option key={type} value={type}>
+                          {MEMBER_TYPE_LABELS[type].toUpperCase()}
+                        </option>
+                      ))}
+                    </select>
+                    <p className="text-[10px] font-medium text-gray-400">
+                      {memberType === 'RESEARCH_ASSISTANT'
+                        ? 'Listed on the Research Assistants page.'
+                        : 'Listed on the Faculty page and the home page.'}
+                    </p>
                   </div>
                   <div className="space-y-2">
                     <label className={labelClass}>Departmental Unit</label>

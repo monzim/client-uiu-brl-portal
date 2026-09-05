@@ -16,7 +16,12 @@ export type DbNewsListItem = Pick<
   'id' | 'slug' | 'title' | 'date' | 'description' | 'image'
 >
 
-export type PublicationType = 'journal' | 'conference' | 'book' | 'thesis' | 'other'
+export type PublicationType =
+  | 'journal'
+  | 'conference'
+  | 'book'
+  | 'thesis'
+  | 'other'
 
 export interface Publication {
   title: string
@@ -27,6 +32,15 @@ export interface Publication {
   doi?: string
   url?: string
   note?: string
+}
+
+export const MEMBER_TYPES = ['FACULTY', 'RESEARCH_ASSISTANT'] as const
+
+export type MemberType = (typeof MEMBER_TYPES)[number]
+
+export const MEMBER_TYPE_LABELS: Record<MemberType, string> = {
+  FACULTY: 'Faculty Member',
+  RESEARCH_ASSISTANT: 'Research Assistant',
 }
 
 export interface DbFaculty {
@@ -50,6 +64,7 @@ export interface DbFaculty {
   researchProjects: string[]
   publications: Publication[]
   importantLinks: { label: string; url: string }[]
+  memberType: MemberType
   published: boolean
   sortOrder: number
   createdAt: string | Date

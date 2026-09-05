@@ -1,4 +1,5 @@
 import Redis from 'ioredis'
+import type { MemberType } from '../types/cms'
 
 const globalForRedis = globalThis as unknown as { redis?: Redis }
 
@@ -41,9 +42,23 @@ export async function cached<T>(
 export const CACHE_KEYS = {
   newsList: () => 'news:list',
   newsItem: (id: string) => `news:${id}`,
-  facultyList: () => 'faculty:list',
+  /** Omit `memberType` for the combined list of every published member. */
+  facultyList: (memberType?: MemberType) =>
+    memberType ? `faculty:list:${memberType}` : 'faculty:list',
   facultyItem: (id: string) => `faculty:${id}`,
 } as const
+
+/**
+ * A member's type can change on edit, so a write invalidates every list variant
+ * rather than trying to guess which ones the record used to belong to.
+ */
+export function invalidateFacultyLists(): Promise<unknown> {
+  return Promise.allSettled([
+    redis.del(CACHE_KEYS.facultyList()),
+    redis.del(CACHE_KEYS.facultyList('FACULTY')),
+    redis.del(CACHE_KEYS.facultyList('RESEARCH_ASSISTANT')),
+  ])
+}
 
 export const CACHE_TTL = {
   newsList: 300,
