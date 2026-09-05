@@ -46,6 +46,10 @@ export const CACHE_KEYS = {
   facultyList: (memberType?: MemberType) =>
     memberType ? `faculty:list:${memberType}` : 'faculty:list',
   facultyItem: (id: string) => `faculty:${id}`,
+  galleryPage: () => 'gallery:page',
+  galleryImages: () => 'gallery:images',
+  galleryCategories: () => 'gallery:categories',
+  gallerySettings: () => 'gallery:settings',
 } as const
 
 /**
@@ -60,9 +64,23 @@ export function invalidateFacultyLists(): Promise<unknown> {
   ])
 }
 
+/**
+ * Images, categories and settings all feed the same public page, so any gallery
+ * write drops every gallery key rather than reasoning about which view changed.
+ */
+export function invalidateGallery(): Promise<unknown> {
+  return Promise.allSettled([
+    redis.del(CACHE_KEYS.galleryPage()),
+    redis.del(CACHE_KEYS.galleryImages()),
+    redis.del(CACHE_KEYS.galleryCategories()),
+    redis.del(CACHE_KEYS.gallerySettings()),
+  ])
+}
+
 export const CACHE_TTL = {
   newsList: 300,
   newsItem: 600,
   facultyList: 600,
   facultyItem: 1800,
+  gallery: 600,
 } as const
