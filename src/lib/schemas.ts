@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { MEMBER_TYPES } from '../types/cms'
 
 const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
@@ -19,7 +20,9 @@ export const ImportantLinkSchema = z.object({
 })
 
 export const CreateNewsSchema = z.object({
-  slug: z.string().regex(slugRegex, 'Slug must be lowercase alphanumeric with hyphens'),
+  slug: z
+    .string()
+    .regex(slugRegex, 'Slug must be lowercase alphanumeric with hyphens'),
   title: z.string().min(1).max(500),
   date: z.string().datetime().optional(),
   description: z.string().min(1).max(2000),
@@ -31,7 +34,9 @@ export const CreateNewsSchema = z.object({
 export const UpdateNewsSchema = CreateNewsSchema.partial()
 
 export const CreateFacultySchema = z.object({
-  slug: z.string().regex(slugRegex, 'Slug must be lowercase alphanumeric with hyphens'),
+  slug: z
+    .string()
+    .regex(slugRegex, 'Slug must be lowercase alphanumeric with hyphens'),
   name: z.string().min(1).max(200),
   designation: z.string().min(1).max(200),
   department: z.string().min(1).max(200),
@@ -50,6 +55,7 @@ export const CreateFacultySchema = z.object({
   researchProjects: z.array(z.string()).default([]),
   publications: z.array(PublicationSchema).default([]),
   importantLinks: z.array(ImportantLinkSchema).default([]),
+  memberType: z.enum(MEMBER_TYPES).default('FACULTY'),
   published: z.boolean().default(true),
   sortOrder: z.number().int().default(0),
 })

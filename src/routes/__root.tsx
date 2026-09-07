@@ -10,7 +10,11 @@ import { Footer } from '../components/Footer'
 import { Navbar } from '../components/Navbar'
 import { NotFound } from '../components/NotFound'
 
-import appCss from '../styles.css?url'
+// Side-effect import: TanStack Start's manifest picks the stylesheet up from the
+// client bundle and injects the <link> with the client build's hash. Importing it
+// as `?url` instead bakes the SSR build's hash into the HTML, which does not exist
+// in .output/public and 404s on first paint (unstyled page until hydration).
+import '../styles.css'
 
 const FONT_STYLESHEET =
   'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap'
@@ -40,16 +44,6 @@ export const Route = createRootRoute({
         rel: 'preconnect',
         href: 'https://fonts.gstatic.com',
         crossOrigin: 'anonymous',
-      },
-      // Preload CSS so it is fetched in parallel with HTML — eliminates flash of unstyled content
-      {
-        rel: 'preload',
-        as: 'style',
-        href: appCss,
-      },
-      {
-        rel: 'stylesheet',
-        href: appCss,
       },
       {
         rel: 'stylesheet',

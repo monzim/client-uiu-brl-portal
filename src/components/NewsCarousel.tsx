@@ -52,7 +52,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
           <div className="flex items-center gap-6">
             <Link
               to="/news"
-              className="text-[11px] font-semibold uppercase tracking-widest  hover:opacity-50 transition-opacity bg-brand-text text-sm text-white rounded-2xl p-3  mr-4 hidden sm:block"
+              className="text-[11px] font-bold uppercase tracking-widest text-brand-text hover:opacity-50 transition-opacity border border-brand-text pb-1 mr-4 hidden sm:block"
             >
               View All News
             </Link>

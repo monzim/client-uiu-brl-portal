@@ -1,7 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { db } from '#/lib/db'
-import { cached, redis, CACHE_KEYS, CACHE_TTL } from '#/lib/redis'
-import { getAuthPayload, jsonResponse, errorResponse } from '#/lib/serverHelpers'
+import {
+  cached,
+  redis,
+  CACHE_KEYS,
+  CACHE_TTL,
+  invalidateFacultyLists,
+} from '#/lib/redis'
+import {
+  getAuthPayload,
+  jsonResponse,
+  errorResponse,
+} from '#/lib/serverHelpers'
 import { UpdateFacultySchema } from '#/lib/schemas'
 import { auditLog } from '#/lib/audit'
 
@@ -18,11 +28,18 @@ export const Route = createFileRoute('/api/faculty/$id')({
           if (!faculty) return errorResponse('Not found', 404)
           return jsonResponse(faculty)
         }
-        const data = await cached(CACHE_KEYS.facultyItem(identifier), CACHE_TTL.facultyItem, async () => {
-          return db.faculty.findFirst({
-            where: { OR: [{ slug: identifier }, { id: identifier }], published: true },
-          })
-        })
+        const data = await cached(
+          CACHE_KEYS.facultyItem(identifier),
+          CACHE_TTL.facultyItem,
+          async () => {
+            return db.faculty.findFirst({
+              where: {
+                OR: [{ slug: identifier }, { id: identifier }],
+                published: true,
+              },
+            })
+          },
+        )
         if (!data) return errorResponse('Not found', 404)
         return jsonResponse(data)
       },
@@ -33,7 +50,11 @@ export const Route = createFileRoute('/api/faculty/$id')({
         const raw = await request.json().catch(() => null)
         if (!raw) return errorResponse('Invalid body', 400)
         const result = UpdateFacultySchema.safeParse(raw)
-        if (!result.success) return errorResponse(result.error.issues[0]?.message ?? 'Validation failed', 400)
+        if (!result.success)
+          return errorResponse(
+            result.error.issues[0]?.message ?? 'Validation failed',
+            400,
+          )
 
         const existing = await db.faculty.findFirst({
           where: { OR: [{ slug: identifier }, { id: identifier }] },
@@ -45,11 +66,13 @@ export const Route = createFileRoute('/api/faculty/$id')({
           where: { id: existing.id },
           data: result.data,
         })
-        await Promise.allSettled([
-          redis.del(CACHE_KEYS.facultyItem(existing.slug)),
-          redis.del(CACHE_KEYS.facultyList()),
+        await Promise.all([
+          redis.del(CACHE_KEYS.facultyItem(existing.slug)).catch(() => {}),
+          invalidateFacultyLists(),
         ])
-        auditLog('faculty.update', payload.adminId, payload.email, { facultyId: existing.id })
+        auditLog('faculty.update', payload.adminId, payload.email, {
+          facultyId: existing.id,
+        })
         return jsonResponse(faculty)
       },
       DELETE: async ({ request, params }) => {
@@ -62,11 +85,14 @@ export const Route = createFileRoute('/api/faculty/$id')({
         })
         if (!existing) return errorResponse('Not found', 404)
         await db.faculty.delete({ where: { id: existing.id } })
-        await Promise.allSettled([
-          redis.del(CACHE_KEYS.facultyItem(existing.slug)),
-          redis.del(CACHE_KEYS.facultyList()),
+        await Promise.all([
+          redis.del(CACHE_KEYS.facultyItem(existing.slug)).catch(() => {}),
+          invalidateFacultyLists(),
         ])
-        auditLog('faculty.delete', payload.adminId, payload.email, { facultyId: existing.id, slug: existing.slug })
+        auditLog('faculty.delete', payload.adminId, payload.email, {
+          facultyId: existing.id,
+          slug: existing.slug,
+        })
         return jsonResponse({ ok: true })
       },
     },

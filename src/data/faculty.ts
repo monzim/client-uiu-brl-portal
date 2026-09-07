@@ -211,8 +211,3 @@ export const facultyData: Faculty[] = [
     ]
   }
 ];
-
-export const assistantData = [
-  { id: '1', name: 'Shadid Talukder', designation: 'Research Assistant', image: '/work_picture/BRL team member.webp' },
-  { id: '2', name: 'Janita Islam Jarin', designation: 'Research Assistant', image: '/work_picture/BRL team member.webp' },
-];

@@ -5,7 +5,16 @@ import { ConfirmationDialog } from '../components/admin/ConfirmationDialog'
 import { DataTable } from '../components/admin/DataTable'
 import { cn } from '../lib/utils'
 import { getAdminFacultyList } from '../server/faculty'
-import type { DbFaculty } from '../types/cms'
+import { MEMBER_TYPES, MEMBER_TYPE_LABELS } from '../types/cms'
+import type { DbFaculty, MemberType } from '../types/cms'
+
+const TYPE_FILTERS: { value: MemberType | 'ALL'; label: string }[] = [
+  { value: 'ALL', label: 'All' },
+  ...MEMBER_TYPES.map((type) => ({
+    value: type,
+    label: MEMBER_TYPE_LABELS[type],
+  })),
+]
 
 export const Route = createFileRoute('/admin/faculty/')({
   loader: () => getAdminFacultyList(),
@@ -16,20 +25,23 @@ function AdminFacultyPage() {
   const initialData = Route.useLoaderData()
   const [data, setData] = useState(initialData)
   const [searchQuery, setSearchQuery] = useState('')
+  const [typeFilter, setTypeFilter] = useState<MemberType | 'ALL'>('ALL')
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
   const [slugToDelete, setSlugToDelete] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const filteredData = useMemo(() => {
-    if (!searchQuery) return data
     const q = searchQuery.toLowerCase()
-    return data.filter(
-      (f) =>
+    return data.filter((f) => {
+      if (typeFilter !== 'ALL' && f.memberType !== typeFilter) return false
+      if (!q) return true
+      return (
         f.name.toLowerCase().includes(q) ||
         f.designation.toLowerCase().includes(q) ||
-        f.email.toLowerCase().includes(q),
-    )
-  }, [data, searchQuery])
+        f.email.toLowerCase().includes(q)
+      )
+    })
+  }, [data, searchQuery, typeFilter])
 
   const handleDelete = (slug: string) => {
     setSlugToDelete(slug)
@@ -103,6 +115,23 @@ function AdminFacultyPage() {
             className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-emerald-500/20 transition-all placeholder:text-gray-400 font-medium"
           />
         </div>
+        <div className="flex items-center gap-1 p-1 bg-gray-50 rounded-xl">
+          {TYPE_FILTERS.map((filter) => (
+            <button
+              key={filter.value}
+              type="button"
+              onClick={() => setTypeFilter(filter.value)}
+              className={cn(
+                'px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap',
+                typeFilter === filter.value
+                  ? 'bg-white text-emerald-700 shadow-sm'
+                  : 'text-gray-400 hover:text-gray-600',
+              )}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
         <div className="flex items-center gap-6 px-4 whitespace-nowrap">
           <div className="flex flex-col">
             <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
@@ -159,6 +188,16 @@ function AdminFacultyPage() {
                   </span>
                   <span className="text-[10px] text-gray-400 font-medium uppercase tracking-tighter">
                     {row.designation}
+                  </span>
+                  <span
+                    className={cn(
+                      'mt-1 self-start px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest border',
+                      row.memberType === 'RESEARCH_ASSISTANT'
+                        ? 'bg-blue-50 text-blue-700 border-blue-100'
+                        : 'bg-emerald-50 text-emerald-700 border-emerald-100',
+                    )}
+                  >
+                    {MEMBER_TYPE_LABELS[row.memberType]}
                   </span>
                 </div>
               </Link>

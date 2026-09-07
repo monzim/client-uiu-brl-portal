@@ -50,7 +50,10 @@ const FacultyGridCard = ({ faculty }: { faculty: DbFaculty }) => (
   >
     <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-[24px] bg-brand-border">
       <SmoothImage
-        src={faculty.image || '/work_picture/BRL team member.webp'}
+        src={
+          faculty.image ||
+          '/work_picture/BRL team member.webp'
+        }
         alt={faculty.name}
         className="h-full w-full object-cover brightness-[1.05] grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
         containerClassName="h-full w-full"

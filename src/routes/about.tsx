@@ -25,7 +25,7 @@ function About() {
       {/* Hero Section */}
       <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
-          src="/banner_images/uiu1.webp"
+          src="/banner_images/3u-3.webp"
           alt="BRL Laboratory"
           className="w-full h-full object-cover grayscale brightness-[0.6] object-center"
           containerClassName="w-full h-full"

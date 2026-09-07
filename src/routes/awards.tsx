@@ -115,7 +115,7 @@ function AwardsPage() {
             </svg>
 
             {/* corner ribbon */}
-            {/* <div className="absolute top-0 right-0 z-10">
+            <div className="absolute top-0 right-0 z-10">
               <div className="relative w-32 h-32 md:w-40 md:h-40 overflow-hidden">
                 <div className="absolute top-[22px] right-[-38px] md:top-[28px] md:right-[-42px] w-[170px] md:w-[200px] rotate-45 bg-[#d8b23f] text-brand-text text-center py-1.5 md:py-2 shadow-lg">
                   <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">
@@ -123,7 +123,7 @@ function AwardsPage() {
                   </span>
                 </div>
               </div>
-            </div> */}
+            </div>
 
             {/* floating sparkles */}
             <motion.div
@@ -161,13 +161,13 @@ function AwardsPage() {
                       <Trophy className="w-8 h-8 md:w-11 md:h-11" />
                     </div>
                   </div>
-                  <h2 className="text-3xl md:text-5xl xl:text-6xl font-medium tracking-tight text-white leading-[1.05] ">
+                  <h2 className="text-3xl md:text-5xl xl:text-6xl font-medium tracking-tight text-white leading-[1.05] uppercase">
                     {owsdAward.name}
                   </h2>
                 </div>
 
                 <div className="flex items-center gap-3 text-white/80 mb-8">
-                  
+                  <Star className="w-4 h-4 text-[#d8b23f] shrink-0" fill="#d8b23f" />
                   <p className="text-sm md:text-lg font-bold tracking-widest uppercase">
                     {owsdAward.recipient}
                   </p>
@@ -310,11 +310,11 @@ function AwardsPage() {
                               >
                                 {String(i + 1).padStart(2, '0')}
                               </span>
-                              {/* {isTopFunded && (
+                              {isTopFunded && (
                                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[#d8b23f]/15 border border-[#d8b23f]/35 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#d8b23f]">
                                   <Flame className="w-3 h-3" /> Largest Grant
                                 </span>
-                              )} */}
+                              )}
                             </div>
 
                             {/* name */}

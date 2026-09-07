@@ -133,8 +133,8 @@ function ProjectDetail() {
           {/* ─── Sticky sidebar: Quick Facts ─── */}
           <aside className="lg:col-span-4 order-2 lg:order-1">
             <div className="lg:sticky lg:top-32 space-y-6">
-              <div className="rounded-2xl border border-brand-border/70 bg-white p-8 md:p-9 space-y-8">
-                <h4 className="text-[10px] font-bold uppercase  text-brand-text/35">
+              <div className="rounded-[28px] border border-brand-border/70 bg-white p-8 md:p-9 space-y-8">
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-text/35">
                   Quick Facts
                 </h4>
                 <div className="space-y-7">
@@ -142,8 +142,8 @@ function ProjectDetail() {
                     const Icon = fact.icon
                     return (
                       <div key={i} className="flex gap-4 space-y-2">
-                        <div className="shrink-0 w-10 h-10 rounded-xl  flex items-center justify-center text-brand-bg">
-                          <Icon className="w-8 h-8 text-brand-text" />
+                        <div className="shrink-0 w-10 h-10 rounded-xl bg-brand-text flex items-center justify-center text-brand-bg">
+                          <Icon className="w-4 h-4" />
                         </div>
                         <div className="min-w-0">
                           <h5 className="text-xs font-bold uppercase tracking-widest text-brand-text mb-1.5">
