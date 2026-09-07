@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense, lazy } from 'react'
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { checkAdminAuth } from '../server/auth'
 import { FlaskConical } from 'lucide-react'
+
+const DevBanner = lazy(() => import('../components/DevBanner'))
 
 export const Route = createFileRoute('/admin/login')({
   beforeLoad: async () => {
@@ -43,7 +45,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0e1f1a] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#0e1f1a] flex flex-col items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="flex items-center gap-3 mb-10">
           <FlaskConical className="w-8 h-8 text-white/60" />
@@ -105,6 +107,9 @@ function LoginPage() {
           Session expires after 1 hour
         </p>
       </div>
+
+      
+      <div className="absolute bottom-0 w-full "><DevBanner /></div>
     </div>
   )
 }

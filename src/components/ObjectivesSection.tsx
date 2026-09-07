@@ -58,7 +58,7 @@ export function ObjectivesSection() {
             <div className="space-y-4 lg:space-y-6">
               <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-brand-bg/30">Laboratory Initiatives</h2>
               <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tighter leading-[1.1]">
-                Current Projects.
+                Current Projects
               </h3>
             </div>
 
@@ -70,7 +70,7 @@ export function ObjectivesSection() {
                   params={{ projectId: project.id }}
                   onMouseEnter={() => setActive(project.id)}
                   onFocus={() => setActive(project.id)}
-                  className={`w-full text-left p-4 lg:p-6 xl:p-8 rounded-[24px] lg:rounded-[32px] transition-all duration-500 ease-out flex items-center justify-between group ${
+                  className={`w-full h-28 lg:h-32 xl:h-36 text-left p-4 lg:p-6 xl:p-8 rounded-[24px] lg:rounded-[32px] transition-all duration-500 ease-out flex items-center justify-between group ${
                     active === project.id 
                       ? 'bg-brand-bg text-brand-text scale-[1.01]' 
                       : 'opacity-30 hover:opacity-80 hover:bg-brand-bg/5'
@@ -80,8 +80,7 @@ export function ObjectivesSection() {
                     <h4 className="text-sm lg:text-base xl:text-xl font-bold tracking-tight leading-tight uppercase truncate">
                       {project.title}
                     </h4>
-                    {/* Description — stable height via fixed min-h to avoid layout shift */}
-                    <div className={`overflow-hidden transition-all duration-500 ease-out ${active === project.id ? 'max-h-16 opacity-100 mt-2' : 'max-h-0 opacity-0'}`}>
+                    <div className={`h-10 lg:h-12 overflow-hidden pt-2 transition-[opacity,transform] duration-500 ease-out ${active === project.id ? 'translate-y-0 opacity-100' : 'translate-y-1 opacity-0'}`}>
                       <p className="text-xs lg:text-sm leading-relaxed line-clamp-2">
                         {project.description}
                       </p>

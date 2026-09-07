@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from '@tanstack/react-router';
 import { Menu, X, ChevronDown, Search, Facebook, Twitter, Linkedin, Youtube } from 'lucide-react';
 import { SearchModal } from './SearchModal';
@@ -9,7 +9,7 @@ export function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
   
   const location = useLocation();
   const showBg = isScrolled;
@@ -24,17 +24,18 @@ export function Navbar() {
       // Hide/Show logic
       if (currentScrollY < 50) {
         setIsVisible(true);
-      } else if (currentScrollY > lastScrollY) {
+      } else if (currentScrollY > lastScrollY.current) {
         setIsVisible(false);
       } else {
         setIsVisible(true);
       }
       
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Prevent background scrolling when mobile menu is open
   useEffect(() => {
@@ -220,7 +221,7 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-[45] bg-brand-text lg:hidden transition-all duration-500 ease-in-out ${
+      <div className={`fixed inset-0 z-[45] bg-brand-text xl:hidden transition-all duration-500 ease-in-out ${
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-[-100%] pointer-events-none'
         }`}
       >

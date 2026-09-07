@@ -171,10 +171,7 @@ function PartnershipPage() {
                           animate={{ rotate: 360 }}
                           transition={{ duration: 24, ease: 'linear', repeat: Infinity }}
                         >
-                          <svg viewBox="0 0 160 160" fill="none" aria-hidden="true" className="w-full h-full">
-                            <circle cx="80" cy="80" r="74" stroke="#ffffff" strokeWidth="1.5" strokeDasharray="3 9" opacity="0.45" />
-                            <circle cx="80" cy="6" r="4" fill="#ffffff" opacity="0.7" />
-                          </svg>
+                          
                         </motion.div>
                         <div className="absolute inset-[18%] rounded-[26px] md:rounded-[30px] bg-white/10 border border-white/15 backdrop-blur-sm flex items-center justify-center p-4 transition-transform duration-700 group-hover:scale-105">
                           <img

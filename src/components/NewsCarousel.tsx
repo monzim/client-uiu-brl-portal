@@ -52,7 +52,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
           <div className="flex items-center gap-6">
             <Link
               to="/news"
-              className="text-[11px] font-bold uppercase tracking-widest text-brand-text hover:opacity-50 transition-opacity border border-brand-text pb-1 mr-4 hidden sm:block"
+              className="text-[11px] font-semibold uppercase tracking-widest  hover:opacity-50 transition-opacity bg-brand-text text-sm text-white rounded-2xl p-3  mr-4 hidden sm:block"
             >
               View All News
             </Link>
@@ -84,7 +84,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
               key={item.id}
               to="/news/$newsId"
               params={{ newsId: item.slug }}
-              className="min-w-[280px] md:min-w-[320px] bg-white rounded-[24px] snap-center overflow-hidden border border-brand-border hover:border-brand-accent transition-all duration-500 group shadow-sm hover:shadow-2xl"
+              className="min-w-[280px] md:min-w-[320px] bg-white rounded-[24px] snap-center overflow-hidden border border-brand-border hover:border-brand-accent transition-colors duration-500 group"
             >
               <div className="relative h-48 md:h-52 overflow-hidden">
                 <SmoothImage
@@ -108,7 +108,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
                     {item.title}
                   </h4>
                   <div className="shrink-0 w-8 h-8 rounded-full border border-brand-border flex items-center justify-center group-hover:bg-brand-accent group-hover:border-brand-accent group-hover:text-white transition-all duration-500">
-                    <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:rotate-45" />
+                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:rotate-45" />
                   </div>
                 </div>
               </div>
