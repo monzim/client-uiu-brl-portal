@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Link } from '@tanstack/react-router'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { SmoothImage } from './ui/SmoothImage'
 import type { DbFaculty } from '../types/cms'
 
@@ -11,69 +11,78 @@ interface FacultySectionProps {
 
 const FacultyCard = ({
   faculty,
-  isHomePage,
 }: {
   faculty: DbFaculty
-  isHomePage: boolean
 }) => (
   <Link
     to="/faculty/$facultyId"
     params={{ facultyId: faculty.slug }}
-    className={`group cursor-pointer block bg-brand-bg/50 md:bg-transparent rounded-[40px] md:rounded-0 border border-brand-border/30 md:border-transparent transition-all duration-500 flex flex-col h-full ${isHomePage ? 'p-4 md:p-0' : 'p-6 md:p-0'}`}
+    className="group relative block h-[380px] w-[68vw] max-w-[300px] shrink-0 overflow-hidden rounded-2xl bg-brand-text text-white sm:w-[42vw] md:h-[420px] md:w-[29vw] lg:w-[21.5vw]"
   >
-    <div
-      className={`bg-brand-border rounded-[24px] mb-5 overflow-hidden relative shadow-sm transition-shadow group-hover:shadow-2xl ${isHomePage ? 'aspect-square' : 'aspect-[4/5] mb-8'}`}
-    >
+    <SmoothImage
+      src={faculty.image || '/work_picture/BRL team member.webp'}
+      alt={faculty.name}
+      className="h-full w-full object-cover brightness-[0.78]"
+      containerClassName="h-full w-full"
+    />
+    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brand-text/95 via-brand-text/50 to-transparent" />
+    <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-2">
+      <div className="min-w-0">
+        <h4 className="truncate text-sm font-bold tracking-tight text-white md:text-base">
+          {faculty.name}
+        </h4>
+        <p className="mt-0.5 truncate text-[8px] font-extrabold uppercase tracking-[0.16em] text-white/60">
+          {faculty.designation}
+        </p>
+      </div>
+      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/25 text-white transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-brand-text">
+        <ArrowUpRight className="h-3 w-3 transition-transform duration-300 ease-out group-hover:rotate-45" />
+      </div>
+    </div>
+  </Link>
+)
+
+const FacultyGridCard = ({ faculty }: { faculty: DbFaculty }) => (
+  <Link
+    to="/faculty/$facultyId"
+    params={{ facultyId: faculty.slug }}
+    className="group block"
+  >
+    <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-[24px] bg-brand-border">
       <SmoothImage
         src={
           faculty.image ||
           '/work_picture/BRL team member.webp'
         }
         alt={faculty.name}
-        className="w-full h-full object-cover  brightness-[1.1] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-        containerClassName="w-full h-full"
+        className="h-full w-full object-cover brightness-[1.05] grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+        containerClassName="h-full w-full"
       />
-      <div className="absolute inset-0 bg-brand-text/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="absolute inset-0 bg-brand-text/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
     </div>
-    <div
-      className={`flex flex-col flex-grow ${isHomePage ? 'px-2' : 'space-y-4'}`}
-    >
-      <div
-        className={`flex justify-between ${isHomePage ? 'items-center' : 'items-start'} gap-2`}
-      >
-        <div className="overflow-hidden flex-grow">
-          <h4
-            className={`${isHomePage ? 'text-lg md:text-xl' : 'text-xl md:text-2xl'} font-bold text-brand-text mb-1 tracking-tight line-clamp-1`}
-          >
+    <div className="space-y-4">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <h4 className="truncate text-xl font-bold tracking-tight text-brand-text md:text-2xl">
             {faculty.name}
           </h4>
-          <p className="text-brand-text/30 font-extrabold text-[10px] uppercase tracking-[0.25em] line-clamp-1">
+          <p className="mt-1 truncate text-[10px] font-extrabold uppercase tracking-[0.25em] text-brand-text/40">
             {faculty.designation}
           </p>
         </div>
-        {isHomePage && (
-          <div className="shrink-0 rounded-full border border-brand-text/10 flex items-center justify-center group-hover:bg-brand-text group-hover:text-brand-bg transition-all duration-500 w-8 h-8 group-hover:-translate-y-1">
-            <ArrowUpRight className="w-3 h-3 transition-transform duration-500 group-hover:rotate-[45deg]" />
-          </div>
-        )}
-      </div>
-
-      {!isHomePage && (
-        <p className="text-brand-text/60 text-sm leading-relaxed line-clamp-2 h-10 overflow-hidden font-medium">
-          {faculty.profileDescription}
-        </p>
-      )}
-
-      {!isHomePage && (
-        <div className="flex items-center text-brand-text transition-all duration-500 font-bold text-[10px] uppercase tracking-[0.2em] mt-auto border-t border-brand-border/10 pt-6 gap-3 group-hover:gap-5">
-          <span className="opacity-60 group-hover:opacity-100 transition-opacity">
-            View Profile
-          </span>
-          <div className="rounded-full border border-brand-text/10 flex items-center justify-center group-hover:bg-brand-text group-hover:text-brand-bg transition-all duration-500 w-9 h-9">
-            <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:rotate-[45deg]" />
-          </div>
+        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-brand-border text-brand-text transition-colors duration-300 group-hover:bg-brand-text group-hover:text-brand-bg">
+          <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:rotate-45" />
         </div>
-      )}
+      </div>
+      <p className="h-10 overflow-hidden text-sm font-medium leading-relaxed text-brand-text/60 line-clamp-2">
+        {faculty.profileDescription}
+      </p>
+      <div className="flex items-center gap-3 border-t border-brand-border/60 pt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-text">
+        <span className="opacity-60 transition-opacity group-hover:opacity-100">
+          View Profile
+        </span>
+        <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+      </div>
     </div>
   </Link>
 )
@@ -82,48 +91,106 @@ export function FacultySection({
   faculty,
   isHomePage = false,
 }: FacultySectionProps) {
-  return (
-    <section
-      id="faculty"
-      className={`py-24 md:py-16 px-6 ${isHomePage ? 'max-w-[1400px] mx-auto' : 'max-w-[1200px] mx-auto'}`}
-    >
-      {!isHomePage && (
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-20 gap-8">
-          <div className="max-w-2xl">
-            <h2 className="text-sm font-bold tracking-widest text-brand-text/40 uppercase mb-4">
-              Our Team
-            </h2>
-            <h3 className="text-3xl md:text-5xl font-medium tracking-tight text-brand-text leading-tight">
-              Meet the researchers behind the innovation.
-            </h3>
-          </div>
-        </div>
-      )}
+  const scrollRef = useRef<HTMLDivElement>(null)
 
-      {isHomePage ? (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8 items-center">
-          {faculty.length > 0 && (
-            <FacultyCard faculty={faculty[0]} isHomePage={true} />
-          )}
-          <div className="md:col-span-2 flex flex-col justify-start items-center text-center order-first md:order-none py-12 md:pb-36">
-            <h2 className="text-sm font-bold tracking-widest text-brand-text/40 uppercase mb-4">
-              Leadership
+  const scrollPosRef = useRef(0)
+
+  useEffect(() => {
+    const carousel = scrollRef.current
+    if (!carousel) return
+
+    scrollPosRef.current = carousel.scrollLeft
+    const speed = 0.3
+
+    const tick = () => {
+      scrollPosRef.current += speed
+      if (scrollPosRef.current >= carousel.scrollWidth - carousel.clientWidth) {
+        scrollPosRef.current = 0
+      }
+      carousel.scrollLeft = scrollPosRef.current
+      rafId = requestAnimationFrame(tick)
+    }
+
+    let rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [])
+
+  const scroll = (direction: 'left' | 'right') => {
+    const delta = direction === 'left' ? -340 : 340
+    scrollPosRef.current = Math.max(0, scrollPosRef.current + delta)
+    if (scrollRef.current) {
+      scrollRef.current.scrollLeft = scrollPosRef.current
+    }
+  }
+
+  if (!isHomePage) {
+    return (
+      <section id="faculty" className="px-6 py-24 md:py-16">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="mb-16 max-w-2xl md:mb-20">
+            <p className="mb-4 text-sm font-bold uppercase tracking-widest text-brand-text/40">
+              Our Team
+            </p>
+            <h2 className="text-3xl font-medium leading-tight tracking-tight text-brand-text md:text-5xl">
+              Meet the researchers behind the innovation.
             </h2>
-            <h3 className="text-4xl md:text-5xl lg:text-[56px] font-medium tracking-tight text-brand-text leading-[1.1] uppercase">
-              Faculty <br /> Members.
-            </h3>
           </div>
-          {faculty.slice(1).map((f) => (
-            <FacultyCard key={f.id} faculty={f} isHomePage={true} />
+          <div className="grid grid-cols-1 gap-x-8 gap-y-12 md:grid-cols-2 md:gap-x-12 md:gap-y-20 lg:grid-cols-3">
+            {faculty.map((member) => (
+              <FacultyGridCard key={member.id} faculty={member} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  return (
+    <section id="faculty" className="bg-brand-text px-4 py-16 text-white sm:px-6 md:py-24">
+      <div className="mx-auto max-w-[1400px] overflow-hidden px-1 py-2 sm:px-2 md:py-4">
+        <div className="mb-8 flex items-start justify-between gap-6 md:mb-10">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white/55">
+              {isHomePage ? 'Leadership' : 'Our Team'}
+            </p>
+            <h2 className="text-3xl font-medium leading-[1.05] tracking-tight md:text-5xl lg:text-6xl mb-8 sm:mb-10">
+              {isHomePage
+                ? 'Faculty Members.'
+                : 'Meet the researchers behind the innovation.'}
+            </h2>
+          </div>
+          <div className="flex shrink-0 gap-3">
+            <button
+              type="button"
+              aria-label="Show previous faculty members"
+              onClick={() => scroll('left')}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors duration-300 hover:bg-white hover:text-brand-text"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              aria-label="Show more faculty members"
+              onClick={() => scroll('right')}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 text-white transition-colors duration-300 hover:bg-white hover:text-brand-text"
+            >
+              <ArrowRight className="h-4 w-4" />
+            </button>
+          </div>
+        </div>
+
+        <div
+          ref={scrollRef}
+          className="no-scrollbar flex gap-4 overflow-x-auto pb-2"
+        >
+          {faculty.map((member) => (
+            <FacultyCard
+              key={member.id}
+              faculty={member}
+            />
           ))}
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 md:gap-y-20 gap-x-8 md:gap-x-12">
-          {faculty.map((f) => (
-            <FacultyCard key={f.id} faculty={f} isHomePage={false} />
-          ))}
-        </div>
-      )}
+      </div>
     </section>
   )
 }

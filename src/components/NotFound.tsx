@@ -1,11 +1,22 @@
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft, Ghost } from 'lucide-react'
+import { SmoothImage } from '@/components/ui/SmoothImage'
 
 export function NotFound() {
   return (
-    <main className="min-h-screen bg-white font-sans flex items-center justify-center px-6">
-      <div className="max-w-[1400px] w-full mx-auto">
-        <div className="flex flex-col items-center text-center space-y-12">
+    <main className="min-h-screen bg-white font-sans">
+      {/* Banner Image */}
+      <section className="relative w-full h-[40vh] md:h-[65vh] overflow-hidden">
+        <SmoothImage
+          src="/banner_images/404IMG.png"
+          alt="404 Banner"
+          className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
+          containerClassName="w-full h-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+      </section>
+
+      <div className="max-w-[1400px] w-full mx-auto px-6 flex flex-col items-center text-center space-y-12 py-16">
           {/* Decorative Element */}
           <div className="relative">
             <div className="text-[12rem] md:text-[20rem] font-black text-brand-text/[0.03] leading-none select-none uppercase tracking-tighter">
@@ -43,14 +54,13 @@ export function NotFound() {
               Return to Base
             </Link>
           </div>
-        </div>
+      </div>
 
-        {/* Technical Metadata Footer */}
-        <div className="fixed bottom-12 left-0 right-0 px-6 hidden md:block">
-          <div className="max-w-[1400px] mx-auto flex justify-between items-center text-[10px] font-black text-brand-text/20 uppercase tracking-[0.2em]">
-            <span>Error Code: 0x404_NOT_FOUND</span>
-            <span>BRL Systems Protocol v2.0</span>
-          </div>
+      {/* Technical Metadata Footer */}
+      <div className="fixed bottom-12 left-0 right-0 px-6 hidden md:block">
+        <div className="max-w-[1400px] mx-auto flex justify-between items-center text-[10px] font-black text-brand-text/20 uppercase tracking-[0.2em]">
+          <span>Error Code: 0x404_NOT_FOUND</span>
+          <span>BRL Systems Protocol v2.0</span>
         </div>
       </div>
     </main>

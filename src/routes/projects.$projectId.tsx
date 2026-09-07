@@ -81,7 +81,7 @@ function ProjectDetail() {
            alt={project.title} 
            className="w-full h-full object-cover grayscale brightness-[0.7]"
          />
-         <div className="absolute inset-0 bg-gradient-to-b from-transparent  to-brand-text" />
+         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brand-text to-brand-text" />
          
          <div className="absolute inset-0 flex items-end">
             <div className="max-w-[1200px] w-full mx-auto px-6 pb-12 flex flex-col md:flex-row justify-between items-end gap-12">
@@ -93,7 +93,7 @@ function ProjectDetail() {
                 >
                   <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Research
                 </Link>
-                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-brand-accent mb-4">
+                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-white/60 mb-4 mt-10">
                    <Clock className="w-4 h-4" /> Ongoing Project
                 </div>
                 <h1 className="text-4xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
@@ -103,7 +103,7 @@ function ProjectDetail() {
 
               {/* Quick Navigation Links */}
               <div className="w-full md:w-72 space-y-6 border-l border-white/10 pl-8 mb-4 hidden lg:block">
-                 <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">Explore Other Projects</h4>
+                 <h4 className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/60">Explore Other Projects</h4>
                  <div className="space-y-4">
                     {otherProjects.map((op) => (
                       <Link 
