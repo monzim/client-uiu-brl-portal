@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import {
+  Images,
   Newspaper,
   Users,
   LogOut,
@@ -16,6 +17,7 @@ import { cn } from '../../lib/utils'
 const navItems = [
   { to: '/admin/news', label: 'News & Activities', icon: Newspaper },
   { to: '/admin/faculty', label: 'Faculty Members', icon: Users },
+  { to: '/admin/gallery', label: 'Gallery', icon: Images },
 ]
 
 const superuserNavItems = [
@@ -55,15 +57,15 @@ export function AdminSidebar({ role }: AdminSidebarProps = {}) {
     <aside
       className={cn(
         'relative h-screen bg-[#0e1f1a] text-white flex flex-col transition-all duration-300 ease-in-out border-r border-white/5 shadow-xl shrink-0',
-        isCollapsed ? 'w-20' : 'w-72'
+        isCollapsed ? 'w-20' : 'w-72',
       )}
     >
       <div className="h-20 flex items-center px-6 border-b border-white/5">
         <div className="flex items-center gap-3 overflow-hidden">
           <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center">
-            <img 
-              src="/images/transparent original logo.png" 
-              alt="BRL Logo" 
+            <img
+              src="/images/transparent original logo.png"
+              alt="BRL Logo"
               className="w-full h-full object-contain"
             />
           </div>
@@ -72,7 +74,9 @@ export function AdminSidebar({ role }: AdminSidebarProps = {}) {
               <span className="text-xs font-black uppercase tracking-[0.2em] text-emerald-400/80">
                 BRL Portal
               </span>
-              <span className="text-sm font-bold text-white">Administration</span>
+              <span className="text-sm font-bold text-white">
+                Administration
+              </span>
             </div>
           )}
         </div>
@@ -94,11 +98,18 @@ export function AdminSidebar({ role }: AdminSidebarProps = {}) {
                 'group flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200',
                 active
                   ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                  : 'text-white/50 hover:text-white hover:bg-white/5'
+                  : 'text-white/50 hover:text-white hover:bg-white/5',
               )}
               title={isCollapsed ? label : ''}
             >
-              <Icon className={cn('w-5 h-5 flex-shrink-0', active ? 'text-white' : 'group-hover:scale-110 transition-transform')} />
+              <Icon
+                className={cn(
+                  'w-5 h-5 flex-shrink-0',
+                  active
+                    ? 'text-white'
+                    : 'group-hover:scale-110 transition-transform',
+                )}
+              />
               {!isCollapsed && (
                 <span className="whitespace-nowrap opacity-100 transition-opacity duration-300">
                   {label}
@@ -128,11 +139,18 @@ export function AdminSidebar({ role }: AdminSidebarProps = {}) {
                     'group flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200',
                     active
                       ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20'
-                      : 'text-white/50 hover:text-white hover:bg-white/5'
+                      : 'text-white/50 hover:text-white hover:bg-white/5',
                   )}
                   title={isCollapsed ? label : ''}
                 >
-                  <Icon className={cn('w-5 h-5 flex-shrink-0', active ? 'text-white' : 'group-hover:scale-110 transition-transform')} />
+                  <Icon
+                    className={cn(
+                      'w-5 h-5 flex-shrink-0',
+                      active
+                        ? 'text-white'
+                        : 'group-hover:scale-110 transition-transform',
+                    )}
+                  />
                   {!isCollapsed && (
                     <span className="whitespace-nowrap opacity-100 transition-opacity duration-300">
                       {label}
@@ -154,12 +172,12 @@ export function AdminSidebar({ role }: AdminSidebarProps = {}) {
             System
           </p>
         )}
-        
+
         <button
           onClick={handleLogout}
           className={cn(
             'group flex items-center gap-3 px-4 py-3 w-full rounded-xl text-sm font-semibold transition-all duration-200',
-            'text-white/50 hover:text-red-400 hover:bg-red-500/10'
+            'text-white/50 hover:text-red-400 hover:bg-red-500/10',
           )}
           title={isCollapsed ? 'Logout' : ''}
         >

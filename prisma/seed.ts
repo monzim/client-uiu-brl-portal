@@ -202,6 +202,78 @@ const facultyItems = [
   },
 ]
 
+const galleryCategories = [
+  { id: 'gallery-lab-work', slug: 'lab-work', name: 'Lab Work', sortOrder: 0 },
+  {
+    id: 'gallery-equipment',
+    slug: 'equipment',
+    name: 'Equipment',
+    sortOrder: 1,
+  },
+  { id: 'gallery-research', slug: 'research', name: 'Research', sortOrder: 2 },
+  { id: 'gallery-people', slug: 'people', name: 'People', sortOrder: 3 },
+]
+
+const galleryImages = [
+  {
+    id: 'gallery-cell-culture',
+    url: '/work_picture/Cell Culture.webp',
+    caption: 'Cell Culture Analysis',
+    categoryId: 'gallery-lab-work',
+    sortOrder: 0,
+  },
+  {
+    id: 'gallery-hplc-setup',
+    url: '/banner_images/1.Inorganic-lab-pic.webp',
+    caption: 'HPLC Setup',
+    categoryId: 'gallery-equipment',
+    sortOrder: 1,
+  },
+  {
+    id: 'gallery-molecular-visualization',
+    url: '/work_picture/Pharmacogenomics.webp',
+    caption: 'Molecular Visualization',
+    categoryId: 'gallery-research',
+    sortOrder: 2,
+  },
+  {
+    id: 'gallery-compound-evaluation',
+    url: '/current_project_images/Drug discovery.webp',
+    caption: 'Compound Evaluation',
+    categoryId: 'gallery-research',
+    sortOrder: 3,
+  },
+  {
+    id: 'gallery-student-training',
+    url: '/work_picture/Team.webp',
+    caption: 'Student Training',
+    categoryId: 'gallery-people',
+    sortOrder: 4,
+  },
+  {
+    id: 'gallery-lab-safety',
+    url: '/banner_images/9U-9.webp',
+    caption: 'Lab Safety Procedures',
+    categoryId: 'gallery-lab-work',
+    sortOrder: 5,
+  },
+  {
+    id: 'gallery-equipment-testing',
+    url: '/banner_images/2.Microscope.webp',
+    caption: 'Equipment Testing',
+    categoryId: 'gallery-equipment',
+    sortOrder: 6,
+  },
+  {
+    id: 'gallery-team-collaboration',
+    url: '/images/hero2.webp',
+    caption: 'Team Collaboration',
+    categoryId: 'gallery-people',
+    featured: true,
+    sortOrder: 7,
+  },
+]
+
 async function main() {
   const superuserEmail = process.env.SUPERUSER_EMAIL ?? 'admin@brl.uiu.ac.bd'
   const superuserPassword = process.env.SUPERUSER_PASSWORD ?? 'Admin@BRL2026!'
@@ -235,6 +307,36 @@ async function main() {
     })
   }
   console.log(`Seeded ${facultyItems.length} faculty members`)
+
+  for (const category of galleryCategories) {
+    await db.galleryCategory.upsert({
+      where: { id: category.id },
+      update: {},
+      create: category,
+    })
+  }
+
+  for (const image of galleryImages) {
+    await db.galleryImage.upsert({
+      where: { id: image.id },
+      update: {},
+      create: image,
+    })
+  }
+  console.log(
+    `Seeded ${galleryCategories.length} gallery albums and ${galleryImages.length} images`,
+  )
+
+  await db.gallerySettings.upsert({
+    where: { id: 'default' },
+    update: {},
+    create: {
+      id: 'default',
+      heroTitle: 'Inside the Laboratory.',
+      heroImage: '/images/hero1.webp',
+    },
+  })
+  console.log('Gallery page settings seeded')
 }
 
 main()

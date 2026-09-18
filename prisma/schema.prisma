@@ -84,3 +84,54 @@ model Faculty {
 
   @@index([published, memberType, sortOrder, createdAt(sort: Desc)])
 }
+
+/// A grouping of gallery images (e.g. "Lab Work", "Events"). Optional: an image
+/// with no category still shows up in the "All" view.
+model GalleryCategory {
+  id          String         @id @default(cuid())
+  slug        String         @unique
+  name        String
+  description String?
+  published   Boolean        @default(true)
+  sortOrder   Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  images      GalleryImage[]
+
+  @@index([published, sortOrder])
+}
+
+model GalleryImage {
+  id          String           @id @default(cuid())
+  url         String
+  caption     String
+  description String?
+  /// Falls back to `caption` when empty; kept separate so screen-reader text can
+  /// differ from the caption shown under the image.
+  altText     String?
+  categoryId  String?
+  category    GalleryCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  featured    Boolean          @default(false)
+  published   Boolean          @default(true)
+  sortOrder   Int              @default(0)
+  takenAt     DateTime?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  @@index([published, sortOrder, createdAt(sort: Desc)])
+  @@index([categoryId, sortOrder])
+}
+
+/// Single-row table holding the editable copy for the public /gallery page.
+/// Always read/written through `GALLERY_SETTINGS_ID`.
+model GallerySettings {
+  id                 String   @id @default("default")
+  heroTitle          String   @default("Inside the Laboratory.")
+  heroSubtitle       String?
+  heroImage          String?
+  introText          String?
+  metaTitle          String   @default("Laboratory Gallery | UIU Biomedical Research Lab")
+  metaDescription    String   @default("Take a virtual tour of the UIU Biomedical Research Lab and see our state-of-the-art equipment and research facilities.")
+  showCategoryFilter Boolean  @default(true)
+  updatedAt          DateTime @updatedAt
+}
