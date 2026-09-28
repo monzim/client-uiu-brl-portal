@@ -150,11 +150,11 @@ export function FacultySection({
             <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white/55">
               {isHomePage ? 'Leadership' : 'Our Team'}
             </p>
-            <h3 className="text-4xl font-medium leading-[1.05] tracking-tight md:text-5xl  mb-8 sm:mb-10">
+            <h2 className="text-3xl font-medium leading-[1.05] tracking-tight md:text-5xl lg:text-6xl mb-8 sm:mb-10">
               {isHomePage
                 ? 'Faculty Members.'
                 : 'Meet the researchers behind the innovation.'}
-            </h3>
+            </h2>
           </div>
           <div className="flex shrink-0 gap-3">
             <button
