@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { pageMeta } from '../lib/seo'
 import {
   ArrowLeft,
   Award,
@@ -15,9 +16,25 @@ import { getFacultyItem } from '../server/faculty'
 import type { Publication } from '../types/cms'
 
 export const Route = createFileRoute('/faculty/$facultyId')({
-  // @ts-expect-error - parameterized createServerFn call
-  loader: ({ params }) => getFacultyItem({ data: params.facultyId }),
-  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
+  loader: async ({ params }) => {
+    // @ts-expect-error - parameterized createServerFn call
+    const faculty = await getFacultyItem({ data: params.facultyId })
+    if (!faculty) throw notFound()
+    return faculty
+  },
+  head: ({ loaderData }) => ({
+    meta: pageMeta({
+      title: loaderData?.name ?? 'Faculty Profile',
+      description: loaderData
+        ? `${loaderData.name}, ${loaderData.designation} — ${loaderData.profileDescription}`
+        : undefined,
+      image: loaderData?.image,
+      type: 'profile',
+    }),
+  }),
+  errorComponent: ({ error, reset }) => (
+    <ErrorFallback error={error} reset={reset} />
+  ),
   component: FacultyProfile,
 })
 
@@ -37,8 +54,7 @@ function PublicationsList({ publications }: { publications: Publication[] }) {
   const byYear = (pubs as Publication[]).reduce<Record<string, Publication[]>>(
     (acc, pub) => {
       const y = pub.year || 'Undated'
-      if (!acc[y]) acc[y] = []
-      acc[y].push(pub)
+      ;(acc[y] ??= []).push(pub)
       return acc
     },
     {},
@@ -134,10 +150,6 @@ function FacultyProfile() {
   const faculty = Route.useLoaderData()
   const [activeTab, setActiveTab] = useState('biography')
 
-  if (!faculty) {
-    return <NotFound />
-  }
-
   const importantLinks = (
     Array.isArray(faculty.importantLinks)
       ? faculty.importantLinks
@@ -157,12 +169,9 @@ function FacultyProfile() {
   return (
     <main className="min-h-screen bg-white font-sans">
       {/* Full Width Banner */}
-      <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+      <div className="banner-shell relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
         <img
-          src={
-            faculty.coverImage ||
-            '/banner_images/banner_image1.webp'
-          }
+          src={faculty.coverImage || '/banner_images/uiu1.webp'}
           alt="Banner"
           className="w-full h-full object-cover grayscale brightness-[0.4]"
         />
@@ -176,10 +185,8 @@ function FacultyProfile() {
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />{' '}
               Back to Team
             </Link>
-            <div className="flex items-center gap-4 mb-4">
-              
-            </div>
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-none">
+            <div className="flex items-center gap-4 mb-4"></div>
+            <h1 className="rise-in text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-none">
               {faculty.name}
             </h1>
           </div>
@@ -193,18 +200,15 @@ function FacultyProfile() {
             <div>
               <div className="aspect-[4/4] bg-brand-border overflow-hidden rounded-[24px] border border-brand-border/50 shadow-xl mb-6">
                 <img
-                  src={
-                    faculty.image ||
-                    '/work_picture/BRL team member.webp'
-                  }
+                  src={faculty.image || '/work_picture/BRL_team_member.webp'}
                   alt={faculty.name}
                   className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1]"
                 />
               </div>
-              <h2 className="text-2xl md:text-3xl font-black text-brand-text tracking-tighter leading-tight mb-2">
+              <h2 className="text-2xl md:text-4xl font-black text-brand-text tracking-tighter leading-tight mb-2">
                 {faculty.name}
               </h2>
-              <p className="text-xs font-bold text-brand-text/50 uppercase tracking-widest">
+              <p className="text-sm font-bold text-brand-text/70 uppercase ">
                 {faculty.designation}
               </p>
             </div>
@@ -366,12 +370,16 @@ function FacultyProfile() {
                     <h3 className="text-xl md:text-2xl font-black text-brand-text/90 mb-8 uppercase tracking-tighter">
                       Research Overview
                     </h3>
-                    <RichContent
-                      html={
-                        faculty.researchGeneral || faculty.profileDescription
-                      }
-                      className="text-brand-text/80 text-base md:text-lg leading-[1.8]"
-                    />
+                    {faculty.researchGeneral ? (
+                      <RichContent
+                        html={faculty.researchGeneral}
+                        className="text-brand-text/80 text-base md:text-lg leading-[1.8]"
+                      />
+                    ) : (
+                      <p className="text-brand-text/80 text-base md:text-lg leading-[1.8]">
+                        {faculty.profileDescription}
+                      </p>
+                    )}
                   </div>
 
                   {faculty.researchProjects.length > 0 && (

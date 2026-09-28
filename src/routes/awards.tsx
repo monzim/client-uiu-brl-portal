@@ -1,20 +1,13 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
-import {
-  ArrowLeft,
-  Trophy,
-  Quote,
-  Sparkles,
-  Star,
-  Flame,
-} from 'lucide-react'
+import { ArrowLeft, Trophy, Quote, Star, Flame } from 'lucide-react'
 import { SmoothImage } from '../components/ui/SmoothImage'
 import { awardsData } from '../data/data'
 
 export const Route = createFileRoute('/awards')({
   head: () => ({
     meta: [
-      { title: 'Awards & Achievements | UIU Biomedical Research Lab' },
+      { title: 'Awards & Achievements | UIU BME Lab' },
       {
         name: 'description',
         content:
@@ -30,12 +23,15 @@ export const Route = createFileRoute('/awards')({
 // Extracts a comparable numeric value from an amount string like "$25,000" or "USD 1,000"
 function parseAmountValue(amount?: string | number) {
   if (!amount) return 0
-  const match = String(amount).replace(/,/g, '').match(/[\d.]+/)
+  const match = String(amount)
+    .replace(/,/g, '')
+    .match(/[\d.]+/)
   return match ? parseFloat(match[0]) : 0
 }
 
 function AwardsPage() {
-  const [owsdAward, ...otherAwards] = awardsData
+  const owsdAward = awardsData.at(0)
+  const otherAwards = awardsData.slice(1)
 
   const amountValues = otherAwards.map((a) => parseAmountValue(a.amount))
   const maxAmountValue = Math.max(0, ...amountValues)
@@ -45,7 +41,7 @@ function AwardsPage() {
   return (
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
           src="/banner_images/banner_image3.jpg"
           alt="Awards Banner"
@@ -63,7 +59,7 @@ function AwardsPage() {
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />{' '}
               Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               Awards & <br className="hidden md:block" />
               Achievements.
             </h1>
@@ -129,16 +125,21 @@ function AwardsPage() {
             <motion.div
               className="absolute top-10 left-1/2 hidden md:block"
               animate={{ y: [0, -10, 0], opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              <Sparkles className="w-5 h-5 text-[#d8b23f]" />
-            </motion.div>
+              transition={{
+                duration: 3.5,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            ></motion.div>
 
             <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
               {/* Left — emblem + eyebrow + title + recipient + description */}
               <div className="lg:col-span-7 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-6">
-                  <span className="w-8 h-[2px] bg-[#d8b23f]" aria-hidden="true" />
+                  <span
+                    className="w-8 h-[2px] bg-[#d8b23f]"
+                    aria-hidden="true"
+                  />
                   <p className="text-xs md:text-sm font-bold tracking-[0.25em] uppercase text-[#d8b23f]">
                     Most Prestigious Recognition
                   </p>
@@ -150,12 +151,16 @@ function AwardsPage() {
                     <motion.div
                       className="absolute inset-0"
                       animate={{ rotate: 360 }}
-                      transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
+                      transition={{
+                        duration: 16,
+                        ease: 'linear',
+                        repeat: Infinity,
+                      }}
                     >
-                      <svg viewBox="0 0 96 96" fill="none" aria-hidden="true" className="w-full h-full">
+                      {/* <svg viewBox="0 0 96 96" fill="none" aria-hidden="true" className="w-full h-full">
                         <circle cx="48" cy="48" r="45" stroke="#d8b23f" strokeWidth="1.5" strokeDasharray="3 7" opacity="0.7" />
                         <circle cx="48" cy="3" r="4" fill="#d8b23f" opacity="0.9" />
-                      </svg>
+                      </svg> */}
                     </motion.div>
                     <div className="absolute inset-1.5 rounded-full bg-[#d8b23f] flex items-center justify-center text-brand-text shadow-[0_0_50px_rgba(216,178,63,0.45)]">
                       <Trophy className="w-8 h-8 md:w-11 md:h-11" />
@@ -167,7 +172,10 @@ function AwardsPage() {
                 </div>
 
                 <div className="flex items-center gap-3 text-white/80 mb-8">
-                  <Star className="w-4 h-4 text-[#d8b23f] shrink-0" fill="#d8b23f" />
+                  <Star
+                    className="w-4 h-4 text-[#d8b23f] shrink-0"
+                    fill="#d8b23f"
+                  />
                   <p className="text-sm md:text-lg font-bold tracking-widest uppercase">
                     {owsdAward.recipient}
                   </p>
@@ -254,19 +262,33 @@ function AwardsPage() {
                         <div className="relative w-11 h-11 md:w-12 md:h-12">
                           <motion.div
                             className={`absolute inset-0 rounded-full ${
-                              isTopFunded ? 'bg-[#d8b23f]/25' : 'bg-[#c9603f]/20'
+                              isTopFunded
+                                ? 'bg-[#d8b23f]/25'
+                                : 'bg-[#c9603f]/20'
                             }`}
-                            animate={{ scale: [1, 1.3, 1], opacity: [0.6, 0, 0.6] }}
-                            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut', delay: i * 0.15 }}
+                            animate={{
+                              scale: [1, 1.3, 1],
+                              opacity: [0.6, 0, 0.6],
+                            }}
+                            transition={{
+                              duration: 2.4,
+                              repeat: Infinity,
+                              ease: 'easeInOut',
+                              delay: i * 0.15,
+                            }}
                           />
                           <div
                             className={`absolute inset-0 rounded-full bg-brand-bg border-2 flex items-center justify-center ${
-                              isTopFunded ? 'border-[#d8b23f]' : 'border-[#c9603f]'
+                              isTopFunded
+                                ? 'border-[#d8b23f]'
+                                : 'border-[#c9603f]'
                             }`}
                           >
                             <span
                               className={`text-[11px] md:text-xs font-bold ${
-                                isTopFunded ? 'text-[#d8b23f]' : 'text-[#c9603f]'
+                                isTopFunded
+                                  ? 'text-[#d8b23f]'
+                                  : 'text-[#c9603f]'
                               }`}
                             >
                               {String(i + 1).padStart(2, '0')}
@@ -285,9 +307,7 @@ function AwardsPage() {
                           isDark
                             ? 'bg-brand-text border-brand-text/10 text-brand-bg hover:shadow-[0_50px_100px_-60px_rgba(14,31,26,0.55)]'
                             : 'bg-white border-brand-border/70 text-brand-text hover:shadow-[0_40px_90px_-50px_rgba(14,31,26,0.3)]'
-                        } ${
-                          isTopFunded ? 'ring-1 ring-[#d8b23f]/50' : ''
-                        }`}
+                        } ${isTopFunded ? 'ring-1 ring-[#d8b23f]/50' : ''}`}
                       >
                         {/* top accent line — grows on hover */}
                         <span
@@ -305,7 +325,9 @@ function AwardsPage() {
                             <div className="flex items-center justify-between gap-3 mb-6">
                               <span
                                 className={`text-[11px] font-bold tabular-nums tracking-[0.25em] ${
-                                  isTopFunded ? 'text-[#8f7315]' : 'text-[#a34a30]'
+                                  isTopFunded
+                                    ? 'text-[#8f7315]'
+                                    : 'text-[#a34a30]'
                                 }`}
                               >
                                 {String(i + 1).padStart(2, '0')}
@@ -348,12 +370,18 @@ function AwardsPage() {
                           {award.amount && (
                             <div
                               className={`pt-6 sm:pt-0 sm:pl-8 lg:pl-10 border-t sm:border-t-0 sm:border-l sm:flex sm:flex-col sm:justify-center ${
-                                isTopFunded ? 'border-[#d8b23f]/30' : isDark ? 'border-white/10' : 'border-brand-border/60'
+                                isTopFunded
+                                  ? 'border-[#d8b23f]/30'
+                                  : isDark
+                                    ? 'border-white/10'
+                                    : 'border-brand-border/60'
                               }`}
                             >
                               <p
                                 className={`text-[10px] font-bold uppercase tracking-widest mb-3 ${
-                                  isDark ? 'text-white/40' : 'text-brand-text/45'
+                                  isDark
+                                    ? 'text-white/40'
+                                    : 'text-brand-text/45'
                                 }`}
                               >
                                 Grant Amount
@@ -377,7 +405,9 @@ function AwardsPage() {
                         {award.projectTitle && (
                           <div
                             className={`relative mt-8 pt-6 border-t ${
-                              isDark ? 'border-white/10' : 'border-brand-border/50'
+                              isDark
+                                ? 'border-white/10'
+                                : 'border-brand-border/50'
                             }`}
                           >
                             <p

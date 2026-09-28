@@ -39,7 +39,15 @@ export function NewsForm({ initial, newsId }: NewsFormProps) {
     setError(null)
     setSaving(true)
     try {
-      const body = { title, slug: slug.replace(/^-+|-+$/g, ''), date: new Date(date).toISOString(), description, content, image, published }
+      const body = {
+        title,
+        slug: slug.replace(/^-+|-+$/g, ''),
+        date: new Date(date).toISOString(),
+        description,
+        content,
+        image,
+        published,
+      }
       const res = newsId
         ? await fetch(`/api/news/${newsId}`, {
             method: 'PUT',
@@ -57,82 +65,86 @@ export function NewsForm({ initial, newsId }: NewsFormProps) {
       }
       await router.invalidate()
       navigate({ to: '/admin/news' })
-    } catch (e: any) {
-      setError(e.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong')
     } finally {
       setSaving(false)
     }
   }
 
-  const labelClass = "text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block"
-  const inputBase = "w-full bg-white border border-gray-200 p-3 text-sm transition-colors focus:outline-none focus:border-[#0e1f1a] placeholder:text-gray-300"
+  const labelClass =
+    'text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500 mb-2 block'
+  const inputBase =
+    'w-full bg-white border border-gray-200 p-3 text-sm transition-colors focus:outline-none focus:border-[#0e1f1a] placeholder:text-gray-300'
 
   return (
     <div className="min-h-screen bg-white">
       <form onSubmit={handleSubmit}>
         {/* Flat Professional Header */}
         <div className="border-b border-gray-200">
-           <div className="max-w-[1400px] mx-auto px-8 py-6 flex items-center justify-between">
-              <div className="flex items-center gap-6">
+          <div className="max-w-[1400px] mx-auto px-8 py-6 flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <button
+                type="button"
+                onClick={() => navigate({ to: '/admin/news' })}
+                className="p-2 border border-gray-200 hover:border-black transition-colors"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+              <div>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 mb-0.5">
+                  CMS / News / {newsId ? 'Editor' : 'Composer'}
+                </p>
+                <h1 className="text-2xl font-bold text-black tracking-tight uppercase">
+                  {title || 'Untitled Publication'}
+                </h1>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-8">
+              <div className="flex items-center gap-3">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">
+                  Visibility:
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setPublished(!published)}
+                  className={cn(
+                    'px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest border transition-colors',
+                    published
+                      ? 'bg-emerald-600 border-emerald-600 text-white'
+                      : 'bg-white border-gray-200 text-gray-400 hover:border-black',
+                  )}
+                >
+                  {published ? 'Live' : 'Hidden'}
+                </button>
+              </div>
+
+              <div className="h-8 w-px bg-gray-200" />
+
+              <div className="flex items-center gap-4">
                 <button
                   type="button"
                   onClick={() => navigate({ to: '/admin/news' })}
-                  className="p-2 border border-gray-200 hover:border-black transition-colors"
+                  className="text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-black"
                 >
-                  <ArrowLeft className="w-5 h-5" />
+                  Discard
                 </button>
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 mb-0.5">
-                    CMS / News / {newsId ? 'Editor' : 'Composer'}
-                  </p>
-                  <h1 className="text-2xl font-bold text-black tracking-tight uppercase">
-                    {title || 'Untitled Publication'}
-                  </h1>
-                </div>
+                <button
+                  type="submit"
+                  disabled={saving}
+                  className="flex items-center gap-2 px-8 py-3 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#0e1f1a] disabled:opacity-50 transition-colors"
+                >
+                  {saving ? (
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white animate-spin" />
+                  ) : (
+                    <Check className="w-4 h-4" />
+                  )}
+                  {newsId ? 'Commit Changes' : 'Publish Entry'}
+                </button>
               </div>
-
-              <div className="flex items-center gap-8">
-                 <div className="flex items-center gap-3">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-gray-400">Visibility:</span>
-                    <button
-                      type="button"
-                      onClick={() => setPublished(!published)}
-                      className={cn(
-                        "px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest border transition-colors",
-                        published 
-                          ? "bg-emerald-600 border-emerald-600 text-white" 
-                          : "bg-white border-gray-200 text-gray-400 hover:border-black"
-                      )}
-                    >
-                      {published ? 'Live' : 'Hidden'}
-                    </button>
-                 </div>
-                 
-                 <div className="h-8 w-px bg-gray-200" />
-
-                 <div className="flex items-center gap-4">
-                    <button
-                      type="button"
-                      onClick={() => navigate({ to: '/admin/news' })}
-                      className="text-[10px] font-bold uppercase tracking-widest text-gray-500 hover:text-black"
-                    >
-                      Discard
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={saving}
-                      className="flex items-center gap-2 px-8 py-3 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#0e1f1a] disabled:opacity-50 transition-colors"
-                    >
-                      {saving ? (
-                        <div className="w-4 h-4 border-2 border-white/30 border-t-white animate-spin" />
-                      ) : (
-                        <Check className="w-4 h-4" />
-                      )}
-                      {newsId ? 'Commit Changes' : 'Publish Entry'}
-                    </button>
-                 </div>
-              </div>
-           </div>
+            </div>
+          </div>
         </div>
 
         <div className="max-w-[1400px] mx-auto px-8 py-12">
@@ -172,54 +184,74 @@ export function NewsForm({ initial, newsId }: NewsFormProps) {
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between border-b border-gray-200 pb-2">
-                  <label className={labelClass + " mb-0"}>Full Content Body</label>
-                  <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">Markdown Enabled</span>
+                  <label className={labelClass + ' mb-0'}>
+                    Full Content Body
+                  </label>
+                  <span className="text-[9px] font-bold text-gray-300 uppercase tracking-widest">
+                    Markdown Enabled
+                  </span>
                 </div>
                 <div className="border border-gray-200 bg-white">
-                  <RichTextEditor id="news-content-editor" value={content} onChange={setContent} height={700} />
+                  <RichTextEditor
+                    id="news-content-editor"
+                    value={content}
+                    onChange={setContent}
+                    height={700}
+                  />
                 </div>
               </div>
             </div>
 
             {/* Sidebar Column */}
             <div className="lg:col-span-4 space-y-12">
-               <div className="space-y-8">
-                  <div className="space-y-2 pb-8 border-b border-gray-100">
-                    <label className={labelClass}>Release Date</label>
+              <div className="space-y-8">
+                <div className="space-y-2 pb-8 border-b border-gray-100">
+                  <label className={labelClass}>Release Date</label>
+                  <input
+                    type="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                    className={cn(
+                      inputBase,
+                      'font-bold text-black uppercase tracking-wider',
+                    )}
+                  />
+                </div>
+
+                <div className="space-y-2 pb-8 border-b border-gray-100">
+                  <label className={labelClass}>URL Slug / ID</label>
+                  <div className="flex items-center gap-2">
+                    <span className="text-gray-300 font-mono text-xs">/</span>
                     <input
-                      type="date"
-                      value={date}
-                      onChange={(e) => setDate(e.target.value)}
+                      type="text"
+                      value={slug}
+                      onChange={(e) => {
+                        setSlug(
+                          e.target.value
+                            .toLowerCase()
+                            .replace(/[^a-z0-9-]/g, '')
+                            .replace(/-+/g, '-'),
+                        )
+                        setSlugEdited(true)
+                      }}
                       required
-                      className={cn(inputBase, "font-bold text-black uppercase tracking-wider")}
+                      className={cn(
+                        inputBase,
+                        'font-mono text-xs text-gray-400 bg-gray-50/50',
+                      )}
                     />
                   </div>
+                </div>
 
-                  <div className="space-y-2 pb-8 border-b border-gray-100">
-                    <label className={labelClass}>URL Slug / ID</label>
-                    <div className="flex items-center gap-2">
-                      <span className="text-gray-300 font-mono text-xs">/</span>
-                      <input
-                        type="text"
-                        value={slug}
-                        onChange={(e) => {
-                          setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-'))
-                          setSlugEdited(true)
-                        }}
-                        required
-                        className={cn(inputBase, "font-mono text-xs text-gray-400 bg-gray-50/50")}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                     <ImageUpload 
-                      value={image} 
-                      onChange={setImage} 
-                      label="Hero Asset" 
-                    />
-                  </div>
-               </div>
+                <div className="space-y-4">
+                  <ImageUpload
+                    value={image}
+                    onChange={setImage}
+                    label="Hero Asset"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

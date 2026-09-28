@@ -53,14 +53,14 @@ export function EquipmentSection() {
                   </div>
                 )}
               </div>
-              {item.origin && (
-                <p className="text-[10px] text-brand-text/40 font-bold uppercase tracking-widest mb-2 border-b border-brand-border pb-1 w-full">
-                  {item.origin}
-                </p>
-              )}
               <h4 className="text-xl font-bold text-brand-text mb-4 leading-tight">
                 {item.name}
               </h4>
+              {item.origin && (
+                <p className="w-full border-t border-brand-border pt-2 text-[10px] font-bold uppercase tracking-widest text-brand-text/45">
+                  {item.origin}
+                </p>
+              )}
               {item.description && (
                 <p className="text-brand-text/60 leading-relaxed text-sm font-medium">
                   {item.description}

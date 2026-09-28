@@ -26,7 +26,13 @@ export function SmoothImage({
   }, [src])
 
   return (
-    <div className={cn('relative overflow-hidden bg-brand-text/5', containerClassName)}>
+    <div
+      className={cn(
+        'relative overflow-hidden bg-brand-text/5',
+        isLoaded && 'image-loaded',
+        containerClassName,
+      )}
+    >
       {/* Shimmer placeholder */}
       {!isLoaded && !error && (
         <div className="absolute inset-0 animate-pulse bg-brand-text/10" />
@@ -39,8 +45,10 @@ export function SmoothImage({
         loading={loading}
         decoding="async"
         className={cn(
-          'transition-opacity duration-700 ease-in-out',
-          isLoaded ? 'opacity-100' : 'opacity-0',
+          'transition-[opacity,filter,transform] duration-1000 ease-out',
+          isLoaded
+            ? 'opacity-100 blur-0 scale-100'
+            : 'opacity-0 blur-xl scale-105',
           className,
         )}
         onLoad={() => setIsLoaded(true)}

@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { pageMeta } from '../lib/seo'
 import { ArrowLeft, ArrowUpRight, Calendar } from 'lucide-react'
 import { SmoothImage } from '../components/ui/SmoothImage'
 import { ErrorFallback } from '../components/ErrorFallback'
@@ -7,6 +8,14 @@ import { formatNewsDate } from '../types/cms'
 
 export const Route = createFileRoute('/news/')({
   loader: () => getNewsList(),
+  head: () => ({
+    meta: pageMeta({
+      title: 'News & Discoveries',
+      description:
+        'Latest news, publications, events and discoveries from the UIU Biomedical Research Laboratory.',
+      image: '/banner_images/IMG20260225102648.webp',
+    }),
+  }),
   errorComponent: ({ error, reset }) => (
     <ErrorFallback error={error} reset={reset} />
   ),
@@ -19,7 +28,7 @@ function NewsPage() {
   return (
     <main className="min-h-screen bg-brand-bg pb-40">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
           src="/banner_images/IMG20260225102648.webp"
           alt="News Banner"
@@ -37,7 +46,7 @@ function NewsPage() {
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />{' '}
               Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               News & <br className="hidden md:block" />
               Discoveries.
             </h1>
@@ -56,7 +65,7 @@ function NewsPage() {
             >
               <div className="relative h-48 md:h-52 overflow-hidden shrink-0">
                 <SmoothImage
-                  src={newsData[0].image || '/work_picture/Cell Culture.webp'}
+                  src={newsData[0].image || '/work_picture/Cell_Culture.webp'}
                   alt={newsData[0].title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   containerClassName="w-full h-full"
@@ -101,7 +110,7 @@ function NewsPage() {
             >
               <div className="mb-8 w-full aspect-[4/3] rounded-2xl overflow-hidden bg-brand-border relative">
                 <SmoothImage
-                  src={news.image || '/work_picture/Cell Culture.webp'}
+                  src={news.image || '/work_picture/Cell_Culture.webp'}
                   alt={news.title}
                   className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                   containerClassName="w-full h-full"

@@ -1,15 +1,27 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { pageMeta } from '../lib/seo'
 import { ArrowLeft, Calendar, Share2 } from 'lucide-react'
 import { RichContent } from '../components/RichContent'
 import { ErrorFallback } from '../components/ErrorFallback'
-import { NotFound } from '../components/NotFound'
 import { SmoothImage } from '../components/ui/SmoothImage'
 import { getNewsItem } from '../server/news'
 import { formatNewsDate } from '../types/cms'
 
 export const Route = createFileRoute('/news/$newsId')({
-  // @ts-expect-error - parameterized createServerFn call
-  loader: ({ params }) => getNewsItem({ data: params.newsId }),
+  loader: async ({ params }) => {
+    // @ts-expect-error - parameterized createServerFn call
+    const news = await getNewsItem({ data: params.newsId })
+    if (!news) throw notFound()
+    return news
+  },
+  head: ({ loaderData }) => ({
+    meta: pageMeta({
+      title: loaderData?.title ?? 'News',
+      description: loaderData?.description,
+      image: loaderData?.image,
+      type: 'article',
+    }),
+  }),
   errorComponent: ({ error, reset }) => (
     <ErrorFallback error={error} reset={reset} />
   ),
@@ -19,14 +31,10 @@ export const Route = createFileRoute('/news/$newsId')({
 function NewsDetail() {
   const news = Route.useLoaderData()
 
-  if (!news) {
-    return <NotFound />
-  }
-
   return (
     <main className="min-h-screen pb-40 bg-brand-bg">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         {news.image ? (
           <SmoothImage
             src={news.image}
@@ -52,7 +60,7 @@ function NewsDetail() {
               <Calendar className="w-4 h-4" />
               {formatNewsDate(news.date)}
             </div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight text-white max-w-5xl">
+            <h1 className="banner-heading text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight text-white max-w-5xl">
               {news.title}
             </h1>
           </div>

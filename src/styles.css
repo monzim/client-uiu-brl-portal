@@ -1,8 +1,9 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --color-brand-bg: #f2f5f2;
   --color-brand-text: #0e1f1a;
   --color-brand-text-soft: #4a5d57;
@@ -104,6 +105,15 @@ body {
 
 .rise-in {
   animation: rise-in 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.banner-heading {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.banner-shell:has(.image-loaded) .banner-heading {
+  animation: rise-in 800ms cubic-bezier(0.16, 1, 0.3, 1) 350ms both;
 }
 
 @keyframes rise-in {

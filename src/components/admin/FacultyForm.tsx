@@ -356,9 +356,7 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
   const [researchInterests, setResearchInterests] = useState<string[]>(
     initial?.researchInterests ?? [],
   )
-  const [researchProjects, setResearchProjects] = useState<string[]>(
-    initial?.researchProjects ?? [],
-  )
+  const [researchProjects] = useState<string[]>(initial?.researchProjects ?? [])
   const [publications, setPublications] = useState<Publication[]>(
     Array.isArray(initial?.publications)
       ? initial.publications
@@ -429,8 +427,8 @@ export function FacultyForm({ initial, facultyId }: FacultyFormProps) {
       }
       await router.invalidate()
       navigate({ to: '/admin/faculty' })
-    } catch (e: any) {
-      setError(e.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong')
     } finally {
       setSaving(false)
     }

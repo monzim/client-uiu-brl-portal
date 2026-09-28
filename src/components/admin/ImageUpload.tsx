@@ -21,7 +21,6 @@ export function ImageUpload({
   const [isDragging, setIsDragging] = useState(false)
 
   const handleFile = async (file: File) => {
-    if (!file) return
     setError(null)
     setUploading(true)
     try {
@@ -44,7 +43,7 @@ export function ImageUpload({
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault()
     setIsDragging(false)
-    const file = e.dataTransfer.files[0]
+    const file = e.dataTransfer.files.item(0)
     if (file) handleFile(file)
   }
 

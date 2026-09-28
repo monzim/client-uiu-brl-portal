@@ -8,7 +8,7 @@ export function NotFound() {
       {/* Banner Image */}
       <section className="relative w-full h-[40vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
-          src="/banner_images/404IMG.png"
+          src="/banner_images/404IMG.webp"
           alt="404 Banner"
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"
@@ -17,43 +17,44 @@ export function NotFound() {
       </section>
 
       <div className="max-w-[1400px] w-full mx-auto px-6 flex flex-col items-center text-center space-y-12 py-16">
-          {/* Decorative Element */}
-          <div className="relative">
-            <div className="text-[12rem] md:text-[20rem] font-black text-brand-text/[0.03] leading-none select-none uppercase tracking-tighter">
-              404
-            </div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <Ghost className="w-20 h-20 md:w-32 md:h-32 text-brand-text/10 animate-bounce" />
-            </div>
+        {/* Decorative Element */}
+        <div className="relative">
+          <div className="text-[12rem] md:text-[20rem] font-black text-brand-text/[0.03] leading-none select-none uppercase tracking-tighter">
+            404
           </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Ghost className="w-20 h-20 md:w-32 md:h-32 text-brand-text/10 animate-bounce" />
+          </div>
+        </div>
 
-          <div className="space-y-6 max-w-2xl">
-            <div className="flex items-center justify-center gap-4">
-              <div className="h-px w-12 bg-brand-text/20" />
-              <p className="text-sm md:text-base text-brand-text/40 font-bold uppercase tracking-[0.3em]">
-                Protocol Error
-              </p>
-              <div className="h-px w-12 bg-brand-text/20" />
-            </div>
-            
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-brand-text tracking-tighter uppercase leading-none">
-              Lost in <span className="text-brand-accent">Research</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-brand-text/60 font-medium leading-relaxed">
-              The laboratory module you are looking for has been moved, archived, or never existed in this dimension.
+        <div className="space-y-6 max-w-2xl">
+          <div className="flex items-center justify-center gap-4">
+            <div className="h-px w-12 bg-brand-text/20" />
+            <p className="text-sm md:text-base text-brand-text/40 font-bold uppercase tracking-[0.3em]">
+              Protocol Error
             </p>
+            <div className="h-px w-12 bg-brand-text/20" />
           </div>
 
-          <div className="pt-8">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-3 px-10 py-5 bg-brand-text text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-brand-accent transition-all duration-500 group rounded-full shadow-2xl hover:shadow-brand-accent/20"
-            >
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-              Return to Base
-            </Link>
-          </div>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-brand-text tracking-tighter uppercase leading-none">
+            Lost in <span className="text-brand-accent">Research</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-brand-text/60 font-medium leading-relaxed">
+            The laboratory module you are looking for has been moved, archived,
+            or never existed in this dimension.
+          </p>
+        </div>
+
+        <div className="pt-8">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-brand-text text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-brand-accent transition-all duration-500 group rounded-full shadow-2xl hover:shadow-brand-accent/20"
+          >
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            Return to Base
+          </Link>
+        </div>
       </div>
 
       {/* Technical Metadata Footer */}

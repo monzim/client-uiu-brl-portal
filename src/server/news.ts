@@ -1,12 +1,12 @@
 'use server'
 import { createServerFn } from '@tanstack/react-start'
+import { sanitizeRichHtml } from '#/lib/sanitize'
 import { db } from '#/lib/db'
 import { cached, CACHE_KEYS, CACHE_TTL } from '#/lib/redis'
 import type { DbNewsListItem, DbNews } from '#/types/cms'
 
 export const getAdminNewsList = createServerFn({ method: 'GET' }).handler(
-  (): Promise<DbNews[]> =>
-    db.news.findMany({ orderBy: { createdAt: 'desc' } }),
+  (): Promise<DbNews[]> => db.news.findMany({ orderBy: { createdAt: 'desc' } }),
 )
 
 export const getAdminNewsItem = createServerFn({ method: 'GET' }).handler(
@@ -38,7 +38,8 @@ export const getNewsItem = createServerFn({ method: 'GET' }).handler(
   (ctx: { data: string }): Promise<DbNews | null> => {
     const slug = ctx.data
     return cached(CACHE_KEYS.newsItem(slug), CACHE_TTL.newsItem, async () => {
-      return db.news.findFirst({ where: { slug, published: true } })
+      const news = await db.news.findFirst({ where: { slug, published: true } })
+      return news && { ...news, content: sanitizeRichHtml(news.content) }
     }) as Promise<DbNews | null>
   },
 )

@@ -61,7 +61,7 @@ export function Footer() {
                 <img
                   src="/images/uiu-logo.png"
                   alt="UIU Logo"
-                  className="h-12 md:h-16 w-auto"
+                  className="h-12 md:h-14 w-auto"
                 />
               </div>
               <p className="text-white/60 max-w-sm text-lg leading-relaxed font-medium">
@@ -127,7 +127,10 @@ export function Footer() {
           <div className="mt-32 pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between gap-6 text-xs font-semibold uppercase tracking-widest text-white/30">
             <p>&copy; {new Date().getFullYear()} UIU BME Lab</p>
             <div className="flex gap-8">
-              <Link to="/privacy" className="hover:text-white transition-colors">
+              <Link
+                to="/privacy"
+                className="hover:text-white transition-colors"
+              >
                 Privacy Policy
               </Link>
             </div>
