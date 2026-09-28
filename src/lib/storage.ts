@@ -1,6 +1,6 @@
 import '#/lib/env'
 import { Client as MinioClient } from 'minio'
-import { randomBytes } from 'crypto'
+import { randomBytes } from 'node:crypto'
 
 const globalForMinio = globalThis as unknown as { minio?: MinioClient }
 

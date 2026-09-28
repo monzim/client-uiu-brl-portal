@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { pageMeta, SITE_DESCRIPTION, SITE_NAME } from '../lib/seo'
 import { Hero } from '../components/Hero'
 import { QuoteSection } from '../components/QuoteSection'
-import { CollaborationSection } from '../components/CollaborationSection'
 import { NewsCarousel } from '../components/NewsCarousel'
 import { ObjectivesSection } from '../components/ObjectivesSection'
 import { ResearchSection } from '../components/ResearchSection'
@@ -18,7 +18,29 @@ export const Route = createFileRoute('/')({
     const [news, faculty] = await Promise.all([getNewsList(), getFacultyList()])
     return { news, faculty }
   },
-  errorComponent: ({ error, reset }) => <ErrorFallback error={error} reset={reset} />,
+  head: () => ({
+    meta: pageMeta({ title: SITE_NAME }),
+    scripts: [
+      {
+        type: 'application/ld+json',
+        children: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'ResearchOrganization',
+          name: 'Biomedical Research Laboratory, United International University',
+          alternateName: SITE_NAME,
+          description: SITE_DESCRIPTION,
+          parentOrganization: {
+            '@type': 'CollegeOrUniversity',
+            name: 'United International University',
+            url: 'https://www.uiu.ac.bd',
+          },
+        }),
+      },
+    ],
+  }),
+  errorComponent: ({ error, reset }) => (
+    <ErrorFallback error={error} reset={reset} />
+  ),
   component: App,
 })
 
@@ -33,9 +55,8 @@ function App() {
       </div>
 
       {/* QuoteSection is just below the fold — small rootMargin to start early */}
-     
-        <QuoteSection />
-      
+
+      <QuoteSection />
 
       {/* News carousel */}
       <LazySection rootMargin="300px" placeholderHeight="500px">

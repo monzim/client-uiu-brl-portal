@@ -1,50 +1,50 @@
-import { useState, useEffect } from 'react';
-import { Link } from '@tanstack/react-router';
-import { ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react'
+import { Link } from '@tanstack/react-router'
+import { ArrowRight } from 'lucide-react'
 
 const slides = [
   {
     image: '/images/lab.webp',
-    text: 'Welcome to the Biomedical Research Laboratory of UIU '
+    text: 'Welcome to the Biomedical Research Laboratory of UIU ',
   },
   {
     image: '/banner_images/banner_image7.jpg',
-    text: 'Advancing scientific knowledge in the field of pharmaceutical and biomedical sciences .'
-  }
-];
+    text: 'Advancing scientific knowledge in the field of pharmaceutical and biomedical sciences .',
+  },
+]
 
 const focusCards = [
-  { 
+  {
     title: 'Smart Hydrogels in Wound Healing',
     sub: 'Advanced tissue regeneration and drug delivery.',
-    to: '/area/smart-hydrogel'
+    to: '/area/smart-hydrogel',
   },
-  { 
-    title: 'Gene Polymorphism', 
+  {
+    title: 'Gene Polymorphism',
     sub: 'Role of VEGF Polymorphisms and Serum VEGF in Breast Cancer.',
-    to: '/area/gene-polymorphism'
+    to: '/area/gene-polymorphism',
   },
-  { 
-    title: 'Antimicrobial Resistance', 
+  {
+    title: 'Antimicrobial Resistance',
     sub: 'Colistin resistance and mcr-1/mcr-3 gene analysis in E. coli.',
-    to: '/area/antimicrobial-gene-analysis'
+    to: '/area/antimicrobial-gene-analysis',
   },
-  { 
+  {
     title: 'Drug Discovery',
     sub: 'In vitro, in vivo, and in silico analysis of medicinal plant extracts.',
-    to: '/area/drug-discovery'
-  }
-];
+    to: '/area/drug-discovery',
+  },
+]
 
 export function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 10000);
-    return () => clearInterval(timer);
-  }, []);
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 10000)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <section className="relative w-full h-screen max-h-[100dvh] overflow-hidden flex flex-col">
@@ -69,32 +69,35 @@ export function Hero() {
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
-
       {/* Fading Masks */}
       {/* <div className="absolute top-0 left-0 right-0 h-22 bg-gradient-to-b from-black to-transparent z-[5]" /> */}
       {/* <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-black via-black/20 to-transparent z-[5]" /> */}
-{/* //right to left Masks */}
-<div className="absolute bottom-0 left-0 top-0 h-full w-full bg-gradient-to-r from-black via-black/10 to-transparent z-[5]" ></div>
+      {/* //right to left Masks */}
+      <div className="absolute bottom-0 left-0 top-0 h-full w-full bg-gradient-to-r from-black via-black/10 to-transparent z-[5]"></div>
 
       {/* Hero Content */}
       <div className="relative z-10 flex-1 max-w-[1400px] mx-auto px-6 flex flex-col items-start justify-center w-full pt-20 sm:pt-0">
         <div className="max-w-[800px] mb-12 lg:mb-54 relative h-[180px] w-full">
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`transition-all duration-1000 absolute inset-0 flex items-center ${
-                index === currentSlide 
-                  ? 'opacity-100 translate-x-0 pointer-events-auto' 
-                  : index < currentSlide 
-                    ? 'opacity-0 -translate-x-20 pointer-events-none'
-                    : 'opacity-0 translate-x-20 pointer-events-none'
-              }`}
-            >
-              <h1 className="text-white text-[28px] sm:text-[40px] md:text-[44px] font-light leading-[1.1]">
-                {slide.text}
-              </h1>
-            </div>
-          ))}
+          {slides.map((slide, index) => {
+            // Only the first slide is the page's h1; the rest are decorative repeats.
+            const Heading = index === 0 ? 'h1' : 'p'
+            return (
+              <div
+                key={index}
+                className={`transition-all duration-1000 absolute inset-0 flex items-center ${
+                  index === currentSlide
+                    ? 'opacity-100 translate-x-0 pointer-events-auto'
+                    : index < currentSlide
+                      ? 'opacity-0 -translate-x-20 pointer-events-none'
+                      : 'opacity-0 translate-x-20 pointer-events-none'
+                }`}
+              >
+                <Heading className="text-white text-[28px] sm:text-[40px] md:text-[44px] font-light leading-[1.1]">
+                  {slide.text}
+                </Heading>
+              </div>
+            )
+          })}
         </div>
 
         {/* Focus Area Cards */}
@@ -107,9 +110,9 @@ export function Hero() {
                 to="/area/$areaId"
                 params={{ areaId: card.to.split('/').pop() || '' }}
                 className={`group relative p-4 lg:p-6 rounded-2xl backdrop-blur-xl border border-white/20 transition-all duration-500 flex flex-col justify-between h-[100px] sm:h-[130px] lg:h-[180px] ${
-                  // isFeaturedCard 
-                  //   ? 'bg-brand-text border-transparent lg:hover:bg-white/10 lg:hover:border-white/20' 
-                     'bg-white/10 lg:hover:bg-brand-text lg:hover:border-transparent'
+                  // isFeaturedCard
+                  //   ? 'bg-brand-text border-transparent lg:hover:bg-white/10 lg:hover:border-white/20'
+                  'bg-white/10 lg:hover:bg-brand-text lg:hover:border-transparent'
                 }`}
                 style={{ animationDelay: `${i * 100}ms` }}
               >
@@ -127,16 +130,10 @@ export function Hero() {
                   </div>
                 </div>
               </Link>
-            );
+            )
           })}
         </div>
       </div>
     </section>
-  );
+  )
 }
-
-
-
-
-
-

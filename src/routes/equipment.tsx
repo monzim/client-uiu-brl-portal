@@ -9,7 +9,7 @@ import type { Equipment } from '../data/data'
 export const Route = createFileRoute('/equipment')({
   head: () => ({
     meta: [
-      { title: 'Laboratory Equipment | UIU Biomedical Research Lab' },
+      { title: 'Laboratory Equipment | UIU BME Lab' },
       {
         name: 'description',
         content:

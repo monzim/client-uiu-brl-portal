@@ -7,7 +7,7 @@ import { aboutData } from '../data/data'
 export const Route = createFileRoute('/about')({
   head: () => ({
     meta: [
-      { title: 'About BRL | UIU Biomedical Research Lab' },
+      { title: 'About BRL | UIU BME Lab' },
       {
         name: 'description',
         content:
@@ -72,7 +72,7 @@ function About() {
       {/* Hero Section */}
       <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
-          src="/banner_images/3u-3.webp"
+          src="/banner_images/3U-3.webp"
           alt="BRL Laboratory"
           className="w-full h-full object-cover grayscale brightness-[0.6] object-center"
           containerClassName="w-full h-full"

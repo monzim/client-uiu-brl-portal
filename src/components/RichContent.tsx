@@ -1,22 +1,18 @@
-import DOMPurify from 'isomorphic-dompurify'
 import { cn } from '@/lib/utils'
 
 interface RichContentProps {
+  /** Must already be sanitized server-side with `sanitizeRichHtml` (#/lib/sanitize). */
   html: string
   className?: string
 }
 
 export function RichContent({ html, className }: RichContentProps) {
-  const clean = DOMPurify.sanitize(html || '', {
-    ADD_TAGS: ['iframe'],
-    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'],
-  })
   return (
     <>
       <style>{richContentStyles}</style>
       <div
         className={cn('rich-content', className)}
-        dangerouslySetInnerHTML={{ __html: clean }}
+        dangerouslySetInnerHTML={{ __html: html }}
       />
     </>
   )

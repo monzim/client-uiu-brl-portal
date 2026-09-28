@@ -1,9 +1,10 @@
-import { createFileRoute, Link, Outlet, useLocation } from '@tanstack/react-router'
 import {
-  ArrowDown,
-  ArrowLeft,
-  ArrowRight,
-} from 'lucide-react'
+  createFileRoute,
+  Link,
+  Outlet,
+  useLocation,
+} from '@tanstack/react-router'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { SmoothImage } from '../components/ui/SmoothImage'
 import { researchAreas } from '../data/data'
@@ -11,7 +12,7 @@ import { researchAreas } from '../data/data'
 export const Route = createFileRoute('/area')({
   head: () => ({
     meta: [
-      { title: 'Research Areas | UIU Biomedical Research Lab' },
+      { title: 'Research Areas | UIU BME Lab' },
       {
         name: 'description',
         content:
@@ -54,16 +55,17 @@ function AreaPage() {
             <p className="mb-5 text-xs font-bold uppercase  text-[#9ed4c0]">
               Biomedical Research Laboratory
             </p>
-            <h3 className=" max-w-4xl text-2xl font-medium leading-[0.94] tracking-[-0.04em] text-white md:text-7xl lg:text-[70px]">
+            <h1 className="max-w-4xl text-2xl font-medium leading-[0.94] tracking-[-0.04em] text-white md:text-7xl lg:text-[70px]">
               Ideas that move
               <br />
               <span className="text-[#9ed4c0]">science forward.</span>
-            </h3>
+            </h1>
             <p className="mt-8 max-w-xl text-base leading-8 text-white/70 md:text-lg">
-              Four connected research directions, from responsive materials and genetic variation to resistance surveillance and nature-inspired therapeutics.
+              Four connected research directions, from responsive materials and
+              genetic variation to resistance surveillance and nature-inspired
+              therapeutics.
             </p>
           </div>
-          
         </div>
       </section>
 
@@ -78,7 +80,10 @@ function AreaPage() {
 
 function ResearchDirections() {
   return (
-    <section id="research-directions" className="relative z-10 mx-auto mt-15 max-w-[1400px] px-6">
+    <section
+      id="research-directions"
+      className="relative z-10 mx-auto mt-15 max-w-[1400px] px-6"
+    >
       <div className="mb-10 flex items-end justify-between border-b border-brand-border pb-6">
         <div>
           <p className="text-xs font-bold uppercase  text-brand-accent">
@@ -102,7 +107,13 @@ function ResearchDirections() {
   )
 }
 
-function AreaCard({ area, index }) {
+function AreaCard({
+  area,
+  index,
+}: {
+  area: (typeof researchAreas)[number]
+  index: number
+}) {
   const Icon = area.icon
   const [ref, isVisible] = useRevealOnScroll()
 
@@ -136,10 +147,14 @@ function AreaCard({ area, index }) {
           {area.eyebrow}
         </p>
 
-        <h3 className="mt-2 text-lg font-bold leading-tight text-brand-text">{area.title}</h3>
+        <h3 className="mt-2 text-lg font-bold leading-tight text-brand-text">
+          {area.title}
+        </h3>
         <span className="mt-2 block h-[2px] w-0 bg-brand-accent transition-all duration-300 ease-out group-hover:w-10" />
 
-        <p className="mt-3 line-clamp-2 text-sm leading-6 text-brand-text/60">{area.summary}</p>
+        <p className="mt-3 line-clamp-2 text-sm leading-6 text-brand-text/60">
+          {area.summary}
+        </p>
 
         <span className="mt-auto flex items-center gap-1.5 pt-5 text-[10px] font-bold uppercase  text-brand-text/50 transition-colors group-hover:text-brand-accent">
           Read more
@@ -155,7 +170,7 @@ function AreaCard({ area, index }) {
 // ---------------------------------------------------------------------------
 
 function useRevealOnScroll() {
-  const ref = useRef(null)
+  const ref = useRef<HTMLAnchorElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
@@ -163,8 +178,8 @@ function useRevealOnScroll() {
     if (!node) return
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
           setIsVisible(true)
           observer.unobserve(node)
         }

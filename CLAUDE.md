@@ -45,17 +45,18 @@ Route files use `createFileRoute('/path')({...})`. The route tree is auto-genera
 
 **`createServerFn` with parameters:** TanStack Start's type system doesn't support typed `data` parameters in this version — use `(ctx: { data: T })` with `// @ts-expect-error` at both the handler definition and each call site.
 
-### API Routes (Nitro)
+### API Routes (TanStack server routes)
 
-HTTP API routes live in `server/api/` (Nitro file-based routing, NOT in `src/routes/`):
-- `server/api/auth/login.ts` → `POST /api/auth/login`
-- `server/api/news/index.ts` → `GET/POST /api/news`
-- `server/api/news/[id].ts` → `GET/PUT/DELETE /api/news/:id`
-- `server/api/news/admin.ts` → `GET /api/news/admin` (auth required, includes drafts)
-- Same pattern for `faculty/`
-- `server/api/upload.ts` → `POST /api/upload`
+HTTP API routes live in `src/routes/api/` as file routes with `server.handlers` (not in `server/api/`):
+- `src/routes/api/auth/login.ts` → `POST /api/auth/login` (also `logout.ts`, `me.ts`)
+- `src/routes/api/news/index.ts` → `GET/POST /api/news`
+- `src/routes/api/news/$id.ts` → `GET/PUT/DELETE /api/news/:id`
+- `src/routes/api/news/admin.ts` → `GET /api/news/admin` (auth required, includes drafts)
+- Same pattern for `faculty/`; `superuser/` for user management + audit logs
+- `src/routes/api/upload.ts` → `POST /api/upload`
+- `src/routes/robots[.]txt.ts` / `src/routes/sitemap[.]xml.ts` — generated from the request origin (honours `X-Forwarded-*`); sitemap includes published news/faculty from the DB
 
-Use H3 helpers (`defineEventHandler`, `readBody`, `getCookie`, etc.) in server handlers. Auth via `#/lib/requireAuth`. Nitro plugins in `server/plugins/`.
+Use `getAuthPayload` / `jsonResponse` / `errorResponse` from `#/lib/serverHelpers`. Nitro plugins in `server/plugins/`.
 
 ### Data Layer
 
@@ -68,8 +69,12 @@ News and Faculty data served from Postgres via Prisma 7 (`prisma/schema.prisma`)
 - `src/lib/requireAuth.ts` — H3 middleware that throws 401 if no valid token
 - `src/server/news.ts` / `src/server/faculty.ts` — `createServerFn` wrappers for public reads (cached)
 - `src/server/auth.ts` — `checkAdminAuth` server fn reads cookie from SSR request
+- `src/lib/sanitize.ts` — `sanitizeRichHtml` (sanitize-html, server-only). CMS rich text is sanitized in the read server fns; `RichContent` renders it as-is. Do not reintroduce jsdom/isomorphic-dompurify: Nitro's bundle breaks its runtime data files and SSR of detail pages fails.
+- `src/lib/seo.ts` — `pageMeta({ title, description, image, type })` for every public route's `head()`
 
-**Prisma 7 note:** `url` removed from `schema.prisma`; connection string passed via `PrismaPg` adapter in `db.ts`. Migrations need `--url` flag or use `DATABASE_URL` env.
+**SEO conventions:** every public route defines `head()` (use `pageMeta` for new ones); detail loaders `throw notFound()` for missing slugs (real 404 status); exactly one `<h1>` per page. Static images in `public/` use no spaces in filenames and exact case — `src/data/assets.test.ts` fails `npm run test` on broken references.
+
+**Prisma 7 note:** `url` removed from `schema.prisma`; connection string passed via `PrismaPg` adapter in `db.ts`. Migrations need `--url` flag or use `DATABASE_URL` env. Always add schema changes as migrations (`prisma migrate dev`), not `db push` — the migration history must replay cleanly on an empty database.
 
 ### Styling
 

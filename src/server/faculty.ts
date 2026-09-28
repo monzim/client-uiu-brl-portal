@@ -1,5 +1,6 @@
 'use server'
 import { createServerFn } from '@tanstack/react-start'
+import { sanitizeRichHtml } from '#/lib/sanitize'
 import { db } from '#/lib/db'
 import { cached, CACHE_KEYS, CACHE_TTL } from '#/lib/redis'
 import type { DbFaculty, MemberType } from '#/types/cms'
@@ -51,7 +52,20 @@ export const getFacultyItem = createServerFn({ method: 'GET' }).handler(
     const row = await cached(
       CACHE_KEYS.facultyItem(slug),
       CACHE_TTL.facultyItem,
-      async () => db.faculty.findFirst({ where: { slug, published: true } }),
+      async () => {
+        const faculty = await db.faculty.findFirst({
+          where: { slug, published: true },
+        })
+        return (
+          faculty && {
+            ...faculty,
+            fullBio: faculty.fullBio && sanitizeRichHtml(faculty.fullBio),
+            researchGeneral:
+              faculty.researchGeneral &&
+              sanitizeRichHtml(faculty.researchGeneral),
+          }
+        )
+      },
     )
     return row as unknown as DbFaculty | null
   },

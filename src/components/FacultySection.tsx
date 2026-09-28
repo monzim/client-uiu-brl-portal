@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { SmoothImage } from './ui/SmoothImage'
@@ -9,11 +9,7 @@ interface FacultySectionProps {
   isHomePage?: boolean
 }
 
-const FacultyCard = ({
-  faculty,
-}: {
-  faculty: DbFaculty
-}) => (
+const FacultyCard = ({ faculty }: { faculty: DbFaculty }) => (
   <Link
     to="/faculty/$facultyId"
     params={{ facultyId: faculty.slug }}
@@ -143,17 +139,18 @@ export function FacultySection({
   }
 
   return (
-    <section id="faculty" className="bg-brand-text px-4 py-16 text-white sm:px-6 md:py-24">
+    <section
+      id="faculty"
+      className="bg-brand-text px-4 py-16 text-white sm:px-6 md:py-24"
+    >
       <div className="mx-auto max-w-[1400px] overflow-hidden px-1 py-2 sm:px-2 md:py-4">
         <div className="mb-8 flex items-start justify-between gap-6 md:mb-10">
           <div className="max-w-2xl">
             <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white/55">
-              {isHomePage ? 'Leadership' : 'Our Team'}
+              Leadership
             </p>
             <h2 className="text-3xl font-medium leading-[1.05] tracking-tight md:text-5xl lg:text-6xl mb-8 sm:mb-10">
-              {isHomePage
-                ? 'Faculty Members.'
-                : 'Meet the researchers behind the innovation.'}
+              Faculty Members.
             </h2>
           </div>
           <div className="flex shrink-0 gap-3">
@@ -181,10 +178,7 @@ export function FacultySection({
           className="no-scrollbar flex gap-4 overflow-x-auto pb-2"
         >
           {faculty.map((member) => (
-            <FacultyCard
-              key={member.id}
-              faculty={member}
-            />
+            <FacultyCard key={member.id} faculty={member} />
           ))}
         </div>
       </div>

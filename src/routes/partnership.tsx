@@ -8,7 +8,7 @@ import { CollaborationSection } from '#/components/CollaborationSection'
 export const Route = createFileRoute('/partnership')({
   head: () => ({
     meta: [
-      { title: 'Partnerships & Collaborations | UIU Biomedical Research Lab' },
+      { title: 'Partnerships & Collaborations | UIU BME Lab' },
       {
         name: 'description',
         content:

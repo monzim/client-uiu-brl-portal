@@ -1,15 +1,27 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { pageMeta } from '../lib/seo'
 import { ArrowLeft, Calendar, Share2 } from 'lucide-react'
 import { RichContent } from '../components/RichContent'
 import { ErrorFallback } from '../components/ErrorFallback'
-import { NotFound } from '../components/NotFound'
 import { SmoothImage } from '../components/ui/SmoothImage'
 import { getNewsItem } from '../server/news'
 import { formatNewsDate } from '../types/cms'
 
 export const Route = createFileRoute('/news/$newsId')({
-  // @ts-expect-error - parameterized createServerFn call
-  loader: ({ params }) => getNewsItem({ data: params.newsId }),
+  loader: async ({ params }) => {
+    // @ts-expect-error - parameterized createServerFn call
+    const news = await getNewsItem({ data: params.newsId })
+    if (!news) throw notFound()
+    return news
+  },
+  head: ({ loaderData }) => ({
+    meta: pageMeta({
+      title: loaderData?.title ?? 'News',
+      description: loaderData?.description,
+      image: loaderData?.image,
+      type: 'article',
+    }),
+  }),
   errorComponent: ({ error, reset }) => (
     <ErrorFallback error={error} reset={reset} />
   ),
@@ -18,10 +30,6 @@ export const Route = createFileRoute('/news/$newsId')({
 
 function NewsDetail() {
   const news = Route.useLoaderData()
-
-  if (!news) {
-    return <NotFound />
-  }
 
   return (
     <main className="min-h-screen pb-40 bg-brand-bg">

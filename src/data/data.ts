@@ -5,66 +5,111 @@ export const researchAreas = [
     id: 'smart-hydrogel',
     title: 'Smart Hydrogel',
     eyebrow: 'Responsive biomaterials',
-    image: '/areapicture/Hydro_gel.webp',
+    image: '/areaPicture/Hydro_gel.webp',
     icon: FlaskConical,
-    summary: 'Water-rich polymer networks engineered to respond intelligently to their surroundings.',
-    sectionHeadings: ['What is a smart hydrogel?', 'How does it respond?', 'Why it matters'],
+    summary:
+      'Water-rich polymer networks engineered to respond intelligently to their surroundings.',
+    sectionHeadings: [
+      'What is a smart hydrogel?',
+      'How does it respond?',
+      'Why it matters',
+    ],
     paragraphs: [
       'A smart hydrogel is a three-dimensional, cross-linked polymeric network that can absorb and retain a large amount of water while responding to specific environmental stimuli. Unlike conventional hydrogels, smart hydrogels can undergo reversible changes in their swelling, structure, permeability, or drug-release behavior in response to changes in external conditions.',
       'Common stimuli include pH, temperature, ionic strength, light, electric or magnetic fields, enzymes, and specific biomolecules. For example, a pH-responsive hydrogel may remain relatively stable in the stomach but swell at the higher pH of the intestine, enabling site-specific drug release. Similarly, a temperature-responsive hydrogel can undergo a change in solubility or swelling near physiological temperature and may be used for in situ drug delivery.',
       'Because of their high water content, biocompatibility, and tunable responsiveness, smart hydrogels have important applications in controlled and targeted drug delivery, wound healing, tissue engineering, biosensing, regenerative medicine, and pharmaceutical formulations.',
     ],
-    applications: ['Targeted drug delivery', 'Wound healing', 'Tissue engineering', 'Biosensing'],
+    applications: [
+      'Targeted drug delivery',
+      'Wound healing',
+      'Tissue engineering',
+      'Biosensing',
+    ],
   },
   {
     id: 'gene-polymorphism',
     title: 'Gene Polymorphism',
     eyebrow: 'Genetic variation & health',
-    image: '/areapicture/Gene_Polymorphism.webp',
+    image: '/areaPicture/Gene_Polymorphism.webp',
     icon: Dna,
-    summary: 'Mapping normal genetic variation to understand disease susceptibility and treatment response.',
-    sectionHeadings: ['Understanding polymorphism', 'Common forms', 'Biomedical significance', 'From variation to care'],
+    summary:
+      'Mapping normal genetic variation to understand disease susceptibility and treatment response.',
+    sectionHeadings: [
+      'Understanding polymorphism',
+      'Common forms',
+      'Biomedical significance',
+      'From variation to care',
+    ],
     paragraphs: [
       'Gene polymorphism refers to the presence of two or more different forms of a gene, known as alleles, within a population. These genetic variations result from differences in the DNA sequence among individuals and are generally common enough to be considered normal genetic variation rather than rare mutations. Polymorphisms may occur in different regions of a gene, including coding regions, promoter regions, introns, or other regulatory regions. Depending on their location and nature, they may have no noticeable effect or may influence gene expression, protein function, or other biological processes.',
       'The most common form of gene polymorphism is the single nucleotide polymorphism (SNP), in which a single nucleotide differs between individuals. Other forms include insertions and deletions (indels), variable number tandem repeats (VNTRs), and microsatellite polymorphisms. Some polymorphisms can alter the amount or activity of a protein, while others may have little or no functional effect.',
       'Gene polymorphisms are important in biomedical research because they can contribute to individual differences in disease susceptibility, disease progression, drug response, and adverse drug reactions. For example, variations in genes involved in drug-metabolizing enzymes can influence how rapidly an individual metabolizes a particular medicine. Similarly, polymorphisms in genes involved in DNA repair, cell proliferation, inflammation, or hormone regulation may be associated with susceptibility to certain diseases.',
       'Therefore, the study of gene polymorphisms provides valuable information about genetic diversity and its relationship with human health and disease. Identification of disease-associated polymorphisms may also contribute to the development of genetic biomarkers and support personalized approaches to diagnosis and treatment.',
     ],
-    applications: ['Disease biomarkers', 'Pharmacogenomics', 'Risk profiling', 'Personalized care'],
+    applications: [
+      'Disease biomarkers',
+      'Pharmacogenomics',
+      'Risk profiling',
+      'Personalized care',
+    ],
   },
   {
     id: 'antimicrobial-gene-analysis',
     title: 'Antimicrobial Gene Analysis',
     eyebrow: 'Molecular surveillance',
-    image: '/areapicture/Antimicrobial_Gene.webp',
+    image: '/areaPicture/Antimicrobial_Gene.webp',
     icon: ShieldCheck,
-    summary: 'Following the genetic signatures that allow antimicrobial resistance to emerge and spread.',
-    sectionHeadings: ['What is being studied?', 'Resistance mechanisms', 'Detection methods', 'Why analysis matters'],
+    summary:
+      'Following the genetic signatures that allow antimicrobial resistance to emerge and spread.',
+    sectionHeadings: [
+      'What is being studied?',
+      'Resistance mechanisms',
+      'Detection methods',
+      'Why analysis matters',
+    ],
     paragraphs: [
       'Antimicrobial gene analysis is the study of specific genes in microorganisms that contribute to antimicrobial resistance (AMR) or influence their susceptibility to antimicrobial agents. It is used to identify genetic determinants responsible for resistance and to understand how these genes are distributed, acquired, and expressed among microbial populations.',
       'Antimicrobial resistance genes may encode enzymes that inactivate antimicrobial drugs, altered drug targets, efflux pumps that remove drugs from microbial cells, or proteins that reduce drug uptake. Common examples include β-lactamase genes such as bla, methicillin-resistance genes such as mecA, vancomycin-resistance genes such as vanA, and aminoglycoside-resistance genes such as aac and aph.',
       'Genetic analysis can be performed using techniques such as conventional PCR, multiplex PCR, real-time PCR (qPCR), DNA sequencing, and whole-genome sequencing. Typically, microbial DNA is extracted from the isolate, target resistance genes are amplified or detected, and the resulting data are analyzed to determine the presence or absence of specific genes.',
       'Antimicrobial gene analysis is important for surveillance of antimicrobial resistance, characterization of resistant microorganisms, epidemiological studies, infection-control research, and investigation of the molecular mechanisms underlying antimicrobial resistance. It can also help determine whether resistance is associated with particular genetic elements, such as plasmids, transposons, or integrons, which can facilitate the spread of resistance genes between microorganisms.',
     ],
-    workflow: 'Microbial isolation → DNA extraction → Target gene selection → PCR/qPCR → Detection of gene → Sequence confirmation (if required) → Data analysis',
-    applications: ['AMR surveillance', 'PCR & qPCR', 'Sequence confirmation', 'Infection control'],
+    workflow:
+      'Microbial isolation → DNA extraction → Target gene selection → PCR/qPCR → Detection of gene → Sequence confirmation (if required) → Data analysis',
+    applications: [
+      'AMR surveillance',
+      'PCR & qPCR',
+      'Sequence confirmation',
+      'Infection control',
+    ],
   },
   {
     id: 'drug-discovery',
     title: 'Drug Discovery',
     eyebrow: 'Nature-inspired therapeutics',
-    image: '/areapicture/Drug_Discovery.webp',
+    image: '/areaPicture/Drug_Discovery.webp',
     icon: Pill,
-    summary: 'Turning the chemical diversity of medicinal plants into evidence-led therapeutic candidates.',
-    sectionHeadings: ['From plant to candidate', 'Screening for activity', 'Isolating the active compound', 'Validation and optimization'],
+    summary:
+      'Turning the chemical diversity of medicinal plants into evidence-led therapeutic candidates.',
+    sectionHeadings: [
+      'From plant to candidate',
+      'Screening for activity',
+      'Isolating the active compound',
+      'Validation and optimization',
+    ],
     paragraphs: [
       'Drug discovery from plant sources is the systematic process of identifying, isolating, characterizing, and developing biologically active compounds from medicinal plants into potential therapeutic agents. Plants produce a wide range of primary and secondary metabolites, including alkaloids, flavonoids, terpenoids, phenolics, tannins, glycosides, and saponins. Many of these compounds possess pharmacological activities and can serve as lead molecules for new drug development.',
       'The process generally begins with the selection and collection of a plant, often based on traditional medicinal use, ethnobotanical information, or preliminary scientific evidence. The plant material is authenticated, dried, and extracted using suitable solvents. The extracts are then subjected to phytochemical screening and biological evaluation to identify promising activities such as antioxidant, antimicrobial, anti-inflammatory, anticancer, antidiabetic, or thrombolytic effects.',
       'Promising extracts undergo bioassay-guided fractionation, in which the active extract is separated into different fractions and tested repeatedly to identify the fraction containing the active compound. The active constituents are subsequently isolated and structurally characterized using techniques such as chromatography, mass spectrometry, UV-visible spectroscopy, infrared spectroscopy, and nuclear magnetic resonance spectroscopy.',
       'The identified compounds can then undergo in vitro and in vivo pharmacological evaluation, followed by toxicity studies, mechanism-of-action studies, pharmacokinetic evaluation, and optimization of the lead compound. Modern approaches such as molecular docking, molecular dynamics, ADMET prediction, metabolomics, and computational drug design can complement experimental studies and help accelerate the discovery process.',
     ],
-    workflow: 'Plant selection → Authentication → Extraction → Phytochemical screening → Biological screening → Fractionation → Compound isolation → Structural characterization → Mechanistic studies → Toxicity & pharmacokinetic evaluation → Lead optimization → Preclinical development',
-    applications: ['Phytochemical screening', 'Bioassay-guided fractionation', 'Lead optimization', 'Preclinical research'],
+    workflow:
+      'Plant selection → Authentication → Extraction → Phytochemical screening → Biological screening → Fractionation → Compound isolation → Structural characterization → Mechanistic studies → Toxicity & pharmacokinetic evaluation → Lead optimization → Preclinical development',
+    applications: [
+      'Phytochemical screening',
+      'Bioassay-guided fractionation',
+      'Lead optimization',
+      'Preclinical research',
+    ],
   },
 ]
 
@@ -160,49 +205,56 @@ export const equipmentData: Equipment[] = [
     description:
       'The Nikon Eclipse Ts2 inverted microscope, originating from Japan, provides brilliantly clear images for efficient cell culture observation using its LED illumination system.',
     image: '/equipment/fluorescence-microscope.webp',
-  },{
+  },
+  {
     id: 'co2-incubator',
     name: 'CO2 Incubator',
     origin: 'Singapore',
     description:
       'The Esco CelCulture CO2 Incubator, originating from Singapore-based Esco Lifesciences, features an ISOCIDE antimicrobial coating and a high-performance infrared (IR) CO2 sensor for precise environmental control and contamination minimization.',
     image: '/equipment/incubator.webp',
-  },{
+  },
+  {
     id: 'safety-cabinet',
     name: 'Biological Safety Cabinet',
     origin: 'Singapore',
     description:
       'The Labcu Class II Biological Safety Cabinet, originating from an international manufacturer, provides essential personnel, product, and environmental protection using a HEPA filter system for microbiological research.',
     image: '/equipment/biosafety-cabinet.webp',
-  },{
+  },
+  {
     id: 'freezer',
     name: 'Ultra-Low Temperature Freezer',
     origin: 'Singapore',
     description:
       'The Esco Lexicon II Ultra-Low Temperature Freezer is a reliable solution for long-term sample storage, originating from Esco Lifesciences, and features a temperature range of -50°C to -86°C with superior insulation.',
     image: '/equipment/-80-freezer.webp',
-  },{
+  },
+  {
     id: 'thermal-cycler',
     name: 'T100 Thermal Cycler',
     origin: 'USA',
     description:
       'The Bio-Rad T100 Thermal Cycler, manufactured by the US-based company Bio-Rad, is a compact and reliable instrument featuring an intuitive touch-screen interface and thermal gradient capability for efficient PCR applications.',
     image: '/equipment/pcr-machine.webp',
-  },{
+  },
+  {
     id: 'chemidoc',
     name: 'ChemiDoc MP Imaging System',
     origin: 'USA',
     description:
       'The Bio-Rad ChemiDoc MP Imaging System, originating from the US, is an all-in-one solution for imaging and analyzing gels and western blots.',
     image: '/equipment/chemidoc.webp',
-  },{
+  },
+  {
     id: 'protean-tetra',
     name: 'Mini-PROTEAN Tetra System',
     origin: 'USA',
     description:
       'The Bio-Rad Mini-PROTEAN Tetra system is a vertical gel electrophoresis unit from Bio-Rad that allows for the separation of proteins or DNA with the key feature of running up to four mini gels simultaneously.',
     image: '/equipment/western-blotting.webp',
-  },{
+  },
+  {
     id: 'nanodrop',
     name: 'NanoDrop One',
     origin: 'USA',
@@ -218,7 +270,7 @@ export const equipmentData: Equipment[] = [
       'The Corning LSE Mini Microcentrifuge (Model: 6770), originating from Corning, is a compact lab essential with an 8 x 1.5/2.0 mL tube capacity and a key feature of a fixed 6,000 RPM speed for rapid microfiltration and spin-downs.',
     image: '/equipment/spinner.webp',
   },
-  
+
   {
     id: 'humalyzer',
     name: 'HumaLyzer 3000',
@@ -243,10 +295,7 @@ export const equipmentData: Equipment[] = [
       'The Kubota Model 3520 is a compact tabletop micro refrigerated centrifuge made in Japan, ideal for processing various microtubes.',
     image: '/equipment/centrifuge.webp',
   },
-  
-  
-  
-  
+
   {
     id: 'vortex-daihan',
     name: 'DAIHAN MaXshake VM-30',
@@ -267,35 +316,40 @@ export const equipmentData: Equipment[] = [
     id: 'centrifuge-2',
     name: 'Centrifuge S300TR',
     origin: '',
-    description: 'Centrifuge S300TR is a Japanese-made laboratory centrifuge from KUBOTA, designed for efficient separation of biological and laboratory samples through high-speed centrifugal force.',
+    description:
+      'Centrifuge S300TR is a Japanese-made laboratory centrifuge from KUBOTA, designed for efficient separation of biological and laboratory samples through high-speed centrifugal force.',
     image: '/equipment/centrifuge-1.webp',
   },
   {
     id: 'drier',
     name: 'Taisite FCO-65D Blast Drying Oven',
     origin: '',
-    description: 'Taisite FCO-65D Blast Drying Oven is a 65-L laboratory drying oven with forced-air convection, designed for efficient and uniform drying and heat treatment of laboratory samples, with a temperature range of RT + 10°C to 300°C.',
+    description:
+      'Taisite FCO-65D Blast Drying Oven is a 65-L laboratory drying oven with forced-air convection, designed for efficient and uniform drying and heat treatment of laboratory samples, with a temperature range of RT + 10°C to 300°C.',
     image: '/equipment/drier.webp',
   },
   {
     id: 'dry-bath',
     name: 'ONiLAB HB120-S Dry Bath',
     origin: '',
-    description: 'ONiLAB HB120-S Dry Bath is a laboratory heating block designed for precise and uniform heating of samples, with a temperature range of room temperature to 120°C, LED digital temperature/timer display, and interchangeable aluminum heating blocks for various tube and microplate formats. ',
+    description:
+      'ONiLAB HB120-S Dry Bath is a laboratory heating block designed for precise and uniform heating of samples, with a temperature range of room temperature to 120°C, LED digital temperature/timer display, and interchangeable aluminum heating blocks for various tube and microplate formats. ',
     image: '/equipment/dry-bath.webp',
   },
   {
     id: 'microplate-reader',
     name: 'Agilent BioTek 800 TS',
     origin: 'USA',
-    description: 'Agilent BioTek 800 TS is a USA-made absorbance microplate reader designed for ELISA, protein quantification, enzyme kinetics, and cell-based assays, supporting 6- to 384-well plates with reliable absorbance measurement and touchscreen operation.',
+    description:
+      'Agilent BioTek 800 TS is a USA-made absorbance microplate reader designed for ELISA, protein quantification, enzyme kinetics, and cell-based assays, supporting 6- to 384-well plates with reliable absorbance measurement and touchscreen operation.',
     image: '/equipment/microplate-reader.webp',
   },
   {
     id: 'precision-balance',
     name: 'Precision Balance',
     origin: 'Germany',
-    description: 'Sartorius Entris® II BCE224-1S is a German-made analytical balance with a 220 g maximum capacity and 0.1 mg readability, designed for highly precise routine weighing in laboratory applications, featuring external calibration and a typical stabilization time of ≤1.5 seconds.',
+    description:
+      'Sartorius Entris® II BCE224-1S is a German-made analytical balance with a 220 g maximum capacity and 0.1 mg readability, designed for highly precise routine weighing in laboratory applications, featuring external calibration and a typical stabilization time of ≤1.5 seconds.',
     image: '/equipment/precision-balance.webp',
   },
 ]
@@ -487,13 +541,15 @@ export const awardsData: Award[] = [
     name: 'IAR Research Grant for Phytochemistry Study',
     recipient: 'Ms. Sharmin Ahmed Rakhi',
     amount: '5 Lac BDT',
-    projectTitle:'Developing Food-Based Strategies to Reduce Blood Lead Burden in Bangladesh: Experimental Insights from Okra and Chickpea'
+    projectTitle:
+      'Developing Food-Based Strategies to Reduce Blood Lead Burden in Bangladesh: Experimental Insights from Okra and Chickpea',
   },
   {
     name: 'IAR Research Grant for MCC Study',
     recipient: 'Sabiha Tasnim',
     amount: '5 Lac BDT',
-    projectTitle:'Sustainable Production of Pharmaceutical Grade Microcrystalline Cellulose (MCC) from Waste Cotton Lint Using Green Solvent Technology'
+    projectTitle:
+      'Sustainable Production of Pharmaceutical Grade Microcrystalline Cellulose (MCC) from Waste Cotton Lint Using Green Solvent Technology',
   },
   {
     name: 'IAR Research Grant for Gene Polymorphism Study',

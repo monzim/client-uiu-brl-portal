@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react'
+import React, { useState, lazy } from 'react'
 import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router'
 import { checkAdminAuth } from '../server/auth'
 import { FlaskConical } from 'lucide-react'
@@ -37,8 +37,8 @@ function LoginPage() {
         throw new Error(data.message || 'Login failed')
       }
       navigate({ to: '/admin/news' })
-    } catch (e: any) {
-      setError(e.message)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong')
     } finally {
       setLoading(false)
     }
@@ -108,8 +108,9 @@ function LoginPage() {
         </p>
       </div>
 
-      
-      <div className="absolute bottom-0 w-full "><DevBanner /></div>
+      <div className="absolute bottom-0 w-full ">
+        <DevBanner />
+      </div>
     </div>
   )
 }

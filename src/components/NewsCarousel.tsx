@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { ChevronLeft, ChevronRight, Calendar, ArrowUpRight } from 'lucide-react'
 import { SmoothImage } from './ui/SmoothImage'
@@ -12,7 +12,8 @@ interface NewsCarouselProps {
 export function NewsCarousel({ news }: NewsCarouselProps) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [isPaused, setIsPaused] = useState(false)
-  const [featured, ...remainingNews] = news
+  const featured = news.at(0)
+  const remainingNews = news.slice(1)
 
   useEffect(() => {
     if (isPaused) return
@@ -83,9 +84,10 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
                 </p>
               </div>
               <span className="mt-3 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.16em] text-white/80 ">
-                Read the event  <div className="shrink-0 w-8 h-8 rounded-full border border-brand-border flex items-center justify-center group-hover:bg-brand-accent group-hover:border-brand-accent group-hover:text-white transition-all duration-500">
-                    <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:rotate-45" />
-                  </div>
+                Read the event{' '}
+                <div className="shrink-0 w-8 h-8 rounded-full border border-brand-border flex items-center justify-center group-hover:bg-brand-accent group-hover:border-brand-accent group-hover:text-white transition-all duration-500">
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:rotate-45" />
+                </div>
               </span>
             </div>
           </Link>
@@ -106,10 +108,7 @@ export function NewsCarousel({ news }: NewsCarouselProps) {
             >
               <div className="relative h-48 md:h-52 overflow-hidden">
                 <SmoothImage
-                  src={
-                    item.image ||
-                    '/banner_images/banner_image1.webp'
-                  }
+                  src={item.image || '/banner_images/banner_image1.webp'}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   containerClassName="w-full h-full"

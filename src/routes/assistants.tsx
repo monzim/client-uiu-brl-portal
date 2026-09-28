@@ -11,7 +11,7 @@ export const Route = createFileRoute('/assistants')({
   ),
   head: () => ({
     meta: [
-      { title: 'Research Assistants | UIU Biomedical Research Lab' },
+      { title: 'Research Assistants | UIU BME Lab' },
       {
         name: 'description',
         content:
@@ -31,9 +31,9 @@ function AssistantsPage() {
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
       <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <SmoothImage 
-          src="/banner_images/banner_image2.webp" 
-          alt="Assistants Banner" 
+        <SmoothImage
+          src="/banner_images/banner_image2.webp"
+          alt="Assistants Banner"
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"
         />
@@ -49,7 +49,8 @@ function AssistantsPage() {
               Back to Home
             </Link>
             <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
-              Research <br className="hidden md:block"/>Assistants.
+              Research <br className="hidden md:block" />
+              Assistants.
             </h1>
           </div>
         </div>
@@ -71,7 +72,7 @@ function AssistantsPage() {
               >
                 <div className="aspect-square bg-brand-border rounded-[32px] mb-8 overflow-hidden">
                   <SmoothImage
-                    src={member.image || '/work_picture/BRL team member.webp'}
+                    src={member.image || '/work_picture/BRL_team_member.webp'}
                     alt={member.name}
                     className="w-full h-full object-cover grayscale brightness-[1.05] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
                     containerClassName="w-full h-full"

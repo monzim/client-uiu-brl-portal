@@ -9,6 +9,8 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PartnershipRouteImport } from './routes/partnership'
 import { Route as NewsRouteImport } from './routes/news'
@@ -53,6 +55,16 @@ import { Route as ApiSuperuserUsersIdRouteImport } from './routes/api/superuser/
 import { Route as AdminNewsNewsIdEditRouteImport } from './routes/admin.news.$newsId.edit'
 import { Route as AdminFacultyFacultyIdEditRouteImport } from './routes/admin.faculty.$facultyId.edit'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -282,6 +294,8 @@ export interface FileRoutesByFullPath {
   '/news': typeof NewsRouteWithChildren
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/faculty': typeof AdminFacultyRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/news': typeof AdminNewsRouteWithChildren
@@ -325,6 +339,8 @@ export interface FileRoutesByTo {
   '/gallery': typeof GalleryRoute
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/system': typeof AdminSystemRouteWithChildren
   '/api/upload': typeof ApiUploadRoute
@@ -369,6 +385,8 @@ export interface FileRoutesById {
   '/news': typeof NewsRouteWithChildren
   '/partnership': typeof PartnershipRoute
   '/privacy': typeof PrivacyRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/faculty': typeof AdminFacultyRouteWithChildren
   '/admin/login': typeof AdminLoginRoute
   '/admin/news': typeof AdminNewsRouteWithChildren
@@ -416,6 +434,8 @@ export interface FileRouteTypes {
     | '/news'
     | '/partnership'
     | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/admin/faculty'
     | '/admin/login'
     | '/admin/news'
@@ -459,6 +479,8 @@ export interface FileRouteTypes {
     | '/gallery'
     | '/partnership'
     | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/admin/login'
     | '/admin/system'
     | '/api/upload'
@@ -502,6 +524,8 @@ export interface FileRouteTypes {
     | '/news'
     | '/partnership'
     | '/privacy'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/admin/faculty'
     | '/admin/login'
     | '/admin/news'
@@ -548,6 +572,8 @@ export interface RootRouteChildren {
   NewsRoute: typeof NewsRouteWithChildren
   PartnershipRoute: typeof PartnershipRoute
   PrivacyRoute: typeof PrivacyRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ApiUploadRoute: typeof ApiUploadRoute
   FacultyFacultyIdRoute: typeof FacultyFacultyIdRoute
   ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
@@ -568,6 +594,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -970,6 +1010,8 @@ const rootRouteChildren: RootRouteChildren = {
   NewsRoute: NewsRouteWithChildren,
   PartnershipRoute: PartnershipRoute,
   PrivacyRoute: PrivacyRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ApiUploadRoute: ApiUploadRoute,
   FacultyFacultyIdRoute: FacultyFacultyIdRoute,
   ProjectsProjectIdRoute: ProjectsProjectIdRoute,

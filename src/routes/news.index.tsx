@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { pageMeta } from '../lib/seo'
 import { ArrowLeft, ArrowUpRight, Calendar } from 'lucide-react'
 import { SmoothImage } from '../components/ui/SmoothImage'
 import { ErrorFallback } from '../components/ErrorFallback'
@@ -7,6 +8,14 @@ import { formatNewsDate } from '../types/cms'
 
 export const Route = createFileRoute('/news/')({
   loader: () => getNewsList(),
+  head: () => ({
+    meta: pageMeta({
+      title: 'News & Discoveries',
+      description:
+        'Latest news, publications, events and discoveries from the UIU Biomedical Research Laboratory.',
+      image: '/banner_images/IMG20260225102648.webp',
+    }),
+  }),
   errorComponent: ({ error, reset }) => (
     <ErrorFallback error={error} reset={reset} />
   ),
