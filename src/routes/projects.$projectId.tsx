@@ -75,7 +75,7 @@ function ProjectDetail() {
   return (
     <main className="min-h-screen bg-brand-bg">
       {/* Full Width Banner Image */}
-      <div className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <div className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
          <img 
            src={project.image || "/banner_images/banner_image1.webp"} 
            alt={project.title} 
@@ -96,7 +96,7 @@ function ProjectDetail() {
                 <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-white/60 mb-4 mt-10">
                    <Clock className="w-4 h-4" /> Ongoing Project
                 </div>
-                <h1 className="text-4xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+                <h1 className="rise-in text-4xl md:text-5xl lg:text-[70px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
                   {project.title}
                 </h1>
               </div>

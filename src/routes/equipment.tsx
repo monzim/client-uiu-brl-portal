@@ -28,7 +28,7 @@ function EquipmentPage() {
   return (
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
           src="/banner_images/2.Microscope.webp"
           alt="Equipment Banner"
@@ -46,7 +46,7 @@ function EquipmentPage() {
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />{' '}
               Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               Equipment <br className="hidden md:block" />
               Facility.
             </h1>
@@ -91,14 +91,14 @@ function EquipmentPage() {
                   </div>
                 )}
               </div>
-              {item.origin && (
-                <p className="text-[10px] text-brand-text/40 font-bold uppercase tracking-widest mb-2 border-b border-brand-border pb-1 w-full">
-                  {item.origin}
-                </p>
-              )}
               <h4 className="text-xl font-bold text-brand-text mb-4 leading-tight">
                 {item.name}
               </h4>
+              {item.origin && (
+                <p className="w-full border-t border-brand-border pt-2 text-[10px] font-bold uppercase tracking-widest text-brand-text/45">
+                  {item.origin}
+                </p>
+              )}
               {item.description && (
                 <p className="text-brand-text/60 leading-relaxed text-sm font-medium">
                   {item.description}
@@ -154,14 +154,14 @@ function EquipmentPage() {
 
                 {/* Description — right column on desktop, below image on mobile */}
                 <div className="p-4 sm:p-8 pt-6 sm:pt-8 lg:h-full lg:overflow-y-auto lg:p-10 lg:pt-10 lg:flex lg:flex-col lg:justify-center">
-                  {selected.origin && (
-                    <p className="text-[10px] text-brand-text/40 font-bold uppercase tracking-widest mb-2 border-b border-brand-border pb-1 w-full">
-                      {selected.origin}
-                    </p>
-                  )}
                   <Dialog.Title className="text-2xl sm:text-3xl font-bold text-brand-text mb-4 leading-tight">
                     {selected.name}
                   </Dialog.Title>
+                  {selected.origin && (
+                    <p className="mb-4 w-full border-t border-brand-border pt-2 text-[10px] font-bold uppercase tracking-widest text-brand-text/45">
+                      {selected.origin}
+                    </p>
+                  )}
                   <Dialog.Description className="text-brand-text/70 leading-relaxed text-sm sm:text-base font-medium">
                     {selected.description || 'No description available.'}
                   </Dialog.Description>

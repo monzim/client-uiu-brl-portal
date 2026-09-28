@@ -32,7 +32,7 @@ function PrivacyPage() {
   return (
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <img 
           src="/images/lab.webp" 
           alt="Privacy Banner" 
@@ -45,7 +45,7 @@ function PrivacyPage() {
             <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white/50 hover:text-white mb-6 transition-colors group">
                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Home
             </Link>
-            <h1 className="text-4xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-4xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               Privacy <br className="hidden md:block"/>Policy.
             </h1>
           </div>

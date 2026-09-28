@@ -22,9 +22,14 @@ export function CTASection() {
        <div className="relative z-10 bg-brand-bg text-brand-text w-full max-w-[900px] py-12 md:py-20 px-6 md:px-12 text-center flex flex-col items-center gap-6" 
             style={{ 
               borderRadius: '25px',
-              backgroundColor: '#f2f5f2'
+              backgroundColor: '#f2f5f2',backgroundImage: `
+        repeating-linear-gradient(135deg, #cbd5e133 0 8px, transparent 8px 20px),
+        repeating-linear-gradient(-135deg, #d1fae533 0 8px, transparent 8px 20px)
+      `,
+      backgroundSize: "40px 40px",
+              
             }}>
-          <h2 className="text-[32px] md:text-[48px] font-medium leading-tight tracking-tight uppercase">Get in touch</h2>
+          <h2 className="text-[32px] md:text-[48px] font-medium leading-tight tracking-tight ">Get In Touch</h2>
           <p className="max-w-[400px] text-brand-text/60 font-medium text-sm md:text-base leading-relaxed">
              Interested in collaboration or learning more about our research projects? Reach out to us.
           </p>

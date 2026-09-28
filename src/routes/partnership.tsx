@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
-import { ArrowLeft, Check, Handshake } from 'lucide-react'
+import { ArrowLeft, Check } from 'lucide-react'
 import { SmoothImage } from '../components/ui/SmoothImage'
 import { partnershipsData, partnershipsIntro } from '../data/data'
 import { CollaborationSection } from '#/components/CollaborationSection'
@@ -11,7 +11,8 @@ export const Route = createFileRoute('/partnership')({
       { title: 'Partnerships & Collaborations | UIU Biomedical Research Lab' },
       {
         name: 'description',
-        content: 'Discover our research partners and global collaborations that drive innovation at the UIU Biomedical Research Lab.',
+        content:
+          'Discover our research partners and global collaborations that drive innovation at the UIU Biomedical Research Lab.',
       },
       { property: 'og:title', content: 'Partnerships | UIU BME Lab' },
       { property: 'og:type', content: 'website' },
@@ -58,7 +59,7 @@ function PartnershipPage() {
   return (
     <main className="min-h-screen bg-brand-bg">
       {/* Hero Banner — consistent with the rest of the site */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
           src="/banner_images/1.Inorganic-lab-pic.webp"
           alt="Partnership Banner"
@@ -75,9 +76,20 @@ function PartnershipPage() {
         >
           <g stroke="#ffffff">
             <circle cx="980" cy="250" r="120" strokeWidth="1" opacity="0.6" />
-            <circle cx="980" cy="250" r="200" strokeWidth="1" opacity="0.4" strokeDasharray="2 10" />
+            <circle
+              cx="980"
+              cy="250"
+              r="200"
+              strokeWidth="1"
+              opacity="0.4"
+              strokeDasharray="2 10"
+            />
             <circle cx="980" cy="250" r="290" strokeWidth="1" opacity="0.25" />
-            <path d="M980 250L1140 250M980 250L1050 380M980 250L980 120M980 250L840 250M980 250L910 150" strokeWidth="1" opacity="0.4" />
+            <path
+              d="M980 250L1140 250M980 250L1050 380M980 250L980 120M980 250L840 250M980 250L910 150"
+              strokeWidth="1"
+              opacity="0.4"
+            />
           </g>
           <g fill="#ffffff">
             <circle cx="980" cy="120" r="5" />
@@ -102,7 +114,7 @@ function PartnershipPage() {
               <ArrowLeft className="w-4 h-4 transition-transform duration-300 group-hover:-translate-x-1" />{' '}
               Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               Our Collaborative <br className="hidden md:block" />
               Network.
             </h1>
@@ -124,10 +136,31 @@ function PartnershipPage() {
         />
 
         <div className="relative max-w-[1500px] w-full mx-auto lg:px-6">
-          <p className="text-base md:text-2xl font-medium text-brand-text/60 leading-relaxed max-w-4xl mb-16 md:mb-24">
-            {partnershipsIntro}
-          </p>
-          <CollaborationSection/>
+          <div className="flex items-start md:items-center justify-between gap-6 md:gap-12 mb-16 md:mb-24">
+            <p className="text-base md:text-2xl font-medium text-brand-text/80 leading-relaxed max-w-4xl">
+              {partnershipsIntro}
+            </p>
+
+            {/* Partner marks — plain icons on the right */}
+            <div className="hidden md:flex items-center gap-5 md:gap-7 shrink-0 opacity-80 hover:opacity-100 transition-opacity duration-300">
+              <img
+                src={partnershipsData[0]?.logoUrl}
+                alt={partnershipsData[0]?.name}
+                className="h-7 md:h-9 w-auto object-contain"
+              />
+              <img
+                src={partnershipsData[1]?.logoUrl}
+                alt={partnershipsData[1]?.name}
+                className="h-7 md:h-9 w-auto object-contain"
+              />
+              <img
+                src={partnershipsData[2]?.logoUrl}
+                alt={partnershipsData[2]?.name}
+                className="h-8 md:h-14 w-auto object-contain"
+              />
+            </div>
+          </div>
+          <CollaborationSection />
 
           <div className="space-y-8 md:space-y-10">
             {/* ─── 01 · icddr,b — Featured dark panel ─── */}
@@ -142,8 +175,17 @@ function PartnershipPage() {
                 >
                   <g stroke="#ffffff">
                     <circle cx="350" cy="350" r="180" strokeWidth="1" />
-                    <circle cx="350" cy="350" r="280" strokeWidth="1" strokeDasharray="2 10" />
-                    <path d="M350 350L530 350M350 350L450 510M350 350L170 350M350 350L250 510" strokeWidth="1" />
+                    <circle
+                      cx="350"
+                      cy="350"
+                      r="280"
+                      strokeWidth="1"
+                      strokeDasharray="2 10"
+                    />
+                    <path
+                      d="M350 350L530 350M350 350L450 510M350 350L170 350M350 350L250 510"
+                      strokeWidth="1"
+                    />
                   </g>
                   <g fill="#ffffff">
                     <circle cx="350" cy="350" r="10" />
@@ -155,27 +197,30 @@ function PartnershipPage() {
                 </svg>
 
                 <div className="relative">
-                  <div className="flex items-center gap-4 mb-10 md:mb-14">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/40">
+                  {/* Card number — matches the treatment on cards 02 / 03 */}
+                  <div className="flex items-start justify-end mb-2 md:mb-4">
+                    <span
+                      className="select-none text-6xl md:text-8xl font-medium leading-none text-white/10 hidden md:block"
+                      aria-hidden="true"
+                    >
                       01
                     </span>
-                    <span className="h-px w-16 bg-white/20" aria-hidden="true" />
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
                     {/* Logo medallion with orbiting ring */}
+
                     <div className="lg:col-span-4 flex lg:flex-col items-center lg:items-start gap-8 lg:gap-10">
                       <div className="relative w-32 h-32 md:w-40 md:h-40 shrink-0">
                         <motion.div
                           className="absolute inset-0"
                           animate={{ rotate: 360 }}
-                          transition={{ duration: 24, ease: 'linear', repeat: Infinity }}
-                        >
-                          <svg viewBox="0 0 160 160" fill="none" aria-hidden="true" className="w-full h-full">
-                            <circle cx="80" cy="80" r="74" stroke="#ffffff" strokeWidth="1.5" strokeDasharray="3 9" opacity="0.45" />
-                            <circle cx="80" cy="6" r="4" fill="#ffffff" opacity="0.7" />
-                          </svg>
-                        </motion.div>
+                          transition={{
+                            duration: 24,
+                            ease: 'linear',
+                            repeat: Infinity,
+                          }}
+                        ></motion.div>
                         <div className="absolute inset-[18%] rounded-[26px] md:rounded-[30px] bg-white/10 border border-white/15 backdrop-blur-sm flex items-center justify-center p-4 transition-transform duration-700 group-hover:scale-105">
                           <img
                             src={partnershipsData[0].logoUrl}
@@ -203,7 +248,10 @@ function PartnershipPage() {
                   {/* Highlights grid */}
                   <div className="mt-10 md:mt-14 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden">
                     {sectionNotes[0].points.map((point, i) => (
-                      <div key={i} className="bg-brand-text p-5 md:p-6 flex items-start gap-3">
+                      <div
+                        key={i}
+                        className="bg-brand-text p-5 md:p-6 flex items-start gap-3"
+                      >
                         <Check className="w-4 h-4 text-white/60 shrink-0 mt-0.5" />
                         <span className="text-sm md:text-[15px] font-medium text-white/85 leading-snug">
                           {point}
@@ -254,7 +302,10 @@ function PartnershipPage() {
                   </p>
                   <ul className="space-y-0 divide-y divide-white/10">
                     {sectionNotes[1].points.map((point, i) => (
-                      <li key={i} className="py-3.5 flex items-start gap-4 first:pt-0 last:pb-0">
+                      <li
+                        key={i}
+                        className="py-3.5 flex items-start gap-4 first:pt-0 last:pb-0"
+                      >
                         <span className="mt-0.5 w-6 h-6 rounded-full bg-white text-brand-text flex items-center justify-center shrink-0">
                           <Check className="w-3.5 h-3.5" />
                         </span>
@@ -278,15 +329,24 @@ function PartnershipPage() {
                   aria-hidden="true"
                   className="pointer-events-none select-none absolute -bottom-4 -right-4 w-56 md:w-72 text-white opacity-[0.06] transition-all duration-700 group-hover:opacity-10"
                 >
-                  <g stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <g
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
                     <path d="M10 60H80L95 20L110 100L125 45L140 60H230" />
                   </g>
                 </svg>
 
                 <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10 md:mb-12">
                   <div className="flex items-center gap-5">
-                    <div className="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-[22px] bg-white/10 border border-white/15 backdrop-blur-sm flex items-center justify-center p-0 transition-transform duration-700 group-hover:scale-105">
-                      <Handshake className="w-8 h-8 md:w-10 md:h-10 text-white" />
+                    <div className="shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-[22px] bg-white/10 border border-white/15 backdrop-blur-sm flex items-center justify-center p-2 transition-transform duration-700 group-hover:scale-105">
+                      <img
+                        src={partnershipsData[2].logoUrl}
+                        alt={partnershipsData[2].name}
+                        className="w-full h-full object-contain grayscale"
+                      />
                     </div>
                     <h2 className="text-2xl md:text-3xl xl:text-4xl font-medium tracking-tight text-white leading-[1.1]">
                       {partnershipsData[2].name}

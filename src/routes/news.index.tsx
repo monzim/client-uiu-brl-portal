@@ -17,7 +17,7 @@ function NewsPage() {
   return (
     <main className="min-h-screen bg-brand-bg pb-40">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage 
           src="/banner_images/IMG20260225102648.webp" 
           alt="News Banner" 
@@ -31,7 +31,7 @@ function NewsPage() {
             <Link to="/" className="inline-flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest text-white/50 hover:text-white mb-6 transition-colors group">
                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               News & <br className="hidden md:block"/>Discoveries.
             </h1>
           </div>
@@ -96,10 +96,7 @@ function NewsPage() {
             >
               <div className="mb-8 w-full aspect-[4/3] rounded-2xl overflow-hidden bg-brand-border relative">
                 <SmoothImage
-                  src={
-                    news.image ||
-                    '/work_picture/Cell Culture.webp'
-                  }
+                  src={news.image || '/work_picture/Cell_Culture.webp'}
                   alt={news.title}
                   className="w-full h-full object-cover grayscale brightness-[1.1] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
                   containerClassName="w-full h-full"

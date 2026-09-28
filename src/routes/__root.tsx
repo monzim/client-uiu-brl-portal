@@ -49,7 +49,7 @@ export const Route = createRootRoute({
         rel: 'stylesheet',
         href: FONT_STYLESHEET,
       },
-      // Preload hero images so the carousel is ready immediately
+      // Preload the initial homepage hero images before the carousel JavaScript runs
       {
         rel: 'preload',
         as: 'image',
@@ -59,8 +59,8 @@ export const Route = createRootRoute({
       {
         rel: 'preload',
         as: 'image',
-        href: '/images/hero2.webp',
-        fetchPriority: 'low',
+        href: '/banner_images/banner_image7.jpg',
+        fetchPriority: 'high',
       },
       {
         rel: 'icon',
@@ -77,14 +77,18 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     select: (s) => s.location.pathname,
   })
   const isAdmin = pathname.startsWith('/admin')
+  const bannerImage = getBannerImage(pathname)
 
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+        {bannerImage && (
+          <link rel="preload" as="image" href={bannerImage} fetchPriority="high" />
+        )}
         <HeadContent />
       </head>
-      <body className="font-sans antialiased [overflow-wrap:anywhere] selection:bg-[rgba(79,184,178,0.24)]">
+      <body className="font-sans antialiased wrap-anywhere selection:bg-[rgba(79,184,178,0.24)]">
         {!isAdmin && <Navbar />}
         {children}
         {!isAdmin && <Footer />}
@@ -103,4 +107,21 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   )
+}
+
+function getBannerImage(pathname: string) {
+  if (pathname === '/' || pathname.startsWith('/admin')) return null
+  if (pathname.startsWith('/faculty/')) return '/banner_images/banner_image1.webp'
+  if (pathname === '/faculty') return '/work_picture/BRL_team_member.webp'
+  if (pathname.startsWith('/news/')) return '/banner_images/banner_image1.webp'
+  if (pathname === '/news') return '/banner_images/uiu2.webp'
+  if (pathname === '/area') return '/banner_images/banner_image1.webp'
+  if (pathname === '/assistants') return '/banner_images/banner_image2.webp'
+  if (pathname === '/awards') return '/banner_images/banner_image3.jpg'
+  if (pathname === '/equipment') return '/banner_images/2.Microscope.webp'
+  if (pathname === '/gallery') return '/banner_images/gallery_banner.webp'
+  if (pathname === '/partnership') return '/banner_images/1.Inorganic-lab-pic.webp'
+  if (pathname === '/privacy') return '/banner_images/uiu1.webp'
+  if (pathname.startsWith('/projects/')) return '/banner_images/banner_image1.webp'
+  return null
 }

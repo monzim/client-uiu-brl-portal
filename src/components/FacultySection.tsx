@@ -20,7 +20,7 @@ const FacultyCard = ({
     className="group relative block h-[380px] w-[68vw] max-w-[300px] shrink-0 overflow-hidden rounded-2xl bg-brand-text text-white sm:w-[42vw] md:h-[420px] md:w-[29vw] lg:w-[21.5vw]"
   >
     <SmoothImage
-      src={faculty.image || '/work_picture/BRL team member.webp'}
+      src={faculty.image || '/work_picture/BRL_team_member.webp'}
       alt={faculty.name}
       className="h-full w-full object-cover brightness-[0.78]"
       containerClassName="h-full w-full"
@@ -50,12 +50,9 @@ const FacultyGridCard = ({ faculty }: { faculty: DbFaculty }) => (
   >
     <div className="relative mb-5 aspect-[4/5] overflow-hidden rounded-[24px] bg-brand-border">
       <SmoothImage
-        src={
-          faculty.image ||
-          '/work_picture/BRL team member.webp'
-        }
+        src={faculty.image || '/work_picture/BRL_team_member.webp'}
         alt={faculty.name}
-        className="h-full w-full object-cover brightness-[1.05] grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+        className="h-full w-full object-cover brightness-[1.05] transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
         containerClassName="h-full w-full"
       />
       <div className="absolute inset-0 bg-brand-text/5 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -66,7 +63,7 @@ const FacultyGridCard = ({ faculty }: { faculty: DbFaculty }) => (
           <h4 className="truncate text-xl font-bold tracking-tight text-brand-text md:text-2xl">
             {faculty.name}
           </h4>
-          <p className="mt-1 truncate text-[10px] font-extrabold uppercase tracking-[0.25em] text-brand-text/40">
+          <p className="mt-1 truncate text-[10px] font-extrabold uppercase  text-brand-text/60">
             {faculty.designation}
           </p>
         </div>
@@ -77,7 +74,7 @@ const FacultyGridCard = ({ faculty }: { faculty: DbFaculty }) => (
       <p className="h-10 overflow-hidden text-sm font-medium leading-relaxed text-brand-text/60 line-clamp-2">
         {faculty.profileDescription}
       </p>
-      <div className="flex items-center gap-3 border-t border-brand-border/60 pt-5 text-[10px] font-bold uppercase tracking-[0.2em] text-brand-text">
+      <div className="flex items-center gap-3 border-t border-brand-border/60 pt-5 text-[10px] font-bold uppercase  text-brand-text">
         <span className="opacity-60 transition-opacity group-hover:opacity-100">
           View Profile
         </span>
@@ -153,11 +150,11 @@ export function FacultySection({
             <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.25em] text-white/55">
               {isHomePage ? 'Leadership' : 'Our Team'}
             </p>
-            <h2 className="text-3xl font-medium leading-[1.05] tracking-tight md:text-5xl lg:text-6xl mb-8 sm:mb-10">
+            <h3 className="text-4xl font-medium leading-[1.05] tracking-tight md:text-5xl  mb-8 sm:mb-10">
               {isHomePage
                 ? 'Faculty Members.'
                 : 'Meet the researchers behind the innovation.'}
-            </h2>
+            </h3>
           </div>
           <div className="flex shrink-0 gap-3">
             <button

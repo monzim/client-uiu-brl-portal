@@ -157,11 +157,11 @@ function FacultyProfile() {
   return (
     <main className="min-h-screen bg-white font-sans">
       {/* Full Width Banner */}
-      <div className="relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
+      <div className="banner-shell relative w-full h-[40vh] md:h-[50vh] overflow-hidden">
         <img
           src={
             faculty.coverImage ||
-            '/banner_images/banner_image1.webp'
+            '/banner_images/uiu1.webp'
           }
           alt="Banner"
           className="w-full h-full object-cover grayscale brightness-[0.4]"
@@ -179,7 +179,7 @@ function FacultyProfile() {
             <div className="flex items-center gap-4 mb-4">
               
             </div>
-            <h1 className="text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-none">
+            <h1 className="rise-in text-2xl md:text-4xl lg:text-5xl font-black text-white tracking-tighter uppercase leading-none">
               {faculty.name}
             </h1>
           </div>
@@ -195,16 +195,16 @@ function FacultyProfile() {
                 <img
                   src={
                     faculty.image ||
-                    '/work_picture/BRL team member.webp'
+                    '/work_picture/BRL_team_member.webp'
                   }
                   alt={faculty.name}
                   className="w-full h-full object-cover grayscale-[0.2] contrast-[1.1]"
                 />
               </div>
-              <h2 className="text-2xl md:text-3xl font-black text-brand-text tracking-tighter leading-tight mb-2">
+              <h2 className="text-2xl md:text-4xl font-black text-brand-text tracking-tighter leading-tight mb-2">
                 {faculty.name}
               </h2>
-              <p className="text-xs font-bold text-brand-text/50 uppercase tracking-widest">
+              <p className="text-sm font-bold text-brand-text/70 uppercase ">
                 {faculty.designation}
               </p>
             </div>

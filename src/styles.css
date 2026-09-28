@@ -106,6 +106,15 @@ body {
   animation: rise-in 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.banner-heading {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.banner-shell:has(.image-loaded) .banner-heading {
+  animation: rise-in 800ms cubic-bezier(0.16, 1, 0.3, 1) 350ms both;
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;

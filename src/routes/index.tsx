@@ -33,9 +33,9 @@ function App() {
       </div>
 
       {/* QuoteSection is just below the fold — small rootMargin to start early */}
-      <LazySection rootMargin="400px" placeholderHeight="500px">
+     
         <QuoteSection />
-      </LazySection>
+      
 
       {/* News carousel */}
       <LazySection rootMargin="300px" placeholderHeight="500px">
@@ -55,11 +55,6 @@ function App() {
           </div>
         </div>
       </LazySection>
-
-      {/* Collaboration */}
-      {/* <LazySection rootMargin="200px" placeholderHeight="400px">
-        <CollaborationSection />
-      </LazySection> */}
 
       {/* Equipment — images heavy */}
       <LazySection rootMargin="200px" placeholderHeight="600px">

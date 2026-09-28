@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { motion } from 'framer-motion'
 import { SmoothImage } from '../components/ui/SmoothImage'
@@ -20,10 +21,56 @@ export const Route = createFileRoute('/about')({
 })
 
 function About() {
+  const flowRef = useRef<HTMLDivElement>(null)
+  const rootRef = useRef<HTMLDivElement>(null)
+  const nodeRefs = useRef<(HTMLDivElement | null)[]>([])
+  const [flow, setFlow] = useState<{ w: number; h: number; paths: string[] }>({
+    w: 0,
+    h: 0,
+    paths: [],
+  })
+
+  useLayoutEffect(() => {
+    const container = flowRef.current
+    const root = rootRef.current
+    if (!container || !root) return
+
+    const compute = () => {
+      const box = container.getBoundingClientRect()
+      if (!box.width || !box.height) return
+      const r = root.getBoundingClientRect()
+      const sx = r.right - box.left
+      const sy = r.top + r.height / 2 - box.top
+      const paths = nodeRefs.current
+        .map((node) => {
+          if (!node) return ''
+          const n = node.getBoundingClientRect()
+          const ex = n.left - box.left
+          const ey = n.top + n.height / 2 - box.top
+          const dx = Math.max((ex - sx) * 0.5, 60)
+          return `M ${sx} ${sy} C ${sx + dx} ${sy}, ${ex - dx} ${ey}, ${ex} ${ey}`
+        })
+        .filter(Boolean)
+      setFlow({ w: box.width, h: box.height, paths })
+    }
+
+    compute()
+
+    const ro =
+      typeof ResizeObserver !== 'undefined' ? new ResizeObserver(compute) : null
+    ro?.observe(container)
+    ro?.observe(root)
+    nodeRefs.current.forEach((n) => n && ro?.observe(n))
+
+    document.fonts.ready.then(compute).catch(() => {})
+
+    return () => ro?.disconnect()
+  }, [])
+
   return (
     <main className="min-h-screen bg-brand-bg pb-20">
       {/* Hero Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
           src="/banner_images/3u-3.webp"
           alt="BRL Laboratory"
@@ -34,7 +81,7 @@ function About() {
 
         <div className="absolute bottom-0 left-0 w-full px-6 pb-16 md:pb-24">
           <div className="max-w-[1400px] mx-auto">
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl">
               Scientific discovery <br className="hidden md:block" />
               for humanity.
             </h1>
@@ -97,27 +144,30 @@ function About() {
         </div>
       </section>
 
-      {/* Vision Section — Typographic layout, mirroring Goals but right-aligned */}
-      <section className="bg-brand-bg py-20 md:py-32 px-6 border-b border-brand-border/20">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
-          {/* Left Column (Vision Text) */}
-          <div className="lg:col-span-8 flex flex-col justify-center order-2 lg:order-1">
-            <div className="space-y-4">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-brand-text-soft/40">
-                Our Vision
-              </h3>
-              <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-brand-text leading-snug tracking-tight max-w-2xl">
-                {aboutData.vision}
-              </p>
-            </div>
-          </div>
+      {/* Vision Section — centered statement over the BME banner */}
+      <section className="relative overflow-hidden bg-brand-bg py-20 md:py-32 px-6 border-b border-brand-border/20 ">
+        {/* BME banner — absolute background, bottom edge flush with section bottom */}
+        <div className="absolute inset-x-0 bottom-0 z-0">
+          <SmoothImage
+            src="/banner_images/bme_banner.webp"
+            alt="Biomedical Engineering research at BRL"
+            className="w-full h-auto object-cover  brightness-[0.9]"
+            containerClassName="w-full"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-bg via-brand-bg/25 to-transparent" />
+        </div>
 
-          {/* Right Column (Heading + Badges) */}
-          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-32 h-fit order-1 lg:order-2 flex flex-col items-start lg:items-end text-left lg:text-right">
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium tracking-tight text-brand-text leading-tight">
+        <div className="relative z-10 max-w-[1400px] mx-auto">
+          <div className="max-w-4xl mx-auto flex flex-col items-center text-center space-y-6 md:space-y-7">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-text-soft/40">
               Our Vision
-            </h2>
-            <div className="flex flex-wrap gap-2.5 pt-2 justify-start lg:justify-end">
+            </span>
+
+            <p className="text-2xl md:text-3xl lg:text-4xl font-medium text-brand-text leading-snug tracking-tight text-balance">
+              {aboutData.vision}
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-2.5 pt-3">
               <span className="inline-block px-4 py-2 bg-brand-text/5 hover:bg-brand-text/10 transition-colors rounded-full text-xs font-medium uppercase tracking-wider text-brand-text border border-brand-border/30">
                 Global Recognition
               </span>
@@ -183,8 +233,6 @@ function About() {
           </div>
         </div>
       </section>
-
-      
 
       {/* Objectives Section — Radial Hub-and-Spoke */}
       <section className="relative bg-brand-bg py-20 md:py-32 px-6 overflow-hidden">
@@ -255,145 +303,101 @@ function About() {
         </svg>
 
         <div className="relative max-w-[1400px] mx-auto">
-          {/* Header */}
-          <div className="text-center mb-14 md:mb-20">
+          {/* Header — left aligned, edges line up with the flow below */}
+          <div className="w-full max-w-[1120px] mx-auto mb-12 md:mb-16">
             <span className="text-xs font-bold uppercase tracking-widest text-brand-text-soft/40 block mb-3">
               Objectives
             </span>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-brand-text leading-tight">
-              Our core objectives in transforming healthcare.
-            </h3>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 border-b border-brand-border/40 pb-6">
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-brand-text leading-tight max-w-3xl">
+                Our core objectives in transforming healthcare.
+              </h3>
+              <span className="hidden md:block text-xs font-bold uppercase tracking-widest text-brand-text-soft/40 shrink-0 md:pb-2">
+                {aboutData.objectives.length.toString().padStart(2, '0')}{' '}
+                objectives
+              </span>
+            </div>
           </div>
 
-          {/* ── DESKTOP radial layout — full width ── */}
+          {/* ── DESKTOP: flow layout — root left, objective text right ── */}
           <div
-            className="hidden lg:block relative w-full"
-            style={{ aspectRatio: '1 / 0.75', maxHeight: '860px' }}
+            ref={flowRef}
+            className="hidden lg:flex relative w-full min-h-[420px] items-center justify-center gap-x-24"
           >
-            {/* Center root node — text only, no card */}
+            {/* Curved connectors: root → each objective */}
+            {flow.paths.length > 0 && (
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none z-0"
+                viewBox={`0 0 ${flow.w} ${flow.h}`}
+                fill="none"
+                aria-hidden="true"
+              >
+                {flow.paths.map((d, i) => (
+                  <motion.path
+                    key={i}
+                    d={d}
+                    stroke="#2a4d3f"
+                    strokeWidth={1.5}
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 0.3 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{
+                      duration: 1,
+                      delay: 0.15 + i * 0.1,
+                      ease: 'easeOut',
+                    }}
+                  />
+                ))}
+              </svg>
+            )}
+
+            {/* Root node — left side, with lab logo */}
             <div
-              className="absolute z-10 flex flex-col items-center justify-center text-center pointer-events-none"
-              style={{
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-                width: '290px',
-              }}
+              ref={rootRef}
+              className="relative z-10 shrink-0 w-[200px] h-[200px] rounded-[48px] bg-brand-text text-white flex flex-col items-center justify-center text-center gap-2 shadow-xl"
             >
-              <p className="text-4xl md:text-5xl font-semibold text-brand-text leading-tight">
+              <SmoothImage
+                src="/images/transparent original logo.png"
+                alt="Biomedical Research Laboratory"
+                className="w-14 h-14 object-contain"
+                containerClassName="w-14 h-14 bg-transparent"
+              />
+              <p className="text-lg font-semibold leading-tight">
                 Our Objectives
               </p>
             </div>
 
-            {/* Connecting lines — minimal opacity, animate in with nodes */}
-            <svg
-              className="absolute inset-0 w-full h-full pointer-events-none z-0"
-              preserveAspectRatio="none"
-            >
-              {aboutData.objectives.map((_, i) => {
-                const angle = (i * 360) / 7 - 90
-                const rad = (angle * Math.PI) / 180
-                const r = 250
-                const svgW = 1000
-                const svgH = 750
-                const shiftX = i === 4 ? -3 : i === 5 || i === 6 ? -8 : 0
-                const cxPct = ((500 + r * Math.cos(rad)) / svgW) * 100 + shiftX
-                const cyPct = ((375 + r * Math.sin(rad)) / svgH) * 100
-                return (
-                  <g key={i}>
-                    <motion.line
-                      x1="50%"
-                      y1="50%"
-                      x2={`${cxPct}%`}
-                      y2={`${cyPct}%`}
-                      stroke="#2a4d3f"
-                      strokeWidth="1.5"
-                      strokeDasharray="4 6"
-                      strokeLinecap="round"
-                      initial={{ pathLength: 0, opacity: 0 }}
-                      whileInView={{ pathLength: 1, opacity: 0.06 }}
-                      viewport={{ once: true, amount: 0.4 }}
-                      transition={{
-                        duration: 0.8,
-                        delay: i * 0.12 + 0.7,
-                        ease: 'easeOut',
-                      }}
-                    />
-                    <motion.circle
-                      cx={`${cxPct}%`}
-                      cy={`${cyPct}%`}
-                      r="3"
-                      fill="#2a4d3f"
-                      initial={{ scale: 0, opacity: 0 }}
-                      whileInView={{ scale: [0, 1.6, 1], opacity: 0.35 }}
-                      viewport={{ once: true, amount: 0.4 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: i * 0.12 + 1.45,
-                        ease: 'easeOut',
-                      }}
-                      style={{
-                        transformBox: 'fill-box',
-                        transformOrigin: 'center',
-                      }}
-                    />
-                  </g>
-                )
-              })}
-            </svg>
-
-            {/* 7 spoke nodes — text only, animate from behind center and spread */}
-            {aboutData.objectives.map((item, i) => {
-              const angle = (i * 360) / 7 - 90
-              const rad = (angle * Math.PI) / 180
-              const r = 250
-              const svgW = 1000
-              const svgH = 750
-              const nudgeX = -2
-              const nudgeY = -3
-              const shiftX = i === 4 ? -3 : i === 5 || i === 6 ? -8 : 0
-              // Small positional tweak for the first and last objective
-              const extraShiftX = i === 0 || i === 6 ? -4 : 0
-              const extraShiftY = i === 0 || i === 6 ? -4 : 0
-              const cxPct =
-                ((500 + r * Math.cos(rad)) / svgW) * 100 +
-                shiftX +
-                nudgeX +
-                extraShiftX
-              const cyPct =
-                ((375 + r * Math.sin(rad)) / svgH) * 100 + nudgeY + extraShiftY
-              // Alternate color: even → white bg + brand text, odd → brand bg + white text
-              const bg =
-                i % 2 === 0
-                  ? 'text-white bg-brand-text border border-brand-text'
-                  : 'text-brand-text bg-white border border-brand-border/40'
-              return (
-                <motion.div
+            {/* Objective text nodes — right side */}
+            <div className="relative z-10 flex-1 max-w-[824px] flex flex-col justify-center gap-3.5">
+              {aboutData.objectives.map((item, i) => (
+                <div
                   key={i}
-                  className="absolute w-[260px]"
-                  initial={{ left: '50%', top: '50%', scale: 0, opacity: 0 }}
-                  whileInView={{
-                    left: `${cxPct}%`,
-                    top: `${cyPct}%`,
-                    scale: 1,
-                    opacity: 1,
+                  ref={(el) => {
+                    nodeRefs.current[i] = el
                   }}
-                  viewport={{ once: true, amount: 0.4 }}
-                  transition={{
-                    duration: 0.7,
-                    delay: i * 0.12,
-                    ease: 'easeOut',
-                  }}
-                  style={{ zIndex: i % 2 === 0 ? 8 : 5 }}
                 >
-                  <div
-                    className={`rounded-full px-6 py-4 text-center text-base font-medium leading-snug shadow-sm ${bg}`}
+                  <motion.div
+                    className="w-fit max-w-full rounded-full border border-brand-border/40 bg-white/95 px-6 py-3 shadow-sm hover:shadow-md hover:border-brand-accent/40 transition-all flex items-center gap-3"
+                    initial={{ opacity: 0, x: 24 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.1 + i * 0.07,
+                      ease: 'easeOut',
+                    }}
                   >
-                    {item}
-                  </div>
-                </motion.div>
-              )
-            })}
+                    <span className="text-xs font-bold text-brand-accent shrink-0">
+                      {(i + 1).toString().padStart(2, '0')}
+                    </span>
+                    <span className="text-sm font-medium text-brand-text leading-snug">
+                      {item}
+                    </span>
+                  </motion.div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* ── TABLET: 2-column + center card ── */}
@@ -459,7 +463,7 @@ function About() {
         <div className="max-w-[1400px] mx-auto">
           <div className="relative w-full h-[50vh] md:h-[65vh] rounded-[40px] overflow-hidden group shadow-lg border border-brand-border">
             <SmoothImage
-              src="/banner_images/9u-9.webp"
+              src="/banner_images/uiu2.webp"
               alt="UIU Campus"
               className="w-full h-full object-cover grayscale brightness-[0.35] group-hover:scale-105 transition-transform duration-1000"
               containerClassName="w-full h-full"

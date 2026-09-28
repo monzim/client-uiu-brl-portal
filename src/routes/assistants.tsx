@@ -30,10 +30,10 @@ function AssistantsPage() {
   return (
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
-        <SmoothImage
-          src="/banner_images/banner_image2.webp"
-          alt="Assistants Banner"
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+        <SmoothImage 
+          src="/banner_images/banner_image2.webp" 
+          alt="Assistants Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"
         />
@@ -48,9 +48,8 @@ function AssistantsPage() {
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />{' '}
               Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
-              Research <br className="hidden md:block" />
-              Assistants.
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+              Research <br className="hidden md:block"/>Assistants.
             </h1>
           </div>
         </div>

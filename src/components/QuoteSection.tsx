@@ -5,7 +5,7 @@ import { Quote, ArrowRight } from 'lucide-react';
 export function QuoteSection() {
   return (
     <section className="relative py-24 bg-brand-bg overflow-hidden border-y border-brand-border/50">
-      <div className="max-w-[1200px] mx-auto px-6 relative">
+      <div className="max-w-[1200px] mx-auto px-4 relative">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-20 w-full relative z-10 text-center lg:text-left justify-center lg:justify-start">
           {/* Decorative Background Element */}
           <div className="absolute  top-1/2 left-0 w-64 h-64 bg-brand-accent/5 rounded-full -translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
@@ -40,11 +40,11 @@ export function QuoteSection() {
               </h2>
             </div>
             
-            <div className="space-y-6">
-              <p className="text-base lg:text-base font-light leading-[1.8] text-brand-text/70 italic">
+            <div className="space-y-6 ">
+              <p className="max-w-4xl text-base lg:text-lg font-bold leading-[1.9] text-brand-text/80">
                 The Biomedical Research Laboratory at the Department of Pharmacy, United International University (UIU), is committed to advancing scientific knowledge and innovation in pharmaceutical and biomedical sciences. Established following the prestigious OWSD Early Career Fellowship awarded to Dr. Tahmina Foyez by the Organization for Women in Science for the Developing World (OWSD), in collaboration with UIU, the laboratory marks a significant milestone in strengthening research excellence within the institution.
               </p>
-              <p className="text-base lg:text-base font-light leading-[1.8] text-brand-text/70 italic">
+              <p className="max-w-4xl text-base lg:text-lg font-normal leading-[1.9] text-brand-text/80">
                 Equipped with state-of-the-art facilities and driven by a dynamic and dedicated research team, our laboratory strives to achieve impactful scientific discoveries aligned with our mission and vision. We are deeply focused on addressing pressing healthcare challenges through rigorous experimental research, advanced analytical methodologies, and interdisciplinary collaboration.
               </p>
             </div>
@@ -55,6 +55,11 @@ export function QuoteSection() {
                 className="group inline-flex items-center gap-4 px-8 py-4 bg-brand-text text-brand-bg rounded-2xl font-bold uppercase tracking-widest text-[10px] transition-all hover:bg-brand-accent hover:scale-[1.02]"
               >
                 Discover More
+                <img src="\images\transparent original logo.png" alt="" 
+                height={20}
+                width={20}
+                className="transition-transform group-hover:scale-110"
+                />
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>

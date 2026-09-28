@@ -20,7 +20,7 @@ export const Route = createFileRoute('/gallery')({
 })
 
 const images = [
-  { url: '/work_picture/Cell Culture.webp', caption: 'Cell Culture Analysis' },
+  { url: '/work_picture/Cell_Culture.webp', caption: 'Cell Culture Analysis' },
   { url: '/banner_images/1.Inorganic-lab-pic.webp', caption: 'HPLC Setup' },
   { url: '/work_picture/Pharmacogenomics.webp', caption: 'Molecular Visualization' },
   { url: '/current_project_images/Drug discovery.webp', caption: 'Compound Evaluation' },
@@ -48,9 +48,9 @@ function Gallery() {
   return (
     <main className="min-h-screen bg-brand-bg pb-40">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage 
-          src="/images/hero1.webp" 
+          src="/banner_images/gallery_banner.webp" 
           alt="Gallery Banner" 
           className="w-full h-full object-cover grayscale brightness-[0.5] object-center"
           containerClassName="w-full h-full"
@@ -62,7 +62,7 @@ function Gallery() {
             <Link to="/" className="inline-flex items-center gap-2 text-xs md:text-sm font-bold uppercase tracking-widest text-white/50 hover:text-white mb-6 transition-colors group">
                <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" /> Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               Inside the <br className="hidden md:block"/>Laboratory.
             </h1>
           </div>
@@ -71,7 +71,7 @@ function Gallery() {
 
       <div className="max-w-[1400px] mx-auto px-6 mt-16 md:mt-24">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-6">
            {images.map((img, i) => (
               <div 
                 key={i} 

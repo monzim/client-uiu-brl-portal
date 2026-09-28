@@ -45,7 +45,7 @@ function AwardsPage() {
   return (
     <main className="min-h-screen bg-brand-bg pb-32">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         <SmoothImage
           src="/banner_images/banner_image3.jpg"
           alt="Awards Banner"
@@ -63,7 +63,7 @@ function AwardsPage() {
               <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />{' '}
               Back to Home
             </Link>
-            <h1 className="text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
+            <h1 className="banner-heading text-3xl md:text-6xl lg:text-[80px] font-medium leading-[1.05] tracking-tight text-white max-w-4xl uppercase">
               Awards & <br className="hidden md:block" />
               Achievements.
             </h1>
@@ -131,7 +131,7 @@ function AwardsPage() {
               animate={{ y: [0, -10, 0], opacity: [0.4, 1, 0.4] }}
               transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              <Sparkles className="w-5 h-5 text-[#d8b23f]" />
+              
             </motion.div>
 
             <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
@@ -152,10 +152,10 @@ function AwardsPage() {
                       animate={{ rotate: 360 }}
                       transition={{ duration: 16, ease: 'linear', repeat: Infinity }}
                     >
-                      <svg viewBox="0 0 96 96" fill="none" aria-hidden="true" className="w-full h-full">
+                      {/* <svg viewBox="0 0 96 96" fill="none" aria-hidden="true" className="w-full h-full">
                         <circle cx="48" cy="48" r="45" stroke="#d8b23f" strokeWidth="1.5" strokeDasharray="3 7" opacity="0.7" />
                         <circle cx="48" cy="3" r="4" fill="#d8b23f" opacity="0.9" />
-                      </svg>
+                      </svg> */}
                     </motion.div>
                     <div className="absolute inset-1.5 rounded-full bg-[#d8b23f] flex items-center justify-center text-brand-text shadow-[0_0_50px_rgba(216,178,63,0.45)]">
                       <Trophy className="w-8 h-8 md:w-11 md:h-11" />

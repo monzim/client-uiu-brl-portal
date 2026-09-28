@@ -38,7 +38,7 @@ This case–control study is designed to evaluate the association between specif
 Molecular techniques, including polymerase chain reaction (PCR)-based genotyping and enzyme-linked immunosorbent assay (ELISA), are employed for accurate detection and quantification. Statistical analyses are conducted to determine the strength of associations, evaluate risk factors, and identify potential predictive markers.
 
 This research aims to establish VEGF polymorphisms and serum VEGF levels as minimally invasive, reliable biomarkers for early detection, risk assessment, and prognosis of breast cancer in the Bangladeshi population. The findings are expected to contribute to the advancement of precision medicine approaches and support the development of targeted therapeutic strategies tailored to population-specific genetic profiles.`,
-    image: "/current_project_images/Gene Polymorphism.webp"
+    image: "/current_project_images/GenePolymorphism.webp"
   },
   {
     id: "antimicrobial-gene-analysis",
@@ -54,7 +54,7 @@ This study employs a combination of phenotypic and molecular approaches to compr
 Additionally, the study aims to determine the prevalence of these resistance determinants within the hospital environment, providing valuable insights into local antimicrobial resistance patterns. Understanding the distribution of plasmid-mediated colistin resistance genes is essential for implementing effective infection control measures and guiding antibiotic stewardship programs.
 
 Overall, this research seeks to highlight the growing threat of colistin resistance in uropathogenic E. coli and to establish molecular surveillance strategies for early detection and containment. The findings are expected to contribute to improved clinical decision-making, reinforce public health policies, and support global efforts to combat antimicrobial resistance.`,
-    image: "/current_project_images/Antimicrobial Resistance.webp"
+    image: "/current_project_images/Antimicrobial_Resistance.webp"
   },
   {
     id: "drug-discovery",
@@ -70,6 +70,6 @@ To further validate these findings, in vivo studies are conducted using appropri
 In parallel, in silico analysis is performed to identify and characterize the active phytochemical constituents present in the leaf extract. Computational techniques, including molecular docking and pharmacokinetic prediction, are used to investigate the interaction between selected compounds and relevant biological targets. This approach provides mechanistic insights into the observed biological activities and supports the identification of potential lead compounds for drug development.
 
 The integration of experimental and computational methods in this study offers a comprehensive understanding of the therapeutic potential of Diospyros malabarica. The findings are expected to contribute to the discovery of novel plant-based bioactive agents and support the development of safe, effective, and affordable therapeutic alternatives.`,
-    image: "/current_project_images/Drug discovery.webp"
+    image: "/current_project_images/Drug_discovery.webp"
   }
 ];

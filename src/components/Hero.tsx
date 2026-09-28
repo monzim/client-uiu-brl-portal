@@ -8,7 +8,7 @@ const slides = [
     text: 'Welcome to the Biomedical Research Laboratory of UIU '
   },
   {
-    image: '/banner_images/banner_image3.jpg',
+    image: '/banner_images/banner_image7.jpg',
     text: 'Advancing scientific knowledge in the field of pharmaceutical and biomedical sciences .'
   }
 ];
@@ -17,22 +17,22 @@ const focusCards = [
   { 
     title: 'Smart Hydrogels in Wound Healing',
     sub: 'Advanced tissue regeneration and drug delivery.',
-    to: '/projects/smart-hydrogel' 
+    to: '/area/smart-hydrogel'
   },
   { 
     title: 'Gene Polymorphism', 
     sub: 'Role of VEGF Polymorphisms and Serum VEGF in Breast Cancer.',
-    to: '/projects/gene-polymorphism' 
+    to: '/area/gene-polymorphism'
   },
   { 
     title: 'Antimicrobial Resistance', 
     sub: 'Colistin resistance and mcr-1/mcr-3 gene analysis in E. coli.',
-    to: '/projects/antimicrobial-gene-analysis' 
+    to: '/area/antimicrobial-gene-analysis'
   },
   { 
     title: 'Drug Discovery',
     sub: 'In vitro, in vivo, and in silico analysis of medicinal plant extracts.',
-    to: '/projects/drug-discovery'
+    to: '/area/drug-discovery'
   }
 ];
 
@@ -47,7 +47,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="relative w-full h-screen overflow-hidden flex flex-col">
+    <section className="relative w-full h-screen max-h-[100dvh] overflow-hidden flex flex-col">
       {/* Carousel — uses CSS background-image so preloaded images show instantly,
           no JS onLoad gate, no opacity-0 delay */}
       <div className="absolute inset-0 z-0">
@@ -104,9 +104,9 @@ export function Hero() {
             return (
               <Link
                 key={card.title}
-                to="/projects/$projectId"
-                params={{ projectId: card.to.split('/').pop() || '' }}
-                className={`group relative p-4 lg:p-6 rounded-2xl backdrop-blur-xl border border-white/20 transition-all duration-500 flex flex-col justify-between h-[140px] sm:h-[160px] lg:h-[220px] ${
+                to="/area/$areaId"
+                params={{ areaId: card.to.split('/').pop() || '' }}
+                className={`group relative p-4 lg:p-6 rounded-2xl backdrop-blur-xl border border-white/20 transition-all duration-500 flex flex-col justify-between h-[100px] sm:h-[130px] lg:h-[180px] ${
                   // isFeaturedCard 
                   //   ? 'bg-brand-text border-transparent lg:hover:bg-white/10 lg:hover:border-white/20' 
                      'bg-white/10 lg:hover:bg-brand-text lg:hover:border-transparent'
@@ -114,7 +114,7 @@ export function Hero() {
                 style={{ animationDelay: `${i * 100}ms` }}
               >
                 <div>
-                  <h3 className="text-white text-sm sm:text-sm lg:text-2xl font-bold leading-tight mb-2 transition-colors uppercase lg:normal-case">
+                  <h3 className="text-white text-sm sm:text-sm lg:text-xl font-semibold leading-tight mb-2 transition-colors uppercase lg:normal-case">
                     {card.title}
                   </h3>
                   <p className="text-white/60 text-xs font-medium leading-relaxed group-hover:text-white/80 transition-colors line-clamp-2 hidden lg:block">

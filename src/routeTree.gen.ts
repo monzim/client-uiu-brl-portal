@@ -26,6 +26,7 @@ import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as ProjectsProjectIdRouteImport } from './routes/projects.$projectId'
 import { Route as NewsNewsIdRouteImport } from './routes/news.$newsId'
 import { Route as FacultyFacultyIdRouteImport } from './routes/faculty.$facultyId'
+import { Route as AreaAreaIdRouteImport } from './routes/area.$areaId'
 import { Route as ApiUploadRouteImport } from './routes/api/upload'
 import { Route as AdminSystemRouteImport } from './routes/admin.system'
 import { Route as AdminNewsRouteImport } from './routes/admin.news'
@@ -136,6 +137,11 @@ const FacultyFacultyIdRoute = FacultyFacultyIdRouteImport.update({
   id: '/faculty/$facultyId',
   path: '/faculty/$facultyId',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AreaAreaIdRoute = AreaAreaIdRouteImport.update({
+  id: '/$areaId',
+  path: '/$areaId',
+  getParentRoute: () => AreaRoute,
 } as any)
 const ApiUploadRoute = ApiUploadRouteImport.update({
   id: '/api/upload',
@@ -268,7 +274,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
-  '/area': typeof AreaRoute
+  '/area': typeof AreaRouteWithChildren
   '/assistants': typeof AssistantsRoute
   '/awards': typeof AwardsRoute
   '/equipment': typeof EquipmentRoute
@@ -281,6 +287,7 @@ export interface FileRoutesByFullPath {
   '/admin/news': typeof AdminNewsRouteWithChildren
   '/admin/system': typeof AdminSystemRouteWithChildren
   '/api/upload': typeof ApiUploadRoute
+  '/area/$areaId': typeof AreaAreaIdRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -311,7 +318,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/area': typeof AreaRoute
+  '/area': typeof AreaRouteWithChildren
   '/assistants': typeof AssistantsRoute
   '/awards': typeof AwardsRoute
   '/equipment': typeof EquipmentRoute
@@ -321,6 +328,7 @@ export interface FileRoutesByTo {
   '/admin/login': typeof AdminLoginRoute
   '/admin/system': typeof AdminSystemRouteWithChildren
   '/api/upload': typeof ApiUploadRoute
+  '/area/$areaId': typeof AreaAreaIdRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -353,7 +361,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
-  '/area': typeof AreaRoute
+  '/area': typeof AreaRouteWithChildren
   '/assistants': typeof AssistantsRoute
   '/awards': typeof AwardsRoute
   '/equipment': typeof EquipmentRoute
@@ -366,6 +374,7 @@ export interface FileRoutesById {
   '/admin/news': typeof AdminNewsRouteWithChildren
   '/admin/system': typeof AdminSystemRouteWithChildren
   '/api/upload': typeof ApiUploadRoute
+  '/area/$areaId': typeof AreaAreaIdRoute
   '/faculty/$facultyId': typeof FacultyFacultyIdRoute
   '/news/$newsId': typeof NewsNewsIdRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -412,6 +421,7 @@ export interface FileRouteTypes {
     | '/admin/news'
     | '/admin/system'
     | '/api/upload'
+    | '/area/$areaId'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -452,6 +462,7 @@ export interface FileRouteTypes {
     | '/admin/login'
     | '/admin/system'
     | '/api/upload'
+    | '/area/$areaId'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -496,6 +507,7 @@ export interface FileRouteTypes {
     | '/admin/news'
     | '/admin/system'
     | '/api/upload'
+    | '/area/$areaId'
     | '/faculty/$facultyId'
     | '/news/$newsId'
     | '/projects/$projectId'
@@ -528,7 +540,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
-  AreaRoute: typeof AreaRoute
+  AreaRoute: typeof AreaRouteWithChildren
   AssistantsRoute: typeof AssistantsRoute
   AwardsRoute: typeof AwardsRoute
   EquipmentRoute: typeof EquipmentRoute
@@ -674,6 +686,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/faculty/$facultyId'
       preLoaderRoute: typeof FacultyFacultyIdRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/area/$areaId': {
+      id: '/area/$areaId'
+      path: '/$areaId'
+      fullPath: '/area/$areaId'
+      preLoaderRoute: typeof AreaAreaIdRouteImport
+      parentRoute: typeof AreaRoute
     }
     '/api/upload': {
       id: '/api/upload'
@@ -917,6 +936,16 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface AreaRouteChildren {
+  AreaAreaIdRoute: typeof AreaAreaIdRoute
+}
+
+const AreaRouteChildren: AreaRouteChildren = {
+  AreaAreaIdRoute: AreaAreaIdRoute,
+}
+
+const AreaRouteWithChildren = AreaRoute._addFileChildren(AreaRouteChildren)
+
 interface NewsRouteChildren {
   NewsNewsIdRoute: typeof NewsNewsIdRoute
   NewsIndexRoute: typeof NewsIndexRoute
@@ -933,7 +962,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
-  AreaRoute: AreaRoute,
+  AreaRoute: AreaRouteWithChildren,
   AssistantsRoute: AssistantsRoute,
   AwardsRoute: AwardsRoute,
   EquipmentRoute: EquipmentRoute,

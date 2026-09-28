@@ -26,7 +26,7 @@ function NewsDetail() {
   return (
     <main className="min-h-screen pb-40 bg-brand-bg">
       {/* Hero Banner Section */}
-      <section className="relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
+      <section className="banner-shell relative w-full h-[50vh] md:h-[65vh] overflow-hidden">
         {news.image ? (
           <SmoothImage
             src={news.image}
@@ -52,7 +52,7 @@ function NewsDetail() {
               <Calendar className="w-4 h-4" />
               {formatNewsDate(news.date)}
             </div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight text-white max-w-5xl">
+            <h1 className="banner-heading text-3xl md:text-5xl lg:text-6xl font-medium leading-[1.1] tracking-tight text-white max-w-5xl">
               {news.title}
             </h1>
           </div>

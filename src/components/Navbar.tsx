@@ -37,6 +37,11 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close the mobile menu on any navigation
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
+
   // Prevent background scrolling when mobile menu is open
   useEffect(() => {
     if (isOpen) {
@@ -62,7 +67,7 @@ export function Navbar() {
     { 
       label: 'Research Team', 
       subItems: [
-        { label: 'Faculty Members', to: '/faculty' },
+        { label: 'Lab Members', to: '/faculty' },
         { label: 'Research Assistant', to: '/assistants' }
       ] 
     },
@@ -104,17 +109,17 @@ export function Navbar() {
         {/* Main Navbar */}
         <div className={`max-w-[1400px] w-full mx-auto px-4 lg:px-6 flex items-center justify-between transition-all duration-500 ${showBg ? 'py-3 lg:py-4' : 'py-6 lg:py-8'}`}>
           {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-4 group relative z-[60]">
+          <Link to="/" className="flex items-center gap-2 sm:gap-4 group relative z-[60]" onClick={() => setIsOpen(false)}>
             <img 
               src={(isOpen || !showBg) ? "/images/transparent original logo.png" : "/images/transparent black logo.png"} 
               alt="BRL Logo" 
-              className="h-7 sm:h-10 md:h-12 w-auto object-contain transition-all duration-500"
+              className="h-9 sm:h-12 md:h-14 w-auto object-contain transition-all duration-500"
             />
             <div className={`h-6 sm:h-8 md:h-10 w-[1px] bg-current opacity-20 mx-1 sm:mx-2 ${isOpen ? 'text-white' : (showBg ? 'text-brand-accent' : 'text-white')}`} />
             <img 
               src={(isOpen || !showBg) ? "/images/uiu-logo.png" : "/images/UIU-Logo-2.png"} 
               alt="UIU Logo" 
-              className="h-6 sm:h-8 md:h-10 w-auto object-contain transition-all duration-500"
+              className="h-5 sm:h-7 md:h-8 w-auto object-contain transition-all duration-500"
             />
           </Link>
 
@@ -123,7 +128,7 @@ export function Navbar() {
             {navItems.map((item) => (
               <div 
                 key={item.label}
-                className="relative py-2"
+                className={`relative rounded-lg px-3 py-2 transition-colors ${showBg ? '' : 'border border-white/15 bg-white/10 backdrop-blur-md'}`}
                 onMouseEnter={() => setActiveDropdown(item.label)}
                 onMouseLeave={() => setActiveDropdown(null)}
               >
@@ -131,7 +136,7 @@ export function Navbar() {
                   {item.to ? (
                     <Link 
                       to={item.to}
-                      className={`text-[10px] xl:text-xs font-bold uppercase tracking-tight xl:tracking-widest whitespace-nowrap transition-colors ${
+                        className={`text-[9px] xl:text-xs font-bold uppercase tracking-tight xl:tracking-widest whitespace-nowrap transition-colors ${
                         (location.pathname === item.to || (item.to !== '/' && location.pathname.startsWith(item.to)))
                           ? (showBg ? 'text-brand-accent underline underline-offset-[6px] decoration-2' : 'text-white underline underline-offset-[6px] decoration-2')
                           : (showBg ? 'text-brand-accent hover:text-brand-accent/70' : 'text-white hover:text-white/70')
@@ -140,7 +145,7 @@ export function Navbar() {
                       {item.label}
                     </Link>
                   ) : (
-                    <span className={`text-[10px] xl:text-xs font-bold uppercase tracking-tight xl:tracking-widest whitespace-nowrap cursor-default transition-colors ${
+                    <span className={`text-[9px] xl:text-xs font-bold uppercase tracking-tight xl:tracking-widest whitespace-nowrap cursor-default transition-colors ${
                       item.subItems?.some(sub => location.pathname === sub.to || (sub.to !== '/' && location.pathname.startsWith(sub.to)))
                         ? (showBg ? 'text-brand-accent underline underline-offset-[6px] decoration-2' : 'text-white underline underline-offset-[6px] decoration-2')
                         : (showBg ? 'text-brand-accent' : 'text-white')

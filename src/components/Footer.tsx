@@ -61,7 +61,7 @@ export function Footer() {
                 <img
                   src="/images/uiu-logo.png"
                   alt="UIU Logo"
-                  className="h-12 md:h-16 w-auto"
+                  className="h-12 md:h-14 w-auto"
                 />
               </div>
               <p className="text-white/60 max-w-sm text-lg leading-relaxed font-medium">
